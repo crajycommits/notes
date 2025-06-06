@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three Div Layout</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .top {
+            background: #c9daec;
+            color: black;
+            padding: 20px;
+            text-align: center;
+            flex: 0 0 20px;
+        }
+        .container{
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+        }
+        .sidebar{
+            background: #f5f5f5;
+            width: 80px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: scroll;
+        }
+        .main{
+            background-color: #fff;
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        #draw_area{
+            background: white;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #anchor{
+            width: 60px;
+            height: 60px;
+            background: rgb(191, 187, 187);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        .bubble {
+        position: relative;
+        white-space: pre;
+        border-radius: 0px;
+        padding: 0px 0px;
+        background: none;
+        color: black;
+        font-family: 'Comic Sans MS', cursive;
+        z-index: 98;
+        }
+        .node{
+            position: absolute;
+        }
+        .resize_node{
+            white-space: pre;
+            position: relative;
+            resize: both;
+            overflow: hidden;
+            background: none;
+        }
+        .link {
+            display: inline-block; /* Makes it behave like a box */
+            padding: 5px 20px; /* Adds space inside the box */
+            background-color: rgb(204, 186, 186); /* Blue background */
+            color: black; /* White text */
+            text-decoration: none; /* Removes underline */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 10px;
+            transition: background 0.3s ease;
+            font-family: "Arial Black", "Arial Bold"
+        }
+        .link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .context-menu-target {
+            padding: 20px;
+            background-color: lightblue;
+            border: 2px solid #007bff;
+            text-align: center;
+        }
+    .context-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        list-style: none;
+        z-index: 100;
+    }
+
+    .context-menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .context-menu li:hover {
+        background: red;
+    }
+    #draw_area_pop {
+        position: absolute;
+        top: 33%;
+        left: 33%;
+        height: 200px; /* Or whatever height you need */
+        width: 300px;  /* Or whatever width you need */
+        background-color: lightgray; /* For visual clarity */
+        visibility: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        z-index: 99;
+    }
+    #pop_text{
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+    }
+    .img{
+        padding: 0px;
+    }
+    #delete-menu {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      display: none;
+      z-index: 1000;
+    }
+    </style>
+</head>
+<script>
+/*data = [
+    {id: 1, type: "bubble", style: "bubble", x: 0, y: 0, maximize: true, title: ".", text: "snowflake is a \nsaas product\nsaas product\nsaas product\nsaas product"},
+    {id: 2, type: "link", style: "link", x: 40, y: 100,  title: ".", href: "www.google.com", text: "google"},
+    {id: 3, type: "img", style: "img", x: 80, y: 100,  title: ".", name: "chrome"},
+    {id: 4, type: "img", style: "img", x: 80, y: 400,  title: ".", name: "download"},
+    {id: 5, type: "bubble", style: "bubble", x: 0, y: 0,  title: ".", text: "dbt is a \nsaas         product\nsaas product\nsaas product\nsaas product"},
+        
+]*/
+
+const data=[]
+function loadData(){
+    data_input = document.getElementById('FileInput');
+        const file = data_input.files[0];
+        if (!file) {
+        alert("No file selected.")
+        return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (event) {
+        try {
+            data = JSON.parse(event.target.result);
+            //data = JSON.stringify(json, null, 2);
+            //console.log(data)
+        } catch (e) {
+            console.log("Error parsing JSON: " + e.message)
+        }
+        };
+        reader.readAsText(file);
+}
+images = {}
+async function loadImages() {
+  const input = document.getElementById('image-input');
+  if (!input.files || input.files.length === 0) {
+    alert('No files are selected');
+    return;
+  }
+
+  const imageLoadPromises = [];
+
+  for (let i = 0; i < input.files.length; i++) {
+    const file = input.files[i];
+
+    const loadPromise = new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+        images[nameWithoutExt] = e.target.result;
+        resolve(); // notify this image is done
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    imageLoadPromises.push(loadPromise);
+  }
+
+  // Wait for all FileReaders to finish
+  await Promise.all(imageLoadPromises);
+
+  // Now it's safe to load the sidebar
+  loadSideBar();
+}
+
+
+function resizeImage(img, maxWidth = 40, maxHeight = 40, quality = 0.7) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  let { width, height } = img;
+
+  if (width > height) {
+    if (width > maxWidth) {
+      height *= maxWidth / width;
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width *= maxHeight / height;
+      height = maxHeight;
+    }
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.drawImage(img, 0, 0, width, height);
+
+  return new Promise((resolve) => {
+    canvas.toBlob(
+      (blob) => resolve(blob),
+      'image/jpeg',
+      quality
+    );
+  });
+}
+
+function waitForImageLoad(img) {
+  return new Promise((resolve, reject) => {
+    if (img.complete) {
+      resolve(img);
+    } else {
+      img.onload = () => resolve(img);
+      img.onerror = (err) => reject(err);
+    }
+  });
+}
+
+g_clicked_sidebar_img_id = null
+g_clicked_sidebar_div = null
+async function loadSideBar(){
+    console.log('side bar...')
+    e = document.getElementById('sidebar')
+    for (const [key, value] of Object.entries(images)) {
+    img = document.createElement('img')
+    img.src = value
+    await waitForImageLoad(img);
+    console.log(img);                     // Should be an <img> element
+    console.log(img instanceof HTMLImageElement); // Should be true
+    console.log(img.complete);  
+    const d = document.createElement('div')
+    try{
+    resized_img = document.createElement('img')
+    const blob = await resizeImage(img)
+    const url = URL.createObjectURL(blob);
+    resized_img.src = url
+    d.id  = "sidebar_div_" + key
+    resized_img.id = "sidebar_img_" + key
+    resized_img.addEventListener("click", function () {
+    alert(key)
+    if (g_clicked_sidebar_img_id == this.id) // click same image
+    {   
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        alert(g_clicked_sidebar_div.style.border)
+        if (g_clicked_sidebar_div.style.border == "") {g_clicked_sidebar_div.style.border = "thin solid black";}
+        else {g_clicked_sidebar_div.style.border = ""}
+    }
+    else{
+        if ( g_clicked_sidebar_div != null ) g_clicked_sidebar_div.style.border = ""
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        g_clicked_sidebar_div.style.border = "thin solid black";
+    }
+    g_clicked_sidebar_img_id = this.id
+    });
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+    d.appendChild(resized_img)
+    e.appendChild(d)
+    }
+}
+
+function downloadJSON() {
+    // Sample JSON data
+    //const data = {name: "Alice",age: 30,city: "New York"};
+
+    // Convert to JSON string
+    const jsonStr = JSON.stringify(data, null, 2); // Pretty print with 2 spaces
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonStr], { type: "application/json" });
+
+    // Create a link element
+    const link = document.createElement("a");
+
+    // Set the URL for the Blob
+    link.href = URL.createObjectURL(blob);
+    link.download = "data.json"; // File name
+
+    // Append link to body and trigger click
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    document.body.removeChild(link);
+}
+
+function handleResize(event)
+{
+    const element = event.currentTarget;
+    parent_id = element.getAttribute("parent_id")
+    // Code to be executed when the window is resized
+    node = document.getElementById(parent_id)
+    const currentWidth = element.offsetWidth;
+    const currentHeight = element.offsetHeight;
+    setNodeHeight(parent_id, currentHeight);
+    setNodeWidth(parent_id, currentWidth)
+    console.log('Div width on resize:', currentWidth); // Or use the width as needed
+        console.log('Div height on resize:', currentHeight); // Or use the width as needed
+
+}
+
+function makeResizable(element){
+    element.addEventListener('mouseup', handleResize);
+}
+
+function showBubbleAll(bubble_obj, parent_id){
+    let e = document.getElementById(parent_id);
+    data.forEach(item=>{
+        if (item.id==parent_id){ item.maximize = true }
+    })
+    resize_e = e.querySelectorAll('[item_sub_type="resizer"]')[0]
+    console.log(resize_e)
+    resize_e.style.width = ""
+    resize_e.style.height = ""
+}
+
+function handleBubbleContext(text, bubble_obj, target_id){
+    console.log(text, bubble_obj, target_id)
+    if (text=="editText"){
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj})
+    }
+    if (text=="editStyle"){
+        console.log("edit style")
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj})
+    }
+    if (text=="maximize"){
+        showBubbleAll(bubble_obj, target_id)
+    }
+}
+
+function getMaxID(){
+        let max_id = -1
+        data.forEach( d=> {
+            max_id = d.id > max_id ? d.id : max_id
+        })
+        return max_id + 1
+}
+function handleHandleContext(text, obj, target_id){
+    if (text == "delete"){
+        console.log(obj, target_id)
+        let idToRemove = obj.getAttribute("parent_id")
+        const exists = data.some(item => item.id == idToRemove);
+        console.log(exists)
+        if (exists){
+        const index = data.findIndex(item => item.id == idToRemove);
+        console.log(index)
+        console.log(data)
+        if (index !== -1) {data.splice(index, 1)}
+        console.log(data)
+        e = document.getElementById(idToRemove)
+        e.remove()
+        }
+    }
+    }
+function handleDrawAreaContext(text, obj, target_id){
+    if (text == "addBubble"){ 
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        console.log(global_x_moves)
+        console.log(global_y_moves)
+        new_bubble = {id: max_id, type: "bubble", style: {"default": "bubble"}, x: x, y: y, title: ".", text: "i am new bubble"}
+        data.push(new_bubble)
+        createNodes(getNodeParent(),[new_bubble])
+    }
+    if (text == "addLink"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        console.log(global_x_moves)
+        console.log(global_y_moves)
+        let link  = prompt("Enter Link");
+        let link_text = prompt("Enter text");
+        new_link = {id: max_id, type: "link", style: {"default": "link"}, x: x, y: y, title: ".", href: link,  text: link_text}
+        data.push(new_link)
+        createNodes(getNodeParent(),[new_link])
+    }
+    if (text == "addImage"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        let link  = prompt("Enter Img");
+        let img = link
+        new_img = {id: max_id, type: "img", style: {"default": "img"}, x: x, y: y, title: ".", name: img}
+        data.push(new_img)
+        createNodes(getNodeParent(),[new_img])
+    }
+}
+
+function setNodeWidth(id, w = ''){
+    e = document.getElementById(id)
+    parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                if (w==''){
+                    if ( "width" in item ){ delete item.width}
+                    e.style.width = ''
+                } else {
+                    item.width = w
+                    e.style.width = item.width + "px"
+                }
+            }
+        });
+}
+
+function setNodeHeight(id, h = ''){
+    e = document.getElementById(id)
+    parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                if ( h == ''){
+                    if ( "height" in item ){ delete item.height}
+                    e.style.height = ''
+                }
+                else {
+                item.height = h
+                e.style.height = item.height + "px"
+                }
+            }
+        });
+}
+
+g_make_context_flag=false
+function makeContext(element){    
+    
+    let list_items = null
+    // Show context menu on right-click
+    element.addEventListener("contextmenu", (event) => {
+        event.preventDefault(); // Prevent default right-click menu
+        event.stopPropagation(); // Prevent default right-click menu
+        console.log("event listener")
+        type = element.getAttribute("item_sub_type")
+        console.log(type)
+        if (g_make_context_flag) return
+        g_make_context_flag = true
+        if (type == "bubble"){ list_items = createBubbleContext(event.target) }
+        if (type == "draw_area"){ list_items = createDrawAreaContext(event.target) }
+        if (type == "handle"){ list_items = createHandleContext(event.target) }
+        list_items.id = "context_menu_list"
+        document.getElementById("contextMenu").appendChild(list_items)
+        
+        const parentRect = getNodeParent().getBoundingClientRect()
+        startX = event.pageX - parentRect.left
+        startY = event.pageY - parentRect.top
+        contextMenu.style.left = `${startX}px`;
+        contextMenu.style.top = `${startY}px`;
+        contextMenu.style.display = "block";
+        console.log(g_make_context_flag)
+    });
+    // Hide context menu when clicking elsewhere
+    document.addEventListener("click", () => {
+       if (g_make_context_flag) {
+        let list_items = document.getElementById("context_menu_list")
+        console.log(document.getElementById("contextMenu"), list_items)
+        document.getElementById("contextMenu").removeChild(list_items)
+        list_items.remove()
+    }
+       g_make_context_flag = false
+       contextMenu.style.display = "none";
+    });
+}
+
+
+function makeDraggable(element, parent, handle = null){
+    const dragTarget = handle || element
+    element.style.position = 'absolute'
+    dragTarget.style.cursor = 'move'
+
+    let offsetX, offsetY, isDragging = false
+    let startX = 0, startY = 0
+
+    dragTarget.addEventListener('mousedown',function(e){
+        if (e.button === 2) return; // Ignore right-click for drag
+        isDragging = true
+        const parentRect = parent.getBoundingClientRect()
+        const elemRect = element.getBoundingClientRect()
+        offsetX = e.clientX - elemRect.left 
+        offsetY = e.clientY - elemRect.top
+        startX = elemRect.left - parentRect.left
+        startY = elemRect.top - parentRect.top
+        element.style.zIndex = 1000 
+        e.preventDefault()
+        e.stopPropagation()
+    });
+
+    document.addEventListener('mousemove', function(e){
+    if (!isDragging) return
+    const parentRect = parent.getBoundingClientRect()
+    let x = e.clientX - parentRect.left - offsetX
+    let y = e.clientY - parentRect.top - offsetY
+    element.style.left = x + 'px';
+    element.style.top = y + 'px';
+    });
+
+    document.addEventListener('mouseup', function(e){
+        if (isDragging) {
+            isDragging = false
+            element.style.zIndex = ''
+            const parentRect = parent.getBoundingClientRect()
+            const elemRect = element.getBoundingClientRect()
+            const endX = elemRect.left - parentRect.left
+            const endY = elemRect.top - parentRect.top
+            const deltaX = Math.round(endX - startX)
+            const deltaY = Math.round(endY - startY)
+            if (element.id == "anchor")
+            {
+            resetAnchorAndMoveNodes(element, parent, deltaX, deltaY)
+            }
+            else if (element.id && element.getAttribute("item_type") == 'node' ){
+                updateNodePosition(element.id, deltaX, deltaY)
+            }
+        }
+    });
+
+}
+
+    global_x_moves = 0 
+    global_y_moves = 0
+    function resetAnchorAndMoveNodes(anchor, parent, x, y){
+        global_x_moves += x 
+        global_y_moves += y
+        shiftNodePosition(x, y)
+        setPositionByPercentage(anchor, 50, 50, parent)
+    }
+
+    function getNodeParent(){
+        return document.querySelector('#draw_area')
+    }
+
+    function setNodePosition(id){
+        parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                div = document.getElementById(id)
+                console.log(div, id)
+                if (item.calculatedX + div.clientWidth < 0 || item.calculatedX > parent.clientWidth || item.calculatedY + div.clientHeight < 0 || item.calculatedY > parent.clientHeight)
+                    {div.style.visibility = "hidden"}
+                else
+                    {div.style.visibility = "visible"}
+                setPositionByCoords(document.getElementById(id), item.calculatedX, item.calculatedY, parent)
+            }
+        });
+    }
+
+    function updateNodePosition(id, x, y){
+        data.forEach(item =>{
+            if (item.id == id){
+                item.x += x
+                item.y += y
+                item.calculatedX += x
+                item.calculatedY += y
+                
+                setNodePosition(id)
+            }
+        })
+    }
+
+    function shiftNodePosition(shift_x = 0, shift_y = 0){
+        parent = getNodeParent()
+        data.forEach(item => {
+            const id = item.id
+            const div = document.getElementById(id)
+            if (div) {
+                const pos = getPosition(div, parent)
+                item.calculatedX = pos.x + shift_x
+                item.calculatedY = pos.y + shift_y
+                setNodePosition(id)
+            }
+        })
+    }
+
+    function setPositionByCoords(element, x, y, parent){
+        if (parent){
+            element.style.position = 'absolute'
+            element.style.left = x + 'px'
+            element.style.top = y + 'px'
+        } else {
+            element.style.left = x + 'px'
+            element.style.top = y + 'px'
+        }
+    }
+
+    function setPositionByPercentage(element, x , y, parent){
+        if (parent){
+            element.style.position = 'absolute'
+            element.style.left = x + '%'
+            element.style.top = y + '%'
+        } else {
+            element.style.left = x + '%'
+            element.style.top = y + '%'
+        }
+    }
+
+    function getPosition(element, parent){
+        const elemRect = element.getBoundingClientRect()
+        const parentRect = parent.getBoundingClientRect()
+        const pos = {
+            x: Math.round(elemRect.left - parentRect.left),
+            y: Math.round(elemRect.top - parentRect.top),
+        }
+        return pos
+    }
+    function createBubbleContext(t){
+        options = ["editText", "maximize", "editStyle"]
+        return fillContextOptions(options, t)
+    }
+    function createDrawAreaContext(t){
+        options = ["addBubble", "addLink", "addImage"]
+        return fillContextOptions(options, t)
+    }
+    function createHandleContext(t){
+        options = ["delete"]
+        return fillContextOptions(options, t)
+    }
+    function fillContextOptions(options, t){
+        u = document.createElement("div")
+        options.forEach(item => {
+            l = document.createElement("div")
+            l.textContent = item
+            l.addEventListener('click', function() {
+                console.log
+                if (t.getAttribute("item_sub_type") == "bubble"){handleBubbleContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "draw_area"){handleDrawAreaContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "handle"){handleHandleContext(this.textContent,t, t.getAttribute("parent_id"))}
+            });
+            u.appendChild(l)
+        })
+        return u
+    }
+    function createHandle(title, parent_id){
+        handle = document.createElement("div")
+        handle.textContent = title ? title : '.'
+        handle.setAttribute("item_sub_type", "handle");
+        handle.setAttribute("parent_id", parent_id);
+        makeContext(handle)
+        
+        return handle
+    }
+    function applyStyle(data, e){
+        if ("style" in data){
+            Object.entries(data.style).forEach(([key,value])=>{
+                if (key != "default"){
+                    console.log(e,key,value)
+                    e.style[key] = value
+                }
+            })
+        }
+    }
+    function decodeHtmlEntity(entity) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = entity;
+    return txt.value;
+    }
+    function createImg(data, parent_id){
+        handle = createHandle(data.title, parent_id)
+        const new_element = document.createElement('img')
+        new_element.src = images[data.name]
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "img");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.setAttribute("alt", data.name)
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        return {handle: handle, element: new_element}
+    }
+    function createLink(data, parent_id){
+        handle = createHandle(data.title, parent_id)
+        const new_element = document.createElement('a')
+        new_element.href = data.href
+        new_element.textContent = data.text
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "link");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        return {handle: handle, element: new_element}
+    }
+
+    function createBubble(data, parent_id){
+        handle = createHandle(data.title, parent_id)
+        const new_element = document.createElement('div')
+        new_element.textContent = decodeHtmlEntity(data.text)
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "bubble");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        new_element.onclick=makeContext(new_element)
+        return {handle: handle, element: new_element}
+    }
+
+    function createNodes(parent, nodes){
+        console.log(nodes)
+        nodes.forEach(item=>{
+            console.log(item)
+            if (document.getElementById(item.id)){ alert('id already taken'); return }
+            new_element = null
+            container = null
+            item.calculatedX = item.x + global_x_moves
+            item.calculatedY = item.y + global_y_moves
+            const node = document.createElement("div")
+            node.id = item.id
+            if (item.type == "bubble"){
+            resize_node  = document.createElement("div")
+            resize_node.setAttribute("item_sub_type", "resizer");
+            resize_node.setAttribute("parent_id", node.id);
+            resize_node.classList.add("resize_node")
+            if ("maximize" in item && item.maximize) {
+                // do nothing
+            }
+            else {
+                resize_node.style.width = "100px"
+                resize_node.style.height = "50px"
+            }
+            //makeResizable(resize_node)
+            node.appendChild(resize_node)
+            container =  resize_node
+            }
+            else {
+                container = node
+            }
+            
+            //if ("width" in item){ console.log(node.id, item.width); node.style.width = item.width + "px" }
+            //if ("height" in item){ console.log(node.id, item.height); node.style.height = item.height + "px" }
+            node.classList.add('node');
+            if (item.type == "bubble") { new_element = createBubble(item, item.id)}
+            if (item.type == "link") { new_element = createLink(item, item.id)}
+            if (item.type == "img") { new_element = createImg(item, item.id)}
+            handle = new_element['handle']
+            new_element = new_element['element']
+            node.setAttribute("item_type", "node");
+            console.log(handle,new_element)
+            if(handle){container.appendChild(handle)}
+            container.appendChild(new_element)
+            parent.appendChild(node)
+            setNodePosition(node.id, nodes.x, nodes.y)
+            makeDraggable(node, parent, handle)
+        })
+    }
+
+    pop_holder = null
+    function showpop(initiator){
+        pop_holder = initiator
+        pop = document.getElementById("draw_area_pop")
+        pop_text = document.getElementById("pop_text")
+        if (pop_holder.action == "editStyle"){ 
+            pop_text.value = '{"font-size": "16px"}' 
+        }
+        pop.style.visibility="visible"
+        
+    }
+    
+    function get_pop_input(){
+        txt = document.getElementById('pop_text').value
+        console.log(txt)
+        document.getElementById("draw_area_pop").style.visibility = "hidden"
+        call_pop_initiator(txt)
+    }
+    function call_pop_initiator(txt){
+        console.log("call_pop_initiator")
+        if (txt != null && pop_holder.type == "bubble" && pop_holder.action == "editText" )
+        {
+            updateBubbleText(pop_holder.id, txt)
+            
+        }
+        if (txt != null && pop_holder.action == "editStyle" )
+        {
+            try{
+            console.log(txt)
+            console.log(pop_holder.obj)
+            json=JSON.parse(txt)
+            id = pop_holder.id
+            data.forEach(item => {
+                if (id == item.id) {
+                    
+                    Object.entries(json).forEach(([key, value]) => {
+                        console.log(key, value)
+                        item['style'][key] = value
+                    });
+                applyStyle(item, pop_holder.obj)
+                }
+            });
+            }
+            catch(error)
+            {
+                console.log(txt)
+                alert(error)
+            }
+        }
+    pop_holder = null
+    }
+    function updateBubbleText(id, txt){
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = txt; e=document.getElementById(id)
+                e.querySelectorAll('[item_sub_type="bubble"]')[0].textContent = decodeHtmlEntity(txt)
+            }
+        })
+    }
+</script>
+<body>
+    <div class="top"> Top Bar
+        <button onclick="createNodes(getNodeParent(), data)">Add Element</button>
+        <input type="file" id="image-input" accept="image/*" multiple style="display:none" onchange="loadImages()">
+         <input type="file" id="FileInput" accept=".json" onchange="loadData()"/>
+        <button onclick="document.getElementById('image-input').click()">Load images</button>
+        <button onclick="downloadJSON()">download</button>
+    </div>
+    <div class="container">
+        <div class="sidebar" id = 'sidebar'>
+        </div>
+        <div class="main" id="draggable-main">
+            <div id="draw_area" item_sub_type="draw_area">
+                <div id = "draw_area_pop" item_sub_type="draw_area_pop">
+                    <textarea id = "pop_text"></textarea>
+                    <button onclick="get_pop_input()">submit</button>
+                </div>
+                <div id="contextMenu" class="context-menu">
+                </div>
+                <div id="anchor">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function(){
+            const anchor = document.getElementById("anchor")
+            const main = document.getElementById("draggable-main")
+            const draw_area = document.getElementById("draw_area")
+            makeDraggable(anchor, draw_area)
+            makeContext(draw_area)
+        }   
+    </script>
+</body>
+</html>

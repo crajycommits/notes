@@ -54,16 +54,19 @@
             position: absolute;
             top: 50%;
             left: 50%;
+            opacity: .5;
+            z-index: 98;
         }
         .bubble {
         position: relative;
-        white-space: pre;
+        white-space: pre-wrap;
         border-radius: 0px;
         padding: 0px 0px;
         background: none;
         color: black;
         font-family: 'Comic Sans MS', cursive;
-        z-index: 98;
+        font-size: 14px;
+        z-index: 80;
         }
         .node{
             position: absolute;
@@ -84,7 +87,8 @@
             border-radius: 5px; /* Rounded corners */
             font-size: 10px;
             transition: background 0.3s ease;
-            font-family: "Arial Black", "Arial Bold"
+            font-family: "Arial Black", "Arial Bold";
+            z-index: 79;
         }
         .link:hover {
             background-color: #0056b3; /* Darker blue on hover */
@@ -133,6 +137,7 @@
     }
     .img{
         padding: 0px;
+        z-index: 77;
     }
     #delete-menu {
       position: absolute;
@@ -154,7 +159,7 @@
         
 ]*/
 
-const data=[]
+data=[]
 function loadData(){
     data_input = document.getElementById('FileInput');
         const file = data_input.files[0];
@@ -254,6 +259,7 @@ function waitForImageLoad(img) {
 
 g_clicked_sidebar_img_id = null
 g_clicked_sidebar_div = null
+g_clicked_key = null
 async function loadSideBar(){
     console.log('side bar...')
     e = document.getElementById('sidebar')
@@ -273,7 +279,7 @@ async function loadSideBar(){
     d.id  = "sidebar_div_" + key
     resized_img.id = "sidebar_img_" + key
     resized_img.addEventListener("click", function () {
-    alert(key)
+    g_clicked_key = key
     if (g_clicked_sidebar_img_id == this.id) // click same image
     {   
         g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
@@ -327,14 +333,19 @@ function handleResize(event)
 {
     const element = event.currentTarget;
     parent_id = element.getAttribute("parent_id")
+    data.forEach(item => {
+        if (item.id == parent_id){
+            if ( "maximize" in item ){ delete item.maximize}
+        }
+    });
     // Code to be executed when the window is resized
     node = document.getElementById(parent_id)
     const currentWidth = element.offsetWidth;
     const currentHeight = element.offsetHeight;
-    setNodeHeight(parent_id, currentHeight);
-    setNodeWidth(parent_id, currentWidth)
-    console.log('Div width on resize:', currentWidth); // Or use the width as needed
-        console.log('Div height on resize:', currentHeight); // Or use the width as needed
+    setNodeHeight(element, parent_id, currentHeight);
+    setNodeWidth(element, parent_id, currentWidth)
+    console.log('resizer width on resize:', currentWidth); // Or use the width as needed
+    console.log('resizer height on resize:', currentHeight); // Or use the width as needed
 
 }
 
@@ -345,7 +356,11 @@ function makeResizable(element){
 function showBubbleAll(bubble_obj, parent_id){
     let e = document.getElementById(parent_id);
     data.forEach(item=>{
-        if (item.id==parent_id){ item.maximize = true }
+        if (item.id==parent_id){ 
+            item.maximize = true
+            if ("height" in item){delete item.height}
+            if ("width" in item){delete item.width}
+         }
     })
     resize_e = e.querySelectorAll('[item_sub_type="resizer"]')[0]
     console.log(resize_e)
@@ -356,11 +371,26 @@ function showBubbleAll(bubble_obj, parent_id){
 function handleBubbleContext(text, bubble_obj, target_id){
     console.log(text, bubble_obj, target_id)
     if (text=="editText"){
-        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj})
+        console.log("at handleBubbleContext")
+        msg = ''
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            msg = item.text;
+        }
+        })
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg})
     }
     if (text=="editStyle"){
-        console.log("edit style")
-        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj})
+        custom_style_arr = [] // work around to access custom_style inside the block
+        data.forEach(item=>{ if(item.id == target_id && "style" in item ) { 
+            let stl = item.style; 
+            const { default: _omit, ...custom_style } = item.style 
+            console.log(custom_style)
+            custom_style_arr.push(custom_style)
+            }
+        })
+        custom_style = custom_style_arr.pop()
+        if ( custom_style !== undefined && Object.keys(custom_style).length === 0 ){ msg = '{"font-size": "16px"}' } else { msg = JSON.stringify(custom_style)}
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg })
     }
     if (text=="maximize"){
         showBubbleAll(bubble_obj, target_id)
@@ -390,7 +420,12 @@ function handleHandleContext(text, obj, target_id){
         e.remove()
         }
     }
+    if (text == "addTag"){
+        let msg = ''
+        data.forEach(item=>{if(item.id == target_id){ if("tag" in item){ msg = item.tag.join() } }})
+        showpop({type: "handle", id: target_id, action: text, obj: obj, pop_text: msg })
     }
+}
 function handleDrawAreaContext(text, obj, target_id){
     if (text == "addBubble"){ 
         let max_id = getMaxID()
@@ -418,7 +453,7 @@ function handleDrawAreaContext(text, obj, target_id){
         let max_id = getMaxID()
         let x = -global_x_moves
         let y = -global_y_moves
-        let link  = prompt("Enter Img");
+        let link  = prompt("Enter image name", g_clicked_key);
         let img = link
         new_img = {id: max_id, type: "img", style: {"default": "img"}, x: x, y: y, title: ".", name: img}
         data.push(new_img)
@@ -426,8 +461,7 @@ function handleDrawAreaContext(text, obj, target_id){
     }
 }
 
-function setNodeWidth(id, w = ''){
-    e = document.getElementById(id)
+function setNodeWidth(e, id, w = ''){
     parent = getNodeParent()
         data.forEach(item => {
             if (item.id == id){
@@ -442,8 +476,7 @@ function setNodeWidth(id, w = ''){
         });
 }
 
-function setNodeHeight(id, h = ''){
-    e = document.getElementById(id)
+function setNodeHeight(e, id, h = ''){
     parent = getNodeParent()
         data.forEach(item => {
             if (item.id == id){
@@ -459,6 +492,16 @@ function setNodeHeight(id, h = ''){
         });
 }
 
+function searchTag(tag){
+    let res = []
+    data.forEach(item=>{
+        if ("tag" in item && tag.split(',').every(e=>item.tag.includes(e))){
+            res.push(item.id)
+        }
+    })
+    if (res.length>0){alert(res.join('\n'))}
+}
+
 g_make_context_flag=false
 function makeContext(element){    
     
@@ -472,6 +515,7 @@ function makeContext(element){
         console.log(type)
         if (g_make_context_flag) return
         g_make_context_flag = true
+        console.log(event.target)
         if (type == "bubble"){ list_items = createBubbleContext(event.target) }
         if (type == "draw_area"){ list_items = createDrawAreaContext(event.target) }
         if (type == "handle"){ list_items = createHandleContext(event.target) }
@@ -555,6 +599,57 @@ function makeDraggable(element, parent, handle = null){
 
     global_x_moves = 0 
     global_y_moves = 0
+
+    g_global_moves = []
+    function goToNode(id){
+        if ( id == -1){
+            goBack()
+        }
+        if ( ! ( id in data.map(d=>d.id) ) ){
+            return
+        }
+        move_to_x = null
+        move_to_y = null
+        g_global_moves.push([global_x_moves, global_y_moves])
+        data.forEach(item=>{
+            if ( item.id == id ){
+                move_to_x = item.x
+                move_to_y = item.y
+            }
+        })
+        global_x_moves = move_to_x
+        global_y_moves = move_to_y
+        console.log(move_to_x, move_to_y)
+        data.forEach(item=>{
+            item.calculatedX = item.x - move_to_x
+            item.calculatedY = item.y - move_to_y
+            console.log(item, global_x_moves, item.x)
+            setNodePosition(item.id)
+        })
+    }
+
+    function callGoToNode(){
+        goToNode(document.getElementById("input_goto").value)
+    }
+
+    function goBack(){
+        if (g_global_moves.length>0){
+            let xy = g_global_moves.pop()
+            let move_to_x = xy[0]
+            let move_to_y = xy [1]
+            global_x_moves = move_to_x
+            global_y_moves = move_to_y
+            data.forEach(item=>{
+                item.calculatedX = move_to_x
+                item.calculatedY = move_to_y
+                setNodePosition(item.id)
+            })
+        }
+        else {
+            // do nothing
+        }
+    }
+
     function resetAnchorAndMoveNodes(anchor, parent, x, y){
         global_x_moves += x 
         global_y_moves += y
@@ -648,7 +743,7 @@ function makeDraggable(element, parent, handle = null){
         return fillContextOptions(options, t)
     }
     function createHandleContext(t){
-        options = ["delete"]
+        options = ["delete", "addTag"]
         return fillContextOptions(options, t)
     }
     function fillContextOptions(options, t){
@@ -657,7 +752,7 @@ function makeDraggable(element, parent, handle = null){
             l = document.createElement("div")
             l.textContent = item
             l.addEventListener('click', function() {
-                console.log
+                console.log(this)
                 if (t.getAttribute("item_sub_type") == "bubble"){handleBubbleContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "draw_area"){handleDrawAreaContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "handle"){handleHandleContext(this.textContent,t, t.getAttribute("parent_id"))}
@@ -715,10 +810,50 @@ function makeDraggable(element, parent, handle = null){
         return {handle: handle, element: new_element}
     }
 
+    function setBubbleData(outputDiv, encodedText){
+        encodedText = decodeHtmlEntity(encodedText)
+        outputDiv.innerHTML = ''
+        //const regex = /\[size=(\d+)\]([\s\S]*?)\[\/size\]/g;
+        const regex = /(?<!\\)\[size=(\d+)\]([\s\S]*?)\[\/size\]/g; //this helps to escape raw data like \[size=24]abc\[/size\  ]
+        let lastIndex = 0
+        let match
+        console.log(outputDiv, encodedText)
+        while( ( match = regex.exec(encodedText)) ){
+            if (match.index > lastIndex ){
+                const before = encodedText.slice(lastIndex, match.index)
+                console.log(before)
+                outputDiv.appendChild(document.createTextNode(before))
+            }
+
+            const span = document.createElement("span")
+            span.style.fontSize = match[1] + "px"
+            span.textContent = match[2]
+            //span does nothing on right click but pops up bubble edit menu then on rightclick doess nothing causing confusion
+            span.addEventListener("contextmenu", function(e){
+                e.preventDefault()
+                e.stopPropagation()
+            })
+            console.log(span)
+            outputDiv.appendChild(span)
+
+
+            lastIndex = regex.lastIndex
+        }
+
+        if (lastIndex < encodedText.length){
+            outputDiv.appendChild(document.createTextNode(encodedText.slice(lastIndex)))
+            console.log(encodedText.slice(lastIndex))
+        }
+        console.log(outputDiv)
+        return 
+    }
+
     function createBubble(data, parent_id){
         handle = createHandle(data.title, parent_id)
         const new_element = document.createElement('div')
-        new_element.textContent = decodeHtmlEntity(data.text)
+        //new_element.textContent = decodeHtmlEntity(data.text)
+        //setBubbleData( new_element, 'Hello [size=24] abc [/size] def ghi [size=24] def [/size]' )
+        setBubbleData( new_element, data.text )
         new_element.style.position = 'relative'
         new_element.setAttribute("item_sub_type", "bubble");
         new_element.setAttribute("parent_id", parent_id);
@@ -748,10 +883,14 @@ function makeDraggable(element, parent, handle = null){
                 // do nothing
             }
             else {
-                resize_node.style.width = "100px"
-                resize_node.style.height = "50px"
+                let width = "100px"
+                let height = "100px"
+                if ("width" in item){ width = item.width + "px" }
+                if ("height" in item){ height = item.height + "px" }
+                resize_node.style.width = width
+                resize_node.style.height = height
             }
-            //makeResizable(resize_node)
+            makeResizable(resize_node)
             node.appendChild(resize_node)
             container =  resize_node
             }
@@ -759,8 +898,7 @@ function makeDraggable(element, parent, handle = null){
                 container = node
             }
             
-            //if ("width" in item){ console.log(node.id, item.width); node.style.width = item.width + "px" }
-            //if ("height" in item){ console.log(node.id, item.height); node.style.height = item.height + "px" }
+
             node.classList.add('node');
             if (item.type == "bubble") { new_element = createBubble(item, item.id)}
             if (item.type == "link") { new_element = createLink(item, item.id)}
@@ -772,19 +910,18 @@ function makeDraggable(element, parent, handle = null){
             if(handle){container.appendChild(handle)}
             container.appendChild(new_element)
             parent.appendChild(node)
-            setNodePosition(node.id, nodes.x, nodes.y)
+            setNodePosition(node.id)
             makeDraggable(node, parent, handle)
         })
     }
 
     pop_holder = null
     function showpop(initiator){
+        console.log("at showpop", initiator)
         pop_holder = initiator
         pop = document.getElementById("draw_area_pop")
         pop_text = document.getElementById("pop_text")
-        if (pop_holder.action == "editStyle"){ 
-            pop_text.value = '{"font-size": "16px"}' 
-        }
+        pop_text.value = initiator.pop_text 
         pop.style.visibility="visible"
         
     }
@@ -826,13 +963,37 @@ function makeDraggable(element, parent, handle = null){
                 alert(error)
             }
         }
+        if (pop_holder.type == "handle" && pop_holder.action == "addTag" ){
+            if (txt != null && txt.trim() != ''){
+                id = pop_holder.id
+                console.log(txt, id)
+                data.forEach(item => {
+                    if (id == item.id) {
+                        item['tag'] = txt.split(",")
+                        }
+                    });
+            }
+            else {
+                user_confirm = confirm("delete tag ?")
+                if (user_confirm) {
+                    data.forEach(item => {
+                        if (id == item.id && 'tag' in item) {
+                            delete item.tag
+                            }
+                        });   
+                }
+            }
+        }
     pop_holder = null
     }
     function updateBubbleText(id, txt){
+        console.log('update bubble text', id, txt)
         data.forEach(item=>{
             if ( item.id == id ){ 
                 item.text = txt; e=document.getElementById(id)
-                e.querySelectorAll('[item_sub_type="bubble"]')[0].textContent = decodeHtmlEntity(txt)
+                //e.querySelectorAll('[item_sub_type="bubble"]')[0].textContent = decodeHtmlEntity(txt)
+                let bubble = e.querySelectorAll('[item_sub_type="bubble"]')[0]
+                setBubbleData(bubble, txt)
             }
         })
     }
@@ -844,6 +1005,7 @@ function makeDraggable(element, parent, handle = null){
          <input type="file" id="FileInput" accept=".json" onchange="loadData()"/>
         <button onclick="document.getElementById('image-input').click()">Load images</button>
         <button onclick="downloadJSON()">download</button>
+        <input id="input_goto" placeholder="Enter Id(-1 back)"/>
     </div>
     <div class="container">
         <div class="sidebar" id = 'sidebar'>
@@ -868,6 +1030,12 @@ function makeDraggable(element, parent, handle = null){
             const draw_area = document.getElementById("draw_area")
             makeDraggable(anchor, draw_area)
             makeContext(draw_area)
+            document.getElementById("input_goto").addEventListener('keydown', function(event){
+                event.stopPropagation()
+                if (event.key == 'Enter'){
+                    callGoToNode( document.getElementById("input_goto").value.trim() )
+                }
+            })
         }   
     </script>
 </body>

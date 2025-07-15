@@ -11,8 +11,9 @@
             flex-direction: column;
         }
         .top {
-            background: #c9daec;
-            color: black;
+            background: #1F1F1F;
+            border-bottom: 1px solid #707070;
+            color: white;
             padding: 20px;
             text-align: center;
             flex: 0 0 20px;
@@ -23,14 +24,40 @@
             height: calc(100vh - 60px);
         }
         .sidebar{
-            background: #f5f5f5;
+            background: #1F1F1F;
             width: 80px;
             padding: 20px;
             box-sizing: border-box;
             overflow: scroll;
         }
+                /* WebKit browsers (Chrome, Edge, Safari) */
+        ::-webkit-scrollbar {
+          width: 12px;
+          height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #121212;  /* Matches the dark background */
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: #444;       /* Dark gray thumb */
+          border-radius: 6px;
+          border: 3px solid #121212;    /* Creates spacing around thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #666;       /* Lighter gray on hover */
+        }
+
+        /* Firefox support */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #444 #121212;  /* thumb color, track color */
+        }
+
         .main{
-            background-color: #fff;
+            background-color: #1F1F1F;
             flex: 1;
             padding: 20px;
             box-sizing: border-box;
@@ -38,7 +65,7 @@
             overflow: hidden;
         }
         #draw_area{
-            background: #F5F5F5;
+            background: #1F1F1F;
             box-sizing: border-box;
             position: relative;
             display: flex;
@@ -57,14 +84,17 @@
             opacity: .5;
             z-index: 98;
         }
+        
+
         .bubble {
         position: relative;
         white-space: pre-wrap;
         border-radius: 0px;
         padding: 0px 0px;
         background: none;
-        color: black;
-        font-family: 'Comic Sans MS', cursive;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
         font-size: 14px;
         z-index: 80;
         }
@@ -151,7 +181,7 @@
 </head>
 <script>
 /*data = [
-    {id: 1, type: "bubble", style: "bubble", x: 0, y: 0, maximize: true, title: ".", text: "snowflake is a \nsaas product\nsaas product\nsaas product\nsaas product"},
+    {id: 1, type: "bubble", style: "bubble", x: 0, y: 0, title: ".", text: "snowflake is a \nsaas product\nsaas product\nsaas product\nsaas product"},
     {id: 2, type: "link", style: "link", x: 40, y: 100,  title: ".", href: "www.google.com", text: "google"},
     {id: 3, type: "img", style: "img", x: 80, y: 100,  title: ".", name: "chrome"},
     {id: 4, type: "img", style: "img", x: 80, y: 400,  title: ".", name: "download"},
@@ -160,9 +190,11 @@
 ]*/
 
 data=[]
+g_file_name = null
 function loadData(){
     data_input = document.getElementById('FileInput');
         const file = data_input.files[0];
+        g_file_name = file.name
         if (!file) {
         alert("No file selected.")
         return;
@@ -304,6 +336,17 @@ async function loadSideBar(){
     }
 }
 
+function getLocalTimeStamp(){
+    const now = new Date()
+    return now.getFullYear().toString()+
+    String(now.getMonth()+1).padStart(2, '0')+
+    String(now.getDate()+1).padStart(2, '0')+
+    String(now.getHours()+1).padStart(2, '0')+
+    String(now.getMinutes()+1).padStart(2, '0')+
+    String(now.getSeconds()+1).padStart(2, '0')
+
+}
+
 function downloadJSON() {
     // Sample JSON data
     //const data = {name: "Alice",age: 30,city: "New York"};
@@ -319,7 +362,14 @@ function downloadJSON() {
 
     // Set the URL for the Blob
     link.href = URL.createObjectURL(blob);
-    link.download = "data.json"; // File name
+    new Date().toISOString().replace(/[-T:Z.]/g, '').slice(0,14)
+    // link.download = g_file_name.split('.')[0] + getLocalTimeStamp() + '.' + g_file_name.split('.')[1] ; // File name
+    if ( g_file_name == null ){ g_file_name = 'download.json'}
+    let prefix = g_file_name.split('.')[0]
+    let suffix = g_file_name.split('.')[1]
+    let prefix_file = prefix.split('_')[0]
+    let version = prefix.split('_')[1] ? parseInt(g_file_name.split('_')[1]) + 1 : 0
+    link.download = prefix_file + '_' + version  + '.' + suffix ; // File name
 
     // Append link to body and trigger click
     document.body.appendChild(link);
@@ -329,10 +379,29 @@ function downloadJSON() {
     document.body.removeChild(link);
 }
 
+
+const observer = new ResizeObserver(entries =>{
+    for (let entry of entries){
+        const element = entry.target
+        parent_id = element.getAttribute("parent_id")
+        console.log('content rect', entry.contentRect)
+        const currentWidth = element.offsetWidth;
+        const currentHeight = element.offsetHeight;
+        console.log('width', currentWidth)
+        console.log('height', currentHeight)
+        setNodeHeight(element, parent_id, currentHeight);
+        setNodeWidth(element, parent_id, currentWidth)
+    }
+})
+
+/* depreceated in favor of observer
 function handleResize(event)
 {
-    const element = event.currentTarget;
+    const element = event.target;
+    console.log(element)
+    if (event.target.getAttribute("item_sub_type") !=  "resizer"){return}
     parent_id = element.getAttribute("parent_id")
+
     data.forEach(item => {
         if (item.id == parent_id){
             if ( "maximize" in item ){ delete item.maximize}
@@ -347,25 +416,38 @@ function handleResize(event)
     console.log('resizer width on resize:', currentWidth); // Or use the width as needed
     console.log('resizer height on resize:', currentHeight); // Or use the width as needed
 
-}
+}*/
 
+/* depreceated in favor of observer
 function makeResizable(element){
+    
     element.addEventListener('mouseup', handleResize);
+}*/
+
+function showBubbleText(show, text, bubble_obj){
+    if (show){ setBubbleData(bubble_obj,  text ) } 
+    else { setBubbleData(bubble_obj,  text.replace(/./g, 'x')) } 
 }
 
-function showBubbleAll(bubble_obj, parent_id){
-    let e = document.getElementById(parent_id);
+function toggleBubbleText(bubble_obj, parent_id){
+    let currentItem = null
+    let currentText = ''
+    let show = false
     data.forEach(item=>{
-        if (item.id==parent_id){ 
-            item.maximize = true
-            if ("height" in item){delete item.height}
-            if ("width" in item){delete item.width}
-         }
+        if (item.id == parent_id){
+            currentItem = item
+            currentText = item.text
+            if ("show" in item){
+                item.show = !(item.show)
+                show = item.show
+            }
+            else{
+                item.show = false
+                show = item.show
+            }
+        }
     })
-    resize_e = e.querySelectorAll('[item_sub_type="resizer"]')[0]
-    console.log(resize_e)
-    resize_e.style.width = ""
-    resize_e.style.height = ""
+    showBubbleText(show, currentText, bubble_obj)
 }
 
 function handleBubbleContext(text, bubble_obj, target_id){
@@ -392,8 +474,8 @@ function handleBubbleContext(text, bubble_obj, target_id){
         if ( custom_style !== undefined && Object.keys(custom_style).length === 0 ){ msg = '{"font-size": "16px"}' } else { msg = JSON.stringify(custom_style)}
         showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg })
     }
-    if (text=="maximize"){
-        showBubbleAll(bubble_obj, target_id)
+    if (text=="toggleView"){
+        toggleBubbleText(bubble_obj, target_id)
     }
 }
 
@@ -467,10 +549,10 @@ function setNodeWidth(e, id, w = ''){
             if (item.id == id){
                 if (w==''){
                     if ( "width" in item ){ delete item.width}
-                    e.style.width = ''
+                    //e.style.width = ''
                 } else {
                     item.width = w
-                    e.style.width = item.width + "px"
+                    //e.style.width = item.width + "px"
                 }
             }
         });
@@ -482,11 +564,11 @@ function setNodeHeight(e, id, h = ''){
             if (item.id == id){
                 if ( h == ''){
                     if ( "height" in item ){ delete item.height}
-                    e.style.height = ''
+                    //e.style.height = ''
                 }
                 else {
                 item.height = h
-                e.style.height = item.height + "px"
+                //e.style.height = item.height + "px"
                 }
             }
         });
@@ -640,8 +722,8 @@ function makeDraggable(element, parent, handle = null){
             global_x_moves = move_to_x
             global_y_moves = move_to_y
             data.forEach(item=>{
-                item.calculatedX = move_to_x
-                item.calculatedY = move_to_y
+                item.calculatedX += move_to_x
+                item.calculatedY += move_to_y
                 setNodePosition(item.id)
             })
         }
@@ -735,7 +817,7 @@ function makeDraggable(element, parent, handle = null){
         return pos
     }
     function createBubbleContext(t){
-        options = ["editText", "maximize", "editStyle"]
+        options = ["editText", "toggleView", "editStyle"]
         return fillContextOptions(options, t)
     }
     function createDrawAreaContext(t){
@@ -767,7 +849,6 @@ function makeDraggable(element, parent, handle = null){
         handle.setAttribute("item_sub_type", "handle");
         handle.setAttribute("parent_id", parent_id);
         makeContext(handle)
-        
         return handle
     }
     function applyStyle(data, e){
@@ -810,11 +891,12 @@ function makeDraggable(element, parent, handle = null){
         return {handle: handle, element: new_element}
     }
 
-    function setBubbleData(outputDiv, encodedText){
+   /*function setBubbleData(outputDiv, encodedText){
         encodedText = decodeHtmlEntity(encodedText)
         outputDiv.innerHTML = ''
         //const regex = /\[size=(\d+)\]([\s\S]*?)\[\/size\]/g;
-        const regex = /(?<!\\)\[size=(\d+)\]([\s\S]*?)\[\/size\]/g; //this helps to escape raw data like \[size=24]abc\[/size\  ]
+        //this helps to escape raw data like \[size=24]abc\[/size\  ]
+         const regex = /(?<!\\)\[(size|color)=([^\]]+)\]([\s\S]*?)\[\/\1\]/g;
         let lastIndex = 0
         let match
         console.log(outputDiv, encodedText)
@@ -825,9 +907,19 @@ function makeDraggable(element, parent, handle = null){
                 outputDiv.appendChild(document.createTextNode(before))
             }
 
-            const span = document.createElement("span")
-            span.style.fontSize = match[1] + "px"
-            span.textContent = match[2]
+        // Create a span for the matched tag content
+        const span = document.createElement('span');
+
+        if (match[1] === 'size') {
+          // match[2] is font size (number)
+          span.style.fontSize = match[2] + 'px';
+        } else if (match[1] === 'color') {
+          // match[2] is color value (e.g. 'red', '#ff0000')
+          span.style.color = match[2];
+        }
+
+        span.textContent = match[3];
+
             //span does nothing on right click but pops up bubble edit menu then on rightclick doess nothing causing confusion
             span.addEventListener("contextmenu", function(e){
                 e.preventDefault()
@@ -846,19 +938,73 @@ function makeDraggable(element, parent, handle = null){
         }
         console.log(outputDiv)
         return 
+    }*/
+
+    function setBubbleData(outputDiv, encodedText) {
+      encodedText = decodeHtmlEntity(encodedText);
+      outputDiv.innerHTML = '';
+
+      function parseSegment(text) {
+        const container = document.createDocumentFragment();
+
+        const regex = /(?<!\\)\[(size|color)=([^\]]+)\]([\s\S]*?)\[\/\1\]/g;
+        let lastIndex = 0;
+        let match;
+
+        while ((match = regex.exec(text))) {
+          // Text before the tag
+          if (match.index > lastIndex) {
+            container.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+          }
+
+          // Create a span with style according to tag
+          const span = document.createElement('span');
+          if (match[1] === 'size') {
+            span.style.fontSize = match[2] + 'px';
+          } else if (match[1] === 'color') {
+            span.style.color = match[2];
+          }
+
+          // Recursively parse inner content to support nested tags
+          span.appendChild(parseSegment(match[3]));
+
+          // Prevent context menu confusion
+          span.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            e.stopPropagation();
+          });
+
+          container.appendChild(span);
+          lastIndex = regex.lastIndex;
+        }
+
+        // Remaining text after last tag
+        if (lastIndex < text.length) {
+          container.appendChild(document.createTextNode(text.slice(lastIndex)));
+        }
+
+        return container;
+      }
+
+      outputDiv.appendChild(parseSegment(encodedText));
     }
+
 
     function createBubble(data, parent_id){
         handle = createHandle(data.title, parent_id)
         const new_element = document.createElement('div')
         //new_element.textContent = decodeHtmlEntity(data.text)
         //setBubbleData( new_element, 'Hello [size=24] abc [/size] def ghi [size=24] def [/size]' )
-        setBubbleData( new_element, data.text )
+        //setBubbleData( new_element, data.text )
+        if ("show" in data){ showBubbleText(data.show, data.text, new_element) }
+        else { showBubbleText(true, data.text, new_element) }
         new_element.style.position = 'relative'
         new_element.setAttribute("item_sub_type", "bubble");
         new_element.setAttribute("parent_id", parent_id);
         new_element.classList.add(data.style.default);
         applyStyle(data, new_element)
+        // this is only for testing
+        //applyRandomTextColor(new_element)
         new_element.onclick=makeContext(new_element)
         return {handle: handle, element: new_element}
     }
@@ -870,6 +1016,7 @@ function makeDraggable(element, parent, handle = null){
             if (document.getElementById(item.id)){ alert('id already taken'); return }
             new_element = null
             container = null
+            resize_node = null
             item.calculatedX = item.x + global_x_moves
             item.calculatedY = item.y + global_y_moves
             const node = document.createElement("div")
@@ -879,19 +1026,11 @@ function makeDraggable(element, parent, handle = null){
             resize_node.setAttribute("item_sub_type", "resizer");
             resize_node.setAttribute("parent_id", node.id);
             resize_node.classList.add("resize_node")
-            if ("maximize" in item && item.maximize) {
-                // do nothing
-            }
-            else {
-                let width = "100px"
-                let height = "100px"
-                if ("width" in item){ width = item.width + "px" }
-                if ("height" in item){ height = item.height + "px" }
-                resize_node.style.width = width
-                resize_node.style.height = height
-            }
-            makeResizable(resize_node)
+            //makeResizable(resize_node)
+            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
+            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
             node.appendChild(resize_node)
+            observer.observe(resize_node)
             container =  resize_node
             }
             else {
@@ -996,6 +1135,23 @@ function makeDraggable(element, parent, handle = null){
                 setBubbleData(bubble, txt)
             }
         })
+    }
+    const textColors = [
+      'primary-text',
+      'secondary-text',
+      'tertiary-text',
+      'accent-text',
+      'error-text',
+      'success-text',
+      'warning-text', 'text-color-1',  'text-color-2',  'text-color-3',  'text-color-4',  'text-color-5',
+  'text-color-6',  'text-color-7',  'text-color-8',  'text-color-9',  'text-color-10',
+  'text-color-11', 'text-color-12', 'text-color-13', 'text-color-14', 'text-color-15',
+  'text-color-16', 'text-color-17', 'text-color-18', 'text-color-19', 'text-color-20'
+    ];
+
+    function applyRandomTextColor(element) {
+      const randomClass = textColors[Math.floor(Math.random() * textColors.length)];
+      element.classList.add(randomClass);
     }
 </script>
 <body>

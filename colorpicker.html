@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Theme Color Picker</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    .palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .color-box {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .color-box:hover {
+      transform: scale(1.05);
+    }
+    .hex-code {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    .feedback {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.7);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      display: none;
+    }
+    .color-box.copied .feedback {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dark Theme Color Picker</h1>
+  <p>Click a color to copy its hex code!</p>
+
+  <div class="palette">
+    <!-- Dark theme color boxes -->
+    <div class="color-box" data-hex="#121212" style="background:#121212">
+      <div class="hex-code">#121212</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#1E1E1E" style="background:#1E1E1E">
+      <div class="hex-code">#1E1E1E</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#2D2D2D" style="background:#2D2D2D">
+      <div class="hex-code">#2D2D2D</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#333333" style="background:#333333">
+      <div class="hex-code">#333333</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#424242" style="background:#424242">
+      <div class="hex-code">#424242</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#505050" style="background:#505050">
+      <div class="hex-code">#505050</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#606060" style="background:#606060">
+      <div class="hex-code">#606060</div>
+      <div class="feedback">Copied!</div>
+    </div>
+    <div class="color-box" data-hex="#757575" style="background:#757575">
+      <div class="hex-code">#757575</div>
+      <div class="feedback">Copied!</div>
+    </div>
+      <div class="color-box" data-hex="#F88080" style="background:#F88080">
+        <div class="hex-code">#F88080</div>
+        <div class="feedback">Copied!</div>
+      </div>
+      <div class="color-box" data-hex="#569CD6" style="background:#569CD6">
+        <div class="hex-code">#569CD6</div>
+        <div class="feedback">Copied!</div>
+      </div>
+      <div class="color-box" data-hex="#DCDCAA" style="background:#DCDCAA">
+        <div class="hex-code">#DCDCAA</div>
+        <div class="feedback">Copied!</div>
+      </div>
+      <div class="color-box" data-hex="#C586C0" style="background:#C586C0">
+        <div class="hex-code">#C586C0</div>
+        <div class="feedback">Copied!</div>
+      </div>
+      <div class="color-box" data-hex="#687668" style="background:#687668">
+        <div class="hex-code">#687668</div>
+        <div class="feedback">Copied!</div>
+      </div>
+      <div class="color-box" data-hex="#CCCCCC" style="background:#CCCCCC">
+        <div class="hex-code">#CCCCCC</div>
+        <div class="feedback">Copied!</div>
+      </div>
+
+  <!-- 10 X11 & classic dark -->
+  <div class="color-box" data-hex="#151C44" style="background:#151C44"><div class="hex-code">#151C44</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#9C2222" style="background:#9C2222"><div class="hex-code">#9C2222</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#B77B00" style="background:#B77B00"><div class="hex-code">#B77B00</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#430F51" style="background:#430F51"><div class="hex-code">#430F51</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#21272B" style="background:#21272B"><div class="hex-code">#21272B</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#443C33" style="background:#443C33"><div class="hex-code">#443C33</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#1B1B1B" style="background:#1B1B1B"><div class="hex-code">#1B1B1B</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#282a36" style="background:#282a36"><div class="hex-code">#282a36</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#44475a" style="background:#44475a"><div class="hex-code">#44475a</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#6272a4" style="background:#6272a4"><div class="hex-code">#6272a4</div><div class="feedback">Copied!</div></div>
+
+  <!-- 10 Dracula accents -->
+  <div class="color-box" data-hex="#8be9fd" style="background:#8be9fd"><div class="hex-code">#8be9fd</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#50fa7b" style="background:#50fa7b"><div class="hex-code">#50fa7b</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#ffb86c" style="background:#ffb86c"><div class="hex-code">#ffb86c</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#ff79c6" style="background:#ff79c6"><div class="hex-code">#ff79c6</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#bd93f9" style="background:#bd93f9"><div class="hex-code">#bd93f9</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#ff5555" style="background:#ff5555"><div class="hex-code">#ff5555</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#f1fa8c" style="background:#f1fa8c"><div class="hex-code">#f1fa8c</div><div class="feedback">Copied!</div></div>
+
+  <!-- 10 Solarized dark -->
+  <div class="color-box" data-hex="#073642" style="background:#073642"><div class="hex-code">#073642</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#002b36" style="background:#002b36"><div class="hex-code">#002b36</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#586e75" style="background:#586e75"><div class="hex-code">#586e75</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#657b83" style="background:#657b83"><div class="hex-code">#657b83</div><div class="feedback">Copied!</div></div>
+
+  <!-- 10 Dark Academia / muted tones -->
+  <div class="color-box" data-hex="#3C3C3B" style="background:#3C3C3B"><div class="hex-code">#3C3C3B</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#6E6259" style="background:#6E6259"><div class="hex-code">#6E6259</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#58463D" style="background:#58463D"><div class="hex-code">#58463D</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#A2999E" style="background:#A2999E"><div class="hex-code">#A2999E</div><div class="feedback">Copied!</div></div>
+
+  <!-- 10 Dark Summer / cooler accents -->
+  <div class="color-box" data-hex="#6699CC" style="background:#6699CC"><div class="hex-code">#6699CC</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#326B9B" style="background:#326B9B"><div class="hex-code">#326B9B</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#00416C" style="background:#00416C"><div class="hex-code">#00416C</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#95B9DA" style="background:#95B9DA"><div class="hex-code">#95B9DA</div><div class="feedback">Copied!</div></div>
+
+  <!-- 10 Misc dark palette picks -->
+  <div class="color-box" data-hex="#2E3A24" style="background:#2E3A24"><div class="hex-code">#2E3A24</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#4E555B" style="background:#4E555B"><div class="hex-code">#4E555B</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#C3C4C7" style="background:#C3C4C7"><div class="hex-code">#C3C4C7</div><div class="feedback">Copied!</div></div>
+  <div class="color-box" data-hex="#2A2D30" style="background:#2A2D30"><div class="hex-code">#2A2D30</div><div class="feedback">Copied!</div></div>
+    <div class="color-box" data-hex="#ABABAB" style="background:#ABABAB"><div class="hex-code">#ABABAB</div><div class="feedback">Copied!</div></div>
+</div>
+
+  
+
+  <script>
+    document.querySelectorAll('.color-box').forEach(box => {
+      box.addEventListener('click', () => {
+        const hex = box.getAttribute('data-hex');
+        navigator.clipboard.writeText(hex).then(() => {
+          box.classList.add('copied');
+          setTimeout(() => box.classList.remove('copied'), 1000);
+        }, err => {
+          console.error('Failed to copy:', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

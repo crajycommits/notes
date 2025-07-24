@@ -95,8 +95,24 @@
         color: #9CDCFE;
         //font-family: 'Comic Sans MS', cursive;
         font-family: consolas;
-        font-size: 14px;
+        font-size: 8px;
         z-index: 80;
+        }
+        .goto {
+        display: inline-block;
+        background-color: #007BFF; /* Default blue */
+        color: white;
+        padding: 1px 1px;
+        font-size: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+        transition: background-color 0.3s ease;
+        }
+
+        .goto:hover {
+        background-color: #0056b3; /* Darker blue on hover */
         }
         .node{
             position: absolute;
@@ -541,6 +557,17 @@ function handleDrawAreaContext(text, obj, target_id){
         data.push(new_img)
         createNodes(getNodeParent(),[new_img])
     }
+    if (text == "addGoto"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        let name  = prompt("Enter name");
+        let id = prompt("Enter Id")
+        if (parseInt(id) === null || Number.isNaN(parseInt(id))) {alert("Value is null or NaN");return}
+        new_goto = {id: max_id, type: "goto", style: {"default": "goto"}, x: x, y: y, title: ".", text: name, gotoid: id}
+        data.push(new_goto)
+        createNodes(getNodeParent(),[new_goto])
+    }
 }
 
 function setNodeWidth(e, id, w = ''){
@@ -684,10 +711,14 @@ function makeDraggable(element, parent, handle = null){
 
     g_global_moves = []
     function goToNode(id){
+        id = parseInt(id)
         if ( id == -1){
             goBack()
+            return
         }
-        if ( ! ( id in data.map(d=>d.id) ) ){
+        if ( ! ( data.map(d=>d.id).includes(id) ) ){
+
+            alert("id not found:"+id)
             return
         }
         move_to_x = null
@@ -699,19 +730,21 @@ function makeDraggable(element, parent, handle = null){
                 move_to_y = item.y
             }
         })
-        global_x_moves = move_to_x
-        global_y_moves = move_to_y
-        console.log(move_to_x, move_to_y)
+        if ( move_to_x == null ){return}
+        global_x_moves = - move_to_x
+        global_y_moves = -  move_to_y 
         data.forEach(item=>{
-            item.calculatedX = item.x - move_to_x
-            item.calculatedY = item.y - move_to_y
+            item.calculatedX = item.x + global_x_moves
+            item.calculatedY = item.y + global_y_moves
             console.log(item, global_x_moves, item.x)
             setNodePosition(item.id)
         })
     }
 
-    function callGoToNode(){
-        goToNode(document.getElementById("input_goto").value)
+    function callGoToNode(id=null){
+        console.log("goto",id)
+        if (id==null){ goToNode(document.getElementById("input_goto").value) }
+        else { goToNode(id) }
     }
 
     function goBack(){
@@ -722,8 +755,8 @@ function makeDraggable(element, parent, handle = null){
             global_x_moves = move_to_x
             global_y_moves = move_to_y
             data.forEach(item=>{
-                item.calculatedX += move_to_x
-                item.calculatedY += move_to_y
+                item.calculatedX = item.x + global_x_moves
+                item.calculatedY = item.y + global_y_moves
                 setNodePosition(item.id)
             })
         }
@@ -749,6 +782,7 @@ function makeDraggable(element, parent, handle = null){
             if (item.id == id){
                 div = document.getElementById(id)
                 console.log(div, id)
+                console.log(item)
                 if (item.calculatedX + div.clientWidth < 0 || item.calculatedX > parent.clientWidth || item.calculatedY + div.clientHeight < 0 || item.calculatedY > parent.clientHeight)
                     {div.style.visibility = "hidden"}
                 else
@@ -821,7 +855,7 @@ function makeDraggable(element, parent, handle = null){
         return fillContextOptions(options, t)
     }
     function createDrawAreaContext(t){
-        options = ["addBubble", "addLink", "addImage"]
+        options = ["addBubble", "addLink", "addImage", "addGoto"]
         return fillContextOptions(options, t)
     }
     function createHandleContext(t){
@@ -865,6 +899,18 @@ function makeDraggable(element, parent, handle = null){
     const txt = document.createElement("textarea");
     txt.innerHTML = entity;
     return txt.value;
+    }
+    function createGoto(data, parent_id){
+        handle = createHandle(data.title, parent_id)
+        const new_element = document.createElement('div')
+        new_element.innerHTML = data.text
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "goto");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        new_element.onclick=() => callGoToNode(data.gotoid);
+        return {handle: handle, element: new_element}
     }
     function createImg(data, parent_id){
         handle = createHandle(data.title, parent_id)
@@ -1042,6 +1088,7 @@ function makeDraggable(element, parent, handle = null){
             if (item.type == "bubble") { new_element = createBubble(item, item.id)}
             if (item.type == "link") { new_element = createLink(item, item.id)}
             if (item.type == "img") { new_element = createImg(item, item.id)}
+            if (item.type == "goto") { new_element = createGoto(item, item.id)}
             handle = new_element['handle']
             new_element = new_element['element']
             node.setAttribute("item_type", "node");

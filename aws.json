@@ -1,0 +1,185 @@
+[
+  {
+    "id": 0,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 3,
+    "y": -8,
+    "title": ".",
+    "text": "root",
+    "calculatedX": 0,
+    "calculatedY": 0,
+    "height": 46,
+    "width": 42
+  },
+  {
+    "id": 1,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 178,
+    "y": 556,
+    "title": ".",
+    "text": "[size=33]s3[/size] - [color=#f1fa8c]Amazon Simple Storage Service[/color]",
+    "calculatedX": 175,
+    "calculatedY": 564,
+    "height": 88,
+    "width": 99
+  },
+  {
+    "id": 2,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 80,
+    "y": -7,
+    "title": ".",
+    "text": "s3",
+    "gotoid": "1",
+    "calculatedX": 77,
+    "calculatedY": 1
+  },
+  {
+    "id": 3,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 334,
+    "y": 551,
+    "title": ".",
+    "text": "A [color=#f1fa8c]bucket[/color]🪣 is a container for objects. An [color=#f1fa8c]object[/color]🧊 is a file📝 and any metadata🔢 that describes that file\n\neach object can be up to 5🖐 TB in size\n\nobject=[color=#50fa7b]key 🔑 + version 📌+ value/content 📝 + tag🏷️+ metadata🔢[/color]\n\nmetadata🔢\nsystem defined - object's creation time and storage class ....\nuser defined - tags 🏷️\n\n⚠️\nAfter you upload the object, you cant❌ modify this user-defined metadata. The only way to modify this metadata is to make a copy of the object and set the metadata.",
+    "calculatedX": 331,
+    "calculatedY": 559,
+    "height": 252,
+    "width": 240,
+    "tag": [
+      "s3,basic"
+    ]
+  },
+  {
+    "id": 4,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 597,
+    "y": 588,
+    "title": ".",
+    "text": "Uploading⬆️\n\n🚩uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
+    "calculatedX": 594,
+    "calculatedY": 596,
+    "height": 107,
+    "width": 165,
+    "tag": [
+      "s3,basic"
+    ]
+  },
+  {
+    "id": 5,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 537,
+    "y": 809,
+    "title": ".",
+    "text": "[color=#f1fa8c]SSE server💻 side encryption🔐[/color]\n\n🟩Amazon S3 managed keys (SSE-S3) is the default🙋‍♂️ encryption configuration\n\nAmazon S3 managed keys [color=#f1fa8c](SSE-S3)[/color]\nAWS KMS [color=#f1fa8c](SSE-KMS)[/color]\nAWS KMS keys [color=#f1fa8c](DSSE-KMS)[/color] : dual-layer server-side encryption\n\n[color=#f1fa8c](SSE-C)[/color] : customer-provided keys",
+    "calculatedX": 534,
+    "calculatedY": 817,
+    "height": 161,
+    "width": 164,
+    "tag": [
+      "s3,basic"
+    ]
+  },
+  {
+    "id": 7,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 299,
+    "y": 999,
+    "title": ".",
+    "text": "table\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"border-collapse: collapse; width: 100%;\">\n  <thead>\n    <tr>\n      <th></th>\n      <th>Customer managed keys</br>Not SSE-C</th>\n      <th>AWS managed keys</th>\n      <th>AWS owned keys</th>\n    </tr>\n    <tr>\n      <th>cross account</th>\n      <th>Cross account NOT<blink>❌</blink>region</th>\n      <th>No</th>\n      <th>Cross account/region🌍</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Key policy</strong></td>\n      <td>Exclusively controlled by the customer</td>\n      <td>Controlled by service; viewable by customer</td>\n      <td>Exclusively controlled and only viewable by the AWS service that encrypts your data</td>\n    </tr>\n    <tr>\n      <td><strong>Logging</strong></td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>Not viewable by the customer</td>\n    </tr>\n    <tr>\n      <td><strong>Lifecycle management</strong></td>\n      <td>Customer manages rotation🔄, deletion🗑️ and Regional location📍</td>\n      <td>AWS KMS manages rotation (annual), deletion, and Regional location</td>\n      <td>AWS service manages rotation, deletion, and Regional location</td>\n    </tr>\n    <tr>\n      <td><strong>Pricing</strong></td>\n      <td>\n        Monthly fee for existence of keys (pro-rated hourly).<br>\n        Also charged for key usage\n      </td>\n      <td>\n        No monthly fee; but the caller is charged for API usage on these keys\n      </td>\n      <td>No charges to customer🎁</td>\n    </tr>\n  </tbody>\n</table>\n",
+    "calculatedX": 296,
+    "calculatedY": 1007,
+    "height": 308,
+    "width": 578,
+    "tag": [
+      "s3,basic"
+    ]
+  },
+  {
+    "id": 8,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 188,
+    "y": 1393,
+    "title": ".",
+    "text": "[color=#f1fa8c]S3 static website[/color]\n>⚠️Amazon S3 website endpoints do not❌ support HTTPS or access points, \nuse  \n  >[color=#f1fa8c]AWS Amplify Hosting [/color] or \n  >Amazon CloudFront\n\n>Website endpoints(return [color=#50fa7b]HTML[/color]) are different from the endpoints REST API requests(return [color=#50fa7b]XML[/color])\n\n>instead of website endpoints use domain registered with [color=#f1fa8c]Amazon Route 53\nor DNS CNAME[/color] of your own registered domain name",
+    "calculatedX": 185,
+    "calculatedY": 1401,
+    "height": 196,
+    "width": 206,
+    "tag": [
+      "s3",
+      "static",
+      "website"
+    ]
+  },
+  {
+    "id": 9,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 104,
+    "y": -6,
+    "title": ".",
+    "text": "static",
+    "gotoid": "8",
+    "calculatedX": 101,
+    "calculatedY": 2
+  },
+  {
+    "id": 10,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 196,
+    "y": 1678,
+    "title": ".",
+    "text": "[color=#f1fa8c]replication[/color]\n\n1. Live ( ⚠️wont replicate object before setting enabled )\n  a. Cross-Region Replication (CRR)\n  b. Same-Region Replication (SRR)\n2. Ondemand\n\n[color=#50fa7b]bi-directional replication[/color]  is a special type of CRR with 2way sync\n\nsource and destination buckets must have [color=#50fa7b]versioning[/color] enabled.\n\n👌Replica can be in a different storage class\n\nsource: enable both source/target region\ntarget: enable target region ",
+    "calculatedX": 193,
+    "calculatedY": 1686,
+    "height": 197,
+    "width": 339,
+    "tag": [
+      "s3",
+      "replication"
+    ]
+  },
+  {
+    "id": 11,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 155,
+    "y": -8,
+    "title": ".",
+    "text": "replication",
+    "gotoid": "10",
+    "calculatedX": 152,
+    "calculatedY": 0
+  }
+]

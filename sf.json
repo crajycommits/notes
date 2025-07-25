@@ -1,0 +1,205 @@
+[
+  {
+    "id": 1,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "16px"
+    },
+    "x": 438,
+    "y": 235,
+    "title": ".",
+    "text": "snowflake is saas\n\nsaas is a software hosted in cloud ☁ and delivered to user over internet such as browser",
+    "calculatedX": 438,
+    "calculatedY": 235,
+    "height": 190,
+    "width": 314
+  },
+  {
+    "id": 2,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 184,
+    "y": 478,
+    "title": ".",
+    "text": "A virtual warehouse [size=24]🏠[/size], often referred to simply as a warehouse, is a cluster of compute [size=24]💻💻💻💻 [/size] resources in Snowflake.",
+    "calculatedX": 184,
+    "calculatedY": 478,
+    "height": 146,
+    "width": 179
+  },
+  {
+    "id": 4,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "12px",
+      "color": "#ff9800"
+    },
+    "x": 405,
+    "y": 474,
+    "title": ".",
+    "text": "Think like its a lot of computers\nproviding MEMORY and CPU power \n\\[size=24\\] &#x1f4aa \\[/size\\]\n[size=24] &#x1f4aa [/size]\nit may be in aws, azure or \neven in a basement somewhere \nwho cares ?",
+    "calculatedX": 405,
+    "calculatedY": 474,
+    "height": 153,
+    "width": 197
+  },
+  {
+    "id": 6,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 441,
+    "y": 946,
+    "title": ".",
+    "text": "There are 2\ntypes of warehouse",
+    "calculatedX": 441,
+    "calculatedY": 946,
+    "height": 100,
+    "width": 100
+  },
+  {
+    "id": 9,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 685,
+    "y": 1104,
+    "title": ".",
+    "text": "[size=24]standard[/size]\nsmallest size x small\nlargest size  [size=24]6x[/size]",
+    "calculatedX": 685,
+    "calculatedY": 1104,
+    "height": 109,
+    "width": 192
+  },
+  {
+    "id": 10,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "16px"
+    },
+    "x": 712,
+    "y": 480,
+    "title": ".",
+    "text": "A warehouse can be resized up or down at any time, including while it is running and processing statements.",
+    "calculatedX": 712,
+    "calculatedY": 480,
+    "height": 144,
+    "width": 196
+  },
+  {
+    "id": 11,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "44px"
+    },
+    "x": 736,
+    "y": 615,
+    "title": ".",
+    "text": "&#x1f3c3",
+    "calculatedX": 736,
+    "calculatedY": 615,
+    "height": 80,
+    "width": 60
+  },
+  {
+    "id": 12,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 595,
+    "y": 697,
+    "title": ".",
+    "text": "Increasing the size of a warehouse does not always improve data loading performance",
+    "calculatedX": 595,
+    "calculatedY": 697,
+    "height": 61,
+    "width": 171
+  },
+  {
+    "id": 14,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "44px"
+    },
+    "x": 461,
+    "y": 672,
+    "title": ".",
+    "text": "&#x1f69a",
+    "calculatedX": 461,
+    "calculatedY": 672,
+    "height": 80,
+    "width": 60
+  },
+  {
+    "id": 15,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "12px",
+      "color": "red"
+    },
+    "x": 586,
+    "y": 771,
+    "title": ".",
+    "text": "Data loading performance is influenced more by the \n1 number of files being loaded\n2 the size of each file",
+    "calculatedX": 586,
+    "calculatedY": 771,
+    "maximize": true,
+    "height": 88,
+    "width": 339
+  },
+  {
+    "id": 16,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 192,
+    "y": 1056,
+    "title": ".",
+    "text": "[size=24] snowpark [/size]\nrecommended for running Snowpark workloads that has \nlarge memory [size=24]&#x1f9e0 [/size]\nrequirements or\ndependencies on a specific CPU  architecture\n\ni provide [size=24]16x[/size] memory by default\ncompared to standard",
+    "calculatedX": 192,
+    "calculatedY": 1056,
+    "height": 213,
+    "width": 416
+  },
+  {
+    "id": 17,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 178,
+    "y": -2,
+    "title": ".",
+    "text": "warehouse",
+    "gotoid": "2",
+    "calculatedX": 178,
+    "calculatedY": -2
+  },
+  {
+    "id": 0,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 0,
+    "y": 0,
+    "title": ".",
+    "text": "root",
+    "calculatedX": 0,
+    "calculatedY": 0,
+    "height": 44,
+    "width": 38
+  }
+]

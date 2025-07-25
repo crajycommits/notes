@@ -653,58 +653,87 @@ function makeContext(element){
 }
 
 
-function makeDraggable(element, parent, handle = null){
-    const dragTarget = handle || element
-    element.style.position = 'absolute'
-    dragTarget.style.cursor = 'move'
+function makeDraggable(element, parent, handle = null) {
+    const dragTarget = handle || element;
+    element.style.position = 'absolute';
+    dragTarget.style.cursor = 'move';
 
-    let offsetX, offsetY, isDragging = false
-    let startX = 0, startY = 0
+    let offsetX, offsetY, isDragging = false;
+    let startX = 0, startY = 0;
 
-    dragTarget.addEventListener('mousedown',function(e){
-        if (e.button === 2) return; // Ignore right-click for drag
-        isDragging = true
-        const parentRect = parent.getBoundingClientRect()
-        const elemRect = element.getBoundingClientRect()
-        offsetX = e.clientX - elemRect.left 
-        offsetY = e.clientY - elemRect.top
-        startX = elemRect.left - parentRect.left
-        startY = elemRect.top - parentRect.top
-        element.style.zIndex = 1000 
-        e.preventDefault()
-        e.stopPropagation()
-    });
+    function startDrag(x, y) {
+        const parentRect = parent.getBoundingClientRect();
+        const elemRect = element.getBoundingClientRect();
+        offsetX = x - elemRect.left;
+        offsetY = y - elemRect.top;
+        startX = elemRect.left - parentRect.left;
+        startY = elemRect.top - parentRect.top;
+        isDragging = true;
+        element.style.zIndex = 1000;
+    }
 
-    document.addEventListener('mousemove', function(e){
-    if (!isDragging) return
-    const parentRect = parent.getBoundingClientRect()
-    let x = e.clientX - parentRect.left - offsetX
-    let y = e.clientY - parentRect.top - offsetY
-    element.style.left = x + 'px';
-    element.style.top = y + 'px';
-    });
+    function dragMove(x, y) {
+        if (!isDragging) return;
+        const parentRect = parent.getBoundingClientRect();
+        const newX = x - parentRect.left - offsetX;
+        const newY = y - parentRect.top - offsetY;
+        element.style.left = newX + 'px';
+        element.style.top = newY + 'px';
+    }
 
-    document.addEventListener('mouseup', function(e){
-        if (isDragging) {
-            isDragging = false
-            element.style.zIndex = ''
-            const parentRect = parent.getBoundingClientRect()
-            const elemRect = element.getBoundingClientRect()
-            const endX = elemRect.left - parentRect.left
-            const endY = elemRect.top - parentRect.top
-            const deltaX = Math.round(endX - startX)
-            const deltaY = Math.round(endY - startY)
-            if (element.id == "anchor")
-            {
-            resetAnchorAndMoveNodes(element, parent, deltaX, deltaY)
-            }
-            else if (element.id && element.getAttribute("item_type") == 'node' ){
-                updateNodePosition(element.id, deltaX, deltaY)
-            }
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        element.style.zIndex = '';
+        const parentRect = parent.getBoundingClientRect();
+        const elemRect = element.getBoundingClientRect();
+        const endX = elemRect.left - parentRect.left;
+        const endY = elemRect.top - parentRect.top;
+        const deltaX = Math.round(endX - startX);
+        const deltaY = Math.round(endY - startY);
+        if (element.id === "anchor") {
+            resetAnchorAndMoveNodes(element, parent, deltaX, deltaY);
+        } else if (element.id && element.getAttribute("item_type") === 'node') {
+            updateNodePosition(element.id, deltaX, deltaY);
         }
+    }
+
+    // --- MOUSE EVENTS ---
+    dragTarget.addEventListener('mousedown', function (e) {
+        if (e.button === 2) return; // Right-click
+        startDrag(e.clientX, e.clientY);
+        e.preventDefault();
+        e.stopPropagation();
     });
 
+    document.addEventListener('mousemove', function (e) {
+        dragMove(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('mouseup', function () {
+        endDrag();
+    });
+
+    // --- TOUCH EVENTS ---
+    dragTarget.addEventListener('touchstart', function (e) {
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+        e.preventDefault();
+        e.stopPropagation();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        dragMove(touch.clientX, touch.clientY);
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', function () {
+        endDrag();
+    });
 }
+
 
     global_x_moves = 0 
     global_y_moves = 0

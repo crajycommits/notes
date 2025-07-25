@@ -897,7 +897,7 @@ function makeDraggable(element, parent, handle = null) {
             l = document.createElement("div")
             l.textContent = item
             l.addEventListener('click', function() {
-                console.log(this)
+                console.log(this,t)
                 if (t.getAttribute("item_sub_type") == "bubble"){handleBubbleContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "draw_area"){handleDrawAreaContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "handle"){handleHandleContext(this.textContent,t, t.getAttribute("parent_id"))}
@@ -1014,8 +1014,36 @@ function makeDraggable(element, parent, handle = null) {
         console.log(outputDiv)
         return 
     }*/
+function setBubbleData(outputDiv, encodedText) {
+  encodedText = decodeHtmlEntity(encodedText);
+  outputDiv.innerHTML = '';
 
-    function setBubbleData(outputDiv, encodedText) {
+  function parseSegment(text) {
+    // Replace custom [size] and [color] tags with <span> equivalents
+    text = text.replace(/\[size=([^\]]+)\]([\s\S]*?)\[\/size\]/g, (_, size, content) => {
+      return `<span style="font-size: ${size}px;">${content}</span>`;
+    });
+
+    text = text.replace(/\[color=([^\]]+)\]([\s\S]*?)\[\/color\]/g, (_, color, content) => {
+      return `<span style="color: ${color};">${content}</span>`;
+    });
+
+    return text;
+  }
+
+  // Add context menu listener on the entire output div
+  outputDiv.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    // You can customize what happens on right-click here
+    console.log('Context menu triggered on bubble');
+    // For example: show a custom menu
+  });
+
+  outputDiv.innerHTML=parseSegment(encodedText);
+}
+
+    function setBubbleData_old(outputDiv, encodedText) {
       encodedText = decodeHtmlEntity(encodedText);
       outputDiv.innerHTML = '';
 

@@ -1,0 +1,33 @@
+[
+  {
+    "id": 123,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1073,
+    "y": 262,
+    "title": ".",
+    "text": "[size=28]🗿[/size] - Discovered in 1799 near the town of Rosetta (Rashid) in Egypt by French soldiers during Napoleons campaign\nHieroglyphics – the formal writing system used by ancient Egyptian priests.\nDemotic – the common script of daily Egyptian writing at the time.\nAncient Greek – the language of administration under the Ptolemaic dynasty.\n\nBecause scholars could read Ancient Greek, the Rosetta Stone provided the critical key to finally understanding Egyptian hieroglyphs, which had been undeciphered for centuries.",
+    "calculatedX": 532,
+    "calculatedY": 159,
+    "height": 221,
+    "width": 564
+  },
+  {
+    "id": 0,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 0,
+    "y": 0,
+    "title": ".",
+    "text": "rosetta",
+    "gotoid": "123",
+    "calculatedX": -541,
+    "calculatedY": -103,
+    "height": 68,
+    "width": 100
+  }
+]

@@ -193,6 +193,33 @@
       display: none;
       z-index: 1000;
     }
+.goto-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.goto-button:hover {
+  background-color: #0056b3;
+}
+.hover-reveal-img {
+  filter: brightness(40%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.hover-reveal-img:hover {
+  filter: brightness(100%);
+  opacity: 1;
+}
+
     </style>
 </head>
 <script>
@@ -228,6 +255,7 @@ function loadData(){
         reader.readAsText(file);
 }
 images = {}
+g_image_loaded = false
 async function loadImages() {
   const input = document.getElementById('image-input');
   if (!input.files || input.files.length === 0) {
@@ -259,10 +287,11 @@ async function loadImages() {
 
   // Now it's safe to load the sidebar
   loadSideBar();
+  g_image_loaded=true
 }
 
 
-function resizeImage(img, maxWidth = 40, maxHeight = 40, quality = 0.7) {
+function resizeImage(img, maxWidth = 40, maxHeight = 40, quality = 1) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
@@ -326,6 +355,7 @@ async function loadSideBar(){
     resized_img.src = url
     d.id  = "sidebar_div_" + key
     resized_img.id = "sidebar_img_" + key
+    resized_img.className = 'hover-reveal-img';
     resized_img.addEventListener("click", function () {
     g_clicked_key = key
     if (g_clicked_sidebar_img_id == this.id) // click same image
@@ -476,6 +506,38 @@ function handleBubbleContext(text, bubble_obj, target_id){
         }
         })
         showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg})
+    }
+    if (text == "maximize") {
+        resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
+        observer.unobserve(resizer_obj);
+        // Reset styles
+        resizer_obj.style.resize = "none";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.overflow = "visible"; // Show content beyond box
+        resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+        resizer_obj.style.width = "auto";
+        resizer_obj.style.height = "auto";
+        resizer_obj.style.maxWidth = "none";
+        resizer_obj.style.maxHeight = "none";
+    }
+    if (text == "minimize") {
+        let width = height = 0;
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            width = item.width; height = item.height
+        }
+        })
+        console.log(width,height)
+        resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
+        // Reset styles
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
     }
     if (text=="editStyle"){
         custom_style_arr = [] // work around to access custom_style inside the block
@@ -880,7 +942,7 @@ function makeDraggable(element, parent, handle = null) {
         return pos
     }
     function createBubbleContext(t){
-        options = ["editText", "toggleView", "editStyle"]
+        options = ["editText", "toggleView", "editStyle", "maximize", "minimize"]
         return fillContextOptions(options, t)
     }
     function createDrawAreaContext(t){
@@ -958,6 +1020,7 @@ function makeDraggable(element, parent, handle = null) {
         const new_element = document.createElement('a')
         new_element.href = data.href
         new_element.textContent = data.text
+        new_element.target = '_blank'; // Open in new tab
         new_element.style.position = 'relative'
         new_element.setAttribute("item_sub_type", "link");
         new_element.setAttribute("parent_id", parent_id);
@@ -1018,18 +1081,25 @@ function setBubbleData(outputDiv, encodedText) {
   encodedText = decodeHtmlEntity(encodedText);
   outputDiv.innerHTML = '';
 
-  function parseSegment(text) {
-    // Replace custom [size] and [color] tags with <span> equivalents
-    text = text.replace(/\[size=([^\]]+)\]([\s\S]*?)\[\/size\]/g, (_, size, content) => {
-      return `<span style="font-size: ${size}px;">${content}</span>`;
-    });
+function parseSegment(text) {
+  // Replace [s=...] tags with font-size spans
+  text = text.replace(/\[s=([^\]]+)\]([\s\S]*?)\[\/s\]/g, (_, size, content) => {
+    return `<span style="font-size: ${size}px;">${content}</span>`;
+  });
 
-    text = text.replace(/\[color=([^\]]+)\]([\s\S]*?)\[\/color\]/g, (_, color, content) => {
-      return `<span style="color: ${color};">${content}</span>`;
-    });
+  // Replace [c=...] tags with color spans
+  text = text.replace(/\[c=([^\]]+)\]([\s\S]*?)\[\/c\]/g, (_, color, content) => {
+    return `<span style="color: ${color};">${content}</span>`;
+  });
 
-    return text;
-  }
+  // Replace [g=...] tags with clickable span styled as button
+  text = text.replace(/\[g=(\d+)\]([\s\S]*?)\[\/g\]/g, (_, nodeId, content) => {
+    return `<span class="goto-button" onclick="callGoToNode(${nodeId})">${content}</span>`;
+  });
+
+  return text;
+}
+
 
   // Add context menu listener on the entire output div
   outputDiv.addEventListener('contextmenu', e => {
@@ -1265,6 +1335,7 @@ function setBubbleData(outputDiv, encodedText) {
          <input type="file" id="FileInput" accept=".json" onchange="loadData()"/>
         <button onclick="document.getElementById('image-input').click()">Load images</button>
         <button onclick="downloadJSON()">download</button>
+        <button onclick="callGoToNode(-1)">back</button>
         <input id="input_goto" placeholder="Enter Id(-1 back)"/>
     </div>
     <div class="container">

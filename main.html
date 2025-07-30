@@ -496,6 +496,18 @@ function toggleBubbleText(bubble_obj, parent_id){
     showBubbleText(show, currentText, bubble_obj)
 }
 
+function maximizeBubble(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow = "visible"; // Show content beyond box
+    resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    resizer_obj.style.width = "auto";
+    resizer_obj.style.height = "auto";
+    resizer_obj.style.maxWidth = "none";
+    resizer_obj.style.maxHeight = "none";
+}
+
 function handleBubbleContext(text, bubble_obj, target_id){
     console.log(text, bubble_obj, target_id)
     if (text=="editText"){
@@ -510,15 +522,7 @@ function handleBubbleContext(text, bubble_obj, target_id){
     if (text == "maximize") {
         resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
         observer.unobserve(resizer_obj);
-        // Reset styles
-        resizer_obj.style.resize = "none";
-        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
-        resizer_obj.style.overflow = "visible"; // Show content beyond box
-        resizer_obj.style.position = "static"; // Let it expand naturally if in flow
-        resizer_obj.style.width = "auto";
-        resizer_obj.style.height = "auto";
-        resizer_obj.style.maxWidth = "none";
-        resizer_obj.style.maxHeight = "none";
+        maximizeBubble(resizer_obj);
     }
     if (text == "minimize") {
         let width = height = 0;
@@ -986,6 +990,14 @@ function makeDraggable(element, parent, handle = null) {
             })
         }
     }
+    function isIPad() {
+    // For newer iPads running iPadOS (which report as Mac)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isMac = navigator.platform === 'MacIntel';
+    const hasTouch = navigator.maxTouchPoints > 1;
+
+    return isIOS || (isMac && hasTouch);
+    }
     function decodeHtmlEntity(entity) {
     const txt = document.createElement("textarea");
     txt.innerHTML = entity;
@@ -1200,11 +1212,14 @@ function parseSegment(text) {
             resize_node.setAttribute("parent_id", node.id);
             resize_node.classList.add("resize_node")
             //makeResizable(resize_node)
-            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
-            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
-            node.appendChild(resize_node)
-            observer.observe(resize_node)
+            if(isIPad()){maximizeBubble(resize_node)}
+            else{
+                if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
+                if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
+                observer.observe(resize_node)
+            }
             container =  resize_node
+            node.appendChild(resize_node)
             }
             else {
                 container = node

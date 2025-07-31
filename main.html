@@ -96,7 +96,7 @@
         //font-family: 'Comic Sans MS', cursive;
         font-family: consolas;
         font-size: 8px;
-        z-index: 80;
+        z-index: 79;
         }
         .goto {
         display: inline-block;
@@ -501,11 +501,24 @@ function maximizeBubble(resizer_obj){
     resizer_obj.style.resize = "none";
     resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
     resizer_obj.style.overflow = "visible"; // Show content beyond box
-    resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
     resizer_obj.style.width = "auto";
     resizer_obj.style.height = "auto";
-    resizer_obj.style.maxWidth = "none";
-    resizer_obj.style.maxHeight = "none";
+    resizer_obj.style.maxWidth = "50vw";
+    resizer_obj.style.maxHeight = "50vh";
+    observer.unobserve(resizer_obj);
+}
+
+function minimizeBubble(resizer_obj, width, height){
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
 }
 
 function handleBubbleContext(text, bubble_obj, target_id){
@@ -521,7 +534,6 @@ function handleBubbleContext(text, bubble_obj, target_id){
     }
     if (text == "maximize") {
         resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
-        observer.unobserve(resizer_obj);
         maximizeBubble(resizer_obj);
     }
     if (text == "minimize") {
@@ -533,15 +545,7 @@ function handleBubbleContext(text, bubble_obj, target_id){
         console.log(width,height)
         resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
         // Reset styles
-        resizer_obj.style.resize = "both";
-        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
-        resizer_obj.style.removeProperty("overflow");
-        resizer_obj.style.removeProperty("position");
-        resizer_obj.style.removeProperty("max-width");
-        resizer_obj.style.removeProperty("max-height");
-        resizer_obj.style.height = height + "px"
-        resizer_obj.style.width = width + "px"
-        observer.observe(resizer_obj);
+        minimizeBubble(resizer_obj, width, height)
     }
     if (text=="editStyle"){
         custom_style_arr = [] // work around to access custom_style inside the block
@@ -718,7 +722,31 @@ function makeContext(element){
     });
 }
 
-
+g_last_dragged_e = null
+function overrideDraggableIpad(element){
+    // maximize section
+    if (element.getAttribute("item_type") === 'node' && element.querySelector('[item_sub_type="bubble"]')){
+        const resizerElement = element.querySelector('[item_sub_type="resizer"]');
+        const bubbleElement = element.querySelector('[item_sub_type="bubble"]');
+        const parentId = resizerElement.getAttribute("parent_id");
+        let width = null;
+        let height = null;
+        let current_item = null;
+        data.forEach(item=>{ if(item.id == parentId ) { current_item = item; width = item.width; height = item.height } })
+        console.log(current_item,width,height,resizerElement,bubbleElement,parentId)
+        if ( "_max" in current_item && current_item._max){ 
+            minimizeBubble(resizerElement, width, height)
+            bubbleElement.style.backgroundColor = ""
+            element.style.zIndex = "";
+            current_item._max=false
+        } else {
+            maximizeBubble(resizerElement)
+            element.style.zIndex = 80;
+            bubbleElement.style.backgroundColor = "#1f1f1f"
+            current_item._max=true
+        }
+    }
+}
 function makeDraggable(element, parent, handle = null) {
     const dragTarget = handle || element;
     element.style.position = 'absolute';
@@ -728,6 +756,11 @@ function makeDraggable(element, parent, handle = null) {
     let startX = 0, startY = 0;
 
     function startDrag(x, y) {
+        console.log(element)
+        if(isIPad() && element.getAttribute("item_type") === 'node'){
+            overrideDraggableIpad(element)
+            return
+        }
         const parentRect = parent.getBoundingClientRect();
         const elemRect = element.getBoundingClientRect();
         offsetX = x - elemRect.left;
@@ -876,8 +909,6 @@ function makeDraggable(element, parent, handle = null) {
         data.forEach(item => {
             if (item.id == id){
                 div = document.getElementById(id)
-                console.log(div, id)
-                console.log(item)
                 if (item.calculatedX + div.clientWidth < 0 || item.calculatedX > parent.clientWidth || item.calculatedY + div.clientHeight < 0 || item.calculatedY > parent.clientHeight)
                     {div.style.visibility = "hidden"}
                 else
@@ -995,7 +1026,6 @@ function makeDraggable(element, parent, handle = null) {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isMac = navigator.platform === 'MacIntel';
     const hasTouch = navigator.maxTouchPoints > 1;
-
     return isIOS || (isMac && hasTouch);
     }
     function decodeHtmlEntity(entity) {
@@ -1212,12 +1242,9 @@ function parseSegment(text) {
             resize_node.setAttribute("parent_id", node.id);
             resize_node.classList.add("resize_node")
             //makeResizable(resize_node)
-            if(isIPad()){maximizeBubble(resize_node)}
-            else{
-                if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
-                if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
-                observer.observe(resize_node)
-            }
+            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
+            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
+            observer.observe(resize_node)
             container =  resize_node
             node.appendChild(resize_node)
             }

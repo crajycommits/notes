@@ -162,9 +162,22 @@
         margin-top: 20px;
         }
         .quiz-button {
-        padding: 8px 12px;
-        margin-right: 10px;
+            padding: 10px 16px;
+            margin-top: 12px;
+            margin-right: 10px;
+            border-radius: 8px;          /* rounded edges */
+            border: none;                /* remove default border */
+            background-color: #3a8ddb; /* bright blue */
+            color: white;                /* white text */
+            cursor: pointer;             /* pointer cursor on hover */
+            transition: background-color 0.3s ease;
         }
+
+        .quiz-button:hover {
+        background-color: #2c6cb1;  /* darker blue on hover */
+        box-shadow: 0 4px 10px rgba(44, 108, 177, 0.7);        
+        }
+
         .quiz-disabled {
         pointer-events: none;
         opacity: 0.6;

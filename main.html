@@ -98,6 +98,77 @@
         font-size: 8px;
         z-index: 79;
         }
+        .quiz{
+        position: relative;
+        white-space: pre-wrap;
+        border-radius: 0px;
+        padding: 0px 0px;
+        background: none;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
+        font-size: 8px;
+        z-index: 79;
+        }
+        .quiz-box {
+        margin: 20px;
+        font-family: sans-serif;
+        }
+        .quiz-input {
+            font-size: 8px;
+            margin-top: 10px;
+            padding: 8px;
+            display: inline-block;
+            min-width: 80px;
+            margin-right: 5px;
+
+            background-color: #2D2D30;
+            color: #D16D9E;             /* Muted maroon-pinkish tone for subtle contrast */
+            border: 1px solid #3C3C3C;
+            border-radius: 4px;
+
+            outline: none;
+        }
+        .quiz-option {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        display: block;         /* Stack options vertically */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        width: fit-content;
+        }
+        .quiz-hint {
+            background-color: #2D2D30; /* Slightly lighter than your base background */
+            border: 1px solid #3C3C3C; /* Subtle border for structure */
+            color: #DCDCAA; /* A soft yellow often used for tips/hints in editors */
+            font-style: italic;
+        }
+        .quiz-correct {
+            background-color: #004d00; /* A dark green that fits dark themes */
+            border: 1px solid #27ae60;
+            color: #9CDCFE; /* Matches your overall font color */
+        }
+        .quiz-selected {
+        border-color: #ec971f;     /* deeper orange */
+        }
+        .quiz-incorrect {
+            background-color: #3b1e1e; /* Dark muted red */
+            border: 1px solid #e74c3c; /* Vibrant red accent */
+            color: #9CDCFE;            /* Your standard font color */
+        }
+        .quiz-controls {
+        margin-top: 20px;
+        }
+        .quiz-button {
+        padding: 8px 12px;
+        margin-right: 10px;
+        }
+        .quiz-disabled {
+        pointer-events: none;
+        opacity: 0.6;
+        }
         .goto {
         display: inline-block;
         background-color: #007BFF; /* Default blue */
@@ -520,6 +591,17 @@ function minimizeBubble(resizer_obj, width, height){
         resizer_obj.style.width = width + "px"
         observer.observe(resizer_obj);
 }
+function handleQuizContext(text, quiz_obj, target_id){
+    if (text=="editText"){
+        console.log("at handleQuizContext")
+        msg = ''
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            msg = JSON.stringify(item.text, null, 2);
+        }
+        })
+        showpop({type: "quiz", id: target_id, action: text, obj: quiz_obj, pop_text: msg})
+    }
+}
 
 function handleBubbleContext(text, bubble_obj, target_id){
     console.log(text, bubble_obj, target_id)
@@ -696,6 +778,7 @@ function makeContext(element){
         g_make_context_flag = true
         console.log(event.target)
         if (type == "bubble"){ list_items = createBubbleContext(event.target) }
+        if (type == "quiz"){ list_items = createQuizContext(event.target) }
         if (type == "draw_area"){ list_items = createDrawAreaContext(event.target) }
         if (type == "handle"){ list_items = createHandleContext(event.target) }
         list_items.id = "context_menu_list"
@@ -976,6 +1059,210 @@ function makeDraggable(element, parent, handle = null) {
         }
         return pos
     }
+
+    function createQuizApp(app, questions) {
+    let currentIndex = 0;
+
+    function createCardAnswer(question) {
+    const wrapper = document.createElement('div');
+
+    const revealBtn = document.createElement('div');
+    revealBtn.textContent = question.q;
+    revealBtn.style.whiteSpace = 'pre-wrap';
+
+    const answer = document.createElement('div');
+    answer.style.whiteSpace = 'pre-wrap';
+    answer.className = 'quiz-answer';
+    answer.style.display = 'none';
+    answer.textContent = question.a;
+
+    revealBtn.onclick = () => {
+        answer.style.display = 'block';
+        revealBtn.style.display = 'none';
+        showNextButton(); // Move to next after reveal
+        showHint(wrapper,question)
+    };
+
+    wrapper.appendChild(revealBtn);
+    wrapper.appendChild(answer);
+    
+    return wrapper;
+    }
+
+
+    function createFillInTheBlanksQuestion(question) {
+    let attemptCount=0
+    const wrapper = document.createElement('div');
+    const parts = question.q.split("____");
+    const answerArray = Array.isArray(question.a) ? question.a : [question.a];
+
+    const form = document.createElement('div');
+    const inputs = [];
+
+    parts.forEach((part, i) => {
+        form.appendChild(document.createTextNode(part));
+        if (i < answerArray.length) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.size = Math.max(answerArray[i].length, 5);
+        input.className = 'quiz-input';
+        inputs.push(input);
+        form.appendChild(input);
+        }
+    });
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit";
+    submitBtn.className = 'quiz-button';
+
+    submitBtn.onclick = () => {
+        let allCorrect = true;
+        attemptCount++;
+        inputs.forEach((input, idx) => {
+        const val = input.value.trim().toLowerCase();
+        const correct = answerArray[idx].toLowerCase();
+
+        if (val === correct) {
+            input.classList.remove('quiz-incorrect');
+            input.classList.add('quiz-correct');
+        } else {
+            input.classList.add('quiz-incorrect');
+            allCorrect = false;
+        }
+        });
+
+        if (allCorrect || attemptCount >= 3 ) {
+        disableInputs(inputs, submitBtn);
+        showNextButton();
+        showHint(wrapper,question)
+        } 
+        if (attemptCount >= 3) {
+            inputs.forEach((input, idx) => {
+            input.value = answerArray[idx];
+            input.classList.remove('quiz-incorrect');
+            input.classList.add('quiz-correct');
+            });
+        }
+    };
+
+    wrapper.appendChild(form);
+    wrapper.appendChild(submitBtn);
+    return wrapper;
+    }
+
+
+
+    function createOptionsQuestion(question) {
+        const wrapper = document.createElement('div');
+        wrapper.style.whiteSpace = 'pre-wrap';
+        wrapper.innerHTML = question.q
+        const selected = new Set();
+        let attemptCount = 0;
+        let correctAnswer = new Set(question.a)
+        let optionButtons = []
+        const areSetsEqual = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = "Submit";
+        submitBtn.className = 'quiz-button';
+
+        question.options.forEach((opt, index) => {
+            const btn = document.createElement('div');
+            btn.style.whiteSpace = 'pre-wrap';
+            btn.className = 'quiz-option';
+            btn.innerHTML = opt
+            btn.onclick = () => {
+            submitBtn.classList.remove('quiz-incorrect')
+            btn.classList.contains('quiz-selected') ? (btn.classList.remove('quiz-selected'), selected.delete(index)) : (btn.classList.add('quiz-selected'), selected.add(index));
+            console.log(attemptCount, selected, correctAnswer)
+            };
+            optionButtons.push(btn);
+            wrapper.appendChild(btn);
+        });
+
+
+        submitBtn.onclick = () => {
+            attemptCount++
+            if (areSetsEqual(correctAnswer, selected) || attemptCount>=3) {
+                disableInputs(optionButtons, submitBtn);showNextButton();
+                optionButtons.forEach((e,i,a)=>{if(correctAnswer.has(i)){e.classList.add('quiz-correct')}})
+                showHint(wrapper,question)
+            }
+            else{
+                submitBtn.classList.add('quiz-incorrect')
+            }
+            optionButtons.forEach((e,i,a)=>{e.classList.remove('quiz-selected')});
+            selected.clear()
+            };
+        
+        wrapper.appendChild(submitBtn);
+        return wrapper;
+    }
+
+
+
+
+    function renderQuestion() {
+    app.innerHTML = '';
+
+    const question = questions[currentIndex];
+    const container = document.createElement('div');
+    container.innerHTML = `<h3>Q${currentIndex + 1}:</h3>`;
+
+    if (question.options) {
+        container.appendChild(createOptionsQuestion(question));
+    } else if (typeof question.q === 'string' && question.q.includes('____')) {
+        container.appendChild(createFillInTheBlanksQuestion(question));
+    }
+    else {
+        container.appendChild(createCardAnswer(question));
+    }
+    app.appendChild(container);
+    }
+
+
+    function disableInputs(inputs, submitBtn) {
+        inputs.forEach(input => input.disabled = true);
+        submitBtn.style.display = 'none';
+    }
+
+    function disableOptions(container) {
+        const options = container.querySelectorAll('.quiz-option');
+        options.forEach(opt => opt.classList.add('quiz-disabled'));
+    }
+    function showHint(wrapper, question){
+        if (!("h" in question)){return}
+        const hint = document.createElement('div');
+        hint.classList.add('quiz-hint');
+        hint.style.whiteSpace = 'pre-wrap';
+        hint.innerText = "Hint:" + question.h
+        wrapper.appendChild(hint)
+    }
+    function showNextButton() {
+        const controls = document.createElement('div');
+        controls.className = 'quiz-controls';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = currentIndex < questions.length - 1 ? 'Next' : 'Start Over';
+        nextBtn.className = 'quiz-button';
+        nextBtn.onclick = () => {
+        currentIndex = (currentIndex + 1) % questions.length;
+        renderQuestion();
+        };
+
+        controls.appendChild(nextBtn);
+        app.appendChild(controls);
+    }
+
+    // Public API
+    return {
+        start: () => renderQuestion()
+    };
+    }
+    function createQuizContext(t){
+        options = ["editText"]
+        parent = t.closest('[item_sub_type="quiz"]');
+        return fillContextOptions(options, parent)
+    }
     function createBubbleContext(t){
         options = ["editText", "toggleView", "editStyle", "maximize", "minimize"]
         return fillContextOptions(options, t)
@@ -995,6 +1282,7 @@ function makeDraggable(element, parent, handle = null) {
             l.textContent = item
             l.addEventListener('click', function() {
                 console.log(this,t)
+                if (t.getAttribute("item_sub_type") == "quiz"){handleQuizContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "bubble"){handleBubbleContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "draw_area"){handleDrawAreaContext(this.textContent,t, t.getAttribute("parent_id"))}
                 if (t.getAttribute("item_sub_type") == "handle"){handleHandleContext(this.textContent,t, t.getAttribute("parent_id"))}
@@ -1032,6 +1320,29 @@ function makeDraggable(element, parent, handle = null) {
     const txt = document.createElement("textarea");
     txt.innerHTML = entity;
     return txt.value;
+    }
+    function setQuizData(e,json){
+        e.innerHTML = ''; // Clear start button
+        const quizApp = createQuizApp(e, json);
+        quizApp.start();
+    }
+    function createQuiz(data, parent_id){
+        handle = createHandle(data.title, parent_id)
+        quizData = data.text
+        const new_element = document.createElement('div')
+        const quizButton = document.createElement('button');
+        quizButton.className = 'quiz-button';
+        quizButton.id = 'quiz-start-button';
+        quizButton.textContent = 'Start Quiz';
+        new_element.appendChild(quizButton);
+        setQuizData(new_element, quizData)
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "quiz");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        new_element.onclick=makeContext(new_element)
+        return {handle: handle, element: new_element}
     }
     function createGoto(data, parent_id){
         handle = createHandle(data.title, parent_id)
@@ -1303,6 +1614,7 @@ function makeDraggable(element, parent, handle = null) {
             if (item.type == "link") { new_element = createLink(item, item.id)}
             if (item.type == "img") { new_element = createImg(item, item.id)}
             if (item.type == "goto") { new_element = createGoto(item, item.id)}
+            if (item.type == "quiz") { new_element = createQuiz(item, item.id)}
             handle = new_element['handle']
             new_element = new_element['element']
             node.setAttribute("item_type", "node");
@@ -1334,6 +1646,18 @@ function makeDraggable(element, parent, handle = null) {
     }
     function call_pop_initiator(txt){
         console.log("call_pop_initiator")
+        if (txt != null && pop_holder.type == "quiz" && pop_holder.action == "editText" )
+        {
+            try {
+            const parsed = JSON.parse(txt); // try to parse it
+            updateQuizText(pop_holder.id, txt)
+            } catch (e) {
+            // ❌ invalid, do nothing
+            alert("Invalid Json")
+            }
+            
+            
+        }
         if (txt != null && pop_holder.type == "bubble" && pop_holder.action == "editText" )
         {
             updateBubbleText(pop_holder.id, txt)
@@ -1385,6 +1709,18 @@ function makeDraggable(element, parent, handle = null) {
             }
         }
     pop_holder = null
+    }
+    function updateQuizText(id,txt){
+        console.log("updateQuizText:"+id)
+        jsonified_txt = JSON.parse(txt)
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = jsonified_txt;
+                e=document.getElementById(id)
+                let quiz = e.querySelectorAll('[item_sub_type="quiz"]')[0]
+                setQuizData(quiz, jsonified_txt)
+            }
+        })        
     }
     function updateBubbleText(id, txt){
         console.log('update bubble text', id, txt)

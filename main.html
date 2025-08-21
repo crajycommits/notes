@@ -82,33 +82,32 @@
             top: 50%;
             left: 50%;
             opacity: .5;
-            z-index: 98;
         }
-        
-
+        .handle {
+            color: #95B9DA;
+            background: #1f1f1f
+        }
         .bubble {
         position: relative;
         white-space: pre-wrap;
         border-radius: 0px;
         padding: 0px 0px;
-        background: none;
+        background: #1F1F1F;
         color: #9CDCFE;
         //font-family: 'Comic Sans MS', cursive;
         font-family: consolas;
         font-size: 8px;
-        z-index: 79;
         }
         .quiz{
         position: relative;
         white-space: pre-wrap;
         border-radius: 0px;
         padding: 0px 0px;
-        background: none;
+        background: #1F1F1F;
         color: #9CDCFE;
         //font-family: 'Comic Sans MS', cursive;
         font-family: consolas;
         font-size: 8px;
-        z-index: 79;
         }
         .quiz-box {
         margin: 20px;
@@ -218,7 +217,6 @@
             font-size: 10px;
             transition: background 0.3s ease;
             font-family: "Arial Black", "Arial Bold";
-            z-index: 79;
         }
         .link:hover {
             background-color: #0056b3; /* Darker blue on hover */
@@ -236,7 +234,6 @@
         border: 1px solid #ccc;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         list-style: none;
-        z-index: 100;
     }
 
     .context-menu li {
@@ -258,7 +255,6 @@
         visibility: hidden;
         border: 1px solid #ccc;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        z-index: 99;
     }
     #pop_text{
         width: 100%;
@@ -267,16 +263,8 @@
     }
     .img{
         padding: 0px;
-        z-index: 77;
     }
-    #delete-menu {
-      position: absolute;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 5px;
-      display: none;
-      z-index: 1000;
-    }
+
 .goto-button {
   display: inline-block;
   background-color: #007bff;
@@ -315,6 +303,7 @@
     {id: 5, type: "bubble", style: "bubble", x: 0, y: 0,  title: ".", text: "dbt is a \nsaas         product\nsaas product\nsaas product\nsaas product"},
         
 ]*/
+const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, topSpot: 80 };
 
 data=[]
 g_file_name = null
@@ -482,7 +471,7 @@ function downloadJSON() {
     //const data = {name: "Alice",age: 30,city: "New York"};
 
     // Convert to JSON string
-    const jsonStr = JSON.stringify(data, null, 2); // Pretty print with 2 spaces
+    const jsonStr = JSON.stringify(data, null, 1); // Pretty print with 2 spaces
 
     // Create a Blob from the JSON string
     const blob = new Blob([jsonStr], { type: "application/json" });
@@ -555,8 +544,8 @@ function makeResizable(element){
 }*/
 
 function showBubbleText(show, text, bubble_obj){
-    if (show){ setBubbleData(bubble_obj,  text ) } 
-    else { setBubbleData(bubble_obj,  text.replace(/./g, 'x')) } 
+    if (show){ featchCustomParsedData(bubble_obj,  text ) } 
+    else { featchCustomParsedData(bubble_obj,  text.replace(/./g, 'x')) } 
 }
 
 function toggleBubbleText(bubble_obj, parent_id){
@@ -688,6 +677,11 @@ function handleHandleContext(text, obj, target_id){
         data.forEach(item=>{if(item.id == target_id){ if("tag" in item){ msg = item.tag.join() } }})
         showpop({type: "handle", id: target_id, action: text, obj: obj, pop_text: msg })
     }
+    if (text == "editTitle"){
+        let msg = ''
+        data.forEach(item=>{if(item.id == target_id){ if("title" in item){ msg = item.title } }})
+        showpop({type: "handle", id: target_id, action: text, obj: obj, pop_text: msg })
+    }
 }
 function handleDrawAreaContext(text, obj, target_id){
     if (text == "addBubble"){ 
@@ -696,7 +690,7 @@ function handleDrawAreaContext(text, obj, target_id){
         let y = -global_y_moves
         console.log(global_x_moves)
         console.log(global_y_moves)
-        new_bubble = {id: max_id, type: "bubble", style: {"default": "bubble"}, x: x, y: y, title: ".", text: "i am new bubble"}
+        new_bubble = {id: max_id, type: "bubble", style: {"default": "bubble"}, x: x, y: y, title: ".\n\n", text: "i am new bubble"}
         data.push(new_bubble)
         createNodes(getNodeParent(),[new_bubble])
     }
@@ -818,7 +812,7 @@ function makeContext(element){
     });
 }
 
-g_last_dragged_e = null
+g_last_dragged_e = { e: null, zIndex: null}
 function overrideDraggableIpad(element){
     // maximize section
     if (element.getAttribute("item_type") === 'node' && element.querySelector('[item_sub_type="bubble"]')){
@@ -843,6 +837,7 @@ function overrideDraggableIpad(element){
         }
     }
 }
+
 function makeDraggable(element, parent, handle = null) {
     const dragTarget = handle || element;
     element.style.position = 'absolute';
@@ -850,7 +845,8 @@ function makeDraggable(element, parent, handle = null) {
 
     let offsetX, offsetY, isDragging = false;
     let startX = 0, startY = 0;
-
+    let zIndexValue = null
+    let elemet_zindex_capture = null
     function startDrag(x, y) {
         console.log(element)
         if(isIPad() && element.getAttribute("item_type") === 'node'){
@@ -864,6 +860,7 @@ function makeDraggable(element, parent, handle = null) {
         startX = elemRect.left - parentRect.left;
         startY = elemRect.top - parentRect.top;
         isDragging = true;
+        elemet_zindex_capture = element.style.zIndex
         element.style.zIndex = 1000;
     }
 
@@ -879,7 +876,16 @@ function makeDraggable(element, parent, handle = null) {
     function endDrag() {
         if (!isDragging) return;
         isDragging = false;
-        element.style.zIndex = '';
+        if ( g_last_dragged_e.e == null || ( g_last_dragged_e.e != element ) ) { 
+            if (g_last_dragged_e.e){
+                g_last_dragged_e.e.style.zIndex = g_last_dragged_e.zIndex
+            }
+            g_last_dragged_e.e = element;
+            g_last_dragged_e.zIndex = elemet_zindex_capture;
+            
+        }
+        console.log(element, handle, parent)
+        element.style.zIndex = zIndices.topSpot;
         const parentRect = parent.getBoundingClientRect();
         const elemRect = element.getBoundingClientRect();
         const endX = elemRect.left - parentRect.left;
@@ -1132,8 +1138,8 @@ function makeDraggable(element, parent, handle = null) {
         let allCorrect = true;
         attemptCount++;
         inputs.forEach((input, idx) => {
-        const val = input.value.trim().toLowerCase();
-        const correct = answerArray[idx].toLowerCase();
+        const val = input.value.trim()//.toLowerCase();
+        const correct = answerArray[idx]//.toLowerCase();
 
         if (val === correct) {
             input.classList.remove('quiz-incorrect');
@@ -1247,7 +1253,8 @@ function makeDraggable(element, parent, handle = null) {
         const hint = document.createElement('div');
         hint.classList.add('quiz-hint');
         hint.style.whiteSpace = 'pre-wrap';
-        hint.innerText = "Hint:" + question.h
+        featchCustomParsedData(hint, question.h)
+        //hint.innerText = "Hint:" + question.h
         wrapper.appendChild(hint)
     }
     function showNextButton() {
@@ -1285,7 +1292,7 @@ function makeDraggable(element, parent, handle = null) {
         return fillContextOptions(options, t)
     }
     function createHandleContext(t){
-        options = ["delete", "addTag"]
+        options = ["delete", "addTag", "editTitle"]
         return fillContextOptions(options, t)
     }
     function fillContextOptions(options, t){
@@ -1304,11 +1311,15 @@ function makeDraggable(element, parent, handle = null) {
         })
         return u
     }
+    function setHandleText(e, title){
+        e.textContent = title ? title : '.'
+    }
     function createHandle(title, parent_id){
         handle = document.createElement("div")
-        handle.textContent = title ? title : '.'
+        setHandleText(handle, title)
         handle.setAttribute("item_sub_type", "handle");
         handle.setAttribute("parent_id", parent_id);
+        handle.classList.add("handle");
         makeContext(handle)
         return handle
     }
@@ -1445,7 +1456,7 @@ function makeDraggable(element, parent, handle = null) {
     }*/
 
     
-    function setBubbleData(outputDiv, encodedText) {
+    function featchCustomParsedData(outputDiv, encodedText) {
     encodedText = decodeHtmlEntity(encodedText);
     outputDiv.innerHTML = '';
 
@@ -1597,7 +1608,7 @@ function makeDraggable(element, parent, handle = null) {
         console.log(nodes)
         nodes.forEach(item=>{
             console.log(item)
-            if (document.getElementById(item.id)){ alert('id already taken'); return }
+            if (document.getElementById(item.id)){ alert(item.id.toString()+':id already taken'); return }
             new_element = null
             container = null
             resize_node = null
@@ -1605,6 +1616,7 @@ function makeDraggable(element, parent, handle = null) {
             item.calculatedY = item.y + global_y_moves
             const node = document.createElement("div")
             node.id = item.id
+            node.style.zIndex=zIndices[item.type]
             if (item.type == "bubble"){
             resize_node  = document.createElement("div")
             resize_node.setAttribute("item_sub_type", "resizer");
@@ -1721,6 +1733,10 @@ function makeDraggable(element, parent, handle = null) {
                 }
             }
         }
+        if (pop_holder.type == "handle" && pop_holder.action == "editTitle" ){
+            id = pop_holder.id
+            updateHandleText(id, txt)
+        }
     pop_holder = null
     }
     function updateQuizText(id,txt){
@@ -1742,7 +1758,18 @@ function makeDraggable(element, parent, handle = null) {
                 item.text = txt; e=document.getElementById(id)
                 //e.querySelectorAll('[item_sub_type="bubble"]')[0].textContent = decodeHtmlEntity(txt)
                 let bubble = e.querySelectorAll('[item_sub_type="bubble"]')[0]
-                setBubbleData(bubble, txt)
+                featchCustomParsedData(bubble, txt)
+            }
+        })
+    }
+    function updateHandleText(id, txt){
+        if (txt == null || txt.trim() == ''){ alert('invalid title')}
+        console.log('update handle text', id, txt)
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.title = txt; e=document.getElementById(id)
+                let handle = e.querySelectorAll('[item_sub_type="handle"]')[0]
+                setHandleText(handle, txt)
             }
         })
     }
@@ -1763,6 +1790,10 @@ function makeDraggable(element, parent, handle = null) {
       const randomClass = textColors[Math.floor(Math.random() * textColors.length)];
       element.classList.add(randomClass);
     }
+    helper = {
+        'get_max_id': function get_max_id(){let maxid=-1;data.map(id=>{if(id.id>maxid){maxid=id.id}});console.log(maxid)},
+        'get_node': function get_node(id){return data.filter(d=>d.id==id)}
+    }
 </script>
 <body>
     <div class="top"> Top Bar
@@ -1779,13 +1810,13 @@ function makeDraggable(element, parent, handle = null) {
         </div>
         <div class="main" id="draggable-main">
             <div id="draw_area" item_sub_type="draw_area">
-                <div id = "draw_area_pop" item_sub_type="draw_area_pop">
+                <div id = "draw_area_pop" style="z-index: 99;" item_sub_type="draw_area_pop">
                     <textarea id = "pop_text"></textarea>
                     <button onclick="get_pop_input()">submit</button>
                 </div>
-                <div id="contextMenu" class="context-menu">
+                <div id="contextMenu" style="z-index: 100;" class="context-menu">
                 </div>
-                <div id="anchor">
+                <div id="anchor" style="z-index: 98;"></div>
                 </div>
             </div>
         </div>

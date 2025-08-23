@@ -842,7 +842,6 @@ function makeDraggable(element, parent, handle = null) {
     const dragTarget = handle || element;
     element.style.position = 'absolute';
     dragTarget.style.cursor = 'move';
-
     let offsetX, offsetY, isDragging = false;
     let startX = 0, startY = 0;
     let zIndexValue = null
@@ -884,7 +883,6 @@ function makeDraggable(element, parent, handle = null) {
             g_last_dragged_e.zIndex = elemet_zindex_capture;
             
         }
-        console.log(element, handle, parent)
         element.style.zIndex = zIndices.topSpot;
         const parentRect = parent.getBoundingClientRect();
         const elemRect = element.getBoundingClientRect();
@@ -966,14 +964,13 @@ function makeDraggable(element, parent, handle = null) {
         data.forEach(item=>{
             item.calculatedX = item.x + global_x_moves
             item.calculatedY = item.y + global_y_moves
-            console.log(item, global_x_moves, item.x)
             setNodePosition(item.id)
         })
     }
 
     function callGoToNode(id=null){
-        console.log("goto",id)
         if (id==null){ goToNode(document.getElementById("input_goto").value) }
+        else if ( id == -2 ){ goToNode(helper.get_random().id) }
         else { goToNode(id) }
     }
 
@@ -1192,7 +1189,6 @@ function makeDraggable(element, parent, handle = null) {
             btn.onclick = () => {
             submitBtn.classList.remove('quiz-incorrect')
             btn.classList.contains('quiz-selected') ? (btn.classList.remove('quiz-selected'), selected.delete(index)) : (btn.classList.add('quiz-selected'), selected.add(index));
-            console.log(attemptCount, selected, correctAnswer)
             };
             optionButtons.push(btn);
             wrapper.appendChild(btn);
@@ -1327,7 +1323,6 @@ function makeDraggable(element, parent, handle = null) {
         if ("style" in data){
             Object.entries(data.style).forEach(([key,value])=>{
                 if (key != "default"){
-                    console.log(e,key,value)
                     e.style[key] = value
                 }
             })
@@ -1528,7 +1523,6 @@ function makeDraggable(element, parent, handle = null) {
         e.preventDefault();
         e.stopPropagation();
         // You can customize what happens on right-click here
-        console.log('Context menu triggered on bubble');
         // For example: show a custom menu
     });
 
@@ -1691,15 +1685,12 @@ function makeDraggable(element, parent, handle = null) {
         if (txt != null && pop_holder.action == "editStyle" )
         {
             try{
-            console.log(txt)
-            console.log(pop_holder.obj)
             json=JSON.parse(txt)
             id = pop_holder.id
             data.forEach(item => {
                 if (id == item.id) {
                     
                     Object.entries(json).forEach(([key, value]) => {
-                        console.log(key, value)
                         item['style'][key] = value
                     });
                 applyStyle(item, pop_holder.obj)
@@ -1792,7 +1783,9 @@ function makeDraggable(element, parent, handle = null) {
     }
     helper = {
         'get_max_id': function get_max_id(){let maxid=-1;data.map(id=>{if(id.id>maxid){maxid=id.id}});console.log(maxid)},
-        'get_node': function get_node(id){return data.filter(d=>d.id==id)}
+        'get_node': function get_node(id){return data.filter(d=>d.id==id)},
+        'get_random': function get_random() {return data[Math.floor(Math.random() * data.length)];}
+
     }
 </script>
 <body>
@@ -1803,6 +1796,7 @@ function makeDraggable(element, parent, handle = null) {
         <button onclick="document.getElementById('image-input').click()">Load images</button>
         <button onclick="downloadJSON()">download</button>
         <button onclick="callGoToNode(-1)">back</button>
+        <button onclick="callGoToNode(-2)">random</button>
         <input id="input_goto" placeholder="Enter Id(-1 back)"/>
     </div>
     <div class="container">

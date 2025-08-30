@@ -469,8 +469,24 @@ function downloadJSON() {
     // Sample JSON data
     //const data = {name: "Alice",age: 30,city: "New York"};
 
-    // Convert to JSON string
-    const jsonStr = JSON.stringify(data, null, 1); // Pretty print with 2 spaces
+// Recursive function to remove _ keys
+function removeUnderscoreKeys(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(removeUnderscoreKeys);
+  } else if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .filter(([key]) => !key.startsWith('_'))
+        .map(([key, value]) => [key, removeUnderscoreKeys(value)])
+    );
+  }
+  return obj;
+}
+
+const cleanedData = removeUnderscoreKeys(data);
+
+// Convert to JSON string with 1-space indentation
+const jsonStr = JSON.stringify(cleanedData, null, 1); // Pretty print with 2 spaces
 
     // Create a Blob from the JSON string
     const blob = new Blob([jsonStr], { type: "application/json" });
@@ -502,6 +518,7 @@ const observer = new ResizeObserver(entries =>{
     for (let entry of entries){
         const element = entry.target
         parent_id = element.getAttribute("parent_id")
+        parent_e = document.getElementById(parent_id)
         console.log('content rect', entry.contentRect)
         const currentWidth = element.offsetWidth;
         const currentHeight = element.offsetHeight;
@@ -509,6 +526,7 @@ const observer = new ResizeObserver(entries =>{
         console.log('height', currentHeight)
         setNodeHeight(element, parent_id, currentHeight);
         setNodeWidth(element, parent_id, currentWidth)
+        node_on_top(parent_e, parent_e.style.zIndex)
     }
 })
 
@@ -567,7 +585,30 @@ function toggleBubbleText(bubble_obj, parent_id){
     })
     showBubbleText(show, currentText, bubble_obj)
 }
+function maximizequiz(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow = "visible"; // Show content beyond box
+    //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    resizer_obj.style.width = "75vw";
+    resizer_obj.style.height = "75vh";
+    resizer_obj.style.maxWidth = "75vw";
+    resizer_obj.style.maxHeight = "75vh";
+    observer.unobserve(resizer_obj);
+}
 
+function minimizequiz(resizer_obj, width, height){
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
+}
 function maximizeBubble(resizer_obj){
     // Reset styles
     resizer_obj.style.resize = "none";
@@ -811,29 +852,44 @@ function makeContext(element){
     });
 }
 
-g_last_dragged_e = { e: null, zIndex: null}
+g_last_top_e = { e: null, zIndex: null}
+//applies only to bubble
+function node_on_top(element, element_zindex_capture){
+    if ( g_last_top_e.e == null || ( g_last_top_e.e != element )) {
+        if (g_last_top_e.e){
+            g_last_top_e.e.style.zIndex = g_last_top_e.zIndex
+        }
+        g_last_top_e.e = element;
+        g_last_top_e.zIndex = element_zindex_capture;
+    }
+    element.style.zIndex = zIndices.topSpot;
+}
 function overrideDraggableIpad(element){
     // maximize section
-    if (element.getAttribute("item_type") === 'node' && element.querySelector('[item_sub_type="bubble"]')){
+    const typeHandlers = {max : { bubble: maximizeBubble, quiz: maximizequiz }, min: { bubble: minimizeBubble, quiz: minimizequiz }};
+    if (element.getAttribute("item_type") === 'node' && ( element.querySelector('[item_sub_type="bubble"]') ||  element.querySelector('[item_sub_type="quiz"]') ) ){
         const resizerElement = element.querySelector('[item_sub_type="resizer"]');
         const bubbleElement = element.querySelector('[item_sub_type="bubble"]');
+        const quizElement = element.querySelector('[item_sub_type="quiz"]');
+        const e = bubbleElement || quizElement
+        const e_type = e.getAttribute("item_sub_type")
         const parentId = resizerElement.getAttribute("parent_id");
+        const element_zindex_capture = element.style.zIndex
         let width = null;
         let height = null;
         let current_item = null;
         data.forEach(item=>{ if(item.id == parentId ) { current_item = item; width = item.width; height = item.height } })
         console.log(current_item,width,height,resizerElement,bubbleElement,parentId)
         if ( "_max" in current_item && current_item._max){ 
-            minimizeBubble(resizerElement, width, height)
-            bubbleElement.style.backgroundColor = ""
-            element.style.zIndex = "";
+            typeHandlers['min'][e_type](resizerElement, width, height)
+            //bubbleElement.style.backgroundColor = ""
             current_item._max=false
         } else {
-            maximizeBubble(resizerElement)
-            element.style.zIndex = 80;
-            bubbleElement.style.backgroundColor = "#1f1f1f"
+            typeHandlers['max'][e_type](resizerElement)
+            //bubbleElement.style.backgroundColor = "#1f1f1f"
             current_item._max=true
         }
+        node_on_top(element, element_zindex_capture)
     }
 }
 
@@ -844,10 +900,11 @@ function makeDraggable(element, parent, handle = null) {
     let offsetX, offsetY, isDragging = false;
     let startX = 0, startY = 0;
     let zIndexValue = null
-    let elemet_zindex_capture = null
+    let element_zindex_capture = null
     function startDrag(x, y) {
         console.log(element)
-        if(isIPad() && element.getAttribute("item_type") === 'node'){
+        if(( ( isIPad() || isPhone() ) && element.getAttribute("item_type") === 'node')){
+        //if((true && element.getAttribute("item_type") === 'node')){
             overrideDraggableIpad(element)
             return
         }
@@ -858,7 +915,7 @@ function makeDraggable(element, parent, handle = null) {
         startX = elemRect.left - parentRect.left;
         startY = elemRect.top - parentRect.top;
         isDragging = true;
-        elemet_zindex_capture = element.style.zIndex
+        element_zindex_capture = element.style.zIndex
         element.style.zIndex = 1000;
     }
 
@@ -874,15 +931,12 @@ function makeDraggable(element, parent, handle = null) {
     function endDrag() {
         if (!isDragging) return;
         isDragging = false;
-        if ( g_last_dragged_e.e == null || ( g_last_dragged_e.e != element ) ) { 
-            if (g_last_dragged_e.e){
-                g_last_dragged_e.e.style.zIndex = g_last_dragged_e.zIndex
-            }
-            g_last_dragged_e.e = element;
-            g_last_dragged_e.zIndex = elemet_zindex_capture;
-            
+        if (element.getAttribute("item_type") == 'node') {
+            node_on_top(element, element_zindex_capture)
+        } else {
+            element.style.zIndex = element_zindex_capture;
         }
-        element.style.zIndex = zIndices.topSpot;
+        
         const parentRect = parent.getBoundingClientRect();
         const elemRect = element.getBoundingClientRect();
         const endX = elemRect.left - parentRect.left;
@@ -961,8 +1015,8 @@ function makeDraggable(element, parent, handle = null) {
         global_x_moves = - move_to_x
         global_y_moves = -  move_to_y 
         data.forEach(item=>{
-            item.calculatedX = item.x + global_x_moves
-            item.calculatedY = item.y + global_y_moves
+            item._calculatedX = item.x + global_x_moves
+            item._calculatedY = item.y + global_y_moves
             setNodePosition(item.id)
         })
     }
@@ -981,8 +1035,8 @@ function makeDraggable(element, parent, handle = null) {
             global_x_moves = move_to_x
             global_y_moves = move_to_y
             data.forEach(item=>{
-                item.calculatedX = item.x + global_x_moves
-                item.calculatedY = item.y + global_y_moves
+                item._calculatedX = item.x + global_x_moves
+                item._calculatedY = item.y + global_y_moves
                 setNodePosition(item.id)
             })
         }
@@ -1007,11 +1061,11 @@ function makeDraggable(element, parent, handle = null) {
         data.forEach(item => {
             if (item.id == id){
                 div = document.getElementById(id)
-                if (item.calculatedX + div.clientWidth < 0 || item.calculatedX > parent.clientWidth || item.calculatedY + div.clientHeight < 0 || item.calculatedY > parent.clientHeight)
+                if (item._calculatedX + div.clientWidth < 0 || item._calculatedX > parent.clientWidth || item._calculatedY + div.clientHeight < 0 || item._calculatedY > parent.clientHeight)
                     {div.style.visibility = "hidden"}
                 else
                     {div.style.visibility = "visible"}
-                setPositionByCoords(document.getElementById(id), item.calculatedX, item.calculatedY, parent)
+                setPositionByCoords(document.getElementById(id), item._calculatedX, item._calculatedY, parent)
             }
         });
     }
@@ -1021,8 +1075,8 @@ function makeDraggable(element, parent, handle = null) {
             if (item.id == id){
                 item.x += x
                 item.y += y
-                item.calculatedX += x
-                item.calculatedY += y
+                item._calculatedX += x
+                item._calculatedY += y
                 
                 setNodePosition(id)
             }
@@ -1036,8 +1090,8 @@ function makeDraggable(element, parent, handle = null) {
             const div = document.getElementById(id)
             if (div) {
                 const pos = getPosition(div, parent)
-                item.calculatedX = pos.x + shift_x
-                item.calculatedY = pos.y + shift_y
+                item._calculatedX = pos.x + shift_x
+                item._calculatedY = pos.y + shift_y
                 setNodePosition(id)
             }
         })
@@ -1168,50 +1222,99 @@ function makeDraggable(element, parent, handle = null) {
 
 
 
-    function createOptionsQuestion(question) {
-        const wrapper = document.createElement('div');
-        wrapper.style.whiteSpace = 'pre-wrap';
-        wrapper.innerHTML = question.q
-        const selected = new Set();
-        let attemptCount = 0;
-        let correctAnswer = new Set(question.a)
-        let optionButtons = []
-        const areSetsEqual = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
-        const submitBtn = document.createElement('button');
-        submitBtn.textContent = "Submit";
-        submitBtn.className = 'quiz-button';
+function createOptionsQuestion(question) {
+    const wrapper = document.createElement('div');
+    wrapper.style.whiteSpace = 'pre-wrap';
 
+    // Add question text
+    const questionText = document.createElement('div');
+    questionText.innerHTML = question.q;
+    wrapper.appendChild(questionText);
+
+    const selected = new Set();
+    let attemptCount = 0;
+    const correctAnswer = new Set(question.a);
+    const optionButtons = [];
+
+    const areSetsEqual = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
+
+    // Submit button (initially hidden)
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit";
+    submitBtn.className = 'quiz-button';
+    submitBtn.style.display = 'none';
+
+    // Container for the options
+    const optionsContainer = document.createElement('div');
+    showOptionsContainer = null;
+    // "Show Options" button inside its own div
+    if ( g_think ){
+    showOptionsContainer = document.createElement('div');
+    const showOptionsBtn = document.createElement('button');
+    showOptionsBtn.textContent = "Show Options";
+    showOptionsBtn.className = 'quiz-button';
+    showOptionsBtn.onclick = show_options;
+    showOptionsContainer.appendChild(showOptionsBtn);
+    wrapper.appendChild(showOptionsContainer); // below question
+    }
+    else {
+        show_options()
+    }
+    function show_options() {
+        // Hide "Show Options" button
+        if(showOptionsContainer) { showOptionsContainer.style.display = 'none'; }
+
+        // Create and show option buttons
         question.options.forEach((opt, index) => {
             const btn = document.createElement('div');
             btn.style.whiteSpace = 'pre-wrap';
             btn.className = 'quiz-option';
-            btn.innerHTML = opt
+            btn.innerHTML = opt;
             btn.onclick = () => {
-            submitBtn.classList.remove('quiz-incorrect')
-            btn.classList.contains('quiz-selected') ? (btn.classList.remove('quiz-selected'), selected.delete(index)) : (btn.classList.add('quiz-selected'), selected.add(index));
+                submitBtn.classList.remove('quiz-incorrect');
+                if (btn.classList.contains('quiz-selected')) {
+                    btn.classList.remove('quiz-selected');
+                    selected.delete(index);
+                } else {
+                    btn.classList.add('quiz-selected');
+                    selected.add(index);
+                }
             };
             optionButtons.push(btn);
-            wrapper.appendChild(btn);
+            optionsContainer.appendChild(btn);
         });
 
+        submitBtn.style.display = 'inline-block'; // Show the submit button
+    };
 
-        submitBtn.onclick = () => {
-            attemptCount++
-            if (areSetsEqual(correctAnswer, selected) || attemptCount>=3) {
-                disableInputs(optionButtons, submitBtn);showNextButton();
-                optionButtons.forEach((e,i,a)=>{if(correctAnswer.has(i)){e.classList.add('quiz-correct')}})
-                showHint(wrapper,question)
-            }
-            else{
-                submitBtn.classList.add('quiz-incorrect')
-            }
-            optionButtons.forEach((e,i,a)=>{e.classList.remove('quiz-selected')});
-            selected.clear()
-            };
-        
-        wrapper.appendChild(submitBtn);
-        return wrapper;
-    }
+    // Submit button behavior
+    submitBtn.onclick = () => {
+        attemptCount++;
+        if (areSetsEqual(correctAnswer, selected) || attemptCount >= 3) {
+            disableInputs(optionButtons, submitBtn);
+            showNextButton();
+            optionButtons.forEach((btn, i) => {
+                if (correctAnswer.has(i)) {
+                    btn.classList.add('quiz-correct');
+                }
+            });
+            showHint(wrapper, question);
+        } else {
+            submitBtn.classList.add('quiz-incorrect');
+        }
+
+        optionButtons.forEach(btn => btn.classList.remove('quiz-selected'));
+        selected.clear();
+    };
+
+    // Assemble everything
+    wrapper.appendChild(optionsContainer);
+    wrapper.appendChild(submitBtn);
+
+    return wrapper;
+}
+
+
 
 
 
@@ -1221,7 +1324,7 @@ function makeDraggable(element, parent, handle = null) {
 
     const question = questions[currentIndex];
     const container = document.createElement('div');
-    container.innerHTML = `<h3>Q${currentIndex + 1}:</h3>`;
+    container.innerHTML = `<h3 style="border: none; margin: 0;">Q${currentIndex + 1}:</h3>`;
 
     if (question.options) {
         container.appendChild(createOptionsQuestion(question));
@@ -1327,6 +1430,17 @@ function makeDraggable(element, parent, handle = null) {
                 }
             })
         }
+    }
+    function isPhone() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Detect iPhone or iPod explicitly
+    const isIPhoneOrIPod = /iPhone|iPod/.test(ua);
+
+    // Detect Android phones (but not tablets, which usually don't include "Mobile")
+    const isAndroidPhone = /Android/.test(ua) && /Mobile/.test(ua);
+
+    return isIPhoneOrIPod || isAndroidPhone;
     }
     function isIPad() {
     // For newer iPads running iPadOS (which report as Mac)
@@ -1606,19 +1720,19 @@ function makeDraggable(element, parent, handle = null) {
             new_element = null
             container = null
             resize_node = null
-            item.calculatedX = item.x + global_x_moves
-            item.calculatedY = item.y + global_y_moves
+            item._calculatedX = item.x + global_x_moves
+            item._calculatedY = item.y + global_y_moves
             const node = document.createElement("div")
             node.id = item.id
             node.style.zIndex=zIndices[item.type]
-            if (item.type == "bubble"){
+            if (item.type == "bubble" || item.type == "quiz"){
             resize_node  = document.createElement("div")
             resize_node.setAttribute("item_sub_type", "resizer");
             resize_node.setAttribute("parent_id", node.id);
             resize_node.classList.add("resize_node")
             //makeResizable(resize_node)
-            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "200px" }
-            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "200px" }
+            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "auto" }
+            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "auto" }
             observer.observe(resize_node)
             container =  resize_node
             node.appendChild(resize_node)
@@ -1640,6 +1754,11 @@ function makeDraggable(element, parent, handle = null) {
             console.log(handle,new_element)
             if(handle){container.appendChild(handle)}
             container.appendChild(new_element)
+            if (node && (item.type == "bubble" || item.type == "quiz") ) {
+                node.style.border = '1px solid #3C3C3B';
+                node.style.padding = '9px';
+                node.style.backgroundColor = '#1F1F1F';
+            }
             parent.appendChild(node)
             setNodePosition(node.id)
             makeDraggable(node, parent, handle)
@@ -1787,6 +1906,8 @@ function makeDraggable(element, parent, handle = null) {
         'get_random': function get_random() {return data[Math.floor(Math.random() * data.length)];}
 
     }
+    g_think = false
+    function setThink(){ g_think = !(g_think) }
 </script>
 <body>
     <div class="top"> Top Bar
@@ -1797,6 +1918,7 @@ function makeDraggable(element, parent, handle = null) {
         <button onclick="downloadJSON()">download</button>
         <button onclick="callGoToNode(-1)">back</button>
         <button onclick="callGoToNode(-2)">random</button>
+        <button onclick="setThink()">think</button>
         <input id="input_goto" placeholder="Enter Id(-1 back)"/>
     </div>
     <div class="container">

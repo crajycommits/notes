@@ -1,185 +1,2696 @@
 [
-  {
-    "id": 0,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 3,
-    "y": -8,
-    "title": ".",
-    "text": "root",
-    "calculatedX": 0,
-    "calculatedY": 0,
-    "height": 46,
-    "width": 42
+ {
+  "id": 0,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 1,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 178,
-    "y": 556,
-    "title": ".",
-    "text": "[size=33]s3[/size] - [color=#f1fa8c]Amazon Simple Storage Service[/color]",
-    "calculatedX": 175,
-    "calculatedY": 564,
-    "height": 88,
-    "width": 99
+  "x": 3,
+  "y": -8,
+  "title": ".",
+  "text": "root",
+
+
+  "height": 46,
+  "width": 42
+ },
+ {
+  "id": 1,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 2,
-    "type": "goto",
-    "style": {
-      "default": "goto"
-    },
-    "x": 80,
-    "y": -7,
-    "title": ".",
-    "text": "s3",
-    "gotoid": "1",
-    "calculatedX": 77,
-    "calculatedY": 1
+  "x": 178,
+  "y": 556,
+  "title": ".",
+  "text": "[s=33]s3[/s] - [c=#f1fa8c]Amazon Simple Storage Service[/c]",
+
+
+  "height": 88,
+  "width": 99
+ },
+ {
+  "id": 67,
+  "type": "goto",
+  "style": {
+   "default": "goto"
   },
-  {
-    "id": 3,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 334,
-    "y": 551,
-    "title": ".",
-    "text": "A [color=#f1fa8c]bucket[/color]🪣 is a container for objects. An [color=#f1fa8c]object[/color]🧊 is a file📝 and any metadata🔢 that describes that file\n\neach object can be up to 5🖐 TB in size\n\nobject=[color=#50fa7b]key 🔑 + version 📌+ value/content 📝 + tag🏷️+ metadata🔢[/color]\n\nmetadata🔢\nsystem defined - object's creation time and storage class ....\nuser defined - tags 🏷️\n\n⚠️\nAfter you upload the object, you cant❌ modify this user-defined metadata. The only way to modify this metadata is to make a copy of the object and set the metadata.",
-    "calculatedX": 331,
-    "calculatedY": 559,
-    "height": 252,
-    "width": 240,
-    "tag": [
-      "s3,basic"
+  "x": 110,
+  "y": -7,
+  "title": ".",
+  "text": "lambda",
+  "gotoid": "59"
+
+
+ },
+ {
+  "id": 2,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 80,
+  "y": -7,
+  "title": ".",
+  "text": "s3",
+  "gotoid": "1"
+
+
+ },
+ {
+  "id": 3,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 357,
+  "y": 588,
+  "title": ".",
+  "text": "A [c=#f1fa8c]bucket[/c]🪣 is a container for objects.",
+
+
+  "height": 57,
+  "width": 68,
+  "tag": [
+   "s3,basic"
+  ]
+ },
+ {
+  "id": 4,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 551,
+  "y": 616,
+  "title": ".",
+  "text": "Uploading⬆️\n\n🚩uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
+
+
+  "height": 107,
+  "width": 165,
+  "tag": [
+   "s3,basic"
+  ]
+ },
+ {
+  "id": 5,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 537,
+  "y": 809,
+  "title": ".",
+  "text": "[c=#f1fa8c]SSE server💻 side encryption🔐[/c]\n\n🟩Amazon S3 managed keys (SSE-S3) is the default🙋‍♂️ encryption configuration\n\nAmazon S3 managed keys [c=#f1fa8c](SSE-S3)[/c]\nAWS KMS [c=#f1fa8c](SSE-KMS)[/c]\nAWS KMS keys [c=#f1fa8c](DSSE-KMS)[/c] : dual-layer server-side encryption\n\n[c=#f1fa8c](SSE-C)[/c] : customer-provided keys",
+
+
+  "height": 161,
+  "width": 164,
+  "tag": [
+   "s3,basic"
+  ]
+ },
+ {
+  "id": 7,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 299,
+  "y": 999,
+  "title": ".",
+  "text": "table\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"border-collapse: collapse; width: 100%;\">\n  <thead>\n    <tr>\n      <th></th>\n      <th>Customer managed keys</br>Not SSE-C</th>\n      <th>AWS managed keys</th>\n      <th>AWS owned keys</th>\n    </tr>\n    <tr>\n      <th>cross account</th>\n      <th>Cross account NOT<blink>❌</blink>region</th>\n      <th>No</th>\n      <th>Cross account/region🌍</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Key policy</strong></td>\n      <td>Exclusively controlled by the customer</td>\n      <td>Controlled by service; viewable by customer</td>\n      <td>Exclusively controlled and only viewable by the AWS service that encrypts your data</td>\n    </tr>\n    <tr>\n      <td><strong>Logging</strong></td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>Not viewable by the customer</td>\n    </tr>\n    <tr>\n      <td><strong>Lifecycle management</strong></td>\n      <td>Customer manages rotation🔄, deletion🗑️ and Regional location📍</td>\n      <td>AWS KMS manages rotation (annual), deletion, and Regional location</td>\n      <td>AWS service manages rotation, deletion, and Regional location</td>\n    </tr>\n    <tr>\n      <td><strong>Pricing</strong></td>\n      <td>\n        Monthly fee for existence of keys (pro-rated hourly).<br>\n        Also charged for key usage\n      </td>\n      <td>\n        No monthly fee; but the caller is charged for API usage on these keys\n      </td>\n      <td>No charges to customer🎁</td>\n    </tr>\n  </tbody>\n</table>\n",
+
+
+  "height": 308,
+  "width": 578,
+  "tag": [
+   "s3,basic"
+  ]
+ },
+ {
+  "id": 8,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2902,
+  "y": 851,
+  "title": ".",
+  "text": "[c=#f1fa8c]S3 static website[/c]\nAlternate\n[c=#f1fa8c]AWS Amplify Hosting [/c] or \n  >Amazon CloudFront\n",
+
+
+  "height": 79,
+  "width": 129,
+  "tag": [
+   "s3",
+   "static",
+   "website"
+  ]
+ },
+ {
+  "id": 9,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 177,
+  "y": 645,
+  "title": ".",
+  "text": "static",
+  "gotoid": "8"
+
+
+ },
+ {
+  "id": 10,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 196,
+  "y": 1678,
+  "title": ".",
+  "text": "[c=#f1fa8c]replication[/c]\n\n1. Live ( ⚠️wont replicate object before setting enabled )\n  a. Cross-Region Replication (CRR)\n  b. Same-Region Replication (SRR)\n2. Ondemand\n\n[c=#50fa7b]bi-directional replication[/c]  is a special type of CRR with 2way sync\n\nsource and destination buckets must have [c=#50fa7b]versioning[/c] enabled.\n\n👌Replica can be in a different storage class\n\nsource: enable both source/target region\ntarget: enable target region ",
+
+
+  "height": 197,
+  "width": 339,
+  "tag": [
+   "s3",
+   "replication"
+  ]
+ },
+ {
+  "id": 11,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 174,
+  "y": 683,
+  "title": ".",
+  "text": "replication",
+  "gotoid": "10"
+
+
+ },
+ {
+  "id": 54,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 174,
+  "y": 730,
+  "title": ".",
+  "text": "QAObjectBasics",
+  "gotoid": "52"
+
+
+ },
+ {
+  "id": 55,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 174,
+  "y": 780,
+  "title": ".",
+  "text": "QAObjectMeta",
+  "gotoid": "53"
+
+
+ },
+ {
+  "id": 57,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 174,
+  "y": 830,
+  "title": ".",
+  "text": "QADeleteObject",
+  "gotoid": "56"
+
+
+ },
+ {
+  "id": 12,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 317,
+  "y": 636,
+  "title": ".",
+  "text": " An [c=#f1fa8c]object[/c]🧊 is a file📝 and any metadata🔢 that describes that file",
+
+
+  "height": 78,
+  "width": 78
+ },
+ {
+  "id": 13,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 733,
+  "y": 519,
+  "title": ".",
+  "text": "\n\n\n\n\nmetadata🔢\nsystem defined - object's creation time and storage class ....\nuser defined - tags 🏷️\n\n⚠️\nAfter you upload the object, you cant❌ modify this user-defined metadata. The only way to modify this metadata is to make a copy of the object and set the metadata.",
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 14,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 320,
+  "y": 706,
+  "title": ".",
+  "text": "each object can be up to 5🖐 TB in size\n",
+
+
+  "height": 80,
+  "width": 44
+ },
+ {
+  "id": 15,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 418,
+  "y": 641,
+  "title": ".",
+  "text": "object=[c=#50fa7b]key 🔑 + version 📌+ value/content 📝 + tag🏷️+ metadata🔢[/c]",
+
+
+  "height": 93,
+  "width": 75
+ },
+ {
+  "id": 16,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 271,
+  "y": 652,
+  "title": ".",
+  "text": "[s=22]🧊[/s]",
+
+
+  "height": 45,
+  "width": 36
+ },
+ {
+  "id": 17,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 371,
+  "y": 542,
+  "title": ".",
+  "text": "[s=22]🪣[/s]",
+
+
+  "height": 58,
+  "width": 46
+ },
+ {
+  "id": 18,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 472,
+  "y": 529,
+  "title": ".",
+  "text": "[s=55]⛰️[/s]",
+
+
+  "height": 96,
+  "width": 92
+ },
+ {
+  "id": 20,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 516,
+  "y": 707,
+  "title": ".",
+  "text": "[s=50]🎡🏰[/s]",
+
+
+  "height": 92,
+  "width": 172
+ },
+ {
+  "id": 21,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3433,
+  "y": 822,
+  "title": ".",
+  "text": "[c=#f1fa8c][s=22]Static website with cloudfront and s3[/s][/c]",
+
+
+  "height": 48,
+  "width": 473
+ },
+ {
+  "id": 22,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3455,
+  "y": 892,
+  "title": ".",
+  "text": "📢\nNo ❌ need to make bucket public\n",
+
+
+  "height": 72,
+  "width": 114
+ },
+ {
+  "id": 23,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3447,
+  "y": 988,
+  "title": ".",
+  "text": "upload📤 index.html and error.html",
+
+
+  "height": 58,
+  "width": 73
+ },
+ {
+  "id": 24,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3431,
+  "y": 1373,
+  "title": ".",
+  "text": "cloudfront -> create distribution\n\nOrigin domain: Choose your S3 bucket (select the one without .s3-website)\nexample: my-bucket.s3.<region>.amazonaws.com\n\nbelow url is for static⚡website. dont use it with oac❌\n\nmy-bucket.s3-website-us-east-1.amazonaws.com\n\n\n[g=48]Origin path[/g]: leave empty\n\n",
+
+
+  "height": 152,
+  "width": 449
+ },
+ {
+  "id": 25,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 4287,
+  "y": 673,
+  "title": ".",
+  "text": "what is [c=#50fa7b]OAC[/c]\norigin access control\nThis feature securely connects CloudFront to your private S3 bucket\n\nWhat is older format\nOrigin Access Identity (OAI) legacy method is not used anymore\n\nwhat it does\nOAC enabed CloudFront signs each request to S3 using SigV4 (AWS Signature Version 4).",
+
+
+  "height": 160,
+  "width": 164
+ },
+ {
+  "id": 26,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3424,
+  "y": 1566,
+  "title": ".",
+  "text": "Create origin access control [g=25](OAC)[/g]\nName: e.g., my-site-oac\nSigning behavior: Always\nSigning protocol: [g=47]SigV4[/g]",
+
+
+  "height": 73,
+  "width": 200
+ },
+ {
+  "id": 27,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 2084,
+  "y": 666,
+  "title": ".",
+  "text": "staticWebsiteWithCloudFront",
+  "gotoid": "21"
+
+
+ },
+ {
+  "id": 28,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 4292,
+  "y": 634,
+  "title": ".",
+  "text": "[c=#F88080]Definitions[/c].",
+
+
+  "height": 36,
+  "width": 68
+ },
+ {
+  "id": 33,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2901,
+  "y": 907,
+  "title": ".",
+  "text": "1\nS3\nCreate bucket.\nunique bucket name\nChoose region\n[c=#50fa7b] Uncheck the “Block all public access” box [/c]\nAcknowledge the warning and click Create bucket.\n[s=22]⬇️[/s]",
+
+
+  "height": 127,
+  "width": 240
+ },
+ {
+  "id": 34,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2895,
+  "y": 1067,
+  "title": ".",
+  "text": "2\nClick Upload\nAdd files/folder\nSelect your index.html, style.css, etc.\nClick Upload.\n[s=22]⬇️[/s]",
+
+
+  "height": 118,
+  "width": 112
+ },
+ {
+  "id": 35,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2873,
+  "y": 1225,
+  "title": ".",
+  "text": "3\n[c=#50fa7b]Make Files Public[/c]\n\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"PublicReadGetObject\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::your-bucket-name/*\"\n    }\n  ]\n}\n\n[s=22]⬇️[/s]",
+
+
+  "height": 204,
+  "width": 273
+ },
+ {
+  "id": 37,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2863,
+  "y": 1436,
+  "title": ".",
+  "text": "want domain name or sub domain name?\n[s=22]↙️↘️[/s]",
+
+
+  "height": 55,
+  "width": 228
+ },
+ {
+  "id": 38,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2724,
+  "y": 1503,
+  "title": ".",
+  "text": "subdomain\n\n✅ Conditions:\n>S3 bucket name must exactly match the subdomain (e.g., www.example.com).\n>must be public\n>Use the [c=#50fa7b]S3 website endpoint[/c] (not the REST endpoint).\n\nbucket name:\nhttp://www.example.com.s3-website-us-east-1.amazonaws.com\n\ncname:\nName: www.example.com\nType: CNAME\nValue: www.example.com.s3-website-us-east-1.amazonaws.com\n",
+
+
+  "height": 248,
+  "width": 205
+ },
+ {
+  "id": 39,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3029,
+  "y": 1506,
+  "title": ".",
+  "text": "domain\n\n✅ Steps:\nCreate an S3 bucket named exactly example.com.\n\nEnable static website hosting on that bucket.\n\nRoute 53->Create a record:\n\nType: A (or AAAA)\nName: example.com\nAlias: Yes\nAlias Target: Your S3 website endpoint (it will appear in the drop-down)\nhttp://example.com.s3-website-us-east-1.amazonaws.com\n\n✅ This only works in Route 53, not with external DNS providers.",
+
+
+  "height": 238,
+  "width": 225
+ },
+ {
+  "id": 40,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2891,
+  "y": 771,
+  "title": ".",
+  "text": "S3 Website Hosting\tCloudFront (with S3)\nStatic Hosting\t✅ Yes\t✅ Yes\nHTTPS Support\t❌ No\t✅ Yes\nSSL Certificate\t❌ No\t✅ Yes (via ACM)",
+
+
+  "height": 88,
+  "width": 213
+ },
+ {
+  "id": 41,
+  "type": "img",
+  "style": {
+   "default": "img"
+  },
+  "x": 253,
+  "y": 466,
+  "title": ".",
+  "name": "boredSofie1"
+
+ },
+ {
+  "id": 43,
+  "type": "img",
+  "style": {
+   "default": "img"
+  },
+  "x": 940,
+  "y": 572,
+  "title": ".",
+  "name": "bearKnife"
+ },
+ {
+  "id": 44,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3449,
+  "y": 1086,
+  "title": ".",
+  "text": "[c=#50fa7b]Only cloud🌧️ front can read📖 it[/c]\n\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowCloudFrontServicePrincipalReadOnly\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"cloudfront.amazonaws.com\"\n      },\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::your-bucket-name/*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"AWS:SourceArn\": \"arn:aws:cloudfront::your-account-id:distribution/your-distribution-id\"\n        }\n      }\n    }\n  ]\n}\n",
+
+
+  "height": 250,
+  "width": 457
+ },
+ {
+  "id": 45,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3431,
+  "y": 1690,
+  "title": ".",
+  "text": "Viewer protocol policy: Redirect HTTP to HTTPS\nby default it provides a SSL to following domain\n[c=#ff79c6]*.cloudfront.net[/c]\n\nWhen someone goes to https://d123abc.cloudfront.net/\nit serves by default below object\nDefault root object: [c=#ff79c6]index.html[/c]",
+
+
+  "height": 90,
+  "width": 243
+ },
+ {
+  "id": 47,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 4569,
+  "y": 672,
+  "title": ".",
+  "text": "[c=#50fa7b]sigv4[/c]\nWhat is SigV4 (Signature Version 4)?\nSigV4 is AWSs protocol for securely signing API requests.\n\nWhen a service (like CloudFront) makes a request to another AWS service (like S3), SigV4 ensures:\n\nThe request is authenticated\n\nThe request hasnt been tampered with\n\nIt comes from a trusted source (e.g., CloudFront, your application)",
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 48,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 4974,
+  "y": 672,
+  "title": ".",
+  "text": "[c=#50fa7b]Origin path[/c]\n\nmy-bucket/\n├── site-v1/\n│   ├── index.html\n│   └── style.css\n├── site-v2/\n│   ├── index.html\n│   └── app.js\n\n\nOrigin🌱domain:\nmy-bucket.s3.amazonaws.com\n\n\nOrigin path🛣️:\n/site-v2\n\nhttps://your-distribution.cloudfront.net/index.html\n⏩\nhttps://my-bucket.s3.amazonaws.com/site-v2/index.html\n",
+
+
+  "height": 248,
+  "width": 268
+ },
+ {
+  "id": 49,
+  "type": "img",
+  "style": {
+   "default": "img"
+  },
+  "x": 3707,
+  "y": 1032,
+  "title": ".",
+  "name": "sarahread"
+ },
+ {
+  "id": 50,
+  "type": "img",
+  "style": {
+   "default": "img"
+  },
+  "x": 2694,
+  "y": 1189,
+  "title": ".",
+  "name": "scMic"
+ },
+ {
+  "id": 51,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 2086,
+  "y": 624,
+  "title": ".",
+  "text": "staticWebsite",
+  "gotoid": "40"
+
+
+ },
+ {
+  "id": 52,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 598,
+  "y": 2071,
+  "title": ".",
+  "text": [
+   {
+    "q": "An Amazon S3 object can be up to how large?",
+    "options": [
+     "5 GB",
+     "5 TB",
+     "1 TB",
+     "10 TB"
+    ],
+    "a": [
+     1
+    ],
+    "h": "The S3 object size limit is 5 TB."
+   },
+   {
+    "q": "Which three components uniquely identify an object within an S3 bucket when versioning is enabled?",
+    "options": [
+     "Bucket name",
+     "Object key",
+     "Version ID",
+     "Metadata"
+    ],
+    "a": [
+     1,
+     2
+    ],
+    "h": "Within a bucket, the object key and version ID uniquely identify an object."
+   },
+   {
+    "q": "Fill in the blank: In S3, the ____ is the sequence of bytes you store as your object's content.",
+    "a": [
+     "value"
+    ],
+    "h": "The value refers to the content of the object."
+   },
+   {
+    "q": "Which type of metadata is assigned by the user when uploading an S3 object?",
+    "options": [
+     "System metadata",
+     "User-defined metadata"
+    ],
+    "a": [
+     1
+    ],
+    "h": "User-defined metadata is assigned by you; system metadata is assigned by Amazon S3."
+   },
+   {
+    "q": "True or False: Amazon S3 objects are publicly accessible by default.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "By default, S3 resources are private—you must explicitly grant access."
+   },
+   {
+    "q": "What are S3 subresources associated with objects used for?",
+    "options": [
+     "Storing object content",
+     "Managing buckets",
+     "Storing object-specific additional information",
+     "Encrypting objects"
+    ],
+    "a": [
+     2
+    ],
+    "h": "Subresources store additional information tied to objects or buckets."
+   },
+   {
+    "q": "Which one of these is an example of an object subresource in S3?",
+    "options": [
+     "Bucket name",
+     "Permissions ACL",
+     "Object key",
+     "Version ID"
+    ],
+    "a": [
+     1
+    ],
+    "h": "ACL is a subresource that defines access permissions."
+   },
+   {
+    "q": "Which metadata type is used by Amazon S3 for managing your objects?",
+    "options": [
+     "User-defined metadata",
+     "System metadata",
+     "Custom metadata",
+     "Bucket metadata"
+    ],
+    "a": [
+     1
+    ],
+    "h": "System metadata is automatically assigned by Amazon S3 for management purposes."
+   },
+   {
+    "q": "Fill in the blank: S3 objects are stored in one or more ____, which serve as containers.",
+    "a": [
+     "buckets"
+    ],
+    "h": "Objects are stored in buckets in S3."
+   },
+   {
+    "q": "Which two mechanisms can you use to control access to objects in S3?",
+    "options": [
+     "Bucket policies",
+     "Object tags",
+     "ACLs (Access Control Lists)",
+     "Object values"
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "Access is controlled via resource-based ACLs and bucket policies."
+   }
+  ],
+  "links": [
+   "https://docs.aws.amazon.com/AmazonS3/latest/userguide//UsingObjects.html"
+  ],
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 53,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 598,
+  "y": 2571,
+  "title": ".",
+  "text": [
+   {
+    "q": "What are the two kinds of object metadata in Amazon S3?",
+    "options": [
+     "System-defined metadata",
+     "User-defined metadata",
+     "Bucket metadata",
+     "ACL metadata"
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "S3 supports system-defined and user-defined metadata for objects."
+   },
+   {
+    "q": "Which kind of metadata includes creation date, size, and storage class?",
+    "options": [
+     "User-defined metadata",
+     "System-defined metadata"
+    ],
+    "a": [
+     1
+    ],
+    "h": "These are system-controlled elements managed by S3."
+   },
+   {
+    "q": "Fill in the blank: User-defined metadata is provided as ____ pairs.",
+    "a": [
+     "key value"
+    ],
+    "h": "It's a set of key/name-value pairs supplied during object upload."
+   },
+   {
+    "q": "True or False: You can modify user-defined metadata of an object after upload without copying it.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "To change metadata, you must copy the object and set new metadata."
+   },
+   {
+    "q": "True or False: Tags are part of user-defined metadata of an object.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Tags are stored with the object's metadata (inside the object)."
+   },
+   {
+    "q": "System-controlled metadata fields like object-creation date are ____ modifiable.",
+    "options": [
+     "Never",
+     "Always",
+     "Sometimes"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Only S3 can modify those values."
+   },
+   {
+    "q": "The two types of system metadata are ____ controlled and ____ ",
+    "a": [
+     "system",
+     "user"
+    ],
+    "h": "E.g. system controlled - object-creation date\nUser controlled - storage class"
+   },
+   {
+    "q": "Which header must begin with `x-amz-meta-` when setting user-defined metadata via REST?",
+    "options": [
+     "User-defined metadata keys",
+     "System metadata keys"
+    ],
+    "a": [
+     0
+    ],
+    "h": "cli dont need it \n aws s3api put-object --bucket my-bucket --key file.txt --body ./file.txt --metadata team=engineering owner=bob\n adds x-amz-meta-team: engineering,x-amz-meta-owner: bob"
+   },
+   {
+    "q": "True or False: User-defined metadata keys are stored in lowercase by S3.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Keys are normalized to lowercase."
+   },
+   {
+    "q": "What is the HTTP method that retrieves only metadata (without object data)?",
+    "options": [
+     "GET",
+     "PUT",
+     "HEAD",
+     "POST"
+    ],
+    "a": [
+     2
+    ],
+    "h": "`HEAD` returns only metadata; useful when you just need metadata."
+   },
+   {
+    "q": "To modify object metadata using the console, S3 actually ____ the object.",
+    "a": [
+     "copy"
+    ],
+    "h": "Valid only if object is less than 5 GB\n Otherwise use multipart upload by using the AWS CLI or AWS SDKs."
+   },
+   {
+    "q": "True or False: Editing metadata preserves the original Last-Modified timestamp.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Copying the object updates Last-Modified to the time of copy."
+   },
+   {
+    "q": "Metadata updates creates a new version.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
     ]
+   },
+   {
+    "q": " when you are replacing object metadata in Amazon S3. You must specify",
+    "options": [
+     "additional Metadata",
+     "Full Metadata"
+    ],
+    "a": [
+     1
+    ],
+    "h": [
+     "S3 doesnt let you partially edit metadata.Every time you replace metadata, you must provide all the metadata"
+    ]
+   }
+  ],
+  "links": [
+   "https://docs.aws.amazon.com/AmazonS3/latest/userguide//UsingMetadata.html"
+  ],
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 56,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 598,
+  "y": 3000,
+  "title": ".",
+  "text": [
+   {
+    "q": "Which AWS methods can you use to delete objects from an S3 bucket?",
+    "options": [
+     "AWS Console",
+     "AWS CLI",
+     "AWS SDKs",
+     "REST API"
+    ],
+    "a": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "q": "Fill in the blank: The S3 API operation to delete a single object is called ____.",
+    "a": [
+     "DeleteObject"
+    ],
+    "h": "The single-object deletion operation is DeleteObject (HTTP DELETE)."
+   },
+   {
+    "q": "What is the maximum number of objects you can delete in one DeleteObjects API call?",
+    "options": [
+     "100",
+     "500",
+     "1000",
+     "Unlimited"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "True or False: If versioning is enabled and you issue a DeleteObject request without specifying a version ID, the object is permanently deleted.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "What does S3 add to a versioned bucket when you delete an object without specifying a version ID?",
+    "options": [
+     "Delete marker",
+     "None",
+     "Delete tag"
+    ],
+    "a": [
+     0
+    ],
+    "h": "S3 adds a new version of delete marked object with empty content and hides it."
+   },
+   {
+    "q": "True or False: Can Delete Marker point to older version.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Each DeleteObject creates a new version and so delete marker always points to the latest version."
+   },
+   {
+    "q": "Deleting a delete marked object without specifying Version ID does what",
+    "options": [
+     "Does nothing since object is invisible",
+     "Creates a new version",
+     "Permanently deletes the object"
+    ],
+    "a": [
+     1
+    ],
+    "h": [
+     "The new version is also a delete marker"
+    ]
+   },
+   {
+    "q": "If an object in a versioned S3 bucket has multiple delete markers stacked, what must you do to fully restore the object",
+    "options": [
+     "Delete just the latest delete marker; the object becomes visible immediately",
+     "Delete the object without specifying a version ID to remove all delete markers at once.",
+     "Its not possible to restore the object once multiple delete markers exist.",
+     "Delete all delete markers one by one to reveal the underlying data version."
+    ],
+    "a": [
+     3
+    ]
+   },
+   {
+    "q": "In a non-versioned Amazon S3 bucket, what identifier do you need to provide to delete an object",
+    "options": [
+     "Object key name only",
+     "Version ID only",
+     "Both object key name and version ID.",
+     "Delete marker ID"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Fill in the blank: To delete a specific version of an object, you must specify both the object key and the ____.",
+    "a": [
+     "version id"
+    ],
+    "h": "Specifying the version ID allows actual deletion of that specific version."
+   },
+   {
+    "q": "What happens if you attempt to delete a version ID that corresponds to a delete marker?",
+    "options": [
+     "Deletes the delete marker",
+     "Error returned",
+     "Deletes all versions",
+     "Renames the object"
+    ],
+    "a": [
+     0
+    ],
+    "h": "When the version id points to a delete marker, the delete marker is deleted \n The object reappears in the bucket if no more underlying delete markers are present."
+   },
+   {
+    "q": "When versioning is suspended and an object is uploaded ( version = null ) and then deleted, which of the following is True",
+    "options": [
+     "Permanently deletes latest version irrespective of version",
+     "Delete marker is added with version = null",
+     "null version is deleted",
+     "Error thrown"
+    ],
+    "a": [
+     2
+    ],
+    "h": "On a suspended bucket, not specifying version id is same as --version-id null"
+   },
+   {
+    "q": "When versioning is suspended and Delete is called which of the following is True",
+    "options": [
+     "Permanently deletes latest version irrespective of version",
+     "Delete marker is added with version = null",
+     "NULL version is deleted",
+     "Error thrown"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Since no NULL version is available a delete marker with version = null is created."
+   },
+   {
+    "q": "Initially bucket is not versioned(null), then versioning enabled, then suspended, object uploaded(null) which of the following is True",
+    "options": [
+     "Permanently deletes latest version irrespective of version",
+     "Delete marker is added with version = null",
+     "Both initial and latest null version is deleted",
+     "Only latest null version is deleted",
+     "Error thrown"
+    ],
+    "a": [
+     3
+    ],
+    "h": "Only one null version is considered current (the latest one). You can have multiple null-versioned objects in your bucket’s history — just not all active at once."
+   },
+   {
+    "q": "Fill in the blank: Objects in a non-versioned bucket are ____ deleted when using DeleteObject.",
+    "a": [
+     "permanently"
+    ],
+    "h": "Without versioning, DeleteObject permanently removes the object."
+   },
+   {
+    "q": "What is recommended to automatically delete old or unneeded objects in S3 buckets?",
+    "options": [
+     "Bucket policies",
+     "Lifecycle configuration",
+     "ACLs",
+     "Logging"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Lifecycle rules can automatically expire or delete objects based on defined criteria."
+   },
+   {
+    "q": "Which event can notify you when S3 creates a delete marker due to a Lifecycle rule?",
+    "options": [
+     "s3:ObjectRemoved:Delete",
+     "s3:LifecycleExpiration:DeleteMarkerCreated",
+     "s3:ObjectDeleted:Marker",
+     "s3:Lifecycle:DeleteMarker"
+    ],
+    "a": [
+     1
+    ],
+    "h": "The LifecycleExpiration:DeleteMarkerCreated event alerts you when a delete marker is created."
+   },
+   {
+    "q": "True or False: When deleting many objects programmatically, it's recommended to use DeleteObjects rather than repeated calls to DeleteObject.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "MultiObject Delete is more efficient than individual delete calls."
+   },
+   {
+    "q": "Which IAM permissions are necessary to delete objects and versions in S3?",
+    "options": [
+     "s3:DeleteObject",
+     "s3:DeleteObjectVersion",
+     "s3:ListBucket",
+     "s3:GetObject"
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "DeleteObject is required for simple deletes; DeleteObjectVersion is required for version-specific deletes."
+   },
+   {
+    "q": "Fill in the blank: A best practice before deleting objects is to enable ____ for recovery safety.",
+    "a": [
+     "versioning"
+    ],
+    "h": "Versioning protects against accidental deletions by preserving object history."
+   },
+   {
+    "q": "What is one way to retain copies of objects if they are accidentally deleted?",
+    "options": [
+     "Cross Region Replication",
+     "Object Lock",
+     "Bucket Encryption",
+     "Requester Pays"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Replication creates copies in other buckets/regions for added redundancy."
+   },
+   {
+    "q": "Which is true about deleting replicated objects in Amazon S3 (CRR)?",
+    "options": [
+     "Permanent deletes can be replicated",
+     "Versioning must be enabled on both source and destination buckets for any kind of replication to work",
+     "Delete markers can be replicated",
+     "Requester Pays"
+    ],
+    "a": [
+     1,
+     2
+    ],
+    "h": "\"DeleteMarkerReplication\": {\"Status\": \"Enabled\"} setting must be enabled.\n Versioning must be enabled.\n Permanent object deletes are never replicated"
+   },
+   {
+    "q": "What element allows filtering objects by tags or prefix in lifecycle rules?",
+    "options": [
+     "Object key",
+     "Lifecycle filter",
+     "Bucket policy",
+     "ACL"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Incorrect lifecycle filters can result in unintended deletions."
+   },
+   {
+    "q": "True or False: Objects in directory buckets cannot use versioning for delete operations.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Unlike Standard buckets Directory buckets are a new type of S3 bucket designed specifically for S3 Express One Zone. These buckets do not support versioning — not for uploads, not for deletes."
+   }
+  ],
+  "links": [
+   "https://docs.aws.amazon.com/AmazonS3/latest/userguide//DeletingObjects.html"
+  ],
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 58,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 990,
+  "y": 787,
+  "title": ".",
+  "text": "+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| Storage Class           | Use Case                                    | Core Specs                                                   | Other Considerations                                         |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| STANDARD                | Frequently accessed data                     | Durability: 99.999999999%                                    | [c=#f1fa8c]Default[/c] class, no retrieval fees                             |\n|                         |                                             | Availability: 99.99%                                         |                                                              |\n|                         |                                             | Min Storage: None                                            |                                                              |\n|                         |                                             | Min Billable Size: None                                      |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| STANDARD_IA             | Infrequently accessed, long-term storage     | Durability: 99.999999999%                                    | Lower cost, [c=#ffb86c]retrieval fees apply[/c]                            |\n|                         |                                             | Availability: 99.9%                                          |                                                              |\n|                         |                                             | [c=#ffb86c]Min Storage: 30 days[/c]                                         |                                                              |\n|                         |                                             | Min Billable Size: 128 KB                                    |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| INTELLIGENT_TIERING     | Data with unknown or changing access patterns| Durability: 99.999999999%                                    | Auto tiering, [c=#ffb86c]monitoring fee[/c], no retrieval fees              |\n|                         |                                             | Availability: 99.9%                                          |                                                              |\n|                         |                                             | Min Storage: None                                            |                                                              |\n|                         |                                             | Min Billable Size: None                                      |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| ONEZONE_IA              | Re-creatable, infrequently accessed data     | Durability: 99.999999999%                                    | [c=#ffb86c]Stored in 1 AZ many device[/c], cheaper, [c=#ffb86c]less resilient[/c]          |\n|                         |                                             | Availability: 99.5%                                          | Retrieval fees apply                                         |\n|                         |                                             | Min Storage: 30 days                                         |                                                              |\n|                         |                                             | Min Billable Size: 128 KB                                    |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| EXPRESS_ONEZONE         | Latency-sensitive apps needing fast access  | Durability: 99.999999999%                                    | Fastest access (ms); stored in 1 AZ of your choice           |\n|                         |                                             | Availability: 99.95%                                         |                                                              |\n|                         |                                             | Min Storage: None                                            |                                                              |\n|                         |                                             | Min Billable Size: None                                      |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| GLACIER_IR              | Archived data with occasional access         | Durability: 99.999999999%                                    | Millisecond retrieval; retrieval fees apply                  |\n|                         |                                             | Availability: 99.9%                                          |                                                              |\n|                         |                                             | Min Storage: 90 days                                         |                                                              |\n|                         |                                             | Min Billable Size: 128 KB                                    |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| GLACIER                 | Long-term archive, rare access               | Durability: 99.999999999%                                    | Must restore before access; cheaper than Glacier IR          |\n|                         |                                             | Availability: 99.99% (after restore)                         | 40 KB metadata billed (32 KB Glacier, 8 KB Standard)         |\n|                         |                                             | Min Storage: 90 days                                         |                                                              |\n|                         |                                             | Min Billable Size: N/A                                       |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| DEEP_ARCHIVE            | Rarely accessed, very long-term storage      | Durability: 99.999999999%                                    | [c=#ffb86c]Longest restore time (hours)[/c]; lowest cost                    |\n|                         |                                             | Availability: 99.99% (after restore)                         | 40 KB metadata billed (32 KB Glacier, 8 KB Standard)         |\n|                         |                                             | Min Storage: 180 days                                        |                                                              |\n|                         |                                             | Min Billable Size: N/A                                       |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| REDUCED_REDUNDANCY      | Non-critical, reproducible data              | Durability: 99.99%                                           | [c=#FF1493]Deprecated; not recommended[/c]; use STANDARD instead            |\n|                         |                                             | Availability: 99.99%                                         |                                                              |\n|                         |                                             | Min Storage: None                                            |                                                              |\n|                         |                                             | Min Billable Size: None                                      |                                                              |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+\n| S3 OUTPOSTS              | On-premises object storage with S3 API       | Durability: 99.999999999%                                    | Data stored on-premises in your Outpost; limited AZs          |\n|                         |                                              | Availability: Depends on Outpost setup                       | Used where data residency or low latency is required          |\n|                         |                                              | Min Storage: None                                            |                                                              |\n|                         |                                              | Min Billable Size: None                                      |               \n                                               |\n+--------------------------+---------------------------------------------+--------------------------------------------------------------+--------------------------------------------------------------+",
+
+
+  "height": 577,
+  "width": 1024
+ },
+ {
+  "id": 59,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5095,
+  "y": 116,
+  "title": ".",
+  "text": "[s=44]lambda[/s]",
+
+
+  "height": 78,
+  "width": 160
+ },
+ {
+  "id": 60,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5303,
+  "y": 304,
+  "title": ".",
+  "text": "[c=#FFD700]Hypervisor[/c] emulates multiple machines on top of a single machine\n🤖🤖🤖🤖🤖\n💻\nEach VM includes its own OS and kernel\nexample virtual box\n",
+
+
+  "height": 136,
+  "width": 153
+ },
+ {
+  "id": 61,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5512,
+  "y": 306,
+  "title": ".",
+  "text": "Serverless\nYou don't❌ manage containers🖥️, servers🖥️🖥️, or OS — the cloud provider does\nYou write code in [c=#FFD700]Lambda functions[/c] which are executed with language-specific runtimes (like [c=#FF5733]Node.js and Python[/c]) ",
+
+
+  "height": 132,
+  "width": 106
+ },
+ {
+  "id": 62,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5311,
+  "y": 458,
+  "title": ".",
+  "text": "[c=#FFD700]Main properties of lambda[/c]\n\nRole🧻\nmemory🧠\nTime out⌛\n\nIn lambda you cannot choose CPU❌. It is allocated proportional to memory\n",
+
+
+  "height": 125,
+  "width": 148
+ },
+ {
+  "id": 63,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5513,
+  "y": 462,
+  "title": ".",
+  "text": "The execution cost increases with both memory and run time.\n\nTotal GB-Seconds=Number of Requests×\nMemory (MB)/1024×Duration (seconds)\n\n$0.0000166667 per GB-second\n\n",
+
+
+  "height": 121,
+  "width": 159
+ },
+ {
+  "id": 64,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5726,
+  "y": 458,
+  "title": ".",
+  "text": "[c=#FFD700]lambda handler[/c]:\nA Lambda function can contain more than one function, but the handler function is always the entry🚪🛣️ point to your code.\n\nin python [c=#FF5733]lambda_function.lambda_handler[/c] is default\n\n<file_name_without_ext><function_name>\nNote: In case of zipped upload file function name is not❌ the name of the zip file but the file inside the zip\n\n\nThe function handler takes two arguments, [c=#FF5733]event and context[/c]\n\nAn [c=#FF5733]event[/c] in Lambda is a JSON formatted document that contains data for your function to process\n\nIf your function is invoked by another AWS service, the event object contains information about the event that caused the invocation. \nFor example, if your function is invoked when an object is uploaded to an Amazon Simple Storage Service (Amazon S3) bucket, [c=#7CFC00]the event contains the name of the bucket and the object key[/c].\n\n\nhe [c=#FF5733]Lambda context [/c]object:\n\nLambda passes the context object to your function automatically. \nThe context object contains information about the [c=#7CFC00]function invocation and execution environment[/c].\n\nFor ex   \n`console.log('CloudWatch log group: ', context.logGroupName);`\nuses the logGroupName parameter to output the name of its CloudWatch log group.\n",
+
+
+  "height": 356,
+  "width": 421
+ },
+ {
+  "id": 65,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5323,
+  "y": 622,
+  "title": ".",
+  "text": "[c=#FF5733]Synchronous or RequestResponse [/c]🔄 calls wait for output to be returned \ne.g.: API Gateway triggering Lambda to get a response for an HTTP request\n\n[c=#FF5733]Asynchronous calls[/c] return immediately but may run in background\ne.g.: Event-driven processing (e.g., processing uploads, notifications).",
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 66,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5378,
+  "y": 869,
+  "title": ".",
+  "text": "[c=#FFD700]Basic lambda function[/c]\n[c=#FF5733]# Initialization code (runs once per container instance). [/c]\n[c=#FF1493]\n!!!! A container may be reused and so the initialized steps will not run again[/c]\nprint(\"Initializing Lambda container...\")\n\n# Example: setting up a global variable or connection\nGLOBAL_RESOURCE = \"Initialized resource\"\n\ndef lambda_handler(event, context):\n    print(\"Event received:\", event)\n    # Use the initialized resource\n    result = f\"Using {GLOBAL_RESOURCE}\"\n    \n    return {\n        'statusCode': 200,\n        'body': result\n    }\n",
+
+
+  "height": 190,
+  "width": 378
+ },
+ {
+  "id": 69,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 1323,
+  "y": 3000,
+  "title": ".",
+  "text": [
+   {
+    "q": "____ access and ____ access is one way of classifying s3 storage classes",
+    "a": [
+     "frequent",
+     "infrequent"
+    ]
+   },
+   {
+    "q": "Whats the main difference between frequent and infrequent access storage",
+    "options": [
+     "Frequent access storage costs more to store",
+     "Infrequent access storage has higher retrieval costs",
+     "Frequent access storage is for rarely used data",
+     "Infrequent access storage is cheaper for storing rarely accessed data."
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "Which storage class automatically moves data between storage access tiers based on access pattern",
+    "options": [
+     "Amazon S3 outpost",
+     "Amazon S3 express one zone",
+     "Amazon S3 Intelligent-Tiering"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "Which of the following statements is TRUE about Amazon S3 One Zone-IA?",
+    "options": [
+     "It stores data across multiple Availability Zones for high durability",
+     "It is more expensive than S3 Standard-IA because of its higher availability",
+     "It stores data in a single Availability Zone and is ideal for re-creatable or non-critical data",
+     "It automatically moves data to archive tiers when it is not accessed for 30 days"
+    ],
+    "a": [
+     2
+    ],
+    "h": "Amazon S3 One Zone-IA stores data in a single Availability Zone, which makes it less expensive than S3 Standard-IA. \n Its best suited for non-critical or easily re-creatable data that does not require high availability or resilience to AZ failure"
+   },
+   {
+    "q": "Which S3 Glacier storage class provides the lowest cost for long-term data archiving",
+    "options": [
+     "Glacier Deep Archive",
+     "Glacier Instant Retrieval",
+     "Glacier Flexible Retrieval"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Which S3 storage classes require restore before access",
+    "options": [
+     "Glacier Deep Archive",
+     "Glacier Instant Retrieval",
+     "Glacier Flexible Retrieval"
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "Before you can download (or GET) a restore  temporarily copies it to S3 Standard or another accessible tier.\n Glacier Flexible Retrieval⏱️ 1 minute to 12 hours (depending on option) \n Glacier Deep Archive 🕒 12 to 48 hours (depending on option) \n All options provide Milliseconds (instant access) after restore"
+   }
+  ],
+
+
+  "height": 190,
+  "width": 378
+ },
+ {
+  "id": 68,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 2406,
+  "y": 2998,
+  "title": ".",
+  "text": [
+   {
+    "q": "Fill in the blank: The default handler name in an AWS Python Lambda function is ____.",
+    "a": [
+     "lambda_handler"
+    ],
+    "h": "By default, the handler function in AWS Lambda using Python is named 'lambda_handler'."
+   },
+   {
+    "q": "What two parameters does the Lambda handler function typically accept?",
+    "options": [
+     "request and response",
+     "input and output",
+     "event and context",
+     "message and data"
+    ],
+    "a": [
+     2
+    ],
+    "h": "The Lambda handler receives 'event' (the input) and 'context' (runtime metadata)."
+   },
+   {
+    "q": "Fill in the blank: The handler name is specified in the format ____.",
+    "a": [
+     "filename.functionname"
+    ],
+    "h": "The handler is defined as 'filename.functionname', such as 'lambda_function.lambda_handler'.\n Note: If uploading as zip it is not the zip file name rather the file that contains the handler function"
+   },
+   {
+    "q": "A handler can return a value, which must be ____ ____ .",
+    "a": [
+     "json",
+     "serializable"
+    ],
+    "h": "Common return types include dict, list, str, int, float, and bool.\n When you return a bool from a Lambda handler (like return True), AWS Lambda automatically serializes it to JSON using Python json module"
+   },
+   {
+    "q": "Fill in the blank: The ____ object passed to the Lambda handler contains runtime information such as memory limit and request ID.",
+    "a": [
+     "context"
+    ],
+    "h": "example: context.log_group_name, context.log_stream_name. \n Lambda automatically creates a log group named /aws/lambda/<function-name> when the function is first invoked. \n Each invocation generates a new log stream within this group"
+   },
+   {
+    "q": "Can you invoke a Python AWS Lambda function using the AWS SDK for Java",
+    "options": [
+     "No, you can only invoke Lambda functions written in Java using the Java SDK.",
+     "You must rewrite the Lambda in Java to invoke it from the Java SDK",
+     "The Lambda runtime language doesnt matter",
+     "SDK offers flexibility but CLI dont"
+    ],
+    "a": [
+     2
+    ],
+    "h": "When you invoke a Lambda function, you are calling a language-agnostic REST API exposed by AWS Lambda service."
+   },
+   {
+    "q": "Use ____ ____ , when building packages that include native extensions (compiled C/C++ code)",
+    "a": [
+     "container",
+     "images"
+    ]
+   },
+   {
+    "q": "What is the maximum amount of ephemeral storage you can configure for an AWS Lambda function?",
+    "options": [
+     "128 MB",
+     "256 MB",
+     "512 MB",
+     "10240 MB"
+    ],
+    "a": [
+     3
+    ]
+   },
+   {
+    "q": "What is the minimum amount of memory you can configure for an AWS Lambda function?",
+    "options": [
+     "128 MB",
+     "256 MB",
+     "512 MB",
+     "1024 MB"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "What is the maximum amount of memory you can configure for an AWS Lambda function?",
+    "options": [
+     "128 MB",
+     "256 MB",
+     "512 MB",
+     "10240 MB"
+    ],
+    "a": [
+     3
+    ]
+   },
+   {
+    "q": "Lambda provides ephemeral storage for functions in the ____ directory. This storage is temporary and unique to each ____ environment.",
+    "a": [
+     "/tmp",
+     "execution"
+    ],
+    "h": "The /tmp directory is not unique per invocation, but it is isolated per execution environment. \n If AWS reuses the same execution environment (a warm Lambda), the data in /tmp persists across invocations for the same instance. \n If AWS creates a new execution environment (a cold start), /tmp starts fresh — no files from previous runs."
+   },
+   {
+    "q": "By default, Lambda functions have access to the public internet",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "When attached to VPC lambda can only access resources available within that VPC. \n To give your function access to the internet, you also need to configure the VPC to have internet access."
+   },
+   {
+    "q": "What type of network interfaces does AWS Lambda create when configured to access a VPC?",
+    "options": [
+     "Standard ENIs",
+     "Virtual Private Endpoints (VPCEs)",
+     "HENI",
+     "Elastic IP Interfaces"
+    ],
+    "a": [
+     2
+    ],
+    "h": "By default, Lambda functions run in a Lambda-managed VPC that has internet access \n When you attach a Lambda function to your own VPC, AWS places its network interface (Hyperplane ENI) inside the specified subnets"
+   },
+   {
+    "q": "Expand HENI ____ ____ ____ ____",
+    "a": [
+     "Hyperplane",
+     "Elastic",
+     "Network",
+     "Interfaces"
+    ]
+   },
+   {
+    "q": "How does a lambda attached to a managed VPC get internet access",
+    "options": [
+     "Place lambda in public subnet directly",
+     "Place lambda in private subnet pointing to NAT gateway",
+     "place lambda in private subnet with internet gateway",
+     "NAT gateway",
+     "The NAT Gateway is placed in a public subnet, which does have access to the internet via an Internet Gateway (IGW)."
+    ],
+    "a": [
+     1,
+     3
+    ],
+    "h": "When you attach a Lambda function to your own VPC, AWS places its network interface (Hyperplane ENI) inside the specified subnets. However, Lambda ENIs never receive a public IP address, even in a public subnet"
+   },
+   {
+    "q": "Can you invoke an AWS Lambda function placed in a private subnet?",
+    "options": [
+     "No, it cannot be invoked from outside the VPC.",
+     "Yes, but only from another Lambda in the same VPC.",
+     "Yes, it can be invoked normally regardless of subnet type.",
+     "No, unless it has a public IP address."
+    ],
+    "a": [
+     2
+    ],
+    "h": "Invocation is managed by AWS Lambda’s public service endpoints, \n You (or an AWS service like API Gateway, EventBridge, S3, etc.) can still invoke the function even if it’s in a private subnet."
+   },
+   {
+    "q": "To establish a private connection between your VPC and Lambda, create an interface ____ (2). ",
+    "a": [
+     "VPC endpoint"
+    ]
+   },
+   {
+    "q": "Can a Lambda function in a private subnet access Amazon S3 without a NAT Gateway, public subnet, or VPC endpoint?",
+    "options": [
+     "Yes, it can access S3 directly from the private subnet.",
+     "No, it needs a NAT Gateway or VPC endpoint to access S3.",
+     "Yes, if the Lambda has a public IP address assigned."
+    ],
+    "a": [
+     1
+    ],
+    "h": "Because AWS service endpoints like s3.amazonaws.com are public — even when you're inside a VPC. \n So being in a private subnet doesn't automatically give you private access to those AWS services."
+   },
+   {
+    "q": "What is true about Lambda accessing AWS services via VPC endpoint vs. NAT Gateway in a public subnet?",
+    "options": [
+     "VPC endpoint keeps traffic within AWS network.",
+     "NAT Gateway routes traffic through the internet.",
+     "VPC endpoint needs a public IP.",
+     "Lambda cannot use VPC endpoints."
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "VPC endpoints keeps all traffic inside AWS private network — never touches the public internet. \n Its more secure, faster, and often cheaper than using NAT Gateway. \n  You can also restrict access using VPC endpoint policies."
+   }
+  ],
+  "links": [],
+
+
+  "height": 356,
+  "width": 421
+ },
+ {
+  "id": 70,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 990,
+  "y": 750,
+  "title": ".",
+  "text": "qaStorageClass",
+  "gotoid": "69"
+
+
+ },
+ {
+  "id": 71,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 5098,
+  "y": 219,
+  "title": ".",
+  "text": "qaLambdaBasic",
+  "gotoid": "68"
+
+
+ },
+ {
+  "id": 72,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5900,
+  "y": 906,
+  "title": ".",
+  "text": "[c=#FFD700]Building a zip file[/c]\n[c=#FF5733]1.lambda_function.py should contain the handler function[/c]\n[c=#FF5733]ZIP file should have your code and dependencies at the root level[/c]\n\nmkdir package\npip install -r requirements.txt -t package/\ncp lambda_function.py package/\ncd package\nzip -r9 ../function.zip .\ncd ..\n",
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 73,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5759,
+  "y": 261,
+  "title": ".",
+  "text": "Lambda memory range\n[s=22]128 MB - 10,240 MB [/s]\n",
+
+
+  "height": 60,
+  "width": 234
+ },
+ {
+  "id": 74,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5791,
+  "y": 330,
+  "title": ".",
+  "text": "Ephemeral storage /tmp\n[s=22]512 MB and 10,240 MB[/s]\n/tmp is unique to [c=#FF1493]each execution environment[/c] not❌  invocation",
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 75,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 5757,
+  "y": 203,
+  "title": ".",
+  "text": "Timeout \n [s=22]1 and 900 sec[/s]",
+
+
+  "height": 64,
+  "width": 177
+ },
+ {
+  "id": 76,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 6212,
+  "y": 468,
+  "title": ".",
+  "text": "[c=#FFD700]Securing Lambda environment variables[/c]\n\nFor securing environment variables, use SSE  at rest and CSE  in transit.\n\nLambda [c=#00FF7F]always provides SSE at rest[/c] with an AWS KMS key. \nBy [c=#00FF7F]default, Lambda uses an AWS managed key. No extra permission/setup needed[/c].\nTo use a customer🧑 managed key🔑, you need permission to use the key\n\nFor additional security, enable encryption in transit that provide client-side encryption in transit.\nBy default its TLS protected so when is this needed?\nHIPAA requirement, special reasons etc\nhow?\nlambda-Edit environment variables-Encryption in transit-Enable helpers-choose Encrypt next to environment variable-Add code to your function that decrypts the environment variables.\nNote: Even in console this cannot be viewed even for admin\n\n\n[c=#DCDCAA]Managing permissions to your server-side encryption KMS key[/c]\nkms:ListAliases – To view👀 keys in the Lambda console.\n\nkms:CreateGrant, kms:Encrypt\nwho needs it ? deployer\nfor what? To configure a customer managed key on a function.\n\nkms:Decrypt 🔓–\nwho needs it ? lambda execution role\nfor what? \n1. Needed at runtime to decrypt the environment variable value.\n2. To view and manage environment variables that are encrypted with a customer managed key.\n3. Users without Decrypt permissions can still manage functions, but they can't view environment variables or manage them in the Lambda console",
+
+
+  "height": 253,
+  "width": 397
+ },
+ {
+  "id": 77,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 6683,
+  "y": 462,
+  "title": ".",
+  "text": [
+   {
+    "q": "What types of encryption can you use to secure your environment variables?",
+    "options": [
+     "Encryption at rest only",
+     "Encryption in transit only",
+     "Both encryption at rest and in transit",
+     "None of the above"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "What does server-side encryption protect?",
+    "options": [
+     "Data in transit",
+     "Data at rest",
+     "Data in memory",
+     "Data in use"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Server-side encryption protects data at rest, meaning the data stored on disk."
+   },
+   {
+    "q": "What does client-side encryption protect?",
+    "options": [
+     "Data in transit",
+     "Data at rest",
+     "Data in memory",
+     "Data in use"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Client-side encryption protects data in transit, during deployment."
+   },
+   {
+    "q": "Lambda environment variables are ____ protected by ____ (2) encryption at rest with an AWS KMS key.",
+    "a": [
+     "always",
+     "server side"
+    ]
+   },
+   {
+    "q": "Which of the following is true about AWS Lambda and SSE encryption?",
+    "options": [
+     "By default, Lambda uses AWS managed KMS key for encryption",
+     "AWS charges you for default AWS managed KMS key",
+     "Default SSE encryption requires appropriate permissions and setup",
+     "If you prefer, you can provide an AWS KMS customer managed key(SSE CM KMS key) instead"
+    ],
+    "a": [
+     0,
+     3
+    ],
+    "h": "By default, Lambda uses an AWS managed key. \n Lambda creates the AWS managed key in your account and manages the permissions for you \n No additional setup needed"
+   },
+   {
+    "q": "Enable ____ for CSE in transit.",
+    "a": [
+     "helpers"
+    ],
+    "h": "helper is a CM key chosen for specific environment variables for encryption"
+   },
+   {
+    "q": "Which of the following is true about viewing Lambda environment variables encrypted using the encryption helper?",
+    "options": [
+     "Admin can view the plaintext value in the AWS Console",
+     "The plaintext value can be viewed only by the Lambda function at runtime",
+     "The encrypted environment variable is visible as plaintext in the console",
+     "Admin users can retrieve plaintext environment variables directly from the console"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Add code to your function that decrypts the environment variables"
+   },
+   {
+    "q": "Which permission is needed to view and manage Lambda environment variables encrypted with a SSE CM KMS key?",
+    "options": [
+     "kms:Encrypt",
+     "kms:CreateGrant",
+     "kms:Decrypt",
+     "kms:GenerateDataKey"
+    ],
+    "a": [
+     2
+    ],
+    "h": "Users without Decrypt permissions can still manage functions, but they can't view environment variables or manage them in the Lambda console"
+   },
+   {
+    "q": "Which permission is required to view SSE CM KMS key in the Lambda console?",
+    "options": [
+     "kms:ListAliases",
+     "kms:CreateGrant",
+     "kms:Encrypt",
+     "kms:Decrypt"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Which permissions are needed to configure a SSE CM KMS key on a Lambda function?",
+    "options": [
+     "kms:ListAliases, kms:Decrypt",
+     "kms:CreateGrant, kms:Encrypt",
+     "kms:Decrypt, kms:Encrypt",
+     "kms:CreateGrant, kms:ListAliases"
+    ],
+    "a": [
+     1
+    ],
+    "h": "kms:CreateGrant and kms:Encrypt permissions are required to configure a customer managed key on a Lambda function."
+   }
+  ],
+  "links": [
+   "https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars-encryption.html"
+  ],
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 78,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4062,
+  "y": 1099,
+  "title": ".\n\n",
+  "text": "[s=44]Networking[/s]",
+
+
+  "height": 101,
+  "width": 256
+ },
+ {
+  "id": 79,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4046,
+  "y": 1214,
+  "title": "ip types\n\n",
+  "text": "+--------+-----------------------------+------------------------------+---------------------------------------------------------------+\n| Class  | IP Range                    | Private IP Range             | Comment                                                       |\n+--------+-----------------------------+------------------------------+---------------------------------------------------------------+\n| A      | 1.0.0.0 - 126.255.255.255   | 10.0.0.0 - 10.255.255.255     | Used in large networks; private IP used in enterprise LANs.   |\n| B      | 128.0.0.0 - 191.255.255.255 | 172.16.0.0 - 172.31.255.255   | Used in medium networks; private IP used in campuses, etc.    |\n| C      | 192.0.0.0 - 223.255.255.255 | 192.168.0.0 - 192.168.255.255 | Used in small networks; private IP used in home routers.      |\n| D      | 224.0.0.0 - 239.255.255.255 | N/A                          | Reserved for multicast; not for general public use.           |\n| E      | 240.0.0.0 - 255.255.255.255 | N/A                          | Reserved for experimental use; not publicly assigned.         |\n+--------+-----------------------------+------------------------------+---------------------------------------------------------------+\n",
+
+
+  "height": 150,
+  "width": 626
+ },
+ {
+  "id": 80,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4046,
+  "y": 1355,
+  "title": ".\n\n",
+  "text": "binary \n128  64  32  16  8   4   2   1\n\n1    1   0   0   0   0   0   0 = 192\n\nBinary:      11111111.11111111.11111111.11000000\ncidr 26:     8 bits   8 bits   8 bits   2 bits\nSubnet Mask: 255.     255.     255.     192\nno of host:  64 = 2^6(0's)=64 or 32+16+8+4+2+1(0-63=64)\nactual no of host = 64 - reserved ( 0 network 63 broadcast)\nno of network = 2^2 = 4\n\n",
+
+
+  "height": 168,
+  "width": 292
+ },
+ {
+  "id": 81,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -3606,
+  "y": 1409,
+  "title": ".\n\n",
+  "text": "The increment between subnets is 64 (because 256 total IPs / 4 subnets = 64 IPs each\n\n| Subnet # | Network Address | Range of Usable IPs           | Broadcast Address |\n| -------- | --------------- | ----------------------------- | ----------------- |\n| 1        | 192.168.1.0     | 192.168.1.1 – 192.168.1.62    | 192.168.1.63      |\n| 2        | 192.168.1.64    | 192.168.1.65 – 192.168.1.126  | 192.168.1.127     |\n| 3        | 192.168.1.128   | 192.168.1.129 – 192.168.1.190 | 192.168.1.191     |\n| 4        | 192.168.1.192   | 192.168.1.193 – 192.168.1.254 | 192.168.1.255     |\n",
+
+
+  "height": 145,
+  "width": 391
+ },
+ {
+  "id": 82,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -3700,
+  "y": 1408,
+  "title": ".\n\n",
+  "text": "[s=22]➡️[/s]",
+
+
+  "height": 89,
+  "width": 45
+ },
+ {
+  "id": 83,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4046,
+  "y": 1592,
+  "title": ".\n\n",
+  "text": "+------------+-------------------------------+--------------------------+-------------------------------+\n| OSI Layer  | Description                   | TCP/IP Layer             | Example Protocols              |\n+------------+-------------------------------+--------------------------+-------------------------------+\n| 7. Application   | User interfaces, applications | Application              | HTTP, FTP, SMTP, DNS           |\n| 6. Presentation  | Data translation, encryption  | Application              | SSL/TLS, JPEG, ASCII           |\n| 5. Session       | Session management            | Application              | NetBIOS, SAP                   |\n| 4. Transport     | End-to-end connections, reliability | Transport           | TCP, UDP                      |\n| 3. Network       | Routing, logical addressing   | Internet                 | IP, ICMP, OSPF                 |\n| 2. Data Link     | Physical addressing, error detection | Network Interface    | Ethernet, PPP, Switch protocols|\n| 1. Physical      | Media, signals, bits          | Network Interface        | Ethernet (physical), DSL, ISDN |\n+------------+-------------------------------+--------------------------+-------------------------------+\n",
+
+
+  "height": 184,
+  "width": 543
+ },
+ {
+  "id": 84,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4022,
+  "y": 1826,
+  "title": "Deploying Lambda functions as .zip file archives\n\n",
+  "text": "[c=#FFD700]Switch[/c]\n\nA switch connects multiple devices within a [c=#FF5733]Local Area Network[/c] (LAN)\nuses [c=#FF5733]MAC addresses[/c] to forward data only to the intended recipient device. \nIt operates at the [c=#FF5733]Data Link Layer[/c] (Layer 2) of the OSI model\nalthough some advanced switches also have capabilities at the Network Layer (Layer 3), enabling routing functions. \n\nUnlike a [c=#00FF7F]hub, which broadcasts incoming data to all connected devices[/c], a switch intelligently directs data packets based on the MAC address table it maintains, improving network efficiency and reducing collisions. \n",
+
+
+  "height": 261,
+  "width": 152
+ },
+ {
+  "id": 85,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -3786,
+  "y": 1813,
+  "title": ".\n\n",
+  "text": "[c=#FFD700]Router[/c]\n\nA router connects multiple networks together and directs data packets between them. \n\nIt operates primarily at the [c=#FF5733]Network Layer[/c] (Layer 3) of the OSI model. \nRouters use [c=#FF5733]IP addresses[/c] to determine the best path for forwarding packets to their destination, enabling communication between different networks, such as between your home network and the internet. \n\nUnlike switches, which work within a LAN, routers manage traffic [c=#00FF7F]between LANs or between LANs and wide area networks (WANs)[/c]. \n\nRouters also provide features like \n1. traffic management\n2. security through [c=#FF5733]firewalls[/c]\n3. [c=#FF5733]network address translation (NAT)[/c] to allow multiple devices to share a single public IP address.",
+
+
+  "height": 300,
+  "width": 187
+ },
+ {
+  "id": 86,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": -4016,
+  "y": 2095,
+  "title": ".\n\n",
+  "text": "How a switch works\n\nApplication Layer:\nweb browser or email client generates data to send.\n\nTransport Layer (TCP):\nThe OS TCP module takes this data and breaks it into manageable chunks called [c=#FF5733]segments[/c]. \nTCP adds headers that include things like sequence numbers, ports, and error-checking info to ensure reliable delivery.\n\nNetwork Layer (IP):\nThese TCP segments are then passed down to IP, which wraps them into [c=#FF5733]IP packets[/c].\n\nData Link Layer (Ethernet frame):\nIP packets are then encapsulated into [c=#FF5733]Ethernet frames[/c], adding MAC addresses, ready to be sent on the local network.\n\nSwitch:\nThe switch just reads the Ethernet frames MAC addresses and forwards the frame to the correct device. [c=#00FF7F]It doesnt look inside to see TCP or IP data — thats all handled by the devices[/c].\n\nSo:\n\nThe sending device is the one that creates the TCP segment.\n\n[c=#00FF7F]The switch only moves frames based on MAC addresses, unaware of TCP or IP content.[/c]",
+
+
+  "height": 392,
+  "width": 212
+ },
+ {
+  "id": 87,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": -3448,
+  "y": 1664,
+  "title": ".\n\n",
+  "text": [
+{
+  "q": "Which of the following are most common network layer models",
+  "options": [
+    "OSI Model",
+    "Hybrid Model",
+    "Proprietary Model",
+    "TCP/IP Model"
+  ],
+  "a": [
+    0,
+    3
+  ],
+  "h": "The OSI is theoretical and TCP/IP is widely used."
+},{
+    "q": "OSI layer acronym",
+    "a": "Please Do Not Throw Sausage Pizza Away",
+    "h": "Physical,Data Link,Network,Transport,Session,Presentation,Application"
+},{
+  "q": "Which three OSI layers are merged into a single layer in the TCP/IP model?",
+  "options": [
+    "Physical, Data Link, Network",
+    "Application, Presentation, Session",
+    "Transport, Network, Data Link",
+    "Session, Transport, Network"
+  ],
+  "a": [
+    1
+  ],
+  "h": "In the TCP/IP model, the Application, Presentation, and Session layers of the OSI model are combined into a single Application layer."
+},{
+    "q": "At which OSI layer does TCP operate?",
+    "options": [
+      "Network Layer",
+      "Transport Layer",
+      "Data Link Layer",
+      "Application Layer"
+    ],
+    "a": [1],
+    "h": "TCP operates at the Transport Layer (Layer 4) of the OSI model, providing reliable end-to-end communication."
   },
   {
-    "id": 4,
+    "q": "At which OSI layer does IP operate?",
+    "options": [
+      "Data Link Layer",
+      "Transport Layer",
+      "Network Layer",
+      "Physical Layer"
+    ],
+    "a": [2],
+    "h": "IP operates at the Network Layer (Layer 3) of the OSI model, handling logical addressing and routing."
+  },  {
+  "q": "Fill in the starting IP address ranges for each IP class: \nClass A: ____ (4) \n Class B ____ (4) \nClass C ____ (4)",
+  "a": [
+    "1.0.0.0",
+    "128.0.0.0",
+    "192.0.0.0"
+  ],
+  "h": "Class A addresses start from 1.0.0.0, Class B from 128.0.0.0, and Class C from 192.0.0.0."
+},
+  {
+    "q": "a) Fill in the private IP address range for Class A: \nFrom: ____ (4)  To: ____ (4)",
+    "a": [
+      "10.0.0.0",
+      "10.255.255.255"
+    ],
+    "h": "The Class A private IP range spans from 10.0.0.0 to 10.255.255.255."
+  },
+  {
+    "q": "b) Fill in the private IP address range for Class B: \nFrom: ____ (4)  To: ____ (4)",
+    "a": [
+      "172.16.0.0",
+      "172.31.255.255"
+    ],
+    "h": "The Class B private IP range spans from 172.16.0.0 to 172.31.255.255."
+  },
+  {
+    "q": "c) Fill in the private IP address range for Class C: \nFrom: ____ (4)  To: ____ (4)",
+    "a": [
+      "192.168.0.0",
+      "192.168.255.255"
+    ],
+    "h": "The Class C private IP range spans from 192.168.0.0 to 192.168.255.255."
+  },{
+  "q": "For a Class C network with a CIDR of /26, how many subnets and usable hosts per subnet are available?",
+  "options": [
+    "4 subnets, 64 usable hosts",
+    "4 subnets, 62 usable hosts",
+    "2 subnets, 126 usable hosts",
+    "64 subnets, 4 usable hosts"
+  ],
+  "a": [
+    1
+  ],
+  "h": "With a /26 subnet mask, 2 bits are borrowed from the host portion of a Class C network (/24), giving 2² = 4 subnets. Each subnet has 64 total IPs, minus 2 for network and broadcast, resulting in 62 usable hosts."
+},{
+  "q": "What is a subnet mask used for in networking?",
+  "options": [
+    "To assign MAC addresses to devices",
+    "To determine which part of an IP address is the network portion and which is the host portion",
+    "To encrypt data during transmission",
+    "To convert IP addresses to domain names"
+  ],
+  "a": [
+    1
+  ]
+},{
+  "q": "Which of the following correctly represent the number of **network bits** for Class A, B, and C IP addresses?",
+  "options": [
+    "Class A: 8 bits",
+    "Class A: 16 bits",
+    "Class B: 16 bits",
+    "Class B: 24 bits",
+    "Class C: 24 bits",
+    "Class C: 8 bits"
+  ],
+  "a": [
+    0,
+    2,
+    4
+  ],
+  "h": "By default: Class A uses 8 network bits (/8), Class B uses 16 network bits (/16), and Class C uses 24 network bits (/24). The remaining bits are used for host addressing."
+},{
+    "q": "At which OSI layer does a standard switch operate?",
+    "options": [
+      "Layer 1 - Physical",
+      "Layer 2 - Data Link",
+      "Layer 3 - Network",
+      "Layer 4 - Transport"
+    ],
+    "a": [1],
+    "h": "A standard switch operates at Layer 2 (Data Link Layer) of the OSI model."
+  },
+  {
+    "q": "What address does a switch use to forward data?",
+    "options": [
+      "IP address",
+      "MAC address",
+      "Port number",
+      "Domain name"
+    ],
+    "a": [1],
+    "h": "A switch uses MAC addresses to forward data to the correct device."
+  },
+  {
+    "q": "How is a switch different from a hub?",
+    "options": [
+      "A switch sends data to all devices",
+      "A switch sends data only to the intended device",
+      "A switch cannot connect devices",
+      "A switch uses IP addresses"
+    ],
+    "a": [1],
+    "h": "Unlike a hub, a switch forwards data only to the intended recipient using its MAC address table."
+  },
+  {
+    "q": "Which advanced feature can a Layer 3 switch perform?",
+    "options": [
+      "Error detection",
+      "MAC address filtering",
+      "Routing between networks",
+      "Signal amplification"
+    ],
+    "a": [2],
+    "h": "Layer 3 switches have routing capabilities, allowing them to operate at the Network Layer."
+  },{
+      "q": "The OS TCP module takes data from an app and breaks it into manageable chunks called TCP ____. ",
+      "a": "segments"
+  },{
+  "q": "Which of the following are key fields included in every TCP segment header?",
+  "options": [
+    "Sequence number",
+    "Source and destination ports",
+    "MAC address",
+    "Checksum"
+  ],
+  "a": [0, 1, 3]
+},{
+    "q": "In Network Layer (IP): These TCP segments are then passed down to IP, which wraps them into ____ (2)",
+    "a": "IP packets"
+},{
+    "q": "Data Link Layer (Ethernet frame): IP packets are then encapsulated into ____ (2)",
+    "a": "Ethernet frames"
+},{
+  "q": "When are MAC addresses added to data during network communication?",
+  "options": [
+    "When data is generated by the application",
+    "When TCP segments are created",
+    "When IP packets are encapsulated into Ethernet frames at the Data Link Layer",
+    "When data is received by the switch"
+  ],
+  "a": [2]
+},{
+    "q": "Switch looks inside to see TCP or IP data to verify data integrity.",
+    "options": ["True", "False"],
+    "a": [1],
+    "h": "The switch reads Ethernet frames MAC addresses and forwards to the correct device. No introspection"
+},{
+  "q": "What does full duplex communication mean?",
+  "options": [
+    "Data can only be sent in one direction at a time",
+    "Data is sent without any errors",
+    "Data is only received but not sent",
+    "Data can be sent and received at the same time"
+  ],
+  "a": [3],
+  "h": "Most modern switches support full duplex communication"
+},
+{
+  "q": "What does a router connect?",
+  "options": [
+    "Devices in the same network",
+    "Different networks",
+    "Devices using MAC addresses",
+    "A single device"
+  ],
+  "a": [1],
+  "h": "A router connects different networks and routes data between them."
+},{
+  "q": "What do routers use to decide the best path for forwarding packets?",
+  "options": [
+    "MAC addresses",
+    "IP addresses",
+    "Port numbers",
+    "Domain names"
+  ],
+  "a": [1],
+  "h": "Routers use IP addresses to determine the best path to forward packets to their destination."
+},{
+  "q": "Which of the following are features commonly provided by routers?",
+  "options": [
+    "Traffic management",
+    "Firewalls",
+    "Data encryption",
+    "Network Address Translation (NAT)"
+  ],
+  "a": [0, 1, 3]
+}
+
+
+
+
+  ],
+
+
+  "height": 200,
+  "width": 200
+ },
+ {
+  "id": 88,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 81,
+  "y": 48,
+  "title": ".",
+  "text": "network",
+  "gotoid": "78"
+
+
+ },{
+    "id": 89,
     "type": "bubble",
     "style": {
-      "default": "bubble"
+        "default": "bubble"
     },
-    "x": 597,
-    "y": 588,
-    "title": ".",
-    "text": "Uploading⬆️\n\n🚩uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
-    "calculatedX": 594,
-    "calculatedY": 596,
-    "height": 107,
-    "width": 165,
-    "tag": [
-      "s3,basic"
-    ]
-  },
+    "x": 6207,
+    "y": 846,
+    "title": ".\n\n",
+    "text": "A Lambda layer is a .zip file archive that contains supplementary code or data.\n\nReasons why you might consider using layers:\n\nTo [c=#00FF7F]reduce the size of your deployment packages[/c]. Instead of including all of your function dependencies along with your function code in your deployment package, put them in a layer. This keeps deployment packages small and organized.\n\nTo [c=#00FF7F]separate core function logic from dependencies[/c]. separation of concerns for updates or logic change\n\nTo [c=#00FF7F]share dependencies across multiple functions[/c]. \nAfter you create a layer, you can apply it to any number of functions in your account\n\nTo use the [c=#FF5733]Lambda console code editor[/c]. you [c=#00FF7F]cant use the editor if your deployment package size is too large[/c]. Using layers reduces your package size and can unlock usage of the code editor.\n\nTo lock an [c=#FF5733]embedded SDK version[/c]. \nThe embedded SDKs may change without notice as AWS releases new services and features. You can [c=#00FF7F]lock a version of the SDK[/c] by creating a Lambda layer with the specific version needed. \n\nembedded SDK version is a collection of libraries that allow your code to interact with AWS services (like S3, DynamoDB, etc.). For example, in Node.js, its the aws-sdk package.\n[c=#00FF7F]AWS pre-packages a version of the AWS SDK in the Lambda runtime environment[/c] (e.g., Node.js, Python). This means your Lambda function code can use the SDK without including it in your deployment package — its already there.\n\n[c=#FF5733]For Go and Rust[/c] [c=#00FF7F]we recommend against using layers[/c]. For Go and Rust , executable includes your compiled function code along with all of its dependencies. this forces to manually load additional assemblies during the initialization phase, which can increase cold start times. For optimal performance for Go and Rust functions, [c=#00FF7F]include your dependencies along with your deployment package[/c].\n\nWhen you add a layer to a function, Lambda extracts the layer contents into the [c=#FF5733]/opt[/c] directory in your functions execution environment.\nYou can include up to [c=#FF5733]five layers per function[/c]. \nyou can [c=#00FF7F]use layers only with Lambda functions deployed as a .zip file archive[/c]\n\nFor functions defined as a [c=#FF5733]container image[/c], [c=#00FF7F]package your preferred runtime and all code dependencies when you create the container image[/c]\n\nA [c=#FF5733]layer version[/c] is an immutable snapshot of a specific version of a layer. A new layer creates a new layer version with a version number of 1. Each time you publish an update to the layer, Lambda increments the version number and creates a new layer version.\n\nEvery [c=#00FF7F]layer version is identified by a unique Amazon Resource Name (ARN)[/c]. When adding a layer to the function, [c=#00FF7F]you must specify the exact layer version[/c] you want to use (for example, arn:aws:lambda:us-east-1:123456789012:layer:my-layer:1).",
+
+
+    "height": 587,
+    "width": 368
+},{
+    "id": 90,
+    "type": "quiz",
+    "style": {
+        "default": "quiz"
+    },
+    "x": 6643,
+    "y": 872,
+    "title": "Lambda Layer qa.\n\n",
+    "text": [
+    {"q": "A Lambda layer is a ____ file archive that contains supplementary code or data.",
+  "a": ".zip"},
   {
-    "id": 5,
+  "q": "Which of the following are common contents of a Lambda layer?",
+  "options": [
+    "Library dependencies",
+    "Source code of the Lambda function",
+    "Custom runtime",
+    "Configuration files"
+  ],
+  "a": [0, 2, 3]
+},{
+    "q": "A runtime is a program that runs a Lambda functions ____ (2) when the function is invoked",
+    "a": ["handler method"]
+},{
+  "q": "Which of the following are reasons to use AWS Lambda layers?",
+  "options": [
+    "To reduce the size of your deployment packages",
+    "To automatically update the embedded SDK version",
+    "To separate core function logic from dependencies",
+    "To share dependencies across multiple functions",
+    "To use the Lambda console code editor for large deployment package"
+  ],
+  "a": [0, 2, 3, 4]
+},{
+  "q": "What is an embedded SDK version in the context of AWS Lambda?",
+  "options": [
+    "A custom runtime created by the user to run Lambda functions",
+    "The specific version of the Lambda function code deployed",
+    "The operating system version running on the Lambda infrastructure",
+    "A collection of libraries included in the Lambda runtime that allows your code to interact with AWS services"
+  ],
+  "a": [3]
+},{
+    "q": "AWS pre-packages a version of the AWS SDK in the Lambda runtime environment",
+    "options": ["True", "False"],
+    "a": [0]
+},{
+    "q": "The embedded SDKs for lambda environment must be updated manually.",
+    "options": ["True", "False"],
+    "a": [1],
+    "h": "The embedded SDKs may change without notice as AWS releases new services and features. \n Lock a version of the SDK by creating a Lambda layer with the specific version needed."
+},{
+    "q": "For Go and Rust we recommend using layers for reducing deployment package size.",
+    "options": ["True", "False"],
+    "a": [1],
+    "h": "Dependencies in a layer forces your function to manually load additional assemblies during the initialization phase, which can increase cold start times"
+},{
+    "q": "For Go and Rust include your dependencies as ",
+    "options": ["As Lambda Layers", "Along with your deployment package"],
+    "a": [1]
+},{
+    "q": "When you add a layer to a function, Lambda extracts the layer contents into the ____ directory in your functions execution environment.",
+    "a": ["/opt"]
+},{
+    "q": "You can include up to ____ layers per function.",
+    "a": ["five"]
+},{
+  "q": "You can use layers only with Lambda functions deployed as a ?.",
+  "options": [
+    "Lambda functions triggered by S3 events only",
+    "Lambda functions deployed as a .zip file archive",
+    "Functions defined as a container image",
+    "Lambda functions using Amazon EventBridge only"
+  ],
+  "a": [1]
+},{
+    "q": "For functions defined as a container image, package your preferred runtime and all code dependencies when you create the ____ (2) .",
+    "a": ["container image"]
+},{
+    "q": "Every layer version is identified by a unique Amazon Resource Name (ARN).",
+    "a": "arn:aws:lambda:us-east-1:123456789012:layer:my-layer:1"
+},{
+  "q": "What version must you specify when adding a layer to an AWS Lambda function?",
+  "options": [
+    "By default latest layer is picked",
+    "The exact layer version must be provided",
+    "Specifying version is optional"
+  ],
+  "a": [1]
+}
+    ],
+    "links": ["https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html"],
+
+
+    "height": 200,
+    "width": 200
+},{
+    "id": 91,
     "type": "bubble",
     "style": {
-      "default": "bubble"
+        "default": "bubble"
     },
-    "x": 537,
-    "y": 809,
-    "title": ".",
-    "text": "[color=#f1fa8c]SSE server💻 side encryption🔐[/color]\n\n🟩Amazon S3 managed keys (SSE-S3) is the default🙋‍♂️ encryption configuration\n\nAmazon S3 managed keys [color=#f1fa8c](SSE-S3)[/color]\nAWS KMS [color=#f1fa8c](SSE-KMS)[/color]\nAWS KMS keys [color=#f1fa8c](DSSE-KMS)[/color] : dual-layer server-side encryption\n\n[color=#f1fa8c](SSE-C)[/color] : customer-provided keys",
-    "calculatedX": 534,
-    "calculatedY": 817,
-    "height": 161,
-    "width": 164,
-    "tag": [
-      "s3,basic"
-    ]
-  },
-  {
-    "id": 7,
-    "type": "bubble",
+    "x": 5401,
+    "y": 1126,
+    "title": "Lambda execution environment lifecycle.\n\n",
+    "text": "qa:[g=92]qa[/g]\nLambda L invokes your function f in an execution environment\nIt provides a secure and isolated runtime rt environment\n\nThe f's rt communicates with L using the [c=#FF5733]Runtime API[/c]. \nExtensions E communicate with L using the [c=#FF5733]Extensions API[/c]. \nE can receive log messages, other telemetry from f using the [c=#FF5733]Telemetry API[/c].\n\nAn E helps integrate with your preferred monitoring, observability, security, and governance tools.\ne.g. [c=#FF5733]Datadog[/c]\n\nA phase starts with an event that L sends to rt and to all registered extensions. \nThe rt and each E indicate completion by sending a [c=#FF5733]Next API request[/c]\n\n[c=#FF5733]Init phase[/c]\n1. Start all extensions (Extension init)\n2. Bootstrap the runtime (Runtime init)\n3. Run the function's static code (Function init)\n\nIf all [c=#00FF7F]3 tasks do not complete within 10 seconds[/c], L retries Init phase during first function invocation with the configured function timeout.\nNotable exceptions: Lambda snap start, provisioned concurrency\n\n[c=#FF5733]Invoke phase[/c]\nWhen a Lf is invoked in response to a Next API request, L sends an Invoke event to the rt and to each E.\n\nThe f's timeout setting limits the duration of the entire Invoke phase. \nIf you set the f timeout as 360 seconds, the f and all E need to complete within 360 seconds. Note that there is no independent post-invoke phase. [c=#00FF7F]The duration is the sum of all invocation time (runtime + extensions) and is not calculated until the function and all extensions have finished executing.[/c] #basically they all have to call Next\nThe invoke phase ends after the runtime and all extensions signal that they are done by sending a Next API request.\n\n\n[c=#FF5733]Failures during the invoke phase[/c]\nIf the Lf crashes or times out during the Invoke phase, Lambda resets the execution environment. \nThe reset behaves like a Shutdown event. \nFirst, L shuts down the rt, then sends a Shutdown event to each registered external E. \nThe event includes the reason for the shutdown. \nIf this environment is used for a new invocation, Lambda re-initializes the E and rt together with the next invocation.\nNote that the [c=#00FF7F]Lambda reset does not clear the /tmp directory content prior to the next init phase[/c]. This behavior is consistent with the regular shutdown phase.\n\n\n[c=#FF5733]Shutdown phase[/c]\nWhen L is about to shut down the runtime, it sends a Shutdown event to each registered external E. \nE can use this time for final cleanup tasks. \nThe Shutdown event is a response to a Next API request.\n\nDuration limit: The maximum duration of the Shutdown phase depends on the configuration of registered extensions:\n0 ms – A function with no registered extensions\n500 ms – A function with a registered internal extension\n2,000 ms – A function with one or more registered external extensions\nIf the runtime or an extension does not respond to the Shutdown event within the limit, Lambda ends the process using a [c=#FF5733]SIGKILL signal[/c].\n\n[c=#FF5733]Lambda freeze[/c] - The environment maybe frozen for anticipated next call. When the function is invoked again, Lambda thaws the environment for reuse\nDuring freeze\nObjects declared outside of the function's handler method remain initialized\n/tmp directory content remains when the execution environment is frozen\n\n\n[c=#FF5733]Background process[/c]\n[c=#00FF7F]processes or callbacks that were initiated by Lf and did not complete when the f ended resume if L reuses the E environment[/c]. Make sure that any background processes or callbacks in your code are complete before the code exits.\n",
+
+
+    "height": 708,
+    "width": 543
+},{
+    "id": 92,
+    "type": "quiz",
     "style": {
-      "default": "bubble"
+        "default": "quiz"
     },
-    "x": 299,
-    "y": 999,
-    "title": ".",
-    "text": "table\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"6\" style=\"border-collapse: collapse; width: 100%;\">\n  <thead>\n    <tr>\n      <th></th>\n      <th>Customer managed keys</br>Not SSE-C</th>\n      <th>AWS managed keys</th>\n      <th>AWS owned keys</th>\n    </tr>\n    <tr>\n      <th>cross account</th>\n      <th>Cross account NOT<blink>❌</blink>region</th>\n      <th>No</th>\n      <th>Cross account/region🌍</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Key policy</strong></td>\n      <td>Exclusively controlled by the customer</td>\n      <td>Controlled by service; viewable by customer</td>\n      <td>Exclusively controlled and only viewable by the AWS service that encrypts your data</td>\n    </tr>\n    <tr>\n      <td><strong>Logging</strong></td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>CloudTrail customer trail or event data store</td>\n      <td>Not viewable by the customer</td>\n    </tr>\n    <tr>\n      <td><strong>Lifecycle management</strong></td>\n      <td>Customer manages rotation🔄, deletion🗑️ and Regional location📍</td>\n      <td>AWS KMS manages rotation (annual), deletion, and Regional location</td>\n      <td>AWS service manages rotation, deletion, and Regional location</td>\n    </tr>\n    <tr>\n      <td><strong>Pricing</strong></td>\n      <td>\n        Monthly fee for existence of keys (pro-rated hourly).<br>\n        Also charged for key usage\n      </td>\n      <td>\n        No monthly fee; but the caller is charged for API usage on these keys\n      </td>\n      <td>No charges to customer🎁</td>\n    </tr>\n  </tbody>\n</table>\n",
-    "calculatedX": 296,
-    "calculatedY": 1007,
-    "height": 308,
-    "width": 578,
-    "tag": [
-      "s3,basic"
-    ]
-  },
-  {
-    "id": 8,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 188,
-    "y": 1393,
-    "title": ".",
-    "text": "[color=#f1fa8c]S3 static website[/color]\n>⚠️Amazon S3 website endpoints do not❌ support HTTPS or access points, \nuse  \n  >[color=#f1fa8c]AWS Amplify Hosting [/color] or \n  >Amazon CloudFront\n\n>Website endpoints(return [color=#50fa7b]HTML[/color]) are different from the endpoints REST API requests(return [color=#50fa7b]XML[/color])\n\n>instead of website endpoints use domain registered with [color=#f1fa8c]Amazon Route 53\nor DNS CNAME[/color] of your own registered domain name",
-    "calculatedX": 185,
-    "calculatedY": 1401,
-    "height": 196,
-    "width": 206,
-    "tag": [
-      "s3",
-      "static",
-      "website"
-    ]
-  },
-  {
-    "id": 9,
-    "type": "goto",
-    "style": {
-      "default": "goto"
-    },
-    "x": 104,
-    "y": -6,
-    "title": ".",
-    "text": "static",
-    "gotoid": "8",
-    "calculatedX": 101,
-    "calculatedY": 2
-  },
-  {
-    "id": 10,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 196,
-    "y": 1678,
-    "title": ".",
-    "text": "[color=#f1fa8c]replication[/color]\n\n1. Live ( ⚠️wont replicate object before setting enabled )\n  a. Cross-Region Replication (CRR)\n  b. Same-Region Replication (SRR)\n2. Ondemand\n\n[color=#50fa7b]bi-directional replication[/color]  is a special type of CRR with 2way sync\n\nsource and destination buckets must have [color=#50fa7b]versioning[/color] enabled.\n\n👌Replica can be in a different storage class\n\nsource: enable both source/target region\ntarget: enable target region ",
-    "calculatedX": 193,
-    "calculatedY": 1686,
-    "height": 197,
-    "width": 339,
-    "tag": [
-      "s3",
-      "replication"
-    ]
-  },
-  {
-    "id": 11,
-    "type": "goto",
-    "style": {
-      "default": "goto"
-    },
-    "x": 155,
-    "y": -8,
-    "title": ".",
-    "text": "replication",
-    "gotoid": "10",
-    "calculatedX": 152,
-    "calculatedY": 0
-  }
+    "x": 6600,
+    "y": 1399,
+    "title": ".\n\n",
+    "text": [
+    {
+    "q": "Lambda invokes your function in an ____ environment",
+    "a": ["execution"]
+},{
+  "q": "What does the Lambda execution environment provide?",
+  "options": [
+    "Shared and persistent storage",
+    "A secure and isolated runtime environment",
+    "Direct hardware access",
+    "Unlimited runtime duration"
+  ],
+  "a": [1],
+  "h": "The Lambda execution environment is designed to be secure and isolated, ensuring each function runs independently."
+},{
+  "q": "Which of the following are main APIs used by AWS Lambda",
+  "options": [
+    "Runtime API",
+    "Telemetry API",
+    "Lifecycle API",
+    "Extensions API"
+  ],
+  "a": [0, 1, 3],
+  "h": "Lambda supports the Runtime API, Extensions API, and Telemetry API for function and extension communication."
+},{
+    "q": "The functions ____ communicates with   ____ using the Runtime API", "a": ["runtime", "lambda"]
+  },{
+      "q": "A runtime provides a ____ (2) environment  that relays invocation events, context information, and responses between Lambda and the function.", "a": ["language specific"]
+  },{
+  "q": "What are common use cases for AWS Lambda extensions?",
+  "options": [
+    "Adding more monitoring and observability capabilities to Lambda functions",
+    "Improving Lambdas VPC networking performance",
+    "Integrating with security and governance tools",
+    "Reducing Lambda execution cost"
+  ],
+  "a": [0, 2],
+  "h": "Use AWS managed extensions or partners such as Datadog or custom extensions to enable extra capabilities."
+},{
+  "q": "Which API do Lambda extensions use to communicate with the Lambda service?",
+  "options": [
+    "Runtime API",
+    "Telemetry API",
+    "Extensions API",
+    "Execution API"
+  ],
+  "a": [2]
+},{
+  "q": "Which API allows Lambda extensions to receive log messages and telemetry from the function?",
+  "options": [
+    "Runtime API",
+    "Telemetry API",
+    "Extensions API",
+    "Logging API"
+  ],
+  "a": [1],
+  "h": "Extensions can receive log messages and other telemetry from the function by using the Telemetry API"
+},{
+  "q": "Each phase in Lambda starts with an event that Lambda sends to the ____ and all ____ (2)",
+  "a": ["runtime", "registered extensions"]
+},{
+  "q": "Each phase in Lambda ends with the runtime and each extension indicating completion by sending a ____ API request",
+  "a": ["Next"]
+},{
+  "q": "Lambda ____ the execution environment when the runtime and each extension have completed and there are no pending events.",
+  "a": ["freezes"]
+},{
+  "q": "Which tasks are performed by AWS Lambda during the Init phase?",
+  "options": [
+    "Start all extensions (Extension init)",
+    "Process the function invocation event",
+    "Bootstrap the runtime (Runtime init)",
+    "Run the function's static code (Function init)",
+    "Send the function response"
+  ],
+  "a": [0, 2, 3],
+  "h": "During the Init phase, Lambda starts all extensions, bootstraps the runtime, and runs the function’s static initialization code. \n static initialization is the initialization code outside of the main handler\n. Processing invocation events and sending responses happen later."
+},{
+  "q": "What is the time limit for the Init phase in AWS Lambda?",
+  "options": [
+    "5 seconds",
+    "10 seconds",
+    "30 seconds",
+    "60 seconds"
+  ],
+  "a": [1],
+  "h": "The Init phase is limited to 10 seconds to ensure fast startup."
+},{
+  "q": "What happens if the Init phase tasks do not complete within 10 seconds?",
+  "options": [
+    "Lambda terminates the function immediately",
+    "Lambda retries the Init phase during the first function invocation with the configured function timeout",
+    "Lambda skips the Init phase and continues to invocation",
+    "Lambda increases the Init phase timeout automatically"
+  ],
+  "a": [1],
+  "h": "If the Init phase doesn’t finish within 10 seconds, Lambda retries it during the first invocation, using the function’s configured timeout."
+},{
+  "q": "In AWS Lambda, the total invocation duration includes which of the following?",
+  "options": [
+    "Only the runtime execution time",
+    "Only the extensions execution time",
+    "The sum of runtime and extensions execution times",
+    "Only the function's handler execution time"
+  ],
+  "a": [2],
+  "h": "Invocation time is not calculated until the function and all extensions have finished executing. \n The invoke phase ends after the runtime and all extensions signal that they are done by sending a Next API request."
+},{
+    "q": "If the Lambda function crashes or times out during the Invoke phase, Lambda ____ the execution environment which behaves like a ____ event. ",
+    "a": [ "resets", "shutdown" ]
+},{
+  "q": "When Lambda is about to shut down the runtime, it sends a ____ event to each registered external extension.",
+  "a": ["shutdown"]
+},{
+  "q": "What determines the maximum duration of the Shutdown phase in AWS Lambda?",
+  "options": [
+    "The functions timeout setting",
+    "The number of concurrent invocations",
+    "The configuration of registered extensions",
+    "The size of the deployment package"
+  ],
+  "a": [2],
+  "h": "option 1 is not correct because the Shutdown phase happens after the invocation ends, when Lambda is cleaning up the execution environment."
+},{
+  "q": "Match the type of Lambda function extensions with their corresponding Shutdown phase maximum duration.\nA: A function with no registered extensions\nB: A function with a registered internal extension\nC: A function with one or more registered external extensions\nAnswers:\n1: 500 ms\n2: 2,000 ms\n0: 0 ms\n",
+  "options": [
+    "A-2 B-0 C-1",
+    "A-0 B-1 C-2",
+    "A-1 B-2 C-0",
+    "A-0 B-2 C-1"
+  ],
+  "a": [0],
+  "h": "Correct matches are: no registered extensions - 2,000 ms; internal extension - 0 ms; external extensions - 500 ms."
+},{
+  "q": "What happens if the runtime or an extension does not respond to the Shutdown event within the allowed time?",
+  "options": [
+    "Lambda retries the Shutdown event",
+    "Lambda ends the process using a SIGKILL signal",
+    "Lambda extends the shutdown timeout automatically",
+    "Lambda pauses the function until response is received"
+  ],
+  "a": [1],
+  "h": "If the runtime or an extension doesn’t respond in time, Lambda forcibly ends the process using a SIGKILL signal."
+},{
+  "q": "What does AWS Lambda do after the function and all extensions have completed execution?",
+  "options": [
+    "Immediately shuts down the execution environment",
+    "Usually maintains the execution environment for some time in anticipation of another invocation",
+    "Clears all temporary storage and logs",
+    "Terminates all registered extensions"
+  ],
+  "a": [1],
+  "h": "Lambda keeps the execution environment alive briefly after completion to speed up subsequent invocations."
+},{
+  "q": "When AWS Lambda reuses a frozen execution environment for a new invocation, which of the following statements are true?",
+  "options": [
+    "Objects declared outside the handler remain initialized and can optimize subsequent invocations",
+    "The /tmp directory is cleared and starts empty for every invocation",
+    "Background processes or callbacks initiated but not completed resumes"
+  ],
+  "a": [0, 2],
+  "h": "if your Lambda function establishes a database connection, the original connection is used in subsequent invocations. \n Instead add logic in code to be completely safe"
+}
+    ],
+
+
+    "height": 200,
+    "width": 200
+}
+
 ]

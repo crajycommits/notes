@@ -1,0 +1,245 @@
+[
+  {
+    "id": 0,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 284,
+    "y": 128,
+    "title": ".",
+    "text": "[s=24]kernel[/s]\nA central software that manages [s=24]👨🏻‍💼[/s] \nand allocates computer resources \n(i.e., the CPU, RAM, and devices).",
+
+
+    "height": 140,
+    "width": 274
+  },
+  {
+    "id": 1,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 697,
+    "y": 137,
+    "title": ".",
+    "text": "accompanying standard software tools,\nsuch as \nbrowsers 🌍\ncommand-line interpreters 📟\ngraphical user interfaces 📱\nfile utilities📄\neditors",
+
+
+    "height": 200,
+    "width": 200
+  },
+  {
+    "id": 2,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "34px"
+    },
+    "x": 603,
+    "y": 206,
+    "title": ".",
+    "text": "+",
+
+
+    "height": 64,
+    "width": 28
+  },
+  {
+    "id": 3,
+    "type": "bubble",
+    "style": {
+      "default": "bubble",
+      "font-size": "32px"
+    },
+    "x": 957,
+    "y": 199,
+    "title": ".",
+    "text": "=",
+
+
+    "height": 200,
+    "width": 200
+  },
+  {
+    "id": 4,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1013,
+    "y": 209,
+    "title": ".",
+    "text": "Operating System",
+
+
+    "height": 52,
+    "width": 143
+  },
+  {
+    "id": 5,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 101,
+    "y": 262,
+    "title": ".",
+    "text": "The Linux kernel executable typically resides at the pathname \n\n   [s=24]🪑/boot/vmlinuz[/s]",
+
+
+    "height": 132,
+    "width": 258
+  },
+  {
+    "id": 6,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 166,
+    "y": 420,
+    "title": ".",
+    "text": "CPU MODES - [s=24]🖥️[/s]\n\nKernel mode and user mode\n\nKernel mode or supervisor mode\n[s=24]💪[/s]\n\nUser mode\n[s=24]🚫[/s]\nCan access what is allowed",
+
+
+    "height": 266,
+    "width": 242
+  },
+  {
+    "id": 7,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 558,
+    "y": 396,
+    "title": ".",
+    "text": "What is the use of being a [s=24]process 😩[/s]\n\nWhen will i get scheduled\nWhere am i in RAM\nHow can i talk to my friends\nWhen will i get the signals\nWhen will i get the CPU time\nI cannot even talk to devices directly\nI cannot even create my own child process\n\nOnly [s=32]KERNEL[/s] knows",
+
+
+    "height": 292,
+    "width": 340
+  },
+  {
+    "id": 8,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 434,
+    "y": 461,
+    "title": ".",
+    "text": "    ...\n[s=48]➡️[/s]\n    ...\n",
+
+
+    "height": 116,
+    "width": 73
+  },
+  {
+    "id": 9,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1201,
+    "y": 337,
+    "title": ".",
+    "text": "[s=32]🐚SHELL🌊[/s]\n\nlogin shell denotes a process created to run a shell when the user first logs in .\n\nBourne shell (sh) 👶 - Oldest and widely used\n\nC shell (csh) - Not so portable. no backward compatible\n\nKorn shell (ksh) 🌽 - backward compatible\n\nBourne again shell (bash) 👶 🔁-reimplementation of the Bourne shell. Most widely used shell in linux",
+
+
+    "height": 279,
+    "width": 686,
+    "show": true
+  },
+  {
+    "id": 10,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 992,
+    "y": 447,
+    "title": ".",
+    "text": "    ...\n[s=48]➡️[/s]\n    ...\n",
+
+
+    "height": 141,
+    "width": 102
+  },
+  {
+    "id": 11,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1180,
+    "y": 762,
+    "title": ".",
+    "text": "Every user [s=24]🙍🏻‍♂️[/s] has a unique user name and UID \nit is in [s=24]/etc/passwd[/s]\n\nThis file also has\nGroup ID 👨‍👨‍👦‍👦: the numeric group ID of the [s=24]first[/s] of the groups of which the user is a\nmember.\n\nHome [s=24]🏠[/s] directory: the initial directory into which the user is placed after logging in.\n\nLogin [s=24]🔐[/s] shell: the name of the program to be executed to interpret user commands",
+
+
+    "height": 304,
+    "width": 628
+  },
+  {
+    "id": 12,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1285,
+    "y": 615,
+    "title": ".",
+    "text": "...\n[s=48]⬇️[/s]\n...",
+
+
+    "height": 130,
+    "width": 84
+  },
+  {
+    "id": 13,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 778,
+    "y": 740,
+    "title": ".",
+    "text": "[s=24]superuser 💪[/s]\n\nuser ID 0\ntypical login name root. [s=24]🪵[/s]\n\nsuperuser can access any file in the system\nsend signals to any user process in the system\nso on and so forth",
+
+
+    "height": 220,
+    "width": 347
+  },
+  {
+    "id": 14,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 626,
+    "y": 815,
+    "title": ".",
+    "text": "...\n[s=48]⬅️[/s]\n...",
+
+
+    "height": 132,
+    "width": 97
+  },
+  {
+    "id": 15,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1829,
+    "y": 785,
+    "title": ".",
+    "text": "[s=24]groups 👨‍👨‍👦‍👦[/s]\n\nEach group is identified by a single line in the system group file, [s=32]/etc/group[/s]\n\nGroup name: unique name of the group.\n\nGroup ID (GID): the numeric ID\n\nUser list: comma separated line of users. Primary group listed in [s=24]/etc/passwd[/s]",
+
+
+    "height": 271,
+    "width": 596
+  }
+]

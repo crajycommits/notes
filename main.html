@@ -290,6 +290,15 @@
   filter: brightness(100%);
   opacity: 1;
 }
+.inline-link {
+    display: inline-block;
+    background-color: #9CDCFE; /* Match overall background */
+    color: #1F1F1F;            /* Match overall text color */
+    text-decoration: none;
+    border-radius: 2px;
+    font-family: "Arial Black", "Arial Bold";
+}
+
 
     </style>
 </head>
@@ -591,10 +600,10 @@ function maximizequiz(resizer_obj){
     resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
     resizer_obj.style.overflow = "visible"; // Show content beyond box
     //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
-    resizer_obj.style.width = "75vw";
-    resizer_obj.style.height = "75vh";
-    resizer_obj.style.maxWidth = "75vw";
-    resizer_obj.style.maxHeight = "75vh";
+    resizer_obj.style.width = "35vw";
+    resizer_obj.style.height = "35vh";
+    resizer_obj.style.maxWidth = "35vw";
+    resizer_obj.style.maxHeight = "35vh";
     observer.unobserve(resizer_obj);
 }
 
@@ -1584,6 +1593,11 @@ function createOptionsQuestion(question) {
         // Goto button: [g=123]Click me[/g]
         text = text.replace(/\[g=(\d+)\]([\s\S]*?)\[\/g\]/g, (_, nodeId, content) => {
         return `<span class="goto-button" onclick="callGoToNode(${nodeId})">${content}</span>`;
+        });
+
+        // External links: [a=https://example.com]Text[/a]
+        text = text.replace(/\[a=([^\]]+)\]([\s\S]*?)\[\/a\]/g, (match, linkTarget, content) => {
+        return `<a class="inline-link" href="${linkTarget}" target="_blank" rel="noopener noreferrer">${content}</a>`;
         });
 
         return text;

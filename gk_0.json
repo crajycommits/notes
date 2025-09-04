@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1344,
+    "y": 286,
+    "title": ".",
+    "text": "[s=28]🗿[/s] - Discovered in 1799 near the town of Rosetta (Rashid) in Egypt by French soldiers during Napoleons campaign\nHieroglyphics – the formal writing system used by ancient Egyptian priests.\nDemotic – the common script of daily Egyptian writing at the time.\nAncient Greek – the language of administration under the Ptolemaic dynasty.\n\nBecause scholars could read Ancient Greek, the Rosetta Stone provided the critical key to finally understanding Egyptian hieroglyphs, which had been undeciphered for centuries.",
+    "height": 161,
+    "width": 325
+  },
+  {
+    "id": 0,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 0,
+    "y": 0,
+    "title": ".",
+    "text": "rosetta",
+    "gotoid": "1",
+    "height": 68,
+    "width": 100
+  },
+  {
+    "id": 2,
+    "type": "bubble",
+    "style": {
+      "default": "bubble"
+    },
+    "x": 1266,
+    "y": 1269,
+    "title": "Alexander III of Macedon",
+    "text": "[c=#f1fa8c]Darius III and Alexander the Great[/c]\n\n[c=#50fa7b]Battle of Issus (333 BC):[/c]\nThis was the first major encounter between Alexander and Darius. \nDarius's forces were significantly larger than Alexander's, potentially by a 2 to 1 ratio or more. \n\n[c=#50fa7b]Battle of Gaugamela (331 BC):[/c]\nAlexander the Great visited the Oracle of Amun at the [a=https://en.wikipedia.org/wiki/Siwa_Oasis]Siwa[/a] Oasis in Egypt in February/March 331 BCE. His motivations for this challenging desert journey were to legitimise his rule by tracing his lineage to the Egyptian god Amun\n\n[c=#50fa7b]Battle of Gaugamela (331 BC):[/c]\nFought on a large flat plain\nAlexander employed slanted formation, lured Darius's forces into a trap, aiming to break through the center and target Darius directly. \n",
+
+
+    "height": 230,
+    "width": 227
+  },
+  {
+    "id": 3,
+    "type": "goto",
+    "style": {
+      "default": "goto"
+    },
+    "x": 0,
+    "y": 40,
+    "title": ".",
+    "text": "Alexander",
+    "gotoid": "2"
+  }
+]

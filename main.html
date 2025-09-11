@@ -102,7 +102,7 @@
         position: relative;
         white-space: pre-wrap;
         border-radius: 0px;
-        padding: 0px 0px;
+        padding: 2px 2px;
         background: #1F1F1F;
         color: #9CDCFE;
         //font-family: 'Comic Sans MS', cursive;
@@ -151,6 +151,7 @@
         }
         .quiz-selected {
         border-color: #ec971f;     /* deeper orange */
+        background-color: #3b2a1f;   /* subtle dark orange-brown highlight */
         }
         .quiz-controls {
         margin-top: 20px;
@@ -1279,7 +1280,11 @@ function createOptionsQuestion(question) {
             btn.style.whiteSpace = 'pre-wrap';
             btn.className = 'quiz-option';
             btn.innerHTML = opt;
-            btn.onclick = () => {
+            // Make div focusable via tab
+            btn.setAttribute('tabindex', '0');
+            btn.setAttribute('role', 'button'); // Optional: For screen readers
+            // ✅ Shared handler for mouse & keyboard
+            const toggleSelection = () => {
                 submitBtn.classList.remove('quiz-incorrect');
                 if (btn.classList.contains('quiz-selected')) {
                     btn.classList.remove('quiz-selected');
@@ -1289,6 +1294,16 @@ function createOptionsQuestion(question) {
                     selected.add(index);
                 }
             };
+        // ✅ Mouse click
+        btn.onclick = toggleSelection;
+
+        // ✅ Keyboard: Enter or Space
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault(); // Prevent scrolling on space
+                toggleSelection();
+            }
+        });
             optionButtons.push(btn);
             optionsContainer.appendChild(btn);
         });
@@ -1419,12 +1434,27 @@ function createOptionsQuestion(question) {
         })
         return u
     }
-    function setHandleText(e, title){
+    function setHandleText(e, data){
+        console.log(data)
+        title = null
+        if ("last_visited" in data){
+            // Get today's date
+            const today = new Date();
+            // Parse last_visited date
+            const lastVisited = new Date(data.last_visited);
+            // Calculate difference in milliseconds
+            const diffInMs = today - lastVisited;
+            // Convert milliseconds to days
+            const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+            title = `${diffInDays}day${diffInDays > 0 ? 's' : ''}:` + data.title;
+        } else {
+            title = data.title
+        }
         e.textContent = title ? title : '.'
     }
-    function createHandle(title, parent_id){
+    function createHandle(data, parent_id){
         handle = document.createElement("div")
-        setHandleText(handle, title)
+        setHandleText(handle, data)
         handle.setAttribute("item_sub_type", "handle");
         handle.setAttribute("parent_id", parent_id);
         handle.classList.add("handle");
@@ -1469,7 +1499,7 @@ function createOptionsQuestion(question) {
         quizApp.start();
     }
     function createQuiz(data, parent_id){
-        handle = createHandle(data.title, parent_id)
+        handle = createHandle(data, parent_id)
         quizData = data.text
         const new_element = document.createElement('div')
         const quizButton = document.createElement('button');
@@ -1487,7 +1517,7 @@ function createOptionsQuestion(question) {
         return {handle: handle, element: new_element}
     }
     function createGoto(data, parent_id){
-        handle = createHandle(data.title, parent_id)
+        handle = createHandle(data, parent_id)
         const new_element = document.createElement('div')
         new_element.innerHTML = data.text
         new_element.style.position = 'relative'
@@ -1499,7 +1529,7 @@ function createOptionsQuestion(question) {
         return {handle: handle, element: new_element}
     }
     function createImg(data, parent_id){
-        handle = createHandle(data.title, parent_id)
+        handle = createHandle(data, parent_id)
         const new_element = document.createElement('img')
         new_element.src = images[data.name]
         new_element.style.position = 'relative'
@@ -1511,7 +1541,7 @@ function createOptionsQuestion(question) {
         return {handle: handle, element: new_element}
     }
     function createLink(data, parent_id){
-        handle = createHandle(data.title, parent_id)
+        handle = createHandle(data, parent_id)
         const new_element = document.createElement('a')
         new_element.href = data.href
         new_element.textContent = data.text
@@ -1708,7 +1738,7 @@ function createOptionsQuestion(question) {
 
 
     function createBubble(data, parent_id){
-        handle = createHandle(data.title, parent_id)
+        handle = createHandle(data, parent_id)
         const new_element = document.createElement('div')
         //new_element.textContent = decodeHtmlEntity(data.text)
         //setBubbleData( new_element, 'Hello [size=24] abc [/size] def ghi [size=24] def [/size]' )
@@ -1893,7 +1923,7 @@ function createOptionsQuestion(question) {
             if ( item.id == id ){ 
                 item.title = txt; e=document.getElementById(id)
                 let handle = e.querySelectorAll('[item_sub_type="handle"]')[0]
-                setHandleText(handle, txt)
+                setHandleText(handle, item)
             }
         })
     }

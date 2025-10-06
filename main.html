@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three Div Layout</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .top {
+            background: #1F1F1F;
+            border-bottom: 1px solid #707070;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex: 0 0 20px;
+        }
+        .container{
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+        }
+        .sidebar{
+            background: #1F1F1F;
+            width: 80px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: scroll;
+        }
+                /* WebKit browsers (Chrome, Edge, Safari) */
+        ::-webkit-scrollbar {
+          width: 12px;
+          height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #121212;  /* Matches the dark background */
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: #444;       /* Dark gray thumb */
+          border-radius: 6px;
+          border: 3px solid #121212;    /* Creates spacing around thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #666;       /* Lighter gray on hover */
+        }
+
+        /* Firefox support */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #444 #121212;  /* thumb color, track color */
+        }
+
+        .main{
+            background-color: #1F1F1F;
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        #draw_area{
+            background: #1F1F1F;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #anchor{
+            width: 60px;
+            height: 60px;
+            background: rgb(191, 187, 187);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            opacity: .5;
+        }
+        .handle {
+            color: #c8da95;
+            background: #1f1f1f;
+            padding: 0;
+            border: 0;
+        }
+        .bubble {
+        position: relative;
+        white-space: pre-wrap;
+        border: 0;
+        padding: 0;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
+        font-size: 8px;
+        }
+        .quiz{
+        position: relative;
+        white-space: pre-wrap;
+        border-radius: 0px;
+        padding: 2px 2px;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
+        font-size: 8px;
+        }
+        .quiz-box {
+        margin: 20px;
+        font-family: sans-serif;
+        }
+        .quiz-input {
+            font-size: 8px;
+            margin-top: 10px;
+            padding: 8px;
+            display: inline-block;
+            min-width: 80px;
+            margin-right: 5px;
+
+            background-color: #2D2D30;
+            color: #D16D9E;             /* Muted maroon-pinkish tone for subtle contrast */
+            border: 1px solid #3C3C3C;
+            border-radius: 4px;
+
+            outline: none;
+        }
+        .quiz-option {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        display: block;         /* Stack options vertically */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        width: fit-content;
+        }
+        .quiz-hint {
+            background-color: #2D2D30; /* Slightly lighter than your base background */
+            border: 1px solid #3C3C3C; /* Subtle border for structure */
+            color: #DCDCAA; /* A soft yellow often used for tips/hints in editors */
+            font-style: italic;
+        }
+        .quiz-correct {
+            background-color: #004d00; /* A dark green that fits dark themes */
+            border: 1px solid #27ae60;
+            color: #9CDCFE; /* Matches your overall font color */
+        }
+        .quiz-selected {
+        border-color: #ec971f;     /* deeper orange */
+        background-color: #3b2a1f;   /* subtle dark orange-brown highlight */
+        }
+        .quiz-controls {
+        margin-top: 20px;
+        }
+        .quiz-button {
+            padding: 10px 16px;
+            margin-top: 12px;
+            margin-right: 10px;
+            border-radius: 8px;          /* rounded edges */
+            border: none;                /* remove default border */
+            background-color: #3a8ddb; /* bright blue */
+            color: white;                /* white text */
+            cursor: pointer;             /* pointer cursor on hover */
+            transition: background-color 0.3s ease;
+        }
+        .quiz-incorrect {
+            background-color: #3b1e1e; /* Dark muted red */
+            border: 1px solid #e74c3c; /* Vibrant red accent */
+            color: #9CDCFE;            /* Your standard font color */
+        }
+        .quiz-button:hover {
+        background-color: #2c6cb1;  /* darker blue on hover */
+        box-shadow: 0 4px 10px rgba(44, 108, 177, 0.7);        
+        }
+
+        .quiz-disabled {
+        pointer-events: none;
+        opacity: 0.6;
+        }
+        .card {
+        background: #1F1F1F;
+        color: #9CDCFE;
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+        padding: 1px;
+        max-width: 400px;
+        margin: 1px auto;
+        }
+        .baloon {
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+        position: relative;
+        white-space: pre-wrap;
+        padding: 0;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        }
+        .goto {
+        display: inline-block;
+        background-color: #007BFF; /* Default blue */
+        color: white;
+        padding: 1px 1px;
+        font-size: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+        transition: background-color 0.3s ease;
+        }
+
+        .goto:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        }
+        .node{
+            position: absolute;
+            padding: 0;
+            border: 0;
+        }
+        .resize_node{
+            white-space: pre;
+            position: relative;
+            resize: both;
+            overflow: hidden;
+            background: none;
+        }
+        .link {
+            display: inline-block; /* Makes it behave like a box */
+            padding: 5px 20px; /* Adds space inside the box */
+            background-color: rgb(204, 186, 186); /* Blue background */
+            color: black; /* White text */
+            text-decoration: none; /* Removes underline */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 10px;
+            transition: background 0.3s ease;
+            font-family: "Arial Black", "Arial Bold";
+        }
+        .link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .context-menu-target {
+            padding: 20px;
+            background-color: lightblue;
+            border: 2px solid #007bff;
+            text-align: center;
+        }
+    .context-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        list-style: none;
+    }
+
+    .context-menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .context-menu li:hover {
+        background: red;
+    }
+    #draw_area_pop {
+        position: absolute;
+        top: 33%;
+        left: 33%;
+        height: 200px; /* Or whatever height you need */
+        width: 300px;  /* Or whatever width you need */
+        background-color: lightgray; /* For visual clarity */
+        visibility: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+    #pop_text{
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+    }
+    .img{
+        padding: 0px;
+    }
+
+.goto-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.goto-button:hover {
+  background-color: #0056b3;
+}
+.hover-reveal-img {
+  filter: brightness(40%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.hover-reveal-img:hover {
+  filter: brightness(100%);
+  opacity: 1;
+}
+.inline-link {
+    display: inline-block;
+    background-color: #9CDCFE; /* Match overall background */
+    color: #1F1F1F;            /* Match overall text color */
+    text-decoration: none;
+    border-radius: 2px;
+    font-family: "Arial Black", "Arial Bold";
+}
+    .star-selected * {
+      background: #807eeb;
+    }
+    .self-selected{
+      border: 1px solid red;
+      background: #550000;
+    }
+
+    .child-highlight {
+      border: 1px solid green;
+      background: #553300;
+    }
+
+    .parent-highlight {
+      border: 1px solid orange;
+      background: #555500;
+    }
+
+    </style>
+</head>
+<script>
+/*data = [
+    {id: 1, type: "bubble", style: "bubble", x: 0, y: 0, title: ".", text: "snowflake is a \nsaas product\nsaas product\nsaas product\nsaas product"},
+    {id: 2, type: "link", style: "link", x: 40, y: 100,  title: ".", href: "www.google.com", text: "google"},
+    {id: 3, type: "img", style: "img", x: 80, y: 100,  title: ".", name: "chrome"},
+    {id: 4, type: "img", style: "img", x: 80, y: 400,  title: ".", name: "download"},
+    {id: 5, type: "bubble", style: "bubble", x: 0, y: 0,  title: ".", text: "dbt is a \nsaas         product\nsaas product\nsaas product\nsaas product"},
+        
+]*/
+const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, card: 79, topSpot: 80, baloon: 85 };
+
+data=[]
+g_file_name = null
+function loadData(){
+    data_input = document.getElementById('FileInput');
+        const file = data_input.files[0];
+        g_file_name = file.name
+        if (!file) {
+        alert("No file selected.")
+        return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (event) {
+        try {
+            data = JSON.parse(event.target.result);
+            //data = JSON.stringify(json, null, 2);
+            //console.log(data)
+        } catch (e) {
+            console.log("Error parsing JSON: " + e.message)
+        }
+        };
+        reader.readAsText(file);
+}
+images = {}
+g_image_loaded = false
+async function loadImages() {
+  const input = document.getElementById('image-input');
+  if (!input.files || input.files.length === 0) {
+    alert('No files are selected');
+    return;
+  }
+
+  const imageLoadPromises = [];
+
+  for (let i = 0; i < input.files.length; i++) {
+    const file = input.files[i];
+
+    const loadPromise = new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+        images[nameWithoutExt] = e.target.result;
+        resolve(); // notify this image is done
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    imageLoadPromises.push(loadPromise);
+  }
+
+  // Wait for all FileReaders to finish
+  await Promise.all(imageLoadPromises);
+
+  // Now it's safe to load the sidebar
+  loadSideBar();
+  g_image_loaded=true
+}
+
+
+function resizeImage(img, maxWidth = 40, maxHeight = 40, quality = 1) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  let { width, height } = img;
+
+  if (width > height) {
+    if (width > maxWidth) {
+      height *= maxWidth / width;
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width *= maxHeight / height;
+      height = maxHeight;
+    }
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.drawImage(img, 0, 0, width, height);
+
+  return new Promise((resolve) => {
+    canvas.toBlob(
+      (blob) => resolve(blob),
+      'image/jpeg',
+      quality
+    );
+  });
+}
+
+function waitForImageLoad(img) {
+  return new Promise((resolve, reject) => {
+    if (img.complete) {
+      resolve(img);
+    } else {
+      img.onload = () => resolve(img);
+      img.onerror = (err) => reject(err);
+    }
+  });
+}
+
+g_clicked_sidebar_img_id = null
+g_clicked_sidebar_div = null
+g_clicked_key = null
+async function loadSideBar(){
+    console.log('side bar...')
+    e = document.getElementById('sidebar')
+    for (const [key, value] of Object.entries(images)) {
+    img = document.createElement('img')
+    img.src = value
+    await waitForImageLoad(img);
+    console.log(img);                     // Should be an <img> element
+    console.log(img instanceof HTMLImageElement); // Should be true
+    console.log(img.complete);  
+    const d = document.createElement('div')
+    try{
+    resized_img = document.createElement('img')
+    const blob = await resizeImage(img)
+    const url = URL.createObjectURL(blob);
+    resized_img.src = url
+    d.id  = "sidebar_div_" + key
+    resized_img.id = "sidebar_img_" + key
+    resized_img.className = 'hover-reveal-img';
+    resized_img.addEventListener("click", function () {
+    g_clicked_key = key
+    if (g_clicked_sidebar_img_id == this.id) // click same image
+    {   
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        alert(g_clicked_sidebar_div.style.border)
+        if (g_clicked_sidebar_div.style.border == "") {g_clicked_sidebar_div.style.border = "thin solid black";}
+        else {g_clicked_sidebar_div.style.border = ""}
+    }
+    else{
+        if ( g_clicked_sidebar_div != null ) g_clicked_sidebar_div.style.border = ""
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        g_clicked_sidebar_div.style.border = "thin solid black";
+    }
+    g_clicked_sidebar_img_id = this.id
+    });
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+    d.appendChild(resized_img)
+    e.appendChild(d)
+    }
+}
+
+function getLocalTimeStamp(){
+    const now = new Date()
+    return now.getFullYear().toString()+
+    String(now.getMonth()+1).padStart(2, '0')+
+    String(now.getDate()+1).padStart(2, '0')+
+    String(now.getHours()+1).padStart(2, '0')+
+    String(now.getMinutes()+1).padStart(2, '0')+
+    String(now.getSeconds()+1).padStart(2, '0')
+
+}
+
+function downloadJSON() {
+    // Sample JSON data
+    //const data = {name: "Alice",age: 30,city: "New York"};
+
+// Recursive function to remove _ keys
+function removeUnderscoreKeys(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(removeUnderscoreKeys);
+  } else if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .filter(([key]) => !key.startsWith('_'))
+        .map(([key, value]) => [key, removeUnderscoreKeys(value)])
+    );
+  }
+  return obj;
+}
+
+const cleanedData = removeUnderscoreKeys(data);
+
+// Convert to JSON string with 1-space indentation
+const jsonStr = JSON.stringify(cleanedData, null, 1); // Pretty print with 2 spaces
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonStr], { type: "application/json" });
+
+    // Create a link element
+    const link = document.createElement("a");
+
+    // Set the URL for the Blob
+    link.href = URL.createObjectURL(blob);
+    new Date().toISOString().replace(/[-T:Z.]/g, '').slice(0,14)
+    // link.download = g_file_name.split('.')[0] + getLocalTimeStamp() + '.' + g_file_name.split('.')[1] ; // File name
+    if ( g_file_name == null ){ g_file_name = 'download.json'}
+    let prefix = g_file_name.split('.')[0]
+    let suffix = g_file_name.split('.')[1]
+    let prefix_file = prefix.split('_')[0]
+    let version = prefix.split('_')[1] ? parseInt(g_file_name.split('_')[1]) + 1 : 0
+    link.download = prefix_file + '_' + version  + '.' + suffix ; // File name
+
+    // Append link to body and trigger click
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    document.body.removeChild(link);
+}
+
+
+const observer = new ResizeObserver(entries =>{
+    for (let entry of entries){
+        const element = entry.target
+        parent_id = element.getAttribute("parent_id")
+        parent_e = document.getElementById(parent_id)
+        //console.log('content rect', entry.contentRect)
+        const currentWidth = element.offsetWidth;
+        const currentHeight = element.offsetHeight;
+        //console.log('width', currentWidth)
+        //console.log('height', currentHeight)
+        setNodeHeight(element, parent_id, currentHeight);
+        setNodeWidth(element, parent_id, currentWidth)
+        node_on_top(parent_e, parent_e.style.zIndex)
+    }
+})
+
+/* depreceated in favor of observer
+function handleResize(event)
+{
+    const element = event.target;
+    console.log(element)
+    if (event.target.getAttribute("item_sub_type") !=  "resizer"){return}
+    parent_id = element.getAttribute("parent_id")
+
+    data.forEach(item => {
+        if (item.id == parent_id){
+            if ( "maximize" in item ){ delete item.maximize}
+        }
+    });
+    // Code to be executed when the window is resized
+    node = document.getElementById(parent_id)
+    const currentWidth = element.offsetWidth;
+    const currentHeight = element.offsetHeight;
+    setNodeHeight(element, parent_id, currentHeight);
+    setNodeWidth(element, parent_id, currentWidth)
+    console.log('resizer width on resize:', currentWidth); // Or use the width as needed
+    console.log('resizer height on resize:', currentHeight); // Or use the width as needed
+
+}*/
+
+/* depreceated in favor of observer
+function makeResizable(element){
+    
+    element.addEventListener('mouseup', handleResize);
+}*/
+
+function showBubbleText(show, text, bubble_obj){
+    if (show){ featchCustomParsedData(bubble_obj,  text ) } 
+    else { featchCustomParsedData(bubble_obj,  text.replace(/./g, 'x')) } 
+}
+
+function toggleBubbleText(bubble_obj, parent_id){
+    let currentItem = null
+    let currentText = ''
+    let show = false
+    data.forEach(item=>{
+        if (item.id == parent_id){
+            currentItem = item
+            currentText = item.text
+            if ("show" in item){
+                item.show = !(item.show)
+                show = item.show
+            }
+            else{
+                item.show = false
+                show = item.show
+            }
+        }
+    })
+    showBubbleText(show, currentText, bubble_obj)
+}
+function maximizequiz(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow = "visible"; // Show content beyond box
+    //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    resizer_obj.style.width = "35vw";
+    resizer_obj.style.height = "35vh";
+    resizer_obj.style.maxWidth = "35vw";
+    resizer_obj.style.maxHeight = "35vh";
+    observer.unobserve(resizer_obj);
+}
+
+function minimizequiz(resizer_obj, width, height){
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
+}
+function maximizeBubble(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow

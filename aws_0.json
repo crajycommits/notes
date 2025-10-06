@@ -49,7 +49,7 @@
   "x": 643,
   "y": 1187,
   "title": ".",
-  "text": "Uploading⬆️\n\n🚩uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
+  "text": "Uploading⬆️\n\n🚩 uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
   "height": 107,
   "width": 165,
   "tag": [
@@ -2667,5 +2667,813 @@
   ],
   "height": 65,
   "width": 103
+ },
+ {
+  "id": 100,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1065,
+  "y": 516,
+  "text": "s3",
+  "child": [
+   101,
+   103,
+   105,
+   141
+  ],
+  "root": true
+ },
+ {
+  "id": 101,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087.8374996185303,
+  "y": 636.2000007629395,
+  "text": "?",
+  "child": [
+   102
+  ]
+ },
+ {
+  "id": 102,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1103.5500001907349,
+  "y": 634.6000003814697,
+  "text": "aws☁️storage",
+  "child": []
+ },
+ {
+  "id": 103,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087.8374996185303,
+  "y": 608.6000003814697,
+  "text": "*",
+  "child": [
+   104
+  ]
+ },
+ {
+  "id": 104,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1104.4375,
+  "y": 608.6000003814697,
+  "text": "simple storage service",
+  "child": []
+ },
+ {
+  "id": 105,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087.8374996185303,
+  "y": 501.3999996185303,
+  "text": "k",
+  "child": [
+   106
+  ]
+ },
+ {
+  "id": 106,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1104.4375,
+  "y": 501.3999996185303,
+  "text": "bucket",
+  "child": [
+   107,
+   110,
+   115,
+   121,
+   124,
+   159
+  ]
+ },
+ {
+  "id": 107,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 582.6000003814697,
+  "text": "?",
+  "child": [
+   108
+  ]
+ },
+ {
+  "id": 108,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1171.4000005722046,
+  "y": 582.6000003814697,
+  "text": "container for object",
+  "child": [
+   109
+  ]
+ },
+ {
+  "id": 109,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305.2750005722046,
+  "y": 582.6000003814697,
+  "text": "object",
+  "child": []
+ },
+ {
+  "id": 110,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 556.6000003814697,
+  "text": "v",
+  "child": [
+   111,
+   112,
+   113,
+   114
+  ]
+ },
+ {
+  "id": 111,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1173.8875007629395,
+  "y": 641.0000019073486,
+  "text": "General purpose",
+  "child": []
+ },
+ {
+  "id": 112,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1173.8875007629395,
+  "y": 615.0000019073486,
+  "text": "Directory",
+  "child": []
+ },
+ {
+  "id": 113,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1173.8875007629395,
+  "y": 589.0000019073486,
+  "text": "Table",
+  "child": []
+ },
+ {
+  "id": 114,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1173.8875007629395,
+  "y": 563.0000019073486,
+  "text": "Vector",
+  "child": []
+ },
+ {
+  "id": 115,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 530.6000003814697,
+  "text": "p",
+  "child": [
+   116
+  ]
+ },
+ {
+  "id": 116,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1172.2875003814697,
+  "y": 555,
+  "text": "object",
+  "child": [
+   139,
+   146,
+   148
+  ]
+ },
+ {
+  "id": 139,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1219.9875011444092,
+  "y": 611.8000011444092,
+  "text": "p",
+  "child": [
+   117,
+   118,
+   119,
+   120
+  ]
+ },
+ {
+  "id": 117,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1236.587501525879,
+  "y": 654.0000019073486,
+  "text": "key 🔑",
+  "child": []
+ },
+ {
+  "id": 118,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1236.587501525879,
+  "y": 624.8000011444092,
+  "text": "version 📌",
+  "child": []
+ },
+ {
+  "id": 119,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1236.587501525879,
+  "y": 595.6000003814697,
+  "text": "value/content 📝",
+  "child": []
+ },
+ {
+  "id": 120,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1236.587501525879,
+  "y": 566.3999996185303,
+  "text": "metadata🔢",
+  "child": []
+ },
+ {
+  "id": 121,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 501.3999996185303,
+  "text": "🏠",
+  "child": [
+   122,
+   129,
+   142
+  ]
+ },
+ {
+  "id": 122,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1186.2625007629395,
+  "y": 514.3999996185303,
+  "text": "name",
+  "child": [
+   123,
+   127
+  ]
+ },
+ {
+  "id": 123,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1229.5125007629395,
+  "y": 525.7999992370605,
+  "text": "✏️",
+  "child": [
+   126
+  ]
+ },
+ {
+  "id": 124,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 462.3999996185303,
+  "text": "lc",
+  "child": [
+   125,
+   135
+  ]
+ },
+ {
+  "id": 125,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1175.8375005722046,
+  "y": 475.3999996185303,
+  "text": "create",
+  "child": []
+ },
+ {
+  "id": 126,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260.087501525879,
+  "y": 525.7999992370605,
+  "text": "no",
+  "child": []
+ },
+ {
+  "id": 127,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1229.5125007629395,
+  "y": 499.79999923706055,
+  "text": "!",
+  "child": [
+   128
+  ]
+ },
+ {
+  "id": 128,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1243.4500007629395,
+  "y": 499.79999923706055,
+  "text": "part of URL",
+  "child": []
+ },
+ {
+  "id": 129,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1186.2625007629395,
+  "y": 473.79999923706055,
+  "text": "access",
+  "child": [
+   130
+  ]
+ },
+ {
+  "id": 130,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1235.7250022888184,
+  "y": 473.79999923706055,
+  "text": "**",
+  "child": [
+   131
+  ]
+ },
+ {
+  "id": 131,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260.325002670288,
+  "y": 473.79999923706055,
+  "text": "public",
+  "child": [
+   140
+  ]
+ },
+ {
+  "id": 132,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1361.9500064849854,
+  "y": 473.79999923706055,
+  "text": "ed",
+  "child": [
+   133
+  ]
+ },
+ {
+  "id": 133,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1385.6625061035156,
+  "y": 473.79999923706055,
+  "text": "disabled",
+  "child": []
+ },
+ {
+  "id": 134,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1134.6374988555908,
+  "y": 394.1999988555908,
+  "text": "disabled",
+  "child": []
+ },
+ {
+  "id": 135,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1175.8375005722046,
+  "y": 449.3999996185303,
+  "text": "grow",
+  "child": [
+   136
+  ]
+ },
+ {
+  "id": 136,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1217.3249998092651,
+  "y": 449.3999996185303,
+  "text": "version",
+  "child": [
+   137
+  ]
+ },
+ {
+  "id": 137,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1273.037501335144,
+  "y": 449.3999996185303,
+  "text": "default",
+  "child": [
+   138
+  ]
+ },
+ {
+  "id": 138,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1326.062502861023,
+  "y": 449.3999996185303,
+  "text": "disabled",
+  "child": []
+ },
+ {
+  "id": 140,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1308.9250049591064,
+  "y": 473.79999923706055,
+  "text": "default",
+  "child": [
+   132
+  ]
+ },
+ {
+  "id": 141,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087.8374996185303,
+  "y": 394.1999988555908,
+  "text": "delete",
+  "child": [
+   134
+  ]
+ },
+ {
+  "id": 142,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1186.2625007629395,
+  "y": 447.79999923706055,
+  "text": "version",
+  "child": [
+   143
+  ]
+ },
+ {
+  "id": 143,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1241.9750022888184,
+  "y": 447.79999923706055,
+  "text": "default",
+  "child": [
+   144
+  ]
+ },
+ {
+  "id": 144,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1295.0000038146973,
+  "y": 447.79999923706055,
+  "text": "ed",
+  "child": [
+   145
+  ]
+ },
+ {
+  "id": 145,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 863,
+  "y": 280,
+  "text": "disabled",
+  "child": []
+ },
+ {
+  "id": 146,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1219.9875011444092,
+  "y": 540.3999996185303,
+  "text": "l",
+  "child": [
+   147
+  ]
+ },
+ {
+  "id": 147,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1233.037501335144,
+  "y": 540.3999996185303,
+  "text": "5TB",
+  "child": []
+ },
+ {
+  "id": 148,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1219.9875011444092,
+  "y": 481.99999809265137,
+  "text": "✏️",
+  "child": [
+   149,
+   153
+  ]
+ },
+ {
+  "id": 149,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1250.5625019073486,
+  "y": 498.1999988555908,
+  "text": "update",
+  "child": [
+   150,
+   156
+  ]
+ },
+ {
+  "id": 150,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1301.8125019073486,
+  "y": 511.1999988555908,
+  "text": "💣",
+  "child": [
+   151
+  ]
+ },
+ {
+  "id": 151,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1332.387502670288,
+  "y": 511.1999988555908,
+  "text": "?",
+  "child": [
+   152
+  ]
+ },
+ {
+  "id": 152,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1348.1000032424927,
+  "y": 511.1999988555908,
+  "text": "last update wins",
+  "child": []
+ },
+ {
+  "id": 153,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1250.5625019073486,
+  "y": 452.7999973297119,
+  "text": "📖",
+  "child": [
+   154
+  ]
+ },
+ {
+  "id": 154,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1281.137502670288,
+  "y": 452.7999973297119,
+  "text": "return",
+  "child": [
+   155
+  ]
+ },
+ {
+  "id": 155,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1327.950002670288,
+  "y": 452.7999973297119,
+  "text": "old or new never corrupt",
+  "child": []
+ },
+ {
+  "id": 156,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1301.8125019073486,
+  "y": 481.99999809265137,
+  "text": "🧵🔒",
+  "child": [
+   157
+  ]
+ },
+ {
+  "id": 157,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1354.350004196167,
+  "y": 481.99999809265137,
+  "text": "?",
+  "child": [
+   158
+  ]
+ },
+ {
+  "id": 158,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1370.0625047683716,
+  "y": 481.99999809265137,
+  "text": "No",
+  "child": []
+ },
+ {
+  "id": 159,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1155.6875,
+  "y": 420.1999988555908,
+  "text": "✏️",
+  "child": [
+   160
+  ]
+ },
+ {
+  "id": 160,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1186.2625007629395,
+  "y": 421.79999923706055,
+  "text": "config",
+  "child": [
+   161
+  ]
+ },
+ {
+  "id": 161,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1235.7375030517578,
+  "y": 420.1999988555908,
+  "text": "⏳",
+  "child": [
+   162
+  ]
+ },
+ {
+  "id": 162,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1266.3125038146973,
+  "y": 420.1999988555908,
+  "text": "eventual consistency",
+  "child": []
+ }, {
+  "id": 163,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1265,
+  "y": 516,
+  "text": "s31",
+  "child": [
+  ],
+  "root": true
  }
 ]

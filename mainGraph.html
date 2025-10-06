@@ -303,6 +303,11 @@
 .goto-button:hover {
   background-color: #0056b3;
 }
+
+.goto-highlight {
+    border: 1px solid orange;
+}
+
 .hover-reveal-img {
   filter: brightness(40%);
   opacity: 0.7;
@@ -745,10 +750,15 @@ function getMaxID(){
         return max_id + 1
 }
 
-function openDrawAreaContextMenu(obj, target_id) {
+function openDrawAreaContextMenu(obj) {
     if (!(obj instanceof Element)) {
         console.warn("Invalid object passed to openDrawAreaContextMenu:", obj);
         return;
+    }
+    let clicked_graph_node = g_clicked_graph_node
+    if (!clicked_graph_node){
+        alert('No leaf node clicked')
+        return
     }
 
     let attempts = 0;
@@ -759,8 +769,8 @@ function openDrawAreaContextMenu(obj, target_id) {
         if (!g_make_context_flag) {
             clearInterval(interval);
             const drawArea = document.querySelector('[item_sub_type="draw_area"]');
-            drawArea._fromAddLeaf = { target_id: target_id };
-            const rect = obj.getBoundingClientRect();
+            drawArea._fromAddLeaf = { target_id: clicked_graph_node.id };
+            const rect = clicked_graph_node.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
 
@@ -810,10 +820,6 @@ function handleCardContext(text, obj, target_id){
         })
         showpop({type: "card", id: target_id, action: text, obj: obj, pop_text: msg})
     }
-    if (text=="addLeaf"){
-        //console.log("addLeaf", obj)
-        openDrawAreaContextMenu(obj, target_id);
-    }
 }
 function handleHandleContext(text, obj, target_id){
     if (text == "delete"){
@@ -844,7 +850,7 @@ function handleHandleContext(text, obj, target_id){
 }
 function handleDrawAreaContext(text, obj, target_id){
     // If leafDetail not explicitly passed, try to get from obj._fromAddLeaf
-    const parent_id = obj?._fromAddLeaf?.target_id;
+    const leaf_id = obj?._fromAddLeaf?.target_id;
     let new_item = null
     if (text == "addBubble"){ 
         let max_id = getMaxID()
@@ -906,12 +912,21 @@ function handleDrawAreaContext(text, obj, target_id){
         data.push(new_item);
         createNodes(getNodeParent(), [new_item]);        
     }
-    if ( parent_id != null ) {
-        let updated_item = addNodeToData(new_item, Number(parent_id))
+    if (text=="addLeaf"){
+        //console.log("addLeaf", obj)
+        if ('_fromAddLeaf' in obj) {
+            alert('repeated leaf clicks');
+        } else {
+        openDrawAreaContextMenu(obj);
+        }
+    }
+    if ( leaf_id != null && text != "addLeaf" ) {
+        let updated_item = addNodeToData(new_item, Number(leaf_id))
         if (updated_item != null){
             renderAll(layoutDirection, data, updated_item._groupId)
         }
     }
+    obj && '_fromAddLeaf' in obj && delete obj._fromAddLeaf; // clear from add leaf
 }
 
 function addNodeToData(newNode, parent_id) {
@@ -1168,58 +1183,61 @@ function makeDraggable(element, parent, handle = null) {
     global_y_moves = 0
 
     g_global_moves = []
-    function goToNode(id){
+    function goToNode(id, caller = null ){
+        console.log("gotonode", id, caller)
+        function push_nodes(arr, val){
+            if ( val == null ) return 
+            if ( arr.length > 0 && arr[arr.length-1] == val ) return 
+            arr.push(val)
+        }
         id = parseInt(id)
         if ( id == -1){
-            goBack()
-            return
+            if ( g_global_moves.length > 0 ) g_global_moves.pop() // ignore last element 
+            id = null 
+            if ( g_global_moves.length > 0 ) id = g_global_moves[g_global_moves.length-1] // ignore last element 
+            if ( id == null ) return;
+        } else {
+            if (caller != null) push_nodes(g_global_moves, caller)
+            if ( id != null ) push_nodes(g_global_moves, id)
         }
-        if ( ! ( data.map(d=>d.id).includes(id) ) ){
-
+        id_data = data.find(d=>d.id==id)
+        if ( id_data == null ){
             alert("id not found:"+id)
             return
         }
+        // check if leaf node 
+        if ("child" in id_data){
+            makeAllParentVisible(id)
+        }
         move_to_x = null
         move_to_y = null
-        g_global_moves.push([global_x_moves, global_y_moves])
+        console.log("g_global_moves", g_global_moves)
+        move_to_x = id_data._calculatedX
+        move_to_y = id_data._calculatedY
+        if ( move_to_x == null || move_to_y == null ){return}
+        draw_area_rect = document.getElementById("draw_area").getBoundingClientRect()
+        draw_area_x = draw_area_rect.width/2  
+        draw_area_y = draw_area_rect.height/2
+        draw_area_x -= .1 * draw_area_x
+        draw_area_y -= .1 * draw_area_y
+        move_to_x -= draw_area_x
+        move_to_y -= draw_area_y
+        global_x_moves -= move_to_x
+        global_y_moves -= move_to_y 
+        e = document.getElementById(id)
+        e.classList.add("goto-highlight")
+        setTimeout(()=> {e.classList.remove("goto-highlight")},500)
         data.forEach(item=>{
-            if ( item.id == id ){
-                move_to_x = item.x
-                move_to_y = item.y
-            }
-        })
-        if ( move_to_x == null ){return}
-        global_x_moves = - move_to_x
-        global_y_moves = -  move_to_y 
-        data.forEach(item=>{
-            item._calculatedX = item.x + global_x_moves
-            item._calculatedY = item.y + global_y_moves
+            item._calculatedX -= move_to_x
+            item._calculatedY -= move_to_y 
             setNodePosition(item.id)
         })
     }
 
-    function callGoToNode(id=null){
+    function callGoToNode(id=null, caller=null){
         if (id==null){ goToNode(document.getElementById("input_goto").value) }
         else if ( id == -2 ){ goToNode(helper.get_random().id) }
-        else { goToNode(id) }
-    }
-
-    function goBack(){
-        if (g_global_moves.length>0){
-            let xy = g_global_moves.pop()
-            let move_to_x = xy[0]
-            let move_to_y = xy [1]
-            global_x_moves = move_to_x
-            global_y_moves = move_to_y
-            data.forEach(item=>{
-                item._calculatedX = item.x + global_x_moves
-                item._calculatedY = item.y + global_y_moves
-                setNodePosition(item.id)
-            })
-        }
-        else {
-            // do nothing
-        }
+        else { goToNode(id, caller) }
     }
 
     function resetAnchorAndMoveNodes(anchor, parent, x, y){
@@ -1330,23 +1348,25 @@ function makeDraggable(element, parent, handle = null) {
     }
 
 function makeAllParentVisible(id) {
+    if ( id == null ) id = g_clicked_graph_node?.id
+    if ( id == null ) return alert("No leaf node clicked")
+    id = Number(id)
     let e_data = data.find(n => n.id == id);
     if (!e_data) return alert("No data found!");
     const groupId = e_data?._groupId;
     const nodes = data?._groups?.[groupId] || [];
     // Step 1: process the node itself
-    const self = document.getElementById(id);
-    if (self) {
-        processGraphNode(self, '+');
-    }
+    setGraphNodeVisibility(e_data, '+');
 
     // Step 2: process each parent
     for (const parent of getAllParent(id, nodes)) {
-        const el = document.getElementById(parent.id);
-        if (el) {
-            processGraphNode(el, '+');
+        let p_data = data.find(n => n.id == parent.id);
+        if (p_data) {
+            setGraphNodeVisibility(p_data, '+');
         }
     }
+    highlightAllParents(id, nodes)
+    renderAll(layoutDirection, nodes, groupId)
 }
 
 
@@ -1747,20 +1767,10 @@ function makeAllParentVisible(id) {
     }
     }
 
-g_clicked_graph_node = null
-function processGraphNode(e, input=null) {
+
+function highlightAllParents(id, nodes){
     const CLASS_SELECTED = "self-selected";
-    const CLASS_CHILD = "child-highlight";
-    const CLASS_PARENT = "parent-highlight";
-    selectedNodeId = Number(e.id);
-    if (!selectedNodeId) return;
-    const selectedNode = data.find(n => n.id === selectedNodeId);
-    if (!selectedNode?.child) return;
-    g_clicked_graph_node = e
-    const groupId = selectedNode?._groupId;
-    const nodes = data?._groups?.[groupId] || [];
-    setGraphNodeVisibility(selectedNode, input)
-    renderAll(layoutDirection, nodes, groupId)
+    // clear existing
     for (const node of nodes) {
         const el = document.getElementById(node.id);
             if (el) {
@@ -1768,10 +1778,36 @@ function processGraphNode(e, input=null) {
             }
     }
     // highlight 
-    document.getElementById(selectedNodeId)?.classList.add('self-selected');
-    for (const parent of getAllParent(selectedNodeId, nodes)) {
+    document.getElementById(id)?.classList.add('self-selected');
+    for (const parent of getAllParent(id, nodes)) {
         document.getElementById(parent.id)?.classList.add('self-selected');
     }
+}
+g_clicked_graph_node = null
+g_clicked_graph_node_timeout = null;
+
+function set_g_clicked_graph_node(e) {
+  g_clicked_graph_node = e;
+  clearTimeout(g_clicked_graph_node_timeout);
+  g_clicked_graph_node_timeout = setTimeout(() => g_clicked_graph_node = null, 5000);
+}
+function processGraphNode(e, input=null) {
+    if (!e) {
+        alert('No graph node clicked');
+        return;
+    }
+    const CLASS_CHILD = "child-highlight";
+    const CLASS_PARENT = "parent-highlight";
+    selectedNodeId = Number(e.id);
+    if (!selectedNodeId) return;
+    const selectedNode = data.find(n => n.id === selectedNodeId);
+    if (!selectedNode?.child) return;
+    set_g_clicked_graph_node(e)
+    const groupId = selectedNode?._groupId;
+    const nodes = data?._groups?.[groupId] || [];
+    setGraphNodeVisibility(selectedNode, input)
+    renderAll(layoutDirection, nodes, groupId)
+    highlightAllParents(selectedNodeId, nodes)
     return
     /* the lock for * is more important than this let this stabilise
     console.log(selectedNodeId, groupId, nodes);
@@ -2089,7 +2125,7 @@ function createOptionsQuestion(question) {
         return fillContextOptions(options, t)
     }
     function createDrawAreaContext(t){
-        options = ["addBubble", "addLink", "addImage", "addGoto", "addCard", "addBaloon"]
+        options = ["addBubble", "addLink", "addImage", "addGoto", "addCard", "addBaloon", "addLeaf"]
         return fillContextOptions(options, t)
     }
     function createHandleContext(t){
@@ -2099,7 +2135,6 @@ function createOptionsQuestion(question) {
     function createCardContext(t){
         const item = t.getAttribute("parent_id") && data.find(obj => obj.id == t.getAttribute("parent_id"));
         let options = ["editText"];
-        "child" in item && options.push("addLeaf");
         return fillContextOptions(options, t)
     }
     function fillContextOptions(options, t){
@@ -2139,7 +2174,7 @@ function createOptionsQuestion(question) {
         e.textContent = title ? title : '.'
     }
     function createHandle(data, parent_id){
-        handle = document.createElement("div")
+        handle = document.createElement("spwn")
         setHandleText(handle, data)
         handle.setAttribute("item_sub_type", "handle");
         handle.setAttribute("parent_id", parent_id);
@@ -2243,7 +2278,7 @@ function createOptionsQuestion(question) {
         new_element.setAttribute("parent_id", parent_id);
         new_element.classList.add(data.style.default);
         applyStyle(data, new_element)
-        new_element.onclick=() => callGoToNode(data.gotoid);
+        new_element.onclick=() => callGoToNode(data.gotoid, parent_id);
         return {handle: handle, element: new_element}
     }
     function createCard(data, parent_id){
@@ -2336,7 +2371,7 @@ function createOptionsQuestion(question) {
     function featchCustomParsedData(outputDiv, encodedText) {
     encodedText = decodeHtmlEntity(encodedText);
     outputDiv.innerHTML = '';
-
+    parent_id = outputDiv.getAttribute("parent_id")
     // Local helper function to parse [s], [c], [g] tags
     function parseSegment(text) {
         // Font size: [s=20]Text[/s]
@@ -2351,7 +2386,7 @@ function createOptionsQuestion(question) {
 
         // Goto button: [g=123]Click me[/g]
         text = text.replace(/\[g=(\d+)\]([\s\S]*?)\[\/g\]/g, (_, nodeId, content) => {
-        return `<span class="goto-button" onclick="callGoToNode(${nodeId})">${content}</span>`;
+        return `<span class="goto-button" onclick="callGoToNode(${nodeId}, ${parent_id})">${content}</span>`;
         });
 
         // External links: [a=https://example.com]Text[/a]
@@ -2741,6 +2776,7 @@ function createOptionsQuestion(question) {
         <button onclick="callGoToNode(-1)">back</button>
         <button onclick="callGoToNode(-2)">random</button>
         <button onclick="(()=>processGraphNode(g_clicked_graph_node, '*'))()">*</button>
+        <button onclick="(()=>makeAllParentVisible())()">+</button>
         <button onclick="setThink()">think</button>
         <input id="input_goto" placeholder="Enter Id(-1 back)"/>
     </div>

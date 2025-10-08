@@ -183,15 +183,19 @@
         pointer-events: none;
         opacity: 0.6;
         }
-        .card {
-        background: #1F1F1F;
-        color: #9CDCFE;
-        border: 1px solid #dddddd;
-        border-radius: 8px;
-        padding: 1px;
-        max-width: 400px;
-        margin: 1px auto;
-        }
+.card {
+  background: #1F1F1F;
+  color: #9CDCFE;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 1px;
+  margin: 1px auto;
+  
+  white-space: nowrap;        /* Prevent text from wrapping */
+  overflow: hidden;           /* Hide overflow content */
+  text-overflow: ellipsis;    /* Show "..." when truncated */
+}
+
         .baloon {
         border: 1px solid #dddddd;
         border-radius: 8px;
@@ -1760,7 +1764,7 @@ function makeAllParentVisible(id) {
 
     // Group graphs: { [rootId]: [nodes] }
     const subgraphs = groupGraphsWithBFSGenerator(graphNodes, rootId);
-    Object.assign(data._groups || {}, subgraphs);
+    rootId === null ? (data._groups = subgraphs) : (data._groups[rootId] = subgraphs[rootId]);
     // Loop over each group
     for (const [rootId, group] of Object.entries(subgraphs)) {
         render(layoutDirection, group, Number(rootId)); // 👈 rootId as third param (number)
@@ -2759,8 +2763,40 @@ function createOptionsQuestion(question) {
     helper = {
         'get_max_id': function get_max_id(){let maxid=-1;data.map(id=>{if(id.id>maxid){maxid=id.id}});console.log(maxid)},
         'get_node': function get_node(id){return data.filter(d=>d.id==id)},
-        'get_random': function get_random() {return data[Math.floor(Math.random() * data.length)];}
-        
+        'get_random': function get_random() {return data[Math.floor(Math.random() * data.length)];},
+        'remove_child': function remove_child(rootId) {
+                        const parent = data.find(node => node.id === rootId);
+                        if (!parent) {
+                            console.warn(`Parent with id ${rootId} not found.`);
+                            return;
+                        }
+                        const nodeMap = new Map(data.map(node => [node.id, node]));
+
+                        const idsToRemove = [];
+
+                        // Collect all node IDs in the subtree using BFS
+                        for (const info of bfs(rootId, nodeMap)) {
+                                if (info.nodeId === rootId) {
+                                    // Skip the parent/root node itself
+                                    continue;
+                                    }
+                            idsToRemove.push(info.nodeId);
+                        }
+
+                        // Mutate data in-place to remove matching nodes
+                        for (let i = data.length - 1; i >= 0; i--) {
+                            if (idsToRemove.includes(data[i].id)) {
+                            data.splice(i, 1);
+                            }
+                        }
+
+                        // Clear parent's child list
+                        parent.child = [];
+
+                        // Remove DOM elements
+                        idsToRemove.forEach(id => document.getElementById(id)?.remove());
+                        renderAll(layoutDirection, data)
+                        }
 
     }
     g_think = false

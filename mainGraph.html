@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three Div Layout</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .top {
+            background: #1F1F1F;
+            border-bottom: 1px solid #707070;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex: 0 0 20px;
+        }
+        .container{
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+        }
+        .sidebar{
+            background: #1F1F1F;
+            width: 80px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: scroll;
+        }
+                /* WebKit browsers (Chrome, Edge, Safari) */
+        ::-webkit-scrollbar {
+          width: 12px;
+          height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #121212;  /* Matches the dark background */
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: #444;       /* Dark gray thumb */
+          border-radius: 6px;
+          border: 3px solid #121212;    /* Creates spacing around thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #666;       /* Lighter gray on hover */
+        }
+
+        /* Firefox support */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #444 #121212;  /* thumb color, track color */
+        }
+
+        .main{
+            background-color: #1F1F1F;
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        #draw_area{
+            background: #1F1F1F;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #anchor{
+            width: 60px;
+            height: 60px;
+            background: rgb(191, 187, 187);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            opacity: .5;
+        }
+        .handle {
+            color: #c8da95;
+            background: #1f1f1f;
+            padding: 0;
+            border: 0;
+        }
+        .bubble {
+        position: relative;
+        white-space: pre-wrap;
+        border: 0;
+        padding: 0;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
+        font-size: 8px;
+        }
+        .quiz{
+        position: relative;
+        white-space: pre-wrap;
+        border-radius: 0px;
+        padding: 2px 2px;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        //font-family: 'Comic Sans MS', cursive;
+        font-family: consolas;
+        font-size: 8px;
+        }
+        .quiz-box {
+        margin: 20px;
+        font-family: sans-serif;
+        }
+        .quiz-input {
+            font-size: 8px;
+            margin-top: 10px;
+            padding: 8px;
+            display: inline-block;
+            min-width: 80px;
+            margin-right: 5px;
+
+            background-color: #2D2D30;
+            color: #D16D9E;             /* Muted maroon-pinkish tone for subtle contrast */
+            border: 1px solid #3C3C3C;
+            border-radius: 4px;
+
+            outline: none;
+        }
+        .quiz-option {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        display: block;         /* Stack options vertically */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        width: fit-content;
+        }
+        .quiz-hint {
+            background-color: #2D2D30; /* Slightly lighter than your base background */
+            border: 1px solid #3C3C3C; /* Subtle border for structure */
+            color: #DCDCAA; /* A soft yellow often used for tips/hints in editors */
+            font-style: italic;
+        }
+        .quiz-correct {
+            background-color: #004d00; /* A dark green that fits dark themes */
+            border: 1px solid #27ae60;
+            color: #9CDCFE; /* Matches your overall font color */
+        }
+        .quiz-selected {
+        border-color: #ec971f;     /* deeper orange */
+        background-color: #3b2a1f;   /* subtle dark orange-brown highlight */
+        }
+        .quiz-controls {
+        margin-top: 20px;
+        }
+        .quiz-button {
+            padding: 10px 16px;
+            margin-top: 12px;
+            margin-right: 10px;
+            border-radius: 8px;          /* rounded edges */
+            border: none;                /* remove default border */
+            background-color: #3a8ddb; /* bright blue */
+            color: white;                /* white text */
+            cursor: pointer;             /* pointer cursor on hover */
+            transition: background-color 0.3s ease;
+        }
+        .quiz-incorrect {
+            background-color: #3b1e1e; /* Dark muted red */
+            border: 1px solid #e74c3c; /* Vibrant red accent */
+            color: #9CDCFE;            /* Your standard font color */
+        }
+        .quiz-button:hover {
+        background-color: #2c6cb1;  /* darker blue on hover */
+        box-shadow: 0 4px 10px rgba(44, 108, 177, 0.7);        
+        }
+
+        .quiz-disabled {
+        pointer-events: none;
+        opacity: 0.6;
+        }
+.card {
+  background: #1F1F1F;
+  color: #9CDCFE;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 1px;
+  margin: 1px auto;
+  
+  white-space: nowrap;        /* Prevent text from wrapping */
+  overflow: hidden;           /* Hide overflow content */
+  text-overflow: ellipsis;    /* Show "..." when truncated */
+}
+
+        .baloon {
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+        position: relative;
+        white-space: pre-wrap;
+        padding: 0;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        }
+        .goto {
+        display: inline-block;
+        background-color: #007BFF; /* Default blue */
+        color: white;
+        padding: 1px 1px;
+        font-size: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+        transition: background-color 0.3s ease;
+        }
+
+        .goto:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        }
+        .node{
+            position: absolute;
+            padding: 0;
+            border: 0;
+        }
+        .resize_node{
+            white-space: pre;
+            position: relative;
+            resize: both;
+            overflow: hidden;
+            background: none;
+        }
+        .link {
+            display: inline-block; /* Makes it behave like a box */
+            padding: 5px 20px; /* Adds space inside the box */
+            background-color: rgb(204, 186, 186); /* Blue background */
+            color: black; /* White text */
+            text-decoration: none; /* Removes underline */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 10px;
+            transition: background 0.3s ease;
+            font-family: "Arial Black", "Arial Bold";
+        }
+        .link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .context-menu-target {
+            padding: 20px;
+            background-color: lightblue;
+            border: 2px solid #007bff;
+            text-align: center;
+        }
+    .context-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        list-style: none;
+    }
+
+    .context-menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .context-menu li:hover {
+        background: red;
+    }
+    #draw_area_pop {
+        position: absolute;
+        top: 33%;
+        left: 33%;
+        height: 200px; /* Or whatever height you need */
+        width: 300px;  /* Or whatever width you need */
+        background-color: lightgray; /* For visual clarity */
+        visibility: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+    #pop_text{
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+    }
+    .img{
+        padding: 0px;
+    }
+
+.goto-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.goto-button:hover {
+  background-color: #0056b3;
+}
+
+.goto-highlight {
+    border: 1px solid orange;
+}
+
+.hover-reveal-img {
+  filter: brightness(40%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.hover-reveal-img:hover {
+  filter: brightness(100%);
+  opacity: 1;
+}
+.inline-link {
+    display: inline-block;
+    background-color: #9CDCFE; /* Match overall background */
+    color: #1F1F1F;            /* Match overall text color */
+    text-decoration: none;
+    border-radius: 2px;
+    font-family: "Arial Black", "Arial Bold";
+}
+    .star-selected * {
+      background: #807eeb;
+    }
+    .self-selected{
+      border: 1px solid red;
+      background: #550000;
+    }
+
+    .child-highlight {
+      border: 1px solid green;
+      background: #553300;
+    }
+
+    .parent-highlight {
+      border: 1px solid orange;
+      background: #555500;
+    }
+
+    </style>
+</head>
+<script>
+/*data = [
+    {id: 1, type: "bubble", style: "bubble", x: 0, y: 0, title: ".", text: "snowflake is a \nsaas product\nsaas product\nsaas product\nsaas product"},
+    {id: 2, type: "link", style: "link", x: 40, y: 100,  title: ".", href: "www.google.com", text: "google"},
+    {id: 3, type: "img", style: "img", x: 80, y: 100,  title: ".", name: "chrome"},
+    {id: 4, type: "img", style: "img", x: 80, y: 400,  title: ".", name: "download"},
+    {id: 5, type: "bubble", style: "bubble", x: 0, y: 0,  title: ".", text: "dbt is a \nsaas         product\nsaas product\nsaas product\nsaas product"},
+        
+]*/
+const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, card: 79, topSpot: 80, baloon: 85 };
+
+data=[]
+g_file_name = null
+function loadData(){
+    data_input = document.getElementById('FileInput');
+        const file = data_input.files[0];
+        g_file_name = file.name
+        if (!file) {
+        alert("No file selected.")
+        return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (event) {
+        try {
+            data = JSON.parse(event.target.result);
+            //data = JSON.stringify(json, null, 2);
+            //console.log(data)
+        } catch (e) {
+            console.log("Error parsing JSON: " + e.message)
+        }
+        };
+        reader.readAsText(file);
+}
+images = {}
+g_image_loaded = false
+async function loadImages() {
+  const input = document.getElementById('image-input');
+  if (!input.files || input.files.length === 0) {
+    alert('No files are selected');
+    return;
+  }
+
+  const imageLoadPromises = [];
+
+  for (let i = 0; i < input.files.length; i++) {
+    const file = input.files[i];
+
+    const loadPromise = new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+        images[nameWithoutExt] = e.target.result;
+        resolve(); // notify this image is done
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    imageLoadPromises.push(loadPromise);
+  }
+
+  // Wait for all FileReaders to finish
+  await Promise.all(imageLoadPromises);
+
+  // Now it's safe to load the sidebar
+  loadSideBar();
+  g_image_loaded=true
+}
+
+
+function resizeImage(img, maxWidth = 40, maxHeight = 40, quality = 1) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  let { width, height } = img;
+
+  if (width > height) {
+    if (width > maxWidth) {
+      height *= maxWidth / width;
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width *= maxHeight / height;
+      height = maxHeight;
+    }
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.drawImage(img, 0, 0, width, height);
+
+  return new Promise((resolve) => {
+    canvas.toBlob(
+      (blob) => resolve(blob),
+      'image/jpeg',
+      quality
+    );
+  });
+}
+
+function waitForImageLoad(img) {
+  return new Promise((resolve, reject) => {
+    if (img.complete) {
+      resolve(img);
+    } else {
+      img.onload = () => resolve(img);
+      img.onerror = (err) => reject(err);
+    }
+  });
+}
+
+g_clicked_sidebar_img_id = null
+g_clicked_sidebar_div = null
+g_clicked_key = null
+async function loadSideBar(){
+    console.log('side bar...')
+    e = document.getElementById('sidebar')
+    for (const [key, value] of Object.entries(images)) {
+    img = document.createElement('img')
+    img.src = value
+    await waitForImageLoad(img);
+    console.log(img);                     // Should be an <img> element
+    console.log(img instanceof HTMLImageElement); // Should be true
+    console.log(img.complete);  
+    const d = document.createElement('div')
+    try{
+    resized_img = document.createElement('img')
+    const blob = await resizeImage(img)
+    const url = URL.createObjectURL(blob);
+    resized_img.src = url
+    d.id  = "sidebar_div_" + key
+    resized_img.id = "sidebar_img_" + key
+    resized_img.className = 'hover-reveal-img';
+    resized_img.addEventListener("click", function () {
+    g_clicked_key = key
+    if (g_clicked_sidebar_img_id == this.id) // click same image
+    {   
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        alert(g_clicked_sidebar_div.style.border)
+        if (g_clicked_sidebar_div.style.border == "") {g_clicked_sidebar_div.style.border = "thin solid black";}
+        else {g_clicked_sidebar_div.style.border = ""}
+    }
+    else{
+        if ( g_clicked_sidebar_div != null ) g_clicked_sidebar_div.style.border = ""
+        g_clicked_sidebar_div = document.getElementById("sidebar_div_" + this.id.split('_').pop())
+        g_clicked_sidebar_div.style.border = "thin solid black";
+    }
+    g_clicked_sidebar_img_id = this.id
+    });
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+    d.appendChild(resized_img)
+    e.appendChild(d)
+    }
+}
+
+function getLocalTimeStamp(){
+    const now = new Date()
+    return now.getFullYear().toString()+
+    String(now.getMonth()+1).padStart(2, '0')+
+    String(now.getDate()+1).padStart(2, '0')+
+    String(now.getHours()+1).padStart(2, '0')+
+    String(now.getMinutes()+1).padStart(2, '0')+
+    String(now.getSeconds()+1).padStart(2, '0')
+
+}
+
+function downloadJSON() {
+    // Sample JSON data
+    //const data = {name: "Alice",age: 30,city: "New York"};
+
+// Recursive function to remove _ keys
+function removeUnderscoreKeys(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(removeUnderscoreKeys);
+  } else if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .filter(([key]) => !key.startsWith('_'))
+        .map(([key, value]) => [key, removeUnderscoreKeys(value)])
+    );
+  }
+  return obj;
+}
+
+const cleanedData = removeUnderscoreKeys(data);
+
+// Convert to JSON string with 1-space indentation
+const jsonStr = JSON.stringify(cleanedData, null, 1); // Pretty print with 2 spaces
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonStr], { type: "application/json" });
+
+    // Create a link element
+    const link = document.createElement("a");
+
+    // Set the URL for the Blob
+    link.href = URL.createObjectURL(blob);
+    new Date().toISOString().replace(/[-T:Z.]/g, '').slice(0,14)
+    // link.download = g_file_name.split('.')[0] + getLocalTimeStamp() + '.' + g_file_name.split('.')[1] ; // File name
+    if ( g_file_name == null ){ g_file_name = 'download.json'}
+    let prefix = g_file_name.split('.')[0]
+    let suffix = g_file_name.split('.')[1]
+    let prefix_file = prefix.split('_')[0]
+    let version = prefix.split('_')[1] ? parseInt(g_file_name.split('_')[1]) + 1 : 0
+    link.download = prefix_file + '_' + version  + '.' + suffix ; // File name
+
+    // Append link to body and trigger click
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    document.body.removeChild(link);
+}
+
+
+const observer = new ResizeObserver(entries =>{
+    for (let entry of entries){
+        const element = entry.target
+        parent_id = element.getAttribute("parent_id")
+        parent_e = document.getElementById(parent_id)
+        //console.log('content rect', entry.contentRect)
+        const currentWidth = element.offsetWidth;
+        const currentHeight = element.offsetHeight;
+        //console.log('width', currentWidth)
+        //console.log('height', currentHeight)
+        setNodeHeight(element, parent_id, currentHeight);
+        setNodeWidth(element, parent_id, currentWidth)
+        node_on_top(parent_e, parent_e.style.zIndex)
+    }
+})
+
+/* depreceated in favor of observer
+function handleResize(event)
+{
+    const element = event.target;
+    console.log(element)
+    if (event.target.getAttribute("item_sub_type") !=  "resizer"){return}
+    parent_id = element.getAttribute("parent_id")
+
+    data.forEach(item => {
+        if (item.id == parent_id){
+            if ( "maximize" in item ){ delete item.maximize}
+        }
+    });
+    // Code to be executed when the window is resized
+    node = document.getElementById(parent_id)
+    const currentWidth = element.offsetWidth;
+    const currentHeight = element.offsetHeight;
+    setNodeHeight(element, parent_id, currentHeight);
+    setNodeWidth(element, parent_id, currentWidth)
+    console.log('resizer width on resize:', currentWidth); // Or use the width as needed
+    console.log('resizer height on resize:', currentHeight); // Or use the width as needed
+
+}*/
+
+/* depreceated in favor of observer
+function makeResizable(element){
+    
+    element.addEventListener('mouseup', handleResize);
+}*/
+
+function showBubbleText(show, text, bubble_obj){
+    if (show){ featchCustomParsedData(bubble_obj,  text ) } 
+    else { featchCustomParsedData(bubble_obj,  text.replace(/./g, 'x')) } 
+}
+
+function toggleBubbleText(bubble_obj, parent_id){
+    let currentItem = null
+    let currentText = ''
+    let show = false
+    data.forEach(item=>{
+        if (item.id == parent_id){
+            currentItem = item
+            currentText = item.text
+            if ("show" in item){
+                item.show = !(item.show)
+                show = item.show
+            }
+            else{
+                item.show = false
+                show = item.show
+            }
+        }
+    })
+    showBubbleText(show, currentText, bubble_obj)
+}
+function maximizequiz(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow = "visible"; // Show content beyond box
+    //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    resizer_obj.style.width = "35vw";
+    resizer_obj.style.height = "35vh";
+    resizer_obj.style.maxWidth = "35vw";
+    resizer_obj.style.maxHeight = "35vh";
+    observer.unobserve(resizer_obj);
+}
+
+function minimizequiz(resizer_obj, width, height){
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
+}
+function maximizeBubble(resizer_obj){
+    // Reset styles
+    resizer_obj.style.resize = "none";
+    resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+    resizer_obj.style.overflow = "visible"; // Show content beyond box
+    //resizer_obj.style.position = "static"; // Let it expand naturally if in flow
+    resizer_obj.style.width = "auto";
+    resizer_obj.style.height = "auto";
+    resizer_obj.style.maxWidth = "50vw";
+    resizer_obj.style.maxHeight = "50vh";
+    observer.unobserve(resizer_obj);
+}
+
+function minimizeBubble(resizer_obj, width, height){
+        resizer_obj.style.resize = "both";
+        resizer_obj.style.whiteSpace = "pre"; // Preserve line breaks and spacing
+        resizer_obj.style.removeProperty("overflow");
+        resizer_obj.style.removeProperty("position");
+        resizer_obj.style.removeProperty("max-width");
+        resizer_obj.style.removeProperty("max-height");
+        resizer_obj.style.height = height + "px"
+        resizer_obj.style.width = width + "px"
+        observer.observe(resizer_obj);
+}
+function handleQuizContext(text, quiz_obj, target_id){
+    if (text=="editText"){
+        console.log("at handleQuizContext")
+        msg = ''
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            msg = JSON.stringify(item.text, null, 2);
+        }
+        })
+        showpop({type: "quiz", id: target_id, action: text, obj: quiz_obj, pop_text: msg})
+    }
+}
+
+function handleBubbleContext(text, bubble_obj, target_id){
+    console.log(text, bubble_obj, target_id)
+    if (text=="editText"){
+        console.log("at handleBubbleContext")
+        msg = ''
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            msg = item.text;
+        }
+        })
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg})
+    }
+    if (text == "maximize") {
+        resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
+        maximizeBubble(resizer_obj);
+    }
+    if (text == "minimize") {
+        let width = height = 0;
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            width = item.width; height = item.height
+        }
+        })
+        console.log(width,height)
+        resizer_obj = bubble_obj.closest('[item_sub_type="resizer"]');
+        // Reset styles
+        minimizeBubble(resizer_obj, width, height)
+    }
+    if (text=="editStyle"){
+        custom_style_arr = [] // work around to access custom_style inside the block
+        data.forEach(item=>{ if(item.id == target_id && "style" in item ) { 
+            let stl = item.style; 
+            const { default: _omit, ...custom_style } = item.style 
+            console.log(custom_style)
+            custom_style_arr.push(custom_style)
+            }
+        })
+        custom_style = custom_style_arr.pop()
+        if ( custom_style !== undefined && Object.keys(custom_style).length === 0 ){ msg = '{"font-size": "16px"}' } else { msg = JSON.stringify(custom_style)}
+        showpop({type: "bubble", id: target_id, action: text, obj: bubble_obj, pop_text: msg })
+    }
+    if (text=="toggleView"){
+        toggleBubbleText(bubble_obj, target_id)
+    }
+}
+
+function getMaxID(){
+        let max_id = -1
+        data.forEach( d=> {
+            max_id = d.id > max_id ? d.id : max_id
+        })
+        return max_id + 1
+}
+
+function openDrawAreaContextMenu(obj) {
+    if (!(obj instanceof Element)) {
+        console.warn("Invalid object passed to openDrawAreaContextMenu:", obj);
+        return;
+    }
+    let clicked_graph_node = g_clicked_graph_node
+    if (!clicked_graph_node){
+        alert('No leaf node clicked')
+        return
+    }
+
+    let attempts = 0;
+    const maxAttempts = 50; // e.g., 50 * 100ms = 5 seconds max
+
+    const interval = setInterval(() => {
+        attempts++;
+        if (!g_make_context_flag) {
+            clearInterval(interval);
+            const drawArea = document.querySelector('[item_sub_type="draw_area"]');
+            drawArea._fromAddLeaf = { target_id: clicked_graph_node.id };
+            const rect = clicked_graph_node.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            const eventOptions = {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                button: 2, // Right-click
+                buttons: 2,
+                clientX: x,
+                clientY: y,
+                pageX: x + window.scrollX,
+                pageY: y + window.scrollY,
+            };
+
+            // Simulate full right-click sequence
+            drawArea.dispatchEvent(new MouseEvent("mousedown", eventOptions));
+            drawArea.dispatchEvent(new MouseEvent("mouseup", eventOptions));
+            drawArea.dispatchEvent(new MouseEvent("contextmenu", eventOptions));
+        } else if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            console.warn("openDrawAreaContextMenu: max attempts reached, aborting.");
+        }
+    }, 100);
+}
+
+
+
+
+function handleBaloonContext(text, obj, target_id){
+    const e_data = data.find(item => item.id == target_id);
+    e_text = e_data.text
+    e_title = e_data.title
+    if (text=="editText"){
+        showpop({type: "baloon", id: target_id, action: text, obj: obj, pop_text: e_text})
+    }
+    if (text == "editTitle"){
+        showpop({type: "baloon", id: target_id, action: text, obj: obj, pop_text: e_title })
+    }
+}
+function handleCardContext(text, obj, target_id){
+    if (text=="editText"){
+        msg = ''
+        data.forEach(item=>{ if(item.id == target_id ) { 
+            msg = item.text;
+        }
+        })
+        showpop({type: "card", id: target_id, action: text, obj: obj, pop_text: msg})
+    }
+}
+function handleHandleContext(text, obj, target_id){
+    if (text == "delete"){
+        console.log(obj, target_id)
+        let idToRemove = obj.getAttribute("parent_id")
+        const exists = data.some(item => item.id == idToRemove);
+        console.log(exists)
+        if (exists){
+        const index = data.findIndex(item => item.id == idToRemove);
+        console.log(index)
+        console.log(data)
+        if (index !== -1) {data.splice(index, 1)}
+        console.log(data)
+        e = document.getElementById(idToRemove)
+        e.remove()
+        }
+    }
+    if (text == "addTag"){
+        let msg = ''
+        data.forEach(item=>{if(item.id == target_id){ if("tag" in item){ msg = item.tag.join() } }})
+        showpop({type: "handle", id: target_id, action: text, obj: obj, pop_text: msg })
+    }
+    if (text == "editTitle"){
+        let msg = ''
+        data.forEach(item=>{if(item.id == target_id){ if("title" in item){ msg = item.title } }})
+        showpop({type: "handle", id: target_id, action: text, obj: obj, pop_text: msg })
+    }
+}
+function handleDrawAreaContext(text, obj, target_id){
+    // If leafDetail not explicitly passed, try to get from obj._fromAddLeaf
+    const leaf_id = obj?._fromAddLeaf?.target_id;
+    let new_item = null
+    if (text == "addBubble"){ 
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        console.log(global_x_moves)
+        console.log(global_y_moves)
+        new_item = {id: max_id, type: "bubble", style: {"default": "bubble"}, x: x, y: y, title: ".\n\n", text: "i am new bubble"}
+        data.push(new_item)
+        createNodes(getNodeParent(),[new_item])
+    }
+    if (text == "addLink"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        console.log(global_x_moves)
+        console.log(global_y_moves)
+        let link  = prompt("Enter Link");
+        let link_text = prompt("Enter text");
+        new_item = {id: max_id, type: "link", style: {"default": "link"}, x: x, y: y, title: ".", href: link,  text: link_text}
+        data.push(new_item)
+        createNodes(getNodeParent(),[new_item])
+    }
+    if (text == "addImage"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        let link  = prompt("Enter image name", g_clicked_key);
+        let img = link
+        new_item = {id: max_id, type: "img", style: {"default": "img"}, x: x, y: y, title: ".", name: img}
+        data.push(new_item)
+        createNodes(getNodeParent(),[new_item])
+    }
+    if (text == "addGoto"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        let name  = prompt("Enter name");
+        let id = prompt("Enter Id")
+        if (parseInt(id) === null || Number.isNaN(parseInt(id))) {alert("Value is null or NaN");return}
+        new_item = {id: max_id, type: "goto", style: {"default": "goto"}, x: x, y: y, title: ".", text: name, gotoid: id}
+        data.push(new_item)
+        createNodes(getNodeParent(),[new_item])
+    }
+    if (text == "addBaloon"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        new_item = {id: max_id, type: "baloon", style: {"default": "baloon"}, x: x, y: y, text: 'text', title: 'title'}
+        data.push(new_item);
+        createNodes(getNodeParent(), [new_item]);        
+    }
+    if (text == "addCard"){
+        let max_id = getMaxID()
+        let x = -global_x_moves
+        let y = -global_y_moves
+        let text  = prompt("Enter text");
+        new_item = {id: max_id, type: "card", style: {"default": "card"}, x: x, y: y, text: text}
+        data.push(new_item);
+        createNodes(getNodeParent(), [new_item]);        
+    }
+    if (text=="addLeaf"){
+        //console.log("addLeaf", obj)
+        if ('_fromAddLeaf' in obj) {
+            alert('repeated leaf clicks');
+        } else {
+        openDrawAreaContextMenu(obj);
+        }
+    }
+    if ( leaf_id != null && text != "addLeaf" ) {
+        let updated_item = addNodeToData(new_item, Number(leaf_id))
+        if (updated_item != null){
+            renderAll(layoutDirection, data, updated_item._groupId)
+        }
+    }
+    obj && '_fromAddLeaf' in obj && delete obj._fromAddLeaf; // clear from add leaf
+}
+
+function addNodeToData(newNode, parent_id) {
+  if (parent_id != null) { // check target_id is not null or undefined
+    // Find the parent node by target_id
+    //console.log(parent_id)
+    const parentNode = data.find(item => item.id === parent_id);
+
+    if (!parentNode) {
+      alert(`Parent node with id ${parent_id} not found.`);
+      return; // stop processing
+    }
+
+    // Add child array to new node
+    newNode.child = [];
+    newNode._groupId = parentNode._groupId;
+
+    // Initialize parent's child array if missing
+    if (!Array.isArray(parentNode.child)) {
+      parentNode.child = [];
+    }
+    // Add new node's id to parent's child array
+    parentNode.child.push(newNode.id);
+    return newNode
+  } 
+}
+
+
+function setNodeWidth(e, id, w = ''){
+    parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                if (w==''){
+                    if ( "width" in item ){ delete item.width}
+                    //e.style.width = ''
+                } else {
+                    item.width = w
+                    //e.style.width = item.width + "px"
+                }
+            }
+        });
+}
+
+function setNodeHeight(e, id, h = ''){
+    parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                if ( h == ''){
+                    if ( "height" in item ){ delete item.height}
+                    //e.style.height = ''
+                }
+                else {
+                item.height = h
+                //e.style.height = item.height + "px"
+                }
+            }
+        });
+}
+
+function searchTag(tag){
+    let res = []
+    data.forEach(item=>{
+        if ("tag" in item && tag.split(',').every(e=>item.tag.includes(e))){
+            res.push(item.id)
+        }
+    })
+    if (res.length>0){alert(res.join('\n'))}
+}
+
+g_make_context_flag=false
+function makeContext(element){    
+    
+    let list_items = null
+    // Show context menu on right-click
+    element.addEventListener("contextmenu", (event) => {
+        event.preventDefault(); // Prevent default right-click menu
+        event.stopPropagation(); // Prevent default right-click menu
+        //console.log("event listener")
+        type = element.getAttribute("item_sub_type")
+        //console.log(type)
+        if (g_make_context_flag) return
+        g_make_context_flag = true
+        //console.log(event.target)
+        if (type == "bubble"){ list_items = createBubbleContext(event.target) }
+        if (type == "quiz"){ list_items = createQuizContext(event.target) }
+        if (type == "draw_area"){ list_items = createDrawAreaContext(event.target) }
+        if (type == "handle"){ list_items = createHandleContext(event.target) }
+        if (type == "card"){ list_items = createCardContext(event.target) }
+        if (type == "baloon"){ list_items = createBaloonContext(event.target) }
+        list_items.id = "context_menu_list"
+        document.getElementById("contextMenu").appendChild(list_items)
+        
+        const parentRect = getNodeParent().getBoundingClientRect()
+        startX = event.pageX - parentRect.left
+        startY = event.pageY - parentRect.top
+        contextMenu.style.left = `${startX}px`;
+        contextMenu.style.top = `${startY}px`;
+        contextMenu.style.display = "block";
+        //console.log(g_make_context_flag)
+    });
+    // Hide context menu when clicking elsewhere
+    document.addEventListener("click", () => {
+       if (g_make_context_flag) {
+        let list_items = document.getElementById("context_menu_list")
+        //console.log(document.getElementById("contextMenu"), list_items)
+        document.getElementById("contextMenu").removeChild(list_items)
+        list_items.remove()
+    }
+       g_make_context_flag = false
+       contextMenu.style.display = "none";
+    });
+}
+
+g_last_top_e = { e: null, zIndex: null}
+//applies only to bubble
+function node_on_top(element, element_zindex_capture){
+    if ( g_last_top_e.e == null || ( g_last_top_e.e != element )) {
+        if (g_last_top_e.e){
+            g_last_top_e.e.style.zIndex = g_last_top_e.zIndex
+        }
+        g_last_top_e.e = element;
+        g_last_top_e.zIndex = element_zindex_capture;
+    }
+    element.style.zIndex = zIndices.topSpot;
+}
+function overrideDraggableIpad(element){
+    // maximize section
+    const typeHandlers = {max : { bubble: maximizeBubble, quiz: maximizequiz }, min: { bubble: minimizeBubble, quiz: minimizequiz }};
+    if (element.getAttribute("item_type") === 'node' && ( element.querySelector('[item_sub_type="bubble"]') ||  element.querySelector('[item_sub_type="quiz"]') ) ){
+        const resizerElement = element.querySelector('[item_sub_type="resizer"]');
+        const bubbleElement = element.querySelector('[item_sub_type="bubble"]');
+        const quizElement = element.querySelector('[item_sub_type="quiz"]');
+        const e = bubbleElement || quizElement
+        const e_type = e.getAttribute("item_sub_type")
+        const parentId = resizerElement.getAttribute("parent_id");
+        const element_zindex_capture = element.style.zIndex
+        let width = null;
+        let height = null;
+        let current_item = null;
+        data.forEach(item=>{ if(item.id == parentId ) { current_item = item; width = item.width; height = item.height } })
+        console.log(current_item,width,height,resizerElement,bubbleElement,parentId)
+        if ( "_max" in current_item && current_item._max){ 
+            typeHandlers['min'][e_type](resizerElement, width, height)
+            //bubbleElement.style.backgroundColor = ""
+            current_item._max=false
+        } else {
+            typeHandlers['max'][e_type](resizerElement)
+            //bubbleElement.style.backgroundColor = "#1f1f1f"
+            current_item._max=true
+        }
+        node_on_top(element, element_zindex_capture)
+    }
+}
+
+function makeDraggable(element, parent, handle = null) {
+    const dragTarget = handle || element;
+    element.style.position = 'absolute';
+    dragTarget.style.cursor = 'move';
+    let offsetX, offsetY, isDragging = false;
+    let startX = 0, startY = 0;
+    let zIndexValue = null
+    let element_zindex_capture = null
+    
+    function startDrag(x, y) {
+        element.id !== "anchor" && console.log(element)
+        if (element.button === 2) return;
+        processGraphNode(element)
+        if(( ( isIPad() || isPhone() ) && element.getAttribute("item_type") === 'node')){
+        //if((true && element.getAttribute("item_type") === 'node')){
+            overrideDraggableIpad(element)
+            return
+        }
+        const parentRect = parent.getBoundingClientRect();
+        const elemRect = element.getBoundingClientRect();
+        offsetX = x - elemRect.left;
+        offsetY = y - elemRect.top;
+        startX = elemRect.left - parentRect.left;
+        startY = elemRect.top - parentRect.top;
+        isDragging = true;
+        element_zindex_capture = element.style.zIndex
+        element.style.zIndex = 1000;
+    }
+
+    function dragMove(x, y) {
+        if (!isDragging) return;
+        const parentRect = parent.getBoundingClientRect();
+        const newX = x - parentRect.left - offsetX;
+        const newY = y - parentRect.top - offsetY;
+        element.style.left = newX + 'px';
+        element.style.top = newY + 'px';
+    }
+
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        if (element.getAttribute("item_type") == 'node') {
+            node_on_top(element, element_zindex_capture)
+        } else {
+            element.style.zIndex = element_zindex_capture;
+        }
+        
+        const parentRect = parent.getBoundingClientRect();
+        const elemRect = element.getBoundingClientRect();
+        const endX = elemRect.left - parentRect.left;
+        const endY = elemRect.top - parentRect.top;
+        const deltaX = Math.round(endX - startX);
+        const deltaY = Math.round(endY - startY);
+        if (element.id === "anchor") {
+            resetAnchorAndMoveNodes(element, parent, deltaX, deltaY);
+            renderAll(layoutDirection, data)
+        } else if (element.id && element.getAttribute("item_type") === 'node') {
+            updateNodePosition(element.id, deltaX, deltaY);
+        }
+    }
+
+    // --- MOUSE EVENTS ---
+    dragTarget.addEventListener('mousedown', function (e) {
+        if (e.button === 2) return; // Right-click
+        e.preventDefault();
+        e.stopPropagation();
+        startDrag(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        dragMove(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('mouseup', function () {
+        endDrag();
+    });
+
+    // --- TOUCH EVENTS ---
+    dragTarget.addEventListener('touchstart', function (e) {
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+        e.preventDefault();
+        e.stopPropagation();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        dragMove(touch.clientX, touch.clientY);
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', function () {
+        endDrag();
+    });
+}
+
+
+    global_x_moves = 0 
+    global_y_moves = 0
+
+    g_global_moves = []
+    function goToNode(id, caller = null ){
+        console.log("gotonode", id, caller)
+        function push_nodes(arr, val){
+            if ( val == null ) return 
+            if ( arr.length > 0 && arr[arr.length-1] == val ) return 
+            arr.push(val)
+        }
+        id = parseInt(id)
+        if ( id == -1){
+            if ( g_global_moves.length > 0 ) g_global_moves.pop() // ignore last element 
+            id = null 
+            if ( g_global_moves.length > 0 ) id = g_global_moves[g_global_moves.length-1] // ignore last element 
+            if ( id == null ) return;
+        } else {
+            if (caller != null) push_nodes(g_global_moves, caller)
+            if ( id != null ) push_nodes(g_global_moves, id)
+        }
+        id_data = data.find(d=>d.id==id)
+        if ( id_data == null ){
+            alert("id not found:"+id)
+            return
+        }
+        // check if leaf node 
+        if ("child" in id_data){
+            makeAllParentVisible(id)
+        }
+        move_to_x = null
+        move_to_y = null
+        console.log("g_global_moves", g_global_moves)
+        move_to_x = id_data._calculatedX
+        move_to_y = id_data._calculatedY
+        if ( move_to_x == null || move_to_y == null ){return}
+        draw_area_rect = document.getElementById("draw_area").getBoundingClientRect()
+        draw_area_x = draw_area_rect.width/2  
+        draw_area_y = draw_area_rect.height/2
+        draw_area_x -= .1 * draw_area_x
+        draw_area_y -= .1 * draw_area_y
+        move_to_x -= draw_area_x
+        move_to_y -= draw_area_y
+        global_x_moves -= move_to_x
+        global_y_moves -= move_to_y 
+        e = document.getElementById(id)
+        e.classList.add("goto-highlight")
+        setTimeout(()=> {e.classList.remove("goto-highlight")},500)
+        data.forEach(item=>{
+            item._calculatedX -= move_to_x
+            item._calculatedY -= move_to_y 
+            setNodePosition(item.id)
+        })
+    }
+
+    function callGoToNode(id=null, caller=null){
+        if (id==null){ goToNode(document.getElementById("input_goto").value) }
+        else if ( id == -2 ){ goToNode(helper.get_random().id) }
+        else { goToNode(id, caller) }
+    }
+
+    function resetAnchorAndMoveNodes(anchor, parent, x, y){
+        global_x_moves += x 
+        global_y_moves += y
+        shiftNodePosition(x, y)
+        setPositionByPercentage(anchor, 50, 50, parent)
+    }
+
+    function getNodeParent(){
+        return document.querySelector('#draw_area')
+    }
+
+    function setNodePosition(id){
+        parent = getNodeParent()
+        data.forEach(item => {
+            if (item.id == id){
+                div = document.getElementById(id)
+                if (item._calculatedX + div.clientWidth < 0 || item._calculatedX > parent.clientWidth || item._calculatedY + div.clientHeight < 0 || item._calculatedY > parent.clientHeight)
+                    {div.style.visibility = "hidden"}
+                else
+                    {div.style.visibility = "visible"}
+                setPositionByCoords(document.getElementById(id), item._calculatedX, item._calculatedY, parent)
+            }
+        });
+    }
+
+    function updateNodePosition(id, x, y){
+        data.forEach(item =>{
+            if (item.id == id){
+                item.x += x
+                item.y += y
+                item._calculatedX += x
+                item._calculatedY += y
+                
+                setNodePosition(id)
+            }
+        })
+    }
+
+    function shiftNodePosition(shift_x = 0, shift_y = 0){
+        parent = getNodeParent()
+        data.forEach(item => {
+            const id = item.id
+            const div = document.getElementById(id)
+            if (div) {
+                const pos = getPosition(div, parent)
+                item._calculatedX = pos.x + shift_x
+                item._calculatedY = pos.y + shift_y
+                setNodePosition(id)
+            }
+        })
+    }
+
+    function setPositionByCoords(element, x, y, parent){
+        if (parent){
+            element.style.position = 'absolute'
+            element.style.left = x + 'px'
+            element.style.top = y + 'px'
+        } else {
+            element.style.left = x + 'px'
+            element.style.top = y + 'px'
+        }
+    }
+
+    function setPositionByPercentage(element, x , y, parent){
+        if (parent){
+            element.style.position = 'absolute'
+            element.style.left = x + '%'
+            element.style.top = y + '%'
+        } else {
+            element.style.left = x + '%'
+            element.style.top = y + '%'
+        }
+    }
+
+    function getPosition(element, parent){
+        const elemRect = element.getBoundingClientRect()
+        const parentRect = parent.getBoundingClientRect()
+        const pos = {
+            x: Math.round(elemRect.left - parentRect.left),
+            y: Math.round(elemRect.top - parentRect.top),
+        }
+        return pos
+    }
+
+    function* getAllParent(startId, nodes) {
+        const nodeMap = new Map(nodes.map(n => [n.id, n]));
+        const visited = new Set();
+        
+        let startNode = nodeMap.get(startId);
+        if (!startNode) return;
+
+        let stack = startNode._parents ? [...startNode._parents] : [];
+
+        while (stack.length > 0) {
+            const current = stack.pop();
+
+            if (!current || visited.has(current.id)) continue;
+            visited.add(current.id);
+
+            yield current;
+
+            if (current._parents) {
+                stack.push(...current._parents);
+            }
+        }
+    }
+
+function makeAllParentVisible(id) {
+    if ( id == null ) id = g_clicked_graph_node?.id
+    if ( id == null ) return alert("No leaf node clicked")
+    id = Number(id)
+    let e_data = data.find(n => n.id == id);
+    if (!e_data) return alert("No data found!");
+    const groupId = e_data?._groupId;
+    const nodes = data?._groups?.[groupId] || [];
+    // Step 1: process the node itself
+    setGraphNodeVisibility(e_data, '+');
+
+    // Step 2: process each parent
+    for (const parent of getAllParent(id, nodes)) {
+        let p_data = data.find(n => n.id == parent.id);
+        if (p_data) {
+            setGraphNodeVisibility(p_data, '+');
+        }
+    }
+    highlightAllParents(id, nodes)
+    renderAll(layoutDirection, nodes, groupId)
+}
+
+
+    function makeParent(id, parent_id){
+        let e_data = data.find(n => n.id == id);
+        if (!e_data) return alert("No data found!");
+
+        // Get first parent id (may be undefined or empty)
+        const curr_parent = e_data._parents?.[0].id;
+
+        // Only remove child from current parent if parent exists
+        if (curr_parent) {
+        const curr_parent_data = data.find(n => n.id == curr_parent);
+        if (curr_parent_data) {
+            const idx = curr_parent_data.child?.indexOf(id);
+            if (idx >= 0) curr_parent_data.child.splice(idx, 1);
+            else alert(`Child ID ${id} not found in Parent ID ${curr_parent}'s children array!`);
+        }
+        }
+
+        // Now add to new parent regardless of current parent
+        const new_parent = data.find(n => n.id == parent_id);
+        if (!new_parent) return alert(`New parent ${parent_id} not found!`);
+
+        if (!new_parent.child) new_parent.child = [];
+        if (!new_parent.child.includes(id)) new_parent.child.push(id);
+
+        const groupId = e_data?._groupId;
+        const nodes = data?._groups?.[groupId] || [];
+        renderAll(layoutDirection, nodes, groupId)
+    }
+
+    function calculateMaxSpace(nodeMap, spacing, dimension, rootId) {
+    //console.log("calculateMaxSpace", nodeMap, spacing, dimension, rootId)
+    //const nodeMap = new Map(nodes.map(node => [node.id, node]));
+    function helper(node) {
+        //console.log("helper", node)
+        if (!node.child || node.child.length === 0) {
+        node._max_space = node[dimension];
+        return node[dimension]; // Return own size
+        }
+
+        let total = 0;
+        for (let childId of node.child) {
+        const childNode = nodeMap.get(childId);
+        if (childNode) total += helper(childNode);
+        }
+
+        total += (node.child.length - 1) * spacing;
+
+        const ownSize = node[dimension];
+        const maxSpace = Math.max(ownSize, total);
+
+        node._max_space = maxSpace;
+        return maxSpace;
+    }
+    const rootNode = nodeMap.get(rootId);
+    //console.log(nodeMap, rootId, typeof rootId, rootNode)
+    if (!rootNode) {
+        throw new Error(`Root node with id ${rootId} not found`);
+    }
+    helper(rootNode);
+    //[...nodeMap.entries()].forEach(([id, node]) => console.log(` ${id}: _max_space=${node._max_space}`));
+    return Array.from(nodeMap.values());
+    }
+
+
+    function measureSizes(nodeMap) {
+    for (const [id, node] of nodeMap.entries()) {
+        const element = document.getElementById(id);
+        element.style.display = ''
+        if (element) {
+        const rect = element.getBoundingClientRect();
+        node._width = rect.width;
+        node._height = rect.height;
+        } else {
+        console.warn(`Element with id ${id} not found.`);
+        node._width = 0;
+        node._height = 0;
+        }
+    }
+    }
+
+
+    function* bfs(startId, nodeMap) {
+    //console.log("bfs", startId, nodeMap)
+    const queue = [{
+        nodeId: startId,
+        parent: null,
+        siblingIndex: 0,
+        siblings: [],
+        parents: [] // assuming only one parent for simplicity
+    }];
+
+    while (queue.length > 0) {
+        const { nodeId, parent, siblingIndex, siblings, parents } = queue.shift();
+        const node = nodeMap.get(nodeId);
+        const children = node.child || [];
+
+        // Yield node information instead of calling a helper
+        yield {
+        nodeId,
+        parent,
+        siblingIndex,
+        siblings,
+        parents,
+        node,
+        children
+        };
+
+        // Enqueue children
+        for (let i = 0; i < children.length; i++) {
+        childNode = nodeMap.get(children[i])
+        if (childNode) {
+            queue.push({
+                nodeId: children[i],
+                parent: node,
+                siblingIndex: i,
+                siblings: children,
+                parents: [node]
+            });
+        }
+        }
+    }
+    }
+
+
+    function setGraphNodeVisibility(node, input) {
+    if (input === '*'){
+        node['_*'] = true
+        node['_+'] = true
+    } else if (input === '+') {
+        node['_+'] = true
+        node['_*'] = node['_*']
+    } else if (input === '-') {
+        node['_+'] = false
+        node['_*'] = false
+    }  else {
+        node['_+'] = !node['_+']
+        node['_*'] = node['_+'] === false ? false :  node['_*']
+    }
+    }
+
+    function computeLayout(orientation, nodes, rootId, horizontalSpacing, verticalSpacing) {
+    //console.log("computeLayout", orientation, nodes, rootId, horizontalSpacing, verticalSpacing)
+        function resolveVisibility(node, parent) {
+            e = document.getElementById(node.id)
+            e.classList.remove("star-selected")
+            //console.log('in', node.id, node['_*'], node['_+'], node['_p*'])
+            //parent && console.log('in parent', parent.id, parent['_*'], parent['_+'], parent['_p*'])
+            //initial load
+            node['_*'] ??= false;
+            node['_+'] ??= false;
+            node['_p*'] ??= false;
+            //incremental load
+            // when parent is false then show is false - no calculation
+            if  ( node['_*'] === true ) {
+                
+                e.classList.add("star-selected")
+            }
+            if (parent == null) { // it is root 
+                node['_p*'] = node['_*'];
+            } 
+            else if ( parent['_show'] === false  ){
+                node['_show'] = false;
+            }
+            else {
+                // resolve propagated *
+                if ( node['_*'] === true && parent?.['_+'] === true ) { //only if parent allows then you can override
+                node['_p*'] = true;
+                } else {
+                node['_p*'] = parent['_p*'];
+                }
+                // calculate show
+                node['_show'] = node['_p*'] === true || ( node['_*'] === true && parent?.['_+'] === true ) || parent?.['_+'] === true ;
+            }
+            // dont move this calculation to top , otherwise root will always be true and it wont work for child 
+            if (parent == null) {
+                node['_show'] = true;  // override if parent is null or undefined
+            } 
+            //console.log('out', node.id, node['_*'], node['_+'], node['_p*'], node['_show'])
+        }
+            function helper(
+            nodeId,
+            parent = null,
+            siblingIndex = 0,
+            siblings = [],
+            parentStack = [],
+            {
+                xKey = '_graphX',
+                yKey = '_graphY',
+                widthKey = '_width',
+                heightKey = '_height'
+            } = {}
+            )
+            {
+                //console.log(nodeId, parent, siblingIndex, siblings, parentStack)
+                function getExtremeParentShift(parents) {
+                    //console.log("getExtremeParentShift", parents)
+                    if (!parents || parents.length === 0) {
+                        // Root node — apply global shift
+                        return isHorizontal ? 0 : 0;
+                    }
+
+                    const extremeParent = isHorizontal
+                        ? parents[parents.length - 1]
+                        : parents[0];
+
+                    const siblingShift = extremeParent._total_shift || 0;
+                    return siblingShift ;
+                }
+
+                const node = nodeMap.get(nodeId);
+                const children = node.child || [];
+
+                // === STEP A: Compute sibling shift (a)
+                let siblingShift = 0;
+                if (siblings.length > 1) {
+                if (isHorizontal) {
+                    for (let i = siblingIndex + 1; i < siblings.length; i++) {
+                    const sibling = nodeMap.get(siblings[i]);
+                    //console.log(sibling._max_space , horizontalSpacing)
+                    siblingShift += (sibling._max_space + horizontalSpacing);
+                    }
+                } else {
+                    for (let i = 0; i < siblingIndex; i++) {
+                    const sibling = nodeMap.get(siblings[i]);
+                    //console.log("sibling", sibling)
+                    siblingShift += (sibling._max_space  + verticalSpacing);
+                    }
+                }
+                }
+                //console.log("sibling shift", siblingShift)
+                _total_sibling_shift = siblingShift;
+
+                // === STEP B: Compute parent lineage shift (b)
+                const extremeParentShift = getExtremeParentShift(parentStack);
+                //console.log("extremeParentShift", extremeParentShift)
+                node._total_shift = _total_sibling_shift + extremeParentShift;
+
+                // === STEP C: Get max size
+                const maxSize = node[maxKey];
+                
+                // === STEP D: Position the node
+                if (isHorizontal) {
+                    // Horizontal layout (left → right), vertical center
+                    node[xKey] = parent ? parent[xKey] + parent[widthKey] + verticalSpacing : 0;
+                    node[yKey] = (maxSize / 2) - (node[heightKey] / 2) + siblingShift + extremeParentShift;
+                } else {
+                    // Vertical layout (top → bottom), horizontal center
+                    node[xKey] = (maxSize / 2) - (node[widthKey] / 2) + siblingShift + extremeParentShift;
+                    node[yKey] = parent ? parent[yKey] + parent[heightKey] + horizontalSpacing : 0;
+                }
+                //console.log("x and y", node[xKey], node[yKey]);
+
+        }
+
+
+    const nodeMap = new Map(nodes.map(n => [n.id, n]));
+
+    const isHorizontal = orientation === "horizontal";
+    const maxKey = "_max_space";
+    const maxSpaceSpacing = isHorizontal ? horizontalSpacing : verticalSpacing;
+    const maxSpacedimension = isHorizontal ? "_height" : "_width";
+    //filter visible nodes)
+    for (const info of bfs(rootId, nodeMap)) {
+    // Destructure the yielded info
+    const { nodeId, parent, siblingIndex, siblings, parents, node, children } = info;
+    resolveVisibility(node, parent)
+    }
+    // filter visible/invisible nodes
+    const showNodeMap = new Map();
+    const hideNodeMap = new Map();
+
+    for (const [id, node] of nodeMap) {
+    if (node['_show'] === true) showNodeMap.set(id, node);
+    else hideNodeMap.set(id, node);
+    }
+    //console.log(showNodeMap)
+    measureSizes(showNodeMap)
+    calculateMaxSpace(showNodeMap, maxSpaceSpacing, maxSpacedimension, rootId);
+    //[...nodeMap.entries()].forEach(([id, node]) => console.log(`Node ${id}: x=${node.x}, y=${node.y}`));
+    const rootNode = showNodeMap.get(rootId);
+    if (!rootNode) {
+        throw new Error(`Root node with id ${rootId} not found`);
+    }
+
+    for (const info of bfs(rootId, showNodeMap)) {
+    // Destructure the yielded info
+    const { nodeId, parent, siblingIndex, siblings, parents, node, children } = info;
+    //console.log(node.x, node.y)
+    // You can now call your helper function here if needed:
+    helper(nodeId, parent, siblingIndex, siblings, parents);
+
+    // Or just log it
+    //console.log("Visited node:", nodeId);
+    }
+    return {
+    show: Array.from(showNodeMap.values()),
+    hide: Array.from(hideNodeMap.values())
+    };
+    }
+
+    const layoutSpacing = {
+    vertical: { x: 50, y: 10 },
+    horizontal: { x: 2, y: 5 }
+    };
+    layoutDirection = "horizontal"
+    
+    function render(layoutDirection, rawNodes, rootId) {
+    //console.log("render", layoutDirection, rawNodes, rootId)
+    const xSpacing = layoutSpacing[layoutDirection].x;
+    const ySpacing = layoutSpacing[layoutDirection].y;
+    const rootNode = rawNodes.find(node => node.root === true);
+    //rawNodes.forEach(node => {console.log(node.x, node.y)});
+    const { show, hide } =computeLayout(orientation = layoutDirection, nodes = rawNodes, rootId = rootId, horizontalSpacing = xSpacing , verticalSpacing = ySpacing)
+    shiftNodesToPosition(show, rootId)
+    //show.forEach(node => {console.log('show', node.id, node.x, node.y, node._calculatedX, node._calculatedY)});
+    //hide.forEach(node => {console.log('hide', node.id, node.x, node.y, node._calculatedX, node._calculatedY)});
+    show.forEach(node => setNodePosition(node.id));
+    [...hide, ...show].forEach(node => {
+    const elem = document.getElementById(node.id);
+    if (elem) {
+        elem.style.display = hide.includes(node) ? 'none' : 'block';
+    }
+    });
+    }
+
+    function shiftNodesToPosition(nodes, rootId) {
+    const rootNode = nodes.find(node => node.id === rootId);
+    if (!rootNode) {
+        throw new Error(`Root node with id ${rootId} not found.`);
+    }
+    //make the calculated x and y of root node to 0 so shift everything else
+    deltaX = rootNode._graphX
+    deltaY = rootNode._graphY
+
+    nodes.forEach(node => { node._graphX -= deltaX; node._graphY -= deltaY })
+
+    nodes.forEach(node => {
+        if (node !== rootNode) {
+            node.x = (node._graphX || 0) + rootNode.x
+            node.y = (node._graphY || 0) + rootNode.y
+            node._calculatedX = (node._graphX || 0) + rootNode._calculatedX;
+            node._calculatedY = (node._graphY || 0) + rootNode._calculatedY;
+        }
+    });
+
+    }
+
+
+    function groupGraphsWithBFSGenerator(rawNodes, rootId = null) {
+    //console.log("groupGraphsWithBFSGenerator", rawNodes)
+    const idToNode = new Map(rawNodes.map(n => [n.id, n]));
+    const visited = new Set();
+    const groups = {};
+
+    // Only nodes explicitly marked as root
+    const rootNodes = rootId !== null    ? rawNodes.filter(n => n.id === rootId)    : rawNodes.filter(n => n.root === true);
+    //console.log("root nodes are", rootNodes)
+    for (const node of rootNodes) {
+        if (visited.has(node.id)) continue;
+
+        const group = [];
+        const groupId = node.id;
+        const iterator = bfs(groupId, idToNode);
+
+        for (const item of iterator) {
+        if (!visited.has(item.nodeId)) {
+            visited.add(item.nodeId);
+            item.node._groupId = groupId;
+            item.node._parents = item.parents;
+            group.push(item.node);
+        }
+        }
+
+        groups[groupId] = group; // ✅ key is root ID, value is node array
+    }
+    
+    return groups;
+    }
+
+
+
+    function renderAll(layoutDirection, rawNodes, rootId = null) {
+    //console.log("renderAll", layoutDirection, rawNodes, rootId)
+    // create empty object if undefined
+    data._groups = data._groups || {};
+    // Only nodes with the 'root' attribute (true or false)
+    const graphNodes = rawNodes.filter(node => node.hasOwnProperty('child'));
+
+    // Group graphs: { [rootId]: [nodes] }
+    const subgraphs = groupGraphsWithBFSGenerator(graphNodes, rootId);
+    rootId === null ? (data._groups = subgraphs) : (data._groups[rootId] = subgraphs[rootId]);
+    // Loop over each group
+    for (const [rootId, group] of Object.entries(subgraphs)) {
+        render(layoutDirection, group, Number(rootId)); // 👈 rootId as third param (number)
+    }
+    }
+
+
+function highlightAllParents(id, nodes){
+    const CLASS_SELECTED = "self-selected";
+    // clear existing
+    for (const node of nodes) {
+        const el = document.getElementById(node.id);
+            if (el) {
+                el.classList.remove(CLASS_SELECTED)
+            }
+    }
+    // highlight 
+    document.getElementById(id)?.classList.add('self-selected');
+    for (const parent of getAllParent(id, nodes)) {
+        document.getElementById(parent.id)?.classList.add('self-selected');
+    }
+}
+g_clicked_graph_node = null
+g_clicked_graph_node_timeout = null;
+
+function set_g_clicked_graph_node(e) {
+  g_clicked_graph_node = e;
+  clearTimeout(g_clicked_graph_node_timeout);
+  g_clicked_graph_node_timeout = setTimeout(() => g_clicked_graph_node = null, 5000);
+}
+function processGraphNode(e, input=null) {
+    if (!e) {
+        alert('No graph node clicked');
+        return;
+    }
+    const CLASS_CHILD = "child-highlight";
+    const CLASS_PARENT = "parent-highlight";
+    selectedNodeId = Number(e.id);
+    if (!selectedNodeId) return;
+    const selectedNode = data.find(n => n.id === selectedNodeId);
+    if (!selectedNode?.child) return;
+    set_g_clicked_graph_node(e)
+    const groupId = selectedNode?._groupId;
+    const nodes = data?._groups?.[groupId] || [];
+    setGraphNodeVisibility(selectedNode, input)
+    renderAll(layoutDirection, nodes, groupId)
+    highlightAllParents(selectedNodeId, nodes)
+    return
+    /* the lock for * is more important than this let this stabilise
+    console.log(selectedNodeId, groupId, nodes);
+  // First, remove all existing highlight classes
+  for (const groupId in data._groups) {
+    const groupNodes = data._groups[groupId];
+    for (const node of groupNodes) {
+      const el = document.getElementById(node.id)
+      if (el) {
+        el.classList.remove(CLASS_SELECTED, CLASS_CHILD, CLASS_PARENT);
+      }
+    }
+  }
+
+  // Delay before applying new highlight classes
+  setTimeout(() => {
+
+    for (const node of nodes) {
+      const el = document.getElementById(node.id);
+      if (!el) continue;
+
+      if (node.id === selectedNodeId) {
+        console.log(node, "selected");
+        el.classList.add(CLASS_SELECTED);
+      } else if (selectedNode.child?.includes(node.id)) {
+        console.log(node, "child");
+        el.classList.add(CLASS_CHILD);
+      } else if ((node.child || []).includes(selectedNodeId)) {
+        console.log(node, "parent");
+        el.classList.add(CLASS_PARENT);
+      }
+    }
+    renderAll(layoutDirection, nodes, groupId)
+  }, 1); // 100ms delay */
+}
+
+
+
+
+
+
+    function createQuizApp(app, questions) {
+    let currentIndex = 0;
+
+    function createCardAnswer(question) {
+    const wrapper = document.createElement('div');
+
+    const revealBtn = document.createElement('div');
+    revealBtn.textContent = question.q;
+    revealBtn.style.whiteSpace = 'pre-wrap';
+
+    const answer = document.createElement('div');
+    answer.style.whiteSpace = 'pre-wrap';
+    answer.className = 'quiz-answer';
+    answer.style.display = 'none';
+    answer.textContent = question.a;
+
+    revealBtn.onclick = () => {
+        answer.style.display = 'block';
+        revealBtn.style.display = 'none';
+        showNextButton(); // Move to next after reveal
+        showHint(wrapper,question)
+    };
+
+    wrapper.appendChild(revealBtn);
+    wrapper.appendChild(answer);
+    
+    return wrapper;
+    }
+
+
+    function createFillInTheBlanksQuestion(question) {
+    let attemptCount=0
+    const wrapper = document.createElement('div');
+    const parts = question.q.split("____");
+    const answerArray = Array.isArray(question.a) ? question.a : [question.a];
+
+    const form = document.createElement('div');
+    const inputs = [];
+
+    parts.forEach((part, i) => {
+        form.appendChild(document.createTextNode(part));
+        if (i < answerArray.length) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.size = Math.max(answerArray[i].length, 5);
+        input.className = 'quiz-input';
+        inputs.push(input);
+        form.appendChild(input);
+        }
+    });
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit";
+    submitBtn.className = 'quiz-button';
+
+    submitBtn.onclick = () => {
+        let allCorrect = true;
+        attemptCount++;
+        inputs.forEach((input, idx) => {
+        const val = input.value.trim()//.toLowerCase();
+        const correct = answerArray[idx]//.toLowerCase();
+
+        if (val === correct) {
+            input.classList.remove('quiz-incorrect');
+            input.classList.add('quiz-correct');
+        } else {
+            input.classList.add('quiz-incorrect');
+            submitBtn.classList.add('quiz-incorrect')
+            allCorrect = false;
+        }
+        });
+
+        if (allCorrect || attemptCount >= 3 ) {
+        disableInputs(inputs, submitBtn);
+        showNextButton();
+        showHint(wrapper,question)
+        } 
+        if (attemptCount >= 3) {
+            inputs.forEach((input, idx) => {
+            input.value = answerArray[idx];
+            input.classList.remove('quiz-incorrect');
+            input.classList.add('quiz-correct');
+            });
+        }
+    };
+
+    wrapper.appendChild(form);
+    wrapper.appendChild(submitBtn);
+    return wrapper;
+    }
+
+
+
+function createOptionsQuestion(question) {
+    const wrapper = document.createElement('div');
+    wrapper.style.whiteSpace = 'pre-wrap';
+
+    // Add question text
+    const questionText = document.createElement('div');
+    questionText.innerHTML = question.q;
+    wrapper.appendChild(questionText);
+
+    const selected = new Set();
+    let attemptCount = 0;
+    const correctAnswer = new Set(question.a);
+    const optionButtons = [];
+
+    const areSetsEqual = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
+
+    // Submit button (initially hidden)
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit";
+    submitBtn.className = 'quiz-button';
+    submitBtn.style.display = 'none';
+
+    // Container for the options
+    const optionsContainer = document.createElement('div');
+    showOptionsContainer = null;
+    // "Show Options" button inside its own div
+    if ( g_think ){
+    showOptionsContainer = document.createElement('div');
+    const showOptionsBtn = document.createElement('button');
+    showOptionsBtn.textContent = "Show Options";
+    showOptionsBtn.className = 'quiz-button';
+    showOptionsBtn.onclick = show_options;
+    showOptionsContainer.appendChild(showOptionsBtn);
+    wrapper.appendChild(showOptionsContainer); // below question
+    }
+    else {
+        show_options()
+    }
+    function show_options() {
+        // Hide "Show Options" button
+        if(showOptionsContainer) { showOptionsContainer.style.display = 'none'; }
+
+        // Create and show option buttons
+        question.options.forEach((opt, index) => {
+            const btn = document.createElement('div');
+            btn.style.whiteSpace = 'pre-wrap';
+            btn.className = 'quiz-option';
+            btn.innerHTML = opt;
+            // Make div focusable via tab
+            btn.setAttribute('tabindex', '0');
+            btn.setAttribute('role', 'button'); // Optional: For screen readers
+            // ✅ Shared handler for mouse & keyboard
+            const toggleSelection = () => {
+                submitBtn.classList.remove('quiz-incorrect');
+                if (btn.classList.contains('quiz-selected')) {
+                    btn.classList.remove('quiz-selected');
+                    selected.delete(index);
+                } else {
+                    btn.classList.add('quiz-selected');
+                    selected.add(index);
+                }
+            };
+        // ✅ Mouse click
+        btn.onclick = toggleSelection;
+
+        // ✅ Keyboard: Enter or Space
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault(); // Prevent scrolling on space
+                toggleSelection();
+            }
+        });
+            optionButtons.push(btn);
+            optionsContainer.appendChild(btn);
+        });
+
+        submitBtn.style.display = 'inline-block'; // Show the submit button
+    };
+
+    // Submit button behavior
+    submitBtn.onclick = () => {
+        attemptCount++;
+        if (areSetsEqual(correctAnswer, selected) || attemptCount >= 3) {
+            disableInputs(optionButtons, submitBtn);
+            showNextButton();
+            optionButtons.forEach((btn, i) => {
+                if (correctAnswer.has(i)) {
+                    btn.classList.add('quiz-correct');
+                }
+            });
+            showHint(wrapper, question);
+        } else {
+            submitBtn.classList.add('quiz-incorrect');
+        }
+
+        optionButtons.forEach(btn => btn.classList.remove('quiz-selected'));
+        selected.clear();
+    };
+
+    // Assemble everything
+    wrapper.appendChild(optionsContainer);
+    wrapper.appendChild(submitBtn);
+
+    return wrapper;
+}
+
+
+
+
+
+
+    function renderQuestion() {
+    app.innerHTML = '';
+
+    const question = questions[currentIndex];
+    const container = document.createElement('div');
+    container.innerHTML = `<h3 style="border: none; margin: 0;">Q${currentIndex + 1}:</h3>`;
+
+    if (question.options) {
+        container.appendChild(createOptionsQuestion(question));
+    } else if (typeof question.q === 'string' && question.q.includes('____')) {
+        container.appendChild(createFillInTheBlanksQuestion(question));
+    }
+    else {
+        container.appendChild(createCardAnswer(question));
+    }
+    app.appendChild(container);
+    }
+
+
+    function disableInputs(inputs, submitBtn) {
+        inputs.forEach(input => input.disabled = true);
+        submitBtn.style.display = 'none';
+    }
+
+    function disableOptions(container) {
+        const options = container.querySelectorAll('.quiz-option');
+        options.forEach(opt => opt.classList.add('quiz-disabled'));
+    }
+    function showHint(wrapper, question){
+        if (!("h" in question)){return}
+        const hint = document.createElement('div');
+        hint.classList.add('quiz-hint');
+        hint.style.whiteSpace = 'pre-wrap';
+        featchCustomParsedData(hint, question.h)
+        //hint.innerText = "Hint:" + question.h
+        wrapper.appendChild(hint)
+    }
+    function showNextButton() {
+        const controls = document.createElement('div');
+        controls.className = 'quiz-controls';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = currentIndex < questions.length - 1 ? 'Next' : 'Start Over';
+        nextBtn.className = 'quiz-button';
+        nextBtn.onclick = () => {
+        currentIndex = (currentIndex + 1) % questions.length;
+        renderQuestion();
+        };
+
+        controls.appendChild(nextBtn);
+        app.appendChild(controls);
+    }
+
+    // Public API
+    return {
+        start: () => renderQuestion()
+    };
+    }
+    function createBaloonContext(t){
+        options = ["editText", "editTitle"]
+        return fillContextOptions(options, t)
+    }
+    function createQuizContext(t){
+        options = ["editText"]
+        parent = t.closest('[item_sub_type="quiz"]');
+        return fillContextOptions(options, parent)
+    }
+    function createBubbleContext(t){
+        options = ["editText", "toggleView", "editStyle", "maximize", "minimize"]
+        return fillContextOptions(options, t)
+    }
+    function createDrawAreaContext(t){
+        options = ["addBubble", "addLink", "addImage", "addGoto", "addCard", "addBaloon", "addLeaf"]
+        return fillContextOptions(options, t)
+    }
+    function createHandleContext(t){
+        options = ["delete", "addTag", "editTitle"]
+        return fillContextOptions(options, t)
+    }
+    function createCardContext(t){
+        const item = t.getAttribute("parent_id") && data.find(obj => obj.id == t.getAttribute("parent_id"));
+        let options = ["editText"];
+        return fillContextOptions(options, t)
+    }
+    function fillContextOptions(options, t){
+        u = document.createElement("div")
+        options.forEach(item => {
+            l = document.createElement("div")
+            l.textContent = item
+            l.addEventListener('click', function() {
+                //console.log(this,t)
+                if (t.getAttribute("item_sub_type") == "quiz"){handleQuizContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "bubble"){handleBubbleContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "draw_area"){handleDrawAreaContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "handle"){handleHandleContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "card"){handleCardContext(this.textContent,t, t.getAttribute("parent_id"))}
+                if (t.getAttribute("item_sub_type") == "baloon"){handleBaloonContext(this.textContent,t, t.getAttribute("parent_id"))}
+            });
+            u.appendChild(l)
+        })
+        return u
+    }
+    function setHandleText(e, data){
+        //console.log(data)
+        title = null
+        if ("last_visited" in data){
+            // Get today's date
+            const today = new Date();
+            // Parse last_visited date
+            const lastVisited = new Date(data.last_visited);
+            // Calculate difference in milliseconds
+            const diffInMs = today - lastVisited;
+            // Convert milliseconds to days
+            const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+            title = `${diffInDays}day${diffInDays > 0 ? 's' : ''}:` + data.title;
+        } else {
+            title = data.title
+        }
+        e.textContent = title ? title : '.'
+    }
+    function createHandle(data, parent_id){
+        handle = document.createElement("spwn")
+        setHandleText(handle, data)
+        handle.setAttribute("item_sub_type", "handle");
+        handle.setAttribute("parent_id", parent_id);
+        handle.classList.add("handle");
+        makeContext(handle)
+        return handle
+    }
+    function applyStyle(data, e){
+        if ("style" in data){
+            Object.entries(data.style).forEach(([key,value])=>{
+                if (key != "default"){
+                    e.style[key] = value
+                }
+            })
+        }
+    }
+    function isPhone() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Detect iPhone or iPod explicitly
+    const isIPhoneOrIPod = /iPhone|iPod/.test(ua);
+
+    // Detect Android phones (but not tablets, which usually don't include "Mobile")
+    const isAndroidPhone = /Android/.test(ua) && /Mobile/.test(ua);
+
+    return isIPhoneOrIPod || isAndroidPhone;
+    }
+    function isIPad() {
+    // For newer iPads running iPadOS (which report as Mac)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isMac = navigator.platform === 'MacIntel';
+    const hasTouch = navigator.maxTouchPoints > 1;
+    return isIOS || (isMac && hasTouch);
+    }
+    function decodeHtmlEntity(entity) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = entity;
+    return txt.value;
+    }
+    function setQuizData(e,json){
+        e.innerHTML = ''; // Clear start button
+        const quizApp = createQuizApp(e, json);
+        quizApp.start();
+    }
+        function showBaloon(e){
+            parent_id = e.getAttribute("parent_id")
+            parent = document.getElementById(parent_id)
+            const baloonChild = parent.querySelector('[item_sub_type="baloon"]');
+            if (!baloonChild) return;
+            self = document.getElementById('baloon')
+            let baloon_data = data.filter(n => n.id == parent_id)[0]
+            self = document.getElementById("baloon")
+            self.style.position = 'absolute'
+            parsedText = featchCustomParsedData(self,  baloon_data.text )
+            self.style.left = (parseInt(parent.style.left, 10) + 15) + 'px';
+            self.style.top = (parseInt(parent.style.top, 10) + 15) + 'px';
+            self.style.display = 'block';
+
+        }
+    function createBaloon(data, parent_id){
+        const new_element = document.createElement('div')
+        parent = new_element.getAttribute("parent_id")
+        new_element.innerHTML = data.title
+        new_element.style.position = 'relative'
+        new_element.style.zIndex = zIndices.baloon;
+        new_element.setAttribute("item_sub_type", "baloon");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        //set the baloon
+        baloon = document.getElementById("baloon")
+        baloon.addEventListener('click', function() {baloon.style.display = 'none';});
+        new_element.addEventListener('click', (e) => showBaloon(e.currentTarget));
+        makeContext(new_element)
+        return {handle: null, element: new_element}
+    }
+    function createQuiz(data, parent_id){
+        handle = createHandle(data, parent_id)
+        quizData = data.text
+        const new_element = document.createElement('div')
+        const quizButton = document.createElement('button');
+        quizButton.className = 'quiz-button';
+        quizButton.id = 'quiz-start-button';
+        quizButton.textContent = 'Start Quiz';
+        new_element.appendChild(quizButton);
+        setQuizData(new_element, quizData)
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "quiz");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        makeContext(new_element)
+        return {handle: handle, element: new_element}
+    }
+    function createGoto(data, parent_id){
+        handle = createHandle(data, parent_id)
+        const new_element = document.createElement('div')
+        new_element.innerHTML = data.text
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "goto");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        new_element.onclick=() => callGoToNode(data.gotoid, parent_id);
+        return {handle: handle, element: new_element}
+    }
+    function createCard(data, parent_id){
+        const new_element = document.createElement('div')
+        new_element.innerHTML = data.text
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "card");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        makeContext(new_element)
+        applyStyle(data, new_element)
+        return {handle: new_element, element: new_element}
+    }
+    function createImg(data, parent_id){
+        handle = createHandle(data, parent_id)
+        const new_element = document.createElement('img')
+        new_element.src = images[data.name]
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "img");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.setAttribute("alt", data.name)
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        return {handle: handle, element: new_element}
+    }
+    function createLink(data, parent_id){
+        handle = createHandle(data, parent_id)
+        const new_element = document.createElement('a')
+        new_element.href = data.href
+        new_element.textContent = data.text
+        new_element.target = '_blank'; // Open in new tab
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "link");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        return {handle: handle, element: new_element}
+    }
+
+   /*function setBubbleData(outputDiv, encodedText){
+        encodedText = decodeHtmlEntity(encodedText)
+        outputDiv.innerHTML = ''
+        //const regex = /\[size=(\d+)\]([\s\S]*?)\[\/size\]/g;
+        //this helps to escape raw data like \[size=24]abc\[/size\  ]
+         const regex = /(?<!\\)\[(size|color)=([^\]]+)\]([\s\S]*?)\[\/\1\]/g;
+        let lastIndex = 0
+        let match
+        console.log(outputDiv, encodedText)
+        while( ( match = regex.exec(encodedText)) ){
+            if (match.index > lastIndex ){
+                const before = encodedText.slice(lastIndex, match.index)
+                console.log(before)
+                outputDiv.appendChild(document.createTextNode(before))
+            }
+
+        // Create a span for the matched tag content
+        const span = document.createElement('span');
+
+        if (match[1] === 'size') {
+          // match[2] is font size (number)
+          span.style.fontSize = match[2] + 'px';
+        } else if (match[1] === 'color') {
+          // match[2] is color value (e.g. 'red', '#ff0000')
+          span.style.color = match[2];
+        }
+
+        span.textContent = match[3];
+
+            //span does nothing on right click but pops up bubble edit menu then on rightclick doess nothing causing confusion
+            span.addEventListener("contextmenu", function(e){
+                e.preventDefault()
+                e.stopPropagation()
+            })
+            console.log(span)
+            outputDiv.appendChild(span)
+
+
+            lastIndex = regex.lastIndex
+        }
+
+        if (lastIndex < encodedText.length){
+            outputDiv.appendChild(document.createTextNode(encodedText.slice(lastIndex)))
+            console.log(encodedText.slice(lastIndex))
+        }
+        console.log(outputDiv)
+        return 
+    }*/
+
+    
+    function featchCustomParsedData(outputDiv, encodedText) {
+    encodedText = decodeHtmlEntity(encodedText);
+    outputDiv.innerHTML = '';
+    parent_id = outputDiv.getAttribute("parent_id")
+    // Local helper function to parse [s], [c], [g] tags
+    function parseSegment(text) {
+        // Font size: [s=20]Text[/s]
+        text = text.replace(/\[s=([^\]]+)\]([\s\S]*?)\[\/s\]/g, (_, size, content) => {
+        return `<span style="font-size: ${size}px;">${content}</span>`;
+        });
+
+        // Color: [c=red]Text[/c]
+        text = text.replace(/\[c=([^\]]+)\]([\s\S]*?)\[\/c\]/g, (_, color, content) => {
+        return `<span style="color: ${color};">${content}</span>`;
+        });
+
+        // Goto button: [g=123]Click me[/g]
+        text = text.replace(/\[g=(\d+)\]([\s\S]*?)\[\/g\]/g, (_, nodeId, content) => {
+        return `<span class="goto-button" onclick="callGoToNode(${nodeId}, ${parent_id})">${content}</span>`;
+        });
+
+        // External links: [a=https://example.com]Text[/a]
+        text = text.replace(/\[a=([^\]]+)\]([\s\S]*?)\[\/a\]/g, (match, linkTarget, content) => {
+        return `<a class="inline-link" href="${linkTarget}" target="_blank" rel="noopener noreferrer">${content}</a>`;
+        });
+
+        return text;
+    }
+
+    // Split around [htmlcodearea] and [/htmlcodearea]
+    const parts = encodedText.split(/\[\/?htmlcodearea\]/);
+    let isHtmlBlock = false;
+
+    for (let part of parts) {
+        if (isHtmlBlock) {
+        // Insert raw HTML directly
+        outputDiv.innerHTML += part;
+        } else {
+        // Escape for plain text, then apply formatting
+        const tempDiv = document.createElement("div");
+        tempDiv.textContent = part;
+        const formatted = parseSegment(tempDiv.innerHTML);
+        outputDiv.innerHTML += formatted;
+        }
+        isHtmlBlock = !isHtmlBlock;
+    }
+    }
+
+    function setBubbleData_v1(outputDiv, encodedText) {
+    encodedText = decodeHtmlEntity(encodedText);
+    outputDiv.innerHTML = '';
+
+    function parseSegment(text) {
+    // Replace [s=...] tags with font-size spans
+    text = text.replace(/\[s=([^\]]+)\]([\s\S]*?)\[\/s\]/g, (_, size, content) => {
+        return `<span style="font-size: ${size}px;">${content}</span>`;
+    });
+
+    // Replace [c=...] tags with color spans
+    text = text.replace(/\[c=([^\]]+)\]([\s\S]*?)\[\/c\]/g, (_, color, content) => {
+        return `<span style="color: ${color};">${content}</span>`;
+    });
+
+    // Replace [g=...] tags with clickable span styled as button
+    text = text.replace(/\[g=(\d+)\]([\s\S]*?)\[\/g\]/g, (_, nodeId, content) => {
+        return `<span class="goto-button" onclick="callGoToNode(${nodeId})">${content}</span>`;
+    });
+
+    return text;
+    }
+
+
+    // Add context menu listener on the entire output div
+    outputDiv.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        // You can customize what happens on right-click here
+        // For example: show a custom menu
+    });
+
+    outputDiv.innerHTML=parseSegment(encodedText);
+    }
+
+    function setBubbleData_v0(outputDiv, encodedText) {
+      encodedText = decodeHtmlEntity(encodedText);
+      outputDiv.innerHTML = '';
+
+      function parseSegment(text) {
+        const container = document.createDocumentFragment();
+
+        const regex = /(?<!\\)\[(size|color)=([^\]]+)\]([\s\S]*?)\[\/\1\]/g;
+        let lastIndex = 0;
+        let match;
+
+        while ((match = regex.exec(text))) {
+          // Text before the tag
+          if (match.index > lastIndex) {
+            container.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+          }
+
+          // Create a span with style according to tag
+          const span = document.createElement('span');
+          if (match[1] === 'size') {
+            span.style.fontSize = match[2] + 'px';
+          } else if (match[1] === 'color') {
+            span.style.color = match[2];
+          }
+
+          // Recursively parse inner content to support nested tags
+          span.appendChild(parseSegment(match[3]));
+
+          // Prevent context menu confusion
+          span.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            e.stopPropagation();
+          });
+
+          container.appendChild(span);
+          lastIndex = regex.lastIndex;
+        }
+
+        // Remaining text after last tag
+        if (lastIndex < text.length) {
+          container.appendChild(document.createTextNode(text.slice(lastIndex)));
+        }
+
+        return container;
+      }
+
+      outputDiv.appendChild(parseSegment(encodedText));
+    }
+
+
+    function createBubble(data, parent_id){
+        handle = createHandle(data, parent_id)
+        const new_element = document.createElement('div')
+        //new_element.textContent = decodeHtmlEntity(data.text)
+        //setBubbleData( new_element, 'Hello [size=24] abc [/size] def ghi [size=24] def [/size]' )
+        //setBubbleData( new_element, data.text )
+        if ("show" in data){ showBubbleText(data.show, data.text, new_element) }
+        else { showBubbleText(true, data.text, new_element) }
+        new_element.style.position = 'relative'
+        new_element.setAttribute("item_sub_type", "bubble");
+        new_element.setAttribute("parent_id", parent_id);
+        new_element.classList.add(data.style.default);
+        applyStyle(data, new_element)
+        // this is only for testing
+        //applyRandomTextColor(new_element)
+        makeContext(new_element)
+        return {handle: handle, element: new_element}
+    }
+
+    function createNodes(parent, nodes, render_graph = false){
+        //console.log(nodes)
+        nodes.forEach(item=>{
+            //console.log(item)
+            if (document.getElementById(item.id)){ alert(item.id.toString()+':id already taken'); return }
+            new_element = null
+            container = null
+            resize_node = null// Set default x and y if not already defined on item
+            item.x = item.x ?? 20;
+            item.y = item.y ?? 20;
+            item._calculatedX = item.x + global_x_moves
+            item._calculatedY = item.y + global_y_moves
+            const node = document.createElement("div")
+            node.id = item.id
+            node.style.zIndex=zIndices[item.type]
+            if (item.type == "bubble" || item.type == "quiz"){
+            resize_node  = document.createElement("div")
+            resize_node.setAttribute("item_sub_type", "resizer");
+            resize_node.setAttribute("parent_id", node.id);
+            resize_node.classList.add("resize_node")
+            //makeResizable(resize_node)
+            if (["height"] in item) { resize_node.style.height = item.height + "px" } else { resize_node.style.height = "auto" }
+            if (["width"] in item) { resize_node.style.width = item.width + "px" } else { resize_node.style.width = "auto" }
+            observer.observe(resize_node)
+            container =  resize_node
+            node.appendChild(resize_node)
+            }
+            else {
+                container = node
+            }
+            
+
+            node.classList.add('node');
+            if (item.type == "bubble") { new_element = createBubble(item, item.id)}
+            if (item.type == "link") { new_element = createLink(item, item.id)}
+            if (item.type == "img") { new_element = createImg(item, item.id)}
+            if (item.type == "goto") { new_element = createGoto(item, item.id)}
+            if (item.type == "quiz") { new_element = createQuiz(item, item.id)}
+            if (item.type == "card") { new_element = createCard(item, item.id)}
+            if (item.type == "baloon") { new_element = createBaloon(item, item.id)}
+            handle = new_element?.handle ?? null
+            new_element = new_element['element']
+            node.setAttribute("item_type", "node");
+            //console.log(handle,new_element)
+            if(handle){container.appendChild(handle)}
+            container.appendChild(new_element)
+            if (node && (item.type == "bubble" || item.type == "quiz") ) {
+                //node.style.border = '1px solid #3C3C3B';
+                //node.style.padding = '9px';
+                //node.style.backgroundColor = '#1F1F1F';
+            }
+            parent.appendChild(node)
+            setNodePosition(node.id)
+            makeDraggable(node, parent, handle)
+        })
+    render_graph && renderAll(layoutDirection, nodes);
+    }
+
+    pop_holder = null
+    function showpop(initiator){
+        //console.log("at showpop", initiator)
+        pop_holder = initiator
+        pop = document.getElementById("draw_area_pop")
+        pop_text = document.getElementById("pop_text")
+        pop_text.value = initiator.pop_text 
+        pop.style.visibility="visible"
+        
+    }
+    
+    function get_pop_input(){
+        txt = document.getElementById('pop_text').value
+        //console.log(txt)
+        document.getElementById("draw_area_pop").style.visibility = "hidden"
+        call_pop_initiator(txt)
+    }
+    function call_pop_initiator(txt){
+        //console.log("call_pop_initiator")
+        if (txt != null && pop_holder.type == "quiz" && pop_holder.action == "editText" )
+        {
+            try {
+            const parsed = JSON.parse(txt); // try to parse it
+            updateQuizText(pop_holder.id, txt)
+            } catch (e) {
+            // ❌ invalid, do nothing
+            alert("Invalid Json")
+            }
+            
+            
+        }
+        if (txt != null && pop_holder.type == "bubble" && pop_holder.action == "editText" )
+        {
+            updateBubbleText(pop_holder.id, txt)
+            
+        }
+        if (txt != null && pop_holder.action == "editStyle" )
+        {
+            try{
+            json=JSON.parse(txt)
+            id = pop_holder.id
+            data.forEach(item => {
+                if (id == item.id) {
+                    
+                    Object.entries(json).forEach(([key, value]) => {
+                        item['style'][key] = value
+                    });
+                applyStyle(item, pop_holder.obj)
+                }
+            });
+            }
+            catch(error)
+            {
+                console.log(txt)
+                alert(error)
+            }
+        }
+        if (pop_holder.type == "handle" && pop_holder.action == "addTag" ){
+            if (txt != null && txt.trim() != ''){
+                id = pop_holder.id
+                console.log(txt, id)
+                data.forEach(item => {
+                    if (id == item.id) {
+                        item['tag'] = txt.split(",")
+                        }
+                    });
+            }
+            else {
+                user_confirm = confirm("delete tag ?")
+                if (user_confirm) {
+                    data.forEach(item => {
+                        if (id == item.id && 'tag' in item) {
+                            delete item.tag
+                            }
+                        });   
+                }
+            }
+        }
+        if (pop_holder.type == "handle" && pop_holder.action == "editTitle" ){
+            id = pop_holder.id
+            updateHandleText(id, txt)
+        }
+        if (txt != null && pop_holder.type == "card" && pop_holder.action == "editText" )
+        {
+            updateCardText(pop_holder.id, txt)
+            
+        }
+        if (txt != null && pop_holder.type == "baloon" && pop_holder.action == "editText" )
+        {
+            updateBaloonText(pop_holder.id, txt)
+            
+        }
+        if (txt != null && pop_holder.type == "baloon" && pop_holder.action == "editTitle" )
+        {
+            updateBaloonTitle(pop_holder.id, txt)
+            
+        }
+    pop_holder = null
+    }
+    function updateQuizText(id,txt){
+        console.log("updateQuizText:"+id)
+        jsonified_txt = JSON.parse(txt)
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = jsonified_txt;
+                e=document.getElementById(id)
+                let quiz = e.querySelectorAll('[item_sub_type="quiz"]')[0]
+                setQuizData(quiz, jsonified_txt)
+            }
+        })        
+    }
+    function updateBubbleText(id, txt){
+        console.log('update bubble text', id, txt)
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = txt; e=document.getElementById(id)
+                //e.querySelectorAll('[item_sub_type="bubble"]')[0].textContent = decodeHtmlEntity(txt)
+                let bubble = e.querySelectorAll('[item_sub_type="bubble"]')[0]
+                featchCustomParsedData(bubble, txt)
+            }
+        })
+    }
+    function updateHandleText(id, txt){
+        if (txt == null || txt.trim() == ''){ alert('invalid title')}
+        console.log('update handle text', id, txt)
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.title = txt; e=document.getElementById(id)
+                let handle = e.querySelectorAll('[item_sub_type="handle"]')[0]
+                setHandleText(handle, item)
+            }
+        })
+    }
+    function updateCardText(id, txt){
+        if (txt == null || txt.trim() == ''){ alert('invalid title')}
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = txt; e=document.getElementById(id)
+                let card = e.querySelectorAll('[item_sub_type="card"]')[0]
+                featchCustomParsedData(card, txt)
+            }
+        })
+    }
+    function updateBaloonText(id, txt){
+        if (txt == null || txt.trim() == ''){ alert('invalid title')}
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.text = txt; e=document.getElementById(id)
+            }
+        })
+    }
+    function updateBaloonTitle(id, txt){
+        if (txt == null || txt.trim() == ''){ alert('invalid title')}
+        data.forEach(item=>{
+            if ( item.id == id ){ 
+                item.title = txt; e=document.getElementById(id)
+                let baloon = e.querySelectorAll('[item_sub_type="baloon"]')[0]
+                baloon.innerHTML = txt
+            }
+        })
+    }
+    const textColors = [
+      'primary-text',
+      'secondary-text',
+      'tertiary-text',
+      'accent-text',
+      'error-text',
+      'success-text',
+      'warning-text', 'text-color-1',  'text-color-2',  'text-color-3',  'text-color-4',  'text-color-5',
+  'text-color-6',  'text-color-7',  'text-color-8',  'text-color-9',  'text-color-10',
+  'text-color-11', 'text-color-12', 'text-color-13', 'text-color-14', 'text-color-15',
+  'text-color-16', 'text-color-17', 'text-color-18', 'text-color-19', 'text-color-20'
+    ];
+
+    function applyRandomTextColor(element) {
+      const randomClass = textColors[Math.floor(Math.random() * textColors.length)];
+      element.classList.add(randomClass);
+    }
+    helper = {
+        'get_max_id': function get_max_id(){let maxid=-1;data.map(id=>{if(id.id>maxid){maxid=id.id}});console.log(maxid)},
+        'get_node': function get_node(id){return data.filter(d=>d.id==id)},
+        'get_random': function get_random() {return data[Math.floor(Math.random() * data.length)];},
+        'remove_child': function remove_child(rootId) {
+                        const parent = data.find(node => node.id === rootId);
+                        if (!parent) {
+                            console.warn(`Parent with id ${rootId} not found.`);
+                            return;
+                        }
+                        const nodeMap = new Map(data.map(node => [node.id, node]));
+
+                        const idsToRemove = [];
+
+                        // Collect all node IDs in the subtree using BFS
+                        for (const info of bfs(rootId, nodeMap)) {
+                                if (info.nodeId === rootId) {
+                                    // Skip the parent/root node itself
+                                    continue;
+                                    }
+                            idsToRemove.push(info.nodeId);
+                        }
+
+                        // Mutate data in-place to remove matching nodes
+                        for (let i = data.length - 1; i >= 0; i--) {
+                            if (idsToRemove.includes(data[i].id)) {
+                            data.splice(i, 1);
+                            }
+                        }
+
+                        // Clear parent's child list
+                        parent.child = [];
+
+                        // Remove DOM elements
+                        idsToRemove.forEach(id => document.getElementById(id)?.remove());
+                        renderAll(layoutDirection, data)
+                        }
+
+    }
+    g_think = false
+    function setThink(){ g_think = !(g_think) }
+</script>
+<body>
+    <div class="top"> Top Bar
+        <button onclick="createNodes(getNodeParent(), data, true)">Add</button>
+        <input type="file" id="image-input" accept="image/*" multiple style="display:none" onchange="loadImages()">
+         <input type="file" id="FileInput" accept=".json" onchange="loadData()"/>
+        <button onclick="document.getElementById('image-input').click()">img</button>
+        <button onclick="downloadJSON()">download</button>
+        <button onclick="callGoToNode(-1)">back</button>
+        <button onclick="callGoToNode(-2)">random</button>
+        <button onclick="(()=>processGraphNode(g_clicked_graph_node, '*'))()">*</button>
+        <button onclick="(()=>makeAllParentVisible())()">+</button>
+        <button onclick="setThink()">think</button>
+        <input id="input_goto" placeholder="Enter Id(-1 back)"/>
+    </div>
+    <div class="container">
+        <div class="sidebar" id = 'sidebar'>
+        </div>
+        <div class="main" id="draggable-main">
+            <div id="draw_area" item_sub_type="draw_area">
+                <div id = "draw_area_pop" style="z-index: 99;" item_sub_type="draw_area_pop">
+                    <textarea id = "pop_text"></textarea>
+                    <button onclick="get_pop_input()">submit</button>
+                </div>
+                <div id = "baloon" class="baloon" style="z-index: 99; display: none" item_sub_type="baloon"></div>
+                <div id="contextMenu" style="z-index: 100;" class="context-menu">
+                </div>
+                <div id="anchor" style="z-index: 98;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function(){
+            const anchor = document.getElementById("anchor")
+            const main = document.getElementById("draggable-main")
+            const draw_area = document.getElementById("draw_area")
+            makeDraggable(anchor, draw_area)
+            makeContext(draw_area)
+            document.getElementById("input_goto").addEventListener('keydown', function(event){
+                event.stopPropagation()
+                if (event.key == 'Enter'){
+                    callGoToNode( document.getElementById("input_goto").value.trim() )
+                }
+            })
+        }   
+    </script>
+</body>
+</html>

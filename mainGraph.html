@@ -190,7 +190,6 @@
   border-radius: 8px;
   padding: 1px;
   margin: 1px auto;
-  font-size: 12px;
   white-space: nowrap;        /* Prevent text from wrapping */
   overflow: hidden;           /* Hide overflow content */
   text-overflow: ellipsis;    /* Show "..." when truncated */
@@ -1110,7 +1109,7 @@ function makeDraggable(element, parent, handle = null) {
         if (element.button === 2) return;
         processGraphNode(element)
         if(( ( isIPad() || isPhone() ) && element.getAttribute("item_type") === 'node')){
-        //if((true && element.getAttribute("item_type") === 'node')){
+        //if(( true && ( isIPad() || isPhone() ) && element.getAttribute("item_type") === 'node')){
             overrideDraggableIpad(element)
             return
         }
@@ -2291,12 +2290,11 @@ function createOptionsQuestion(question) {
     }
     function createCard(data, parent_id){
         const new_element = document.createElement('div')
-        //new_element.innerHTML = data.text
+        new_element.innerHTML = data.text
         new_element.style.position = 'relative'
         new_element.setAttribute("item_sub_type", "card");
         new_element.setAttribute("parent_id", parent_id);
         new_element.classList.add(data.style.default);
-        featchCustomParsedData(new_element,data.text)
         makeContext(new_element)
         applyStyle(data, new_element)
         return {handle: new_element, element: new_element}
@@ -2730,7 +2728,7 @@ function createOptionsQuestion(question) {
             if ( item.id == id ){ 
                 item.text = txt; e=document.getElementById(id)
                 let card = e.querySelectorAll('[item_sub_type="card"]')[0]
-                featchCustomParsedData(card, txt)
+                card.innerHTML=txt
             }
         })
     }

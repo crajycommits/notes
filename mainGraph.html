@@ -190,7 +190,7 @@
   border-radius: 8px;
   padding: 1px;
   margin: 1px auto;
-  
+  font-size: 12px;
   white-space: nowrap;        /* Prevent text from wrapping */
   overflow: hidden;           /* Hide overflow content */
   text-overflow: ellipsis;    /* Show "..." when truncated */
@@ -2291,11 +2291,12 @@ function createOptionsQuestion(question) {
     }
     function createCard(data, parent_id){
         const new_element = document.createElement('div')
-        new_element.innerHTML = data.text
+        //new_element.innerHTML = data.text
         new_element.style.position = 'relative'
         new_element.setAttribute("item_sub_type", "card");
         new_element.setAttribute("parent_id", parent_id);
         new_element.classList.add(data.style.default);
+        featchCustomParsedData(new_element,data.text)
         makeContext(new_element)
         applyStyle(data, new_element)
         return {handle: new_element, element: new_element}

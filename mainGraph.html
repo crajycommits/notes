@@ -359,7 +359,7 @@
     {id: 5, type: "bubble", style: "bubble", x: 0, y: 0,  title: ".", text: "dbt is a \nsaas         product\nsaas product\nsaas product\nsaas product"},
         
 ]*/
-const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, card: 79, topSpot: 80, baloon: 85 };
+const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, card: 79, graphNode: 85,  topSpot: 90, baloon: 95 };
 
 data=[]
 g_file_name = null
@@ -1064,6 +1064,7 @@ function node_on_top(element, element_zindex_capture){
     element.style.zIndex = zIndices.topSpot;
 }
 function overrideDraggableIpad(element){
+    const element_zindex_capture = element.style.zIndex
     // maximize section
     const typeHandlers = {max : { bubble: maximizeBubble, quiz: maximizequiz }, min: { bubble: minimizeBubble, quiz: minimizequiz }};
     if (element.getAttribute("item_type") === 'node' && ( element.querySelector('[item_sub_type="bubble"]') ||  element.querySelector('[item_sub_type="quiz"]') ) ){
@@ -1073,7 +1074,6 @@ function overrideDraggableIpad(element){
         const e = bubbleElement || quizElement
         const e_type = e.getAttribute("item_sub_type")
         const parentId = resizerElement.getAttribute("parent_id");
-        const element_zindex_capture = element.style.zIndex
         let width = null;
         let height = null;
         let current_item = null;
@@ -1088,7 +1088,11 @@ function overrideDraggableIpad(element){
             //bubbleElement.style.backgroundColor = "#1f1f1f"
             current_item._max=true
         }
-        node_on_top(element, element_zindex_capture)
+    }
+    node_on_top(element, element_zindex_capture)
+    let baloon = element.querySelector('[item_sub_type="baloon"]')
+    if (baloon){
+        showBaloon(baloon)
     }
 }
 
@@ -1135,6 +1139,10 @@ function makeDraggable(element, parent, handle = null) {
         isDragging = false;
         if (element.getAttribute("item_type") == 'node') {
             node_on_top(element, element_zindex_capture)
+            let baloon = element.querySelector('[item_sub_type="baloon"]')
+            if (baloon){
+                showBaloon(baloon)
+            }
         } else {
             element.style.zIndex = element_zindex_capture;
         }
@@ -1389,10 +1397,8 @@ function makeAllchildInvisible(id) {
     const groupId = e_data?._groupId;
     const nodes = data?._groups?.[groupId] || [];
     const nodeMap = new Map(nodes.map(n => [n.id, n]));
-    console.log(id, nodeMap)
     for (const info of bfs(id, nodeMap)) {
         let c_data = data.find(n => n.id == info.nodeId);
-        console.log(c_data)
         if (c_data) {
             setGraphNodeVisibility(c_data, '-');
         }
@@ -2242,7 +2248,6 @@ function createOptionsQuestion(question) {
         parent = new_element.getAttribute("parent_id")
         new_element.innerHTML = data.title
         new_element.style.position = 'relative'
-        new_element.style.zIndex = zIndices.baloon;
         new_element.setAttribute("item_sub_type", "baloon");
         new_element.setAttribute("parent_id", parent_id);
         new_element.classList.add(data.style.default);
@@ -2250,7 +2255,7 @@ function createOptionsQuestion(question) {
         //set the baloon
         baloon = document.getElementById("baloon")
         baloon.addEventListener('click', function() {baloon.style.display = 'none';});
-        new_element.addEventListener('click', (e) => showBaloon(e.currentTarget));
+        //new_element.addEventListener('click', (e) => showBaloon(e.currentTarget));
         makeContext(new_element)
         return {handle: null, element: new_element}
     }
@@ -2537,7 +2542,11 @@ function createOptionsQuestion(question) {
             item._calculatedY = item.y + global_y_moves
             const node = document.createElement("div")
             node.id = item.id
-            node.style.zIndex=zIndices[item.type]
+            if ( "child" in item ) {
+                node.style.zIndex=zIndices['graphNode']
+            } else {
+                node.style.zIndex=zIndices[item.type]
+            }
             if (item.type == "bubble" || item.type == "quiz"){
             resize_node  = document.createElement("div")
             resize_node.setAttribute("item_sub_type", "resizer");
@@ -2866,14 +2875,14 @@ function createOptionsQuestion(question) {
         </div>
         <div class="main" id="draggable-main">
             <div id="draw_area" item_sub_type="draw_area">
-                <div id = "draw_area_pop" style="z-index: 99;" item_sub_type="draw_area_pop">
+                <div id = "draw_area_pop" style="z-index: 100;" item_sub_type="draw_area_pop">
                     <textarea id = "pop_text"></textarea>
                     <button onclick="get_pop_input()">submit</button>
                 </div>
-                <div id = "baloon" class="baloon" style="z-index: 99; display: none" item_sub_type="baloon"></div>
-                <div id="contextMenu" style="z-index: 100;" class="context-menu">
+                <div id = "baloon" class="baloon" style="z-index: 100; display: none" item_sub_type="baloon"></div>
+                <div id="contextMenu" style="z-index: 200;" class="context-menu">
                 </div>
-                <div id="anchor" style="z-index: 98;"></div>
+                <div id="anchor" style="z-index: 190;"></div>
                 </div>
             </div>
         </div>

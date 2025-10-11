@@ -1621,12 +1621,12 @@ function makeAllchildInvisible(id) {
                 // === STEP D: Position the node
                 if (isHorizontal) {
                     // Horizontal layout (left → right), vertical center
-                    node[xKey] = parent ? parent[xKey] + parent[widthKey] + verticalSpacing : 0;
-                    node[yKey] = (maxSize / 2) - (node[heightKey] / 2) + siblingShift + extremeParentShift;
+                    node[xKey] = Math.round( parent ? parent[xKey] + parent[widthKey] + verticalSpacing : 0);
+                    node[yKey] = Math.round( (maxSize / 2) - (node[heightKey] / 2) + siblingShift + extremeParentShift);
                 } else {
                     // Vertical layout (top → bottom), horizontal center
-                    node[xKey] = (maxSize / 2) - (node[widthKey] / 2) + siblingShift + extremeParentShift;
-                    node[yKey] = parent ? parent[yKey] + parent[heightKey] + horizontalSpacing : 0;
+                    node[xKey] = Math.round( (maxSize / 2) - (node[widthKey] / 2) + siblingShift + extremeParentShift);
+                    node[yKey] = Math.round( parent ? parent[yKey] + parent[heightKey] + horizontalSpacing : 0);
                 }
                 //console.log("x and y", node[xKey], node[yKey]);
 
@@ -1716,10 +1716,10 @@ function makeAllchildInvisible(id) {
 
     nodes.forEach(node => {
         if (node !== rootNode) {
-            node.x = (node._graphX || 0) + rootNode.x
-            node.y = (node._graphY || 0) + rootNode.y
-            node._calculatedX = (node._graphX || 0) + rootNode._calculatedX;
-            node._calculatedY = (node._graphY || 0) + rootNode._calculatedY;
+            node.x = Math.round((node._graphX || 0) + rootNode.x)
+            node.y = Math.round((node._graphY || 0) + rootNode.y)
+            node._calculatedX = Math.round((node._graphX || 0) + rootNode._calculatedX);
+            node._calculatedY = Math.round((node._graphY || 0) + rootNode._calculatedY);
         }
     });
 

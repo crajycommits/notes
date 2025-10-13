@@ -183,19 +183,29 @@
         pointer-events: none;
         opacity: 0.6;
         }
-.card {
-  background: #1F1F1F;
-  color: #9CDCFE;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  padding: 1px;
-  margin: 1px auto;
-  white-space: nowrap;        /* Prevent text from wrapping */
-  overflow: hidden;           /* Hide overflow content */
-  text-overflow: ellipsis;    /* Show "..." when truncated */
-}
-
-        .baloon {
+    .card {
+    background: #1F1F1F;
+    color: #9CDCFE;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 1px;
+    margin: 1px auto;
+    white-space: nowrap;        /* Prevent text from wrapping */
+    overflow: hidden;           /* Hide overflow content */
+    text-overflow: ellipsis;    /* Show "..." when truncated */
+    }
+    .baloon{
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;        /* Prevent text from wrapping */
+        overflow: hidden;           /* Hide overflow content */
+        text-overflow: ellipsis;    /* Show "..." when truncated */        
+        padding: 0;
+        background: #1F1F1F;
+        color: #9CDCFE;
+        }
+        .baloonpop {
         border: 1px solid #dddddd;
         border-radius: 8px;
         position: relative;
@@ -2878,7 +2888,7 @@ function createOptionsQuestion(question) {
                     <textarea id = "pop_text"></textarea>
                     <button onclick="get_pop_input()">submit</button>
                 </div>
-                <div id = "baloon" class="baloon" style="z-index: 100; display: none" item_sub_type="baloon"></div>
+                <div id = "baloon" class="baloonpop" style="z-index: 100; display: none" item_sub_type="baloon"></div>
                 <div id="contextMenu" style="z-index: 200;" class="context-menu">
                 </div>
                 <div id="anchor" style="z-index: 190;"></div>

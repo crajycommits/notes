@@ -190,7 +190,7 @@
     border-radius: 8px;
     padding: 1px;
     margin: 1px auto;
-    white-space: nowrap;        /* Prevent text from wrapping */
+    white-space: pre;        /* Prevent text from wrapping */
     overflow: hidden;           /* Hide overflow content */
     text-overflow: ellipsis;    /* Show "..." when truncated */
     }
@@ -347,12 +347,12 @@
       background: #550000;
     }
 
-    .child-highlight {
+    .child-selected {
       border: 1px solid green;
       background: #553300;
     }
 
-    .parent-highlight {
+    .parent-selected {
       border: 1px solid orange;
       background: #555500;
     }
@@ -1393,7 +1393,7 @@ function makeAllParentVisible(id) {
             setGraphNodeVisibility(p_data, '+');
         }
     }
-    highlightAllParents(id, nodes)
+    highlightChain(id, nodes)
     renderAll(layoutDirection, nodes, groupId)
 }
 
@@ -1786,21 +1786,34 @@ function makeAllchildInvisible(id) {
     }
 
 
-function highlightAllParents(id, nodes){
-    const CLASS_SELECTED = "self-selected";
+function highlightChain(id, nodes){
+    const SELF_SELECTED = "self-selected";
+    const CHILD_SELECTED = "child-selected";
+    const PARENT_SELECTED = "parent-selected"
     // clear existing
     for (const node of nodes) {
         const el = document.getElementById(node.id);
             if (el) {
-                el.classList.remove(CLASS_SELECTED)
+                el.classList.remove(SELF_SELECTED)
+                el.classList.remove(CHILD_SELECTED)
+                el.classList.remove(PARENT_SELECTED)
             }
     }
     // highlight 
-    document.getElementById(id)?.classList.add('self-selected');
+    curr_node = document.getElementById(id);
+    curr_node.classList.add(SELF_SELECTED)
+    curr_data = nodes.find(d=>d.id==id)
     for (const parent of getAllParent(id, nodes)) {
-        document.getElementById(parent.id)?.classList.add('self-selected');
+        if (parent.id != curr_data.id) document.getElementById(parent.id)?.classList.add(PARENT_SELECTED);
+    }
+    // get children
+    const all_child = nodes.filter(item => curr_data.child.includes(item.id));
+    for (const child of all_child) {
+        document.getElementById(child.id)?.classList.add(CHILD_SELECTED);
     }
 }
+
+
 g_clicked_graph_node = null
 g_clicked_graph_node_timeout = null;
 
@@ -1825,7 +1838,7 @@ function processGraphNode(e, input=null) {
     const nodes = data?._groups?.[groupId] || [];
     setGraphNodeVisibility(selectedNode, input)
     renderAll(layoutDirection, nodes, groupId)
-    highlightAllParents(selectedNodeId, nodes)
+    highlightChain(selectedNodeId, nodes)
     return
     /* the lock for * is more important than this let this stabilise
     console.log(selectedNodeId, groupId, nodes);
@@ -2192,7 +2205,7 @@ function createOptionsQuestion(question) {
         e.textContent = title ? title : '.'
     }
     function createHandle(data, parent_id){
-        handle = document.createElement("spwn")
+        handle = document.createElement("span")
         setHandleText(handle, data)
         handle.setAttribute("item_sub_type", "handle");
         handle.setAttribute("parent_id", parent_id);

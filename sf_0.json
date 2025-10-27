@@ -1,460 +1,1667 @@
 [
-  {
-    "id": 1,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "16px"
-    },
-    "x": 438,
-    "y": 235,
-    "title": ".",
-    "text": "snowflake is saas\n\nsaas is a software hosted in cloud ☁ and delivered to user over internet such as browser",
-
-
-    "height": 190,
-    "width": 314
+ {
+  "id": 1,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 2,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 184,
-    "y": 478,
-    "title": ".",
-    "text": "A virtual warehouse [s=24]🏠[/s], often referred to simply as a warehouse, is a cluster of compute [s=24]💻💻💻💻 [/s] resources in Snowflake.",
-
-
-    "height": 146,
-    "width": 179
+  "x": 175,
+  "y": 151,
+  "title": "snowflake\n\n",
+  "text": "snowflake is saas\n\nsaas is a software hosted in cloud ☁ and delivered to user over internet such as browser",
+  "height": 24,
+  "width": 86
+ },
+ {
+  "id": 2,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 4,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "12px",
-      "color": "#ff9800"
-    },
-    "x": 405,
-    "y": 474,
-    "title": ".",
-    "text": "Think like its a lot of computers\nproviding MEMORY and CPU power \n\\[s=24\\] &#x1f4aa \\[/size\\]\n[s=24] &#x1f4aa [/s]\nit may be in aws, azure or \neven in a basement somewhere \nwho cares ?",
-
-
-    "height": 153,
-    "width": 197
+  "x": 313,
+  "y": 387,
+  "title": "warehouse\n\n",
+  "text": "[a=https://docs.snowflake.com/en/user-guide/warehouses]link[/a]\n\nA virtual warehouse [s=24]🏠[/s], often referred to simply as a warehouse, is a cluster of compute 💻💻💻💻 resources which provide required resources, such as CPU, memory, and temporary storage, to perform the following operations in a Snowflake session\n\nA virtual warehouse is available in two types:\n1. [c=#FF5733]Standard[/c]\n2. [c=#FF5733]Snowpark-optimized[/c]\n\nWarehouses can be started and stopped at any time. They can also be [c=#00FF7F]resized at any time, even while running[/c]\n\n[c=#FF5733]Gen1[/c]\nSmallest warehouse is [c=#FF5733]x-small[/c]\nlargest warehouse is [c=#FF5733]6X-Large[/c]\n\nSnowflake utilizes per-second billing (with a 60-second minimum each time the warehouse starts)\n\nFor a [c=#FF5733]multi-cluster warehouse[/c], the number of credits billed is calculated based on the warehouse size and the number of clusters that run within the time period. For example, if a 3X-Large multi-cluster warehouse runs 1 cluster for one full hour and then runs 2 clusters for the next full hour, the total number of credits billed would be 192 (i.e. 64 + 128).\n\n\n\n\nIncreasing the size of a warehouse does not always improve data loading performance🏃\n\nData loading🚚 performance is influenced more by the \n1 number of files being loaded\n2 the size of each file\n\n\nAuto-suspension and auto-resumption\nBy default, auto-suspend is enabled. Snowflake automatically suspends the warehouse if it is inactive for the specified period of time.\n\nBy default, auto-resume is enabled. Snowflake automatically resumes the warehouse when any statement that requires a warehouse is submitted and the warehouse is the current warehouse for the session.\n\nAuto-suspend and auto-resume apply only to the entire warehouse and not to the individual clusters in the warehouse. For a multi-cluster warehouse:\n\nAuto-suspend only occurs when the minimum number of clusters is running and there is no activity for the specified period of time. The minimum is typically 1 (cluster), but could be more than 1.\n\nAuto-resume only applies when the entire warehouse is suspended (i.e. no clusters are running).\n\n",
+  "height": 31,
+  "width": 90
+ },
+ {
+  "id": 9,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 6,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 441,
-    "y": 946,
-    "title": ".",
-    "text": "There are 2\ntypes of warehouse",
-
-
-    "height": 100,
-    "width": 100
+  "x": 231,
+  "y": 571,
+  "title": "standard\n\n",
+  "text": "smallest size x small\nlargest size  [s=24]6x[/s]",
+  "height": 26,
+  "width": 76
+ },
+ {
+  "id": 16,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 9,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 685,
-    "y": 1104,
-    "title": ".",
-    "text": "[s=24]standard[/s]\nsmallest size x small\nlargest size  [s=24]6x[/s]",
-
-
-    "height": 109,
-    "width": 192
+  "x": 107,
+  "y": 572,
+  "title": "snowpark\n\n",
+  "text": "recommended for running Snowpark workloads that has \nlarge memory [s=24]&#x1f9e0 [/s]\nrequirements or\ndependencies on a specific CPU  architecture\n\ni provide [s=24]16x[/s] memory by default\ncompared to standard",
+  "height": 38,
+  "width": 79
+ },
+ {
+  "id": 0,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 10,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "16px"
-    },
-    "x": 712,
-    "y": 480,
-    "title": ".",
-    "text": "A warehouse can be resized up or down at any time, including while it is running and processing statements.",
-
-
-    "height": 144,
-    "width": 196
+  "x": 0,
+  "y": 0,
+  "title": ".",
+  "text": "root",
+  "height": 44,
+  "width": 38
+ },
+ {
+  "id": 18,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 11,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "44px"
-    },
-    "x": 736,
-    "y": 615,
-    "title": ".",
-    "text": "&#x1f3c3",
-
-
-    "height": 80,
-    "width": 60
+  "x": 2244,
+  "y": 343,
+  "title": "Dynamic table\n",
+  "text": "[a=https://docs.snowflake.com/en/user-guide/dynamic-tables-about]lnk[/a]\n\nDynamic tables are tables that automatically refresh based on a defined query and target freshness\nThe refresh frequency and freshness of the data are determined by the [g=24]target lag[/g]\n\n[c=#FFD700]When to use dynamic tables[/c]\nAvoid manually tracking data dependencies and managing refresh schedules.\nYou need to materialize query results from multiple base tables without writing custom code.\nYou need to build multiple tables for data transformations in a pipeline.\nYou dont need fine-grained control over refresh schedules, and you only need to specify a target freshness for the pipeline.\nYou want to use a dynamic table as the source of a stream.\n\n[c=#FFD700]dynamic table initialization[/c]\nIf you set INITIALIZE = ON_CREATE (default), the table is initialized immediately. If you set INITIALIZE = ON_SCHEDULE, initialization happens within the specified target lag timeframe.\n\n[c=#FFD700]refresh options[/c]\n- [c=#f1fa8c]manual refresh options[/c]\n  > ALTER DYNAMIC TABLE my_dynamic_table REFRESH or \n  > Snowsight\n\n- [c=#f1fa8c]scheduled  refresh options[/c]\n  > Use target lag\n\n- [c=#f1fa8c]task refresh options[/c]\nCREATE TASK my_task\n  SCHEDULE = 'USING CRON <expr> <time_zone>'\n  AS\n    ALTER DYNAMIC TABLE my_dynamic_table REFRESH;\n\n\nSTATEMENT_TIMEOUT_IN_SECONDS \nSets the maximum allowed duration at the account or warehouse level before a refresh is automatically canceled.\n\n[c=#FFD700]Dynamic table refresh modes[/c]\n- [c=#f1fa8c]AUTO refresh mode[/c]\n  > The system attempts to apply incremental refresh by default.\n  Snowflake automatically selects the most cost- and time-effective refresh mode based on query complexity, supported constructs, operators, functions, and expected performance.\n  > This decision is made only once at the time of table creation.\n\n- [c=#f1fa8c]Incremental refresh mode[/c]\n  > This mode analyzes the dynamic table’s query and calculates changes since the last refresh. It then merges these changes into the table.\n\n- [c=#f1fa8c]Full refresh mode[/c]\n  > This mode executes the dynamic table’s query and completely replaces the previously materialized results.\nDynamic tables in incremental refresh mode cant be downstream from dynamic tables with full refresh mode",
+  "height": 39,
+  "width": 108
+ },
+ {
+  "id": 19,
+  "type": "link",
+  "style": {
+   "default": "link"
   },
-  {
-    "id": 12,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 595,
-    "y": 697,
-    "title": ".",
-    "text": "Increasing the size of a warehouse does not always improve data loading performance",
-
-
-    "height": 61,
-    "width": 171
-  },
-  {
-    "id": 14,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "44px"
-    },
-    "x": 461,
-    "y": 672,
-    "title": ".",
-    "text": "&#x1f69a",
-
-
-    "height": 80,
-    "width": 60
-  },
-  {
-    "id": 15,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "12px",
-      "color": "red"
-    },
-    "x": 586,
-    "y": 771,
-    "title": ".",
-    "text": "Data loading performance is influenced more by the \n1 number of files being loaded\n2 the size of each file",
-
-
-    "maximize": true,
-    "height": 88,
-    "width": 339
-  },
-  {
-    "id": 16,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 192,
-    "y": 1056,
-    "title": ".",
-    "text": "[s=24] snowpark [/s]\nrecommended for running Snowpark workloads that has \nlarge memory [s=24]&#x1f9e0 [/s]\nrequirements or\ndependencies on a specific CPU  architecture\n\ni provide [s=24]16x[/s] memory by default\ncompared to standard",
-
-
-    "height": 213,
-    "width": 416
-  },
-  {
-    "id": 17,
-    "type": "goto",
-    "style": {
-      "default": "goto"
-    },
-    "x": 178,
-    "y": -2,
-    "title": ".",
-    "text": "warehouse",
-    "gotoid": "2"
-
-
-  },
-  {
-    "id": 0,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 0,
-    "y": 0,
-    "title": ".",
-    "text": "root",
-
-
-    "height": 44,
-    "width": 38
-  },
-  {
-    "id": 18,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 2244,
-    "y": 343,
-    "title": ".",
-    "text": "dynamic table\ntables that automatically refresh🔄 based on a defined query❓ and target freshness🌷",
-
-
-    "height": 101,
-    "width": 100
-  },
-  {
-    "id": 19,
-    "type": "link",
-    "style": {
-      "default": "link"
-    },
-    "x": 2353,
-    "y": 343,
-    "title": ".",
-    "href": "https://docs.snowflake.com/en/user-guide/dynamic-tables-about#how-dynamic-tables-work",
-    "text": "dynamic"
-  },
-  {
-    "id": 20,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 2222,
-    "y": 449,
-    "title": ".",
-    "text": "When to use dynamic tables\n> avoid manually [c=#f1fa8c]data dependency[/c] tracking\n> materialize query results from ][c=#f1fa8c]multiple base tables[/c]\n> build multiple tables for data transformations in a pipeline\n>dont need [c=#f1fa8c]fine-grained control over refresh[/c] schedules",
-
-
-    "height": 185,
-    "width": 100
-  },
-  {
-    "id": 21,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 2390,
-    "y": 448,
-    "title": ".",
-    "text": "[s=33]🔄[/s]\nDynamic tables are refreshed based on \n> [c=#50fa7b]target lag[/c] in mins\n> downstream target lag . dt1(every 1min) -> dt2 (every 30min). dt1 may refresh every 30 min.\n\nManual refresh\n> [c=#50fa7b]snowsight[/c] - monitoring - dynamic tables - select - refresh\n> [c=#50fa7b]ALTER[/c] DYNAMIC TABLE my_dynamic_table REFRESH\n",
-
-
-    "height": 200,
-    "width": 200
-  },
-  {
-    "id": 22,
-    "type": "goto",
-    "style": {
-      "default": "goto"
-    },
-    "x": 178,
-    "y": 34,
-    "title": ".",
-    "text": "dynamicTable",
-    "gotoid": "18"
-
-
-  },{
-    "id": 23,
+  "x": 2247,
+  "y": 284,
+  "title": ".",
+  "href": "https://docs.snowflake.com/en/user-guide/dynamic-tables-about#how-dynamic-tables-work",
+  "text": "dynamic"
+ },
+ {
+  "id": 23,
   "type": "quiz",
   "style": {
    "default": "quiz",
    "fontFamily": "Comic Sans MS"
   },
-    "x": 2752,
-    "y": 367,
-    "title": ".",
-    "text": [
-  {
+  "x": 2583,
+  "y": 354,
+  "title": "qa dynamic table\n\n",
+  "text": [
+   {
     "q": "What is a key feature of Snowflake Dynamic Tables?",
     "options": [
-      "automatically refresh based on a defined query and target freshness",
-      "Manual refresh only",
-      "Requires external orchestration",
-      "Only supports batch data"
+     "automatically refresh based on a defined query and target freshness",
+     "Manual refresh only",
+     "Requires external orchestration",
+     "Only supports batch data"
     ],
-    "a": [0],
+    "a": [
+     0
+    ],
     "h": "Dynamic Tables are automatically updated as new data arrives, enabling near real-time data processing."
-  },{
+   },
+   {
     "q": "The refresh frequency and freshness of the data are determined by the ____ (2) specified",
-    "a": ["target lag"],
+    "a": [
+     "target lag"
+    ],
     "h": " a target lag of five minutes ensures that the data in the dynamic table is no more than five minutes behind updates to the base table."
-  },
-  {
+   },
+   {
     "q": "When are dynamic tables ideal to use?",
     "options": [
-      "When you want to manually track data dependencies",
-      "When you want to avoid managing refresh schedules",
-      "When You need to materialize query results from multiple base tables without writing custom code",
-      "When You need fine-grained control over refresh schedules",
-      "You want to use a dynamic table as the source of a stream"
+     "When you want to manually track data dependencies",
+     "When you want to avoid managing refresh schedules",
+     "When You need to materialize query results from multiple base tables without writing custom code",
+     "When You need fine-grained control over refresh schedules",
+     "You want to use a dynamic table as the source of a stream"
     ],
-    "a": [1, 2, 4],
+    "a": [
+     1,
+     2,
+     4
+    ],
     "h": "Dynamic tables support seamless transitions from batch to streaming"
-  },  {
+   },
+   {
     "q": "What does the target lag specify for a dynamic table?",
     "options": [
-      "The maximum delay allowed between base table updates and dynamic table refresh",
-      "The minimum time before the table can be queried",
-      "The refresh frequency of the base tables",
-      "The time to live for data in the dynamic table"
+     "The maximum delay allowed between base table updates and dynamic table refresh",
+     "The minimum time before the table can be queried",
+     "The refresh frequency of the base tables",
+     "The time to live for data in the dynamic table"
     ],
-    "a": [0],
+    "a": [
+     0
+    ],
     "h": "Target lag sets the maximum allowed delay between updates to base tables and the dynamic table."
-  },
-  {
+   },
+   {
     "q": "What are the allowed value for INITIALIZE for a dynamic table?",
-      "options": [
-        "ON_CREATE",
-        "ON_SCHEDULE",
-        "IMMEDIATE",
-        "MANUAL"
-      ],
-    "a": [0, 1],
-    "h": "ION_CREATE is initialized immediately.ON_SCHEDULE, initialization happens within the specified target lag timeframe."
-  },
-  {
-    "q": "Dynamic table can be refreshed manually",
-      "options": [
-        "True",
-        "False"
-      ],
-    "a": [0],
-    "h": "ALTER DYNAMIC TABLE my_dynamic_table REFRESH"
-  },{
-  "q": "Which refresh modes are supported by Snowflake Dynamic Tables?",
-  "options": [
-    "Auto",
-    "Full",
-    "Partial",
-    "Incremental",
-    "Manual"
-  ],
-  "a": [0, 1, 3],
-  "h": "When using the AUTO parameter, Snowflake automatically selects the most cost and time-effective refresh mode"
-},{
-  "q": "Can a dynamic table with incremental refresh mode be downstream of a dynamic table with full refresh mode?",
-  "options": [
-    "Yes, they are fully compatible.",
-    "No, incremental mode is incompatible with full refresh upstream.",
-    "Only if both tables have the same refresh schedule.",
-    "Yes, but with manual intervention."
-  ],
-  "a": [1],
-  "h": "Incremental refresh mode is incompatible with the complete row changes from an upstream full refresh dynamic table."
-},{
-  "q": "True or False: A dynamic table's target lag can be shorter than the target lag of the tables it depends on.",
-  "options": ["True", "False"],
-  "a": [1],
-  "h": "False — the target lag cannot be shorter than the target lag of dependent dynamic tables."
-},{
-  "q": "Which of the following is a valid type of target lag for a Snowflake dynamic table?",
-  "options": [
-    "UPSTREAM",
-    "DOWNSTREAM",
-    "1 hour",
-    "FULLSTREAM"
-  ],
-  "a": [1,2],
-  "h": "Snowflake schedules refreshes slightly earlier to allow time for the refresh to complete."
-},{
-  "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = DOWNSTREAM, DT2 TARGET_LAG = 10 minutes",
-  "options": [
-    "No data is updated",
-    "DT2 is updated at least every 10 minutes",
-    "DT1 is updated every 5 minutes.",
-    "DT1 is updated every time DT2 requires updates."
-  ],
-  "a": [1,3]
-},{
-  "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = 10minutes, DT2 TARGET_LAG = DOWNSTREAM",
-  "options": [
-    "No data is updated for DT2",
-    "DT2 is updated at least every 10 minutes",
-    "DT1 is updated every 10 minutes.",
-    "DT1 is updated every time DT2 requires updates."
-  ],
-  "a": [0,2],
-  "h": "This scenario should be avoided. The report query will not receive any data."
-},{
-  "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = 5minutes, DT2 TARGET_LAG = 10minutes",
-  "options": [
-    "No data is updated for DT2",
-    "DT2 is updated approximately every 10 minutes",
-    "DT1 is updated every 5 minutes.",
-    "DT1 is updated every time DT2 requires updates."
-  ],
-  "a": [1,2]
-},{
-  "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = DOWNSTREAM, DT2 TARGET_LAG = DOWNSTREAM",
-  "options": [
-    "No data is updated for DT2",
-    "DT2 is updated approximately every 10 minutes",
-    "DT1 is updated every 5 minutes.",
-    "DT1 is updated every time DT2 requires updates."
-  ],
-  "a": [0],
-  "h": "Neither DT1 nor DT2 is refreshed periodically because both of them have a downstream lag, and neither has a downstream consumer with a defined lag."
-},{
-  "q": "Dynamic tables can be combined with the benefits of dynamic tables and Snowflake-managed Iceberg tables",
-  "options": [
-    "True",
-    "False"
-  ],
-  "a": [0],
-  "h": "Dynamic Iceberg tables integrate with data lakes, \n which let you store data in external cloud storage such as AWS S3 or Azure Blob Storage while being managed by Snowflake. \n These tables support ACID transactions, schema evolution, hidden partitioning, and table snapshots."
-},{
-  "q": "After how many consecutive scheduled refresh errors are dynamic tables automatically suspended?",
-  "options": [
-    "Three",
-    "Five",
-    "Seven",
-    "Ten"
-  ],
-  "a": [1],
-  "h": "Dynamic tables are automatically suspended after five consecutive scheduled refresh errors to prevent repeated failures."
-},{
-  "q": "Any dynamic tables dependent on a suspended table are ____.",
-  "options": [
-    "automatically refreshed",
-    "automatically suspended",
-    "manually refreshed",
-    "needs to be manually suspended"
-  ],
-  "a": [1],
-  "h": "Any dynamic tables dependent on a suspended table are also automatically suspended to maintain data consistency."
-},{
-  "q": "Dynamic tables can  be manually suspended",
-  "options": [
-    "True",
-    "False"
-  ],
-  "a": [0],
-  "h": "ALTER DYNAMIC TABLE my_dynamic_table SUSPEND;"
-}
+    "options": [
+     "ON_CREATE",
+     "ON_SCHEDULE",
+     "IMMEDIATE",
+     "MANUAL"
     ],
-    "links": ["https://docs.snowflake.com/en/user-guide/dynamic-tables-target-lag#types-of-target-lag"],
-
-
-    "height": 200,
-    "width": 200
-}
+    "a": [
+     0,
+     1
+    ],
+    "h": "ON_CREATE is initialized immediately.ON_SCHEDULE, initialization happens within the specified target lag timeframe."
+   },
+   {
+    "q": "Which of the following is a valid refresh option for dynamic tables in Snowflake?",
+    "options": [
+     "Manual refresh",
+     "Scheduled refresh",
+     "static refresh",
+     "task refresh"
+    ],
+    "a": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "q": "Which of the following is a manual refresh option for a dynamic table in Snowflake?",
+    "options": [
+     "Snowsight",
+     "Use target lag",
+     "Task-based refresh",
+     "ALTER DYNAMIC TABLE REFRESH"
+    ],
+    "a": [
+     0,
+     3
+    ]
+   },
+   {
+    "q": "____ (2) setting enables scheduled  refresh option",
+    "a": [
+     "target lag"
+    ]
+   },
+   {
+    "q": "Which parameter sets the maximum allowed duration before a dynamic table refresh is automatically canceled in Snowflake?",
+    "options": [
+     "MAX_EXECUTION_TIME",
+     "STATEMENT_TIMEOUT",
+     "STATEMENT_TIMEOUT_IN_SECONDS",
+     "QUERY_TIMEOUT"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "Which refresh modes are supported by Snowflake Dynamic Tables?",
+    "options": [
+     "Auto",
+     "Full",
+     "Partial",
+     "Incremental",
+     "Manual"
+    ],
+    "a": [
+     0,
+     1,
+     3
+    ],
+    "h": "When using the AUTO parameter, Snowflake automatically selects the most cost and time-effective refresh mode"
+   },
+   {
+    "q": "When does Snowflake decide the refresh strategy in AUTO refresh mode for a dynamic table?",
+    "options": [
+     "At the time of table creation",
+     "Before every refresh operation",
+     "During query execution",
+     "When a user modifies the table definition"
+    ],
+    "a": [
+     0
+    ],
+    "h": "In AUTO refresh mode, Snowflake makes a one-time decision about the refresh strategy during the creation of the dynamic table."
+   },
+   {
+    "q": "Can a dynamic table with incremental refresh mode be downstream of a dynamic table with full refresh mode?",
+    "options": [
+     "Yes, they are fully compatible.",
+     "No, incremental mode is incompatible with full refresh upstream.",
+     "Only if both tables have the same refresh schedule.",
+     "Yes, but with manual intervention."
+    ],
+    "a": [
+     1
+    ],
+    "h": "Incremental refresh mode is incompatible with the complete row changes from an upstream full refresh dynamic table."
+   },
+   {
+    "q": "Which of the following best describes the behavior of target lag in dynamic table refreshes in Snowflake?",
+    "options": [
+     "It is a goal Snowflake attempts to meet",
+     "It is a strict enforcement rule",
+     "It guarantees real-time data updates",
+     "It blocks queries until lag is resolved"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Target lag is not a guarantee; it’s a goal that Snowflake attempts to meet to keep data in the dynamic table reasonably fresh."
+   },
+   {
+    "q": "What are the types of target lag in Snowflake dynamic table refreshes?",
+    "options": [
+     "1 hour",
+     "Downstream",
+     "UpStream",
+     "amount of time"
+    ],
+    "a": [
+     1,
+     3
+    ],
+    "h": "ALTER DYNAMIC TABLE my_dynamic_table SET TARGET_LAG = '1 hour';\nALTER DYNAMIC TABLE my_dynamic_table SET TARGET_LAG = DOWNSTREAM;"
+   },
+   {
+    "q": "True or False: A dynamic table's target lag can be shorter than the target lag of the tables it depends on.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "False — the target lag cannot be shorter than the target lag of dependent dynamic tables."
+   },
+   {
+    "q": "Which methods can be used to determine the optimal target lag time for dynamic tables in Snowflake?",
+    "options": [
+     "Query profiler",
+     "Snowpipe logs",
+     "DYNAMIC_TABLE_REFRESH_HISTORY table function",
+     "Manual configuration only"
+    ],
+    "a": [
+     2
+    ],
+    "h": "The DYNAMIC_TABLE_REFRESH_HISTORY function in INFORMATION_SCHEMA and Snowsight can be used to analyze and determine optimal target lag times."
+   },
+   {
+    "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = DOWNSTREAM, DT2 TARGET_LAG = 10 minutes",
+    "options": [
+     "No data is updated",
+     "DT2 is updated at least every 10 minutes",
+     "DT1 is updated every 5 minutes.",
+     "DT1 is updated every time DT2 requires updates."
+    ],
+    "a": [
+     1,
+     3
+    ]
+   },
+   {
+    "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = 10minutes, DT2 TARGET_LAG = DOWNSTREAM",
+    "options": [
+     "No data is updated for DT2",
+     "DT2 is updated at least every 10 minutes",
+     "DT1 is updated every 10 minutes.",
+     "DT1 is updated every time DT2 requires updates."
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "This scenario should be avoided. The report query will not receive any data."
+   },
+   {
+    "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = 5minutes, DT2 TARGET_LAG = 10minutes",
+    "options": [
+     "No data is updated for DT2",
+     "DT2 is updated approximately every 10 minutes",
+     "DT1 is updated every 5 minutes.",
+     "DT1 is updated every time DT2 requires updates."
+    ],
+    "a": [
+     1,
+     2
+    ]
+   },
+   {
+    "q": "data - DT1 - DT2- REPORT \n DT1 TARGET_LAG = DOWNSTREAM, DT2 TARGET_LAG = DOWNSTREAM",
+    "options": [
+     "DT2 is updated approximately every 10 minutes",
+     "DT1 is updated every 5 minutes.",
+     "No data is updated",
+     "DT1 is updated every time DT2 requires updates."
+    ],
+    "a": [
+     2
+    ],
+    "h": "Neither DT1 nor DT2 is refreshed periodically because both of them have a downstream lag, and neither has a downstream consumer with a defined lag."
+   },
+   {
+    "q": "Dynamic tables can be combined with the benefits of dynamic tables and Snowflake-managed Iceberg tables",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Dynamic Iceberg tables integrate with data lakes, \n which let you store data in external cloud storage such as AWS S3 or Azure Blob Storage while being managed by Snowflake. \n These tables support ACID transactions, schema evolution, hidden partitioning, and table snapshots."
+   },
+   {
+    "q": "After how many consecutive scheduled refresh errors are dynamic tables automatically suspended?",
+    "options": [
+     "Three",
+     "Five",
+     "Seven",
+     "Ten"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Dynamic tables are automatically suspended after five consecutive scheduled refresh errors to prevent repeated failures."
+   },
+   {
+    "q": "Any dynamic tables dependent on a suspended table are ____.",
+    "options": [
+     "automatically refreshed",
+     "automatically suspended",
+     "manually refreshed",
+     "needs to be manually suspended"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Any dynamic tables dependent on a suspended table are also automatically suspended to maintain data consistency."
+   },
+   {
+    "q": "Dynamic tables can  be manually suspended",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "ALTER DYNAMIC TABLE my_dynamic_table SUSPEND;"
+   }
+  ],
+  "links": [
+   "https://docs.snowflake.com/en/user-guide/dynamic-tables-target-lag#types-of-target-lag"
+  ],
+  "height": 36,
+  "width": 115
+ },
+ {
+  "id": 24,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2415,
+  "y": 345,
+  "title": "Target lag\n\n",
+  "text": "[a=https://docs.snowflake.com/en/user-guide/dynamic-tables-target-lag]lnk[/a]\n\nDynamic table refresh is triggered by the data’s target lag\n\n[c=#00FF7F]Target lag is not a guarantee.[/c] Instead, it is a target that Snowflake attempts to meet\n\nSnowflake schedules refreshes slightly earlier than target lag to allow time for the refresh to complete.\n\nThe target lag for a dynamic table is measured relative to the dynamic tables at the root of the graph, not the dynamic tables directly upstream.\n\nTypes of target lag\n  > ALTER DYNAMIC TABLE my_dynamic_table SET TARGET_LAG = '1 hour';\n  > ALTER DYNAMIC TABLE my_dynamic_table SET TARGET_LAG = DOWNSTREAM;\n\nYou can use either the [a=https://docs.snowflake.com/en/sql-reference/functions/dynamic_table_refresh_history]DYNAMIC_TABLE_REFRESH_HISTORY[/a] table function in INFORMATION_SCHEMA or Snowsight to determine the optimal target lag time per your requirements.\n\nAlter target lag allows to alter lag\n  > ALTER DYNAMIC TABLE my_dynamic_table SET\n  TARGET_LAG = DOWNSTREAM;\n\ndata - dt1 - dt2 - report\n\ndt1,dt2\nDOWNSTREAM, 10minutes\nDT2 is updated at least every 10 minutes. \nDT1 infers its lag from DT2 and is updated every time DT2 requires updates.\n\ndt1,dt2\n10minutes, DOWNSTREAM\nDT1 is frequently refreshed\nDT2 is not refreshed \n\ndt1,dt2\n5minutes, 10minutes\nDT2 is updated approximately every 10 minutes with data from DT1 that’s at most 5 minutes old\n\n\ndt1,dt2\nDOWNSTREAM, DOWNSTREAM\nNeither DT1 nor DT2 is refreshed periodically\n",
+  "height": 27,
+  "width": 95
+ },
+ {
+  "id": 25,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 176,
+  "y": 473,
+  "title": "MultiCluster\n\n",
+  "text": "[a=https://docs.snowflake.com/en/user-guide/warehouses-multicluster]lnk[/a]\n\n\nA multi-cluster warehouse is defined by specifying the following properties:\n\n1. [c=#FF5733]Maximum number[/c] of clusters, greater than 1. The highest value you can specify depends on the warehouse size. \n2. [c=#FF5733]Minimum number[/c] of clusters, equal to or less than the maximum.\n\nmulti-cluster warehouses [c=#00FF7F]support all the same properties and actions as single-cluster warehouses[/c], including:\n\nSpecifying a warehouse size.\nResizing a warehouse at any time.\nAuto-suspending a running warehouse due to inactivity; note that this does not apply to individual clusters, but rather the entire multi-cluster warehouse.\nAuto-resuming a suspended warehouse when new queries are submitted.\n\nMaximized vs. auto-scale\n[c=#FF5733]Maximized[/c]\nThis mode is enabled by specifying the same value for both maximum and minimum number of clusters\n[c=#FF5733]Auto-scale[/c]\nThis mode is enabled by specifying different values for maximum and minimum number of clusters.\n\nAs the number of concurrent user sessions and/or queries for the warehouse increases, Snowflake automatically starts additional clusters, up to the maximum number defined for the warehouse.\n\nSimilarly, as the load on the warehouse decreases, Snowflake automatically shuts down clusters to reduce the number of running clusters and, correspondingly, the number of credits used by the warehouse.\n\nIn Auto-scale mode, Snowflake provides scaling policies. \n[c=#FF5733]Standard[/c]\n  > [c=#00FF7F]Prevents/minimizes queuing by favoring starting additional clusters[/c] over conserving credits. \n[c=#FF5733]Economy[/c]\n  > [c=#00FF7F]Conserves credits by favoring keeping running clusters fully-loaded rather than starting additional clusters[/c], which may result in queries being queued and taking longer to complete.",
+  "height": 33,
+  "width": 102
+ },
+ {
+  "id": 26,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": 464,
+  "y": 380,
+  "title": "qa warehouse\n\n",
+  "text": [
+   {
+    "q": "A virtual warehouse, often referred to simply as a 'warehouse', is a cluster of ____  resources.",
+    "a": [
+     "compute"
+    ]
+   },
+   {
+    "q": "Which of the following are types of virtual warehouses available in Snowflake?",
+    "options": [
+     "Snowpark-optimized",
+     "Enterprise",
+     "On-demand",
+     "Standard"
+    ],
+    "a": [
+     0,
+     3
+    ]
+   },
+   {
+    "q": "Which of the following resources are provided by a Snowflake virtual warehouse?",
+    "options": [
+     "CPU",
+     "Memory",
+     "Access control",
+     "Temporary storage"
+    ],
+    "a": [
+     0,
+     1,
+     3
+    ],
+    "h": "Permanent storage is part of Snowflakes storage layer, not the warehouse."
+   },
+   {
+    "q": "Warehouses can be started and stopped at any time.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Warehouses can be resized at any time, even while running.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "What are the smallest and largest virtual warehouse sizes available in Snowflake?",
+    "options": [
+     "X-Small",
+     "Small",
+     "Large",
+     "6X-Large"
+    ],
+    "a": [
+     0,
+     3
+    ],
+    "h": "These apply for gen-1 warehouse."
+   },
+   {
+    "q": "Increasing the size of a warehouse always improves data loading performance.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "Data loading performance is influenced more by which of the following?",
+    "options": [
+     "Warehouse size",
+     "Number of files being loaded",
+     "Size of each file",
+     "Query complexity"
+    ],
+    "a": [
+     1,
+     2
+    ]
+   },
+   {
+    "q": "By default, is auto-suspend enabled for Snowflake warehouses?",
+    "options": [
+     "Enabled",
+     "Disabled"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "By default, auto-resume is not enabled for Snowflake warehouses.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "Auto-suspend and auto-resume apply  to the ____ (2) and not to the individual clusters in the warehouse.",
+    "a": [
+     "entire warehouse"
+    ]
+   },
+   {
+    "q": "For a multi-cluster warehouse, under what condition does auto-suspend occur in Snowflake warehouses?",
+    "options": [
+     "Warehouse is paused manually",
+     "No activity for the specified period",
+     "Minimum number of clusters is running",
+     "Warehouse size is increased"
+    ],
+    "a": [
+     1,
+     2
+    ]
+   },
+   {
+    "q": "For a multi-cluster warehouse, under what condition does auto-resume occur in Snowflake warehouses?",
+    "options": [
+     "No activity for the specified period",
+     "Minimum number of clusters is running",
+     "no clusters are running",
+     "Warehouse size is increased"
+    ],
+    "a": [
+     2
+    ],
+    "h": "Entire warehouse is suspended"
+   },
+   {
+    "q": "Which properties define a multi-cluster warehouse in Snowflake?",
+    "options": [
+     "Warehouse size (must be X-Large or bigger)",
+     "Minimum number of clusters (equal to or less than maximum)",
+     "Number of users accessing the warehouse",
+     "Maximum number of clusters (greater than 1)"
+    ],
+    "a": [
+     1,
+     3
+    ]
+   },
+   {
+    "q": "Which of the following actions are supported by multi-cluster warehouses in Snowflake?",
+    "options": [
+     "Specifying a warehouse size",
+     "Auto-suspending individual clusters",
+     "Resizing a warehouse at any time",
+     "Auto-resuming a suspended warehouse when new queries are submitted"
+    ],
+    "a": [
+     0,
+     2,
+     3
+    ]
+   },
+   {
+    "q": "What is a key difference between 'Maximized' and 'Auto-Scale' modes in Snowflake multi-cluster warehouses?",
+    "options": [
+     "Maximized runs all clusters at once",
+     "Maximized automatically adds or removes clusters",
+     "Auto-Scale keeps clusters fixed",
+     "Auto-Scale adjusts clusters based on query load"
+    ],
+    "a": [
+     0,
+     3
+    ]
+   },
+   {
+    "q": "____ mode is activated when the maximum and minimum number of clusters are set to the same value?",
+    "a": [
+     "maximized"
+    ]
+   },
+   {
+    "q": "Autoscale mode is enabled by specifying ____ (2) for maximum and minimum number of clusters.",
+    "a": [
+     "different values"
+    ],
+    "h": "Snowflake add or remove clusters based on workload."
+   },
+   {
+    "q": "What are the two scaling policies provided by Snowflake in Auto-scale mode?",
+    "options": [
+     "Manual",
+     "Economy",
+     "Maximized",
+     "Standard"
+    ],
+    "a": [
+     1,
+     3
+    ]
+   },
+   {
+    "q": "Which statements best describe the Standard scaling policy in Snowflake Auto-scale mode? (Select two)",
+    "options": [
+     "Prevents queuing by favoring starting additional clusters quickly",
+     "Conserves credits by delaying cluster startup",
+     "Requires manual cluster management",
+     "Starts additional clusters even if it uses more credits"
+    ],
+    "a": [
+     0,
+     3
+    ]
+   },
+   {
+    "q": "Which of the following best describe the Economy scaling policy in Snowflake Auto-scale mode? (Select two)",
+    "options": [
+     "Requires manual cluster management",
+     "Conserves credits by favoring keeping running clusters fully-loaded",
+     "Faster cluster startup to improve performance",
+     "Allow queries being queued to conserve credits"
+    ],
+    "a": [
+     1,
+     3
+    ],
+    "h": "This may result in queries being queued and taking longer to complete."
+   }
+  ],
+  "height": 24,
+  "width": 127
+ },
+ {
+  "id": 27,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 2243,
+  "y": 223,
+  "title": "g_dynamicTableBasic\n\n\n",
+  "text": "i am new bubble",
+  "height": 29,
+  "width": 162
+ },
+ {
+  "id": 28,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 176,
+  "y": 52,
+  "title": ".",
+  "text": "dynamicTable",
+  "gotoid": "27"
+ },
+ {
+  "id": 29,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 6531,
+  "y": 90,
+  "title": "Study plan\n\n\n",
+  "text": "i am new bubble",
+  "height": 23,
+  "width": 84
+ },
+ {
+  "id": 30,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 6988,
+  "y": 217,
+  "title": "g_dynamicTableBasic\n",
+  "text": "[g=27]go[/g]",
+  "height": 34,
+  "width": 142,
+  "last_visited": "2025-09-08"
+ },
+ {
+  "id": 31,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 2,
+  "y": 90,
+  "title": ".",
+  "text": "studyOrder📖",
+  "gotoid": "29"
+ },
+ {
+  "id": 32,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 100,
+  "y": 384,
+  "title": "g_warehouseBasic\n\n\n",
+  "text": "i am new bubble",
+  "height": 26,
+  "width": 136
+ },
+ {
+  "id": 33,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 175,
+  "y": 6,
+  "title": ".",
+  "text": "warehouse",
+  "gotoid": "32"
+ },
+ {
+  "id": 34,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 7173,
+  "y": 214,
+  "title": "g_warehouseBasic\n\n",
+  "text": "[g=32]go[/g]",
+  "height": 53,
+  "width": 120,
+  "last_visited": "2025-09-08"
+ },
+ {
+  "id": 35,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 846,
+  "y": 330,
+  "text": "snowflake",
+  "root": true,
+  "child": [
+   63,
+   36,
+   40
+  ]
+ },
+ {
+  "id": 36,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 922,
+  "y": 488,
+  "text": "?",
+  "child": [
+   37
+  ]
+ },
+ {
+  "id": 37,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 661,
+  "y": 405,
+  "text": "saas",
+  "child": [
+   38
+  ]
+ },
+ {
+  "id": 38,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 696,
+  "y": 405,
+  "text": "*",
+  "child": [
+   39
+  ]
+ },
+ {
+  "id": 39,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 713,
+  "y": 405,
+  "text": "software as a service",
+  "child": []
+ },
+ {
+  "id": 40,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 922,
+  "y": 304,
+  "text": "k",
+  "child": [
+   41
+  ]
+ },
+ {
+  "id": 41,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 940,
+  "y": 304,
+  "text": "warehouse",
+  "child": [
+   78,
+   43,
+   86
+  ]
+ },
+ {
+  "id": 42,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1035,
+  "y": 318,
+  "text": "cluster of compute resources",
+  "child": []
+ },
+ {
+  "id": 43,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1019,
+  "y": 384,
+  "text": "v",
+  "child": [
+   44,
+   45
+  ]
+ },
+ {
+  "id": 44,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1036,
+  "y": 397,
+  "text": "standard",
+  "child": [
+   46,
+   64
+  ]
+ },
+ {
+  "id": 45,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1036,
+  "y": 332,
+  "text": "snowparkOptimized",
+  "child": [
+   52,
+   54,
+   58
+  ]
+ },
+ {
+  "id": 46,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 436,
+  "text": "l",
+  "child": [
+   47
+  ]
+ },
+ {
+  "id": 47,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1112,
+  "y": 436,
+  "text": "size",
+  "child": [
+   48,
+   50
+  ]
+ },
+ {
+  "id": 48,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 869,
+  "y": 327,
+  "text": "min",
+  "child": [
+   49
+  ]
+ },
+ {
+  "id": 49,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 903,
+  "y": 327,
+  "text": "xsmall",
+  "child": []
+ },
+ {
+  "id": 50,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 869,
+  "y": 301,
+  "text": "max",
+  "child": [
+   51
+  ]
+ },
+ {
+  "id": 51,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 905,
+  "y": 301,
+  "text": "6x",
+  "child": []
+ },
+ {
+  "id": 52,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 898,
+  "y": 300,
+  "text": "?",
+  "child": [
+   53
+  ]
+ },
+ {
+  "id": 53,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 914,
+  "y": 300,
+  "text": "running snowpark workloads",
+  "child": [
+   56
+  ]
+ },
+ {
+  "id": 54,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 898,
+  "y": 274,
+  "text": "f",
+  "child": [
+   55
+  ]
+ },
+ {
+  "id": 55,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 912,
+  "y": 274,
+  "text": "configure memory and cpu architecture",
+  "child": []
+ },
+ {
+  "id": 56,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 300,
+  "text": "!",
+  "child": [
+   57
+  ]
+ },
+ {
+  "id": 57,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1123,
+  "y": 300,
+  "text": "can run on standard also",
+  "child": []
+ },
+ {
+  "id": 58,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 898,
+  "y": 248,
+  "text": "k",
+  "child": [
+   59
+  ]
+ },
+ {
+  "id": 59,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 915,
+  "y": 248,
+  "text": "memory",
+  "child": [
+   60
+  ]
+ },
+ {
+  "id": 60,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 977,
+  "y": 248,
+  "text": "default",
+  "child": [
+   61
+  ]
+ },
+ {
+  "id": 61,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1030,
+  "y": 248,
+  "text": "16*standard WH per node",
+  "child": []
+ },
+ {
+  "id": 62,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 692,
+  "y": 416,
+  "text": "workLoad",
+  "child": []
+ },
+ {
+  "id": 63,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 922,
+  "y": 514,
+  "text": "delete",
+  "child": [
+   62
+  ]
+ },
+ {
+  "id": 64,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 384,
+  "text": "mode",
+  "child": [
+   65
+  ]
+ },
+ {
+  "id": 65,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1143,
+  "y": 384,
+  "text": "multicluster",
+  "child": [
+   66,
+   69
+  ]
+ },
+ {
+  "id": 66,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1228,
+  "y": 397,
+  "text": "pr",
+  "child": [
+   67,
+   68
+  ]
+ },
+ {
+  "id": 67,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1250,
+  "y": 410,
+  "text": "maximumSize",
+  "child": []
+ },
+ {
+  "id": 68,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1250,
+  "y": 384,
+  "text": "minimumSize",
+  "child": []
+ },
+ {
+  "id": 69,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1228,
+  "y": 358,
+  "text": "mode",
+  "child": [
+   70,
+   71
+  ]
+ },
+ {
+  "id": 70,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1278,
+  "y": 383,
+  "text": "maximized",
+  "child": [
+   73
+  ]
+ },
+ {
+  "id": 71,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1278,
+  "y": 318,
+  "text": "autoScale",
+  "child": [
+   74,
+   76,
+   80
+  ]
+ },
+ {
+  "id": 72,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1374,
+  "y": 383,
+  "text": "maxSize=minSize",
+  "child": []
+ },
+ {
+  "id": 73,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1358,
+  "y": 383,
+  "text": "?",
+  "child": [
+   72
+  ]
+ },
+ {
+  "id": 74,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1349,
+  "y": 357,
+  "text": "?",
+  "child": [
+   75
+  ]
+ },
+ {
+  "id": 75,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1365,
+  "y": 357,
+  "text": "maxSize>minSize(1)",
+  "child": []
+ },
+ {
+  "id": 76,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1349,
+  "y": 331,
+  "text": "lc",
+  "child": [
+   77
+  ]
+ },
+ {
+  "id": 77,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1369,
+  "y": 331,
+  "text": "grow",
+  "child": [
+   79
+  ]
+ },
+ {
+  "id": 78,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1019,
+  "y": 462,
+  "text": "?",
+  "child": [
+   42
+  ]
+ },
+ {
+  "id": 79,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1410,
+  "y": 331,
+  "text": "As the number of concurrent user sessions and/or queries for the warehouse increases, Snowflake automatically starts additional clusters, up to the maximum number defined for the warehouse",
+  "title": "onDemand",
+  "child": []
+ },
+ {
+  "id": 80,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1349,
+  "y": 292,
+  "text": "f",
+  "child": [
+   81
+  ]
+ },
+ {
+  "id": 81,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1363,
+  "y": 292,
+  "text": "scalingPolicy",
+  "child": [
+   82,
+   83
+  ]
+ },
+ {
+  "id": 82,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1458,
+  "y": 305,
+  "text": "standard",
+  "child": [
+   85
+  ]
+ },
+ {
+  "id": 83,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1458,
+  "y": 279,
+  "text": "economy",
+  "child": [
+   84
+  ]
+ },
+ {
+  "id": 84,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1525,
+  "y": 279,
+  "text": "favors fully loaded warehouse",
+  "child": []
+ },
+ {
+  "id": 85,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1521,
+  "y": 305,
+  "text": "favors starting additional warehouse",
+  "child": []
+ },
+ {
+  "id": 86,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1019,
+  "y": 226,
+  "text": "f",
+  "child": [
+   94
+  ]
+ },
+ {
+  "id": 87,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1148,
+  "y": 200,
+  "text": "autoSuspend",
+  "child": [
+   89,
+   98
+  ]
+ },
+ {
+  "id": 88,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1148,
+  "y": 278,
+  "text": "autoResume",
+  "child": [
+   91,
+   96
+  ]
+ },
+ {
+  "id": 89,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1238,
+  "y": 226,
+  "text": "ed",
+  "child": [
+   90
+  ]
+ },
+ {
+  "id": 90,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1262,
+  "y": 226,
+  "text": "enabled",
+  "child": []
+ },
+ {
+  "id": 91,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1237,
+  "y": 306,
+  "text": "ed",
+  "child": [
+   92
+  ]
+ },
+ {
+  "id": 92,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1261,
+  "y": 306,
+  "text": "enabled",
+  "child": []
+ },
+ {
+  "id": 93,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1148,
+  "y": 148,
+  "text": "!",
+  "child": [
+   95
+  ]
+ },
+ {
+  "id": 94,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1035,
+  "y": 226,
+  "text": "suspendResume",
+  "child": [
+   88,
+   87,
+   93
+  ]
+ },
+ {
+  "id": 95,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1162,
+  "y": 188,
+  "text": "entire WH not individual cluster",
+  "child": []
+ },
+ {
+  "id": 96,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1237,
+  "y": 265,
+  "text": "wn",
+  "child": [
+   97,
+   102
+  ]
+ },
+ {
+  "id": 97,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1267,
+  "y": 280,
+  "text": "statement that requires a warehouse is submitted",
+  "child": []
+ },
+ {
+  "id": 98,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1238,
+  "y": 187,
+  "text": "wn",
+  "child": [
+   99,
+   100
+  ]
+ },
+ {
+  "id": 99,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1266,
+  "y": 200,
+  "text": "inactive for period of time",
+  "child": []
+ },
+ {
+  "id": 100,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1266,
+  "y": 174,
+  "text": "multicluster",
+  "child": [
+   101
+  ]
+ },
+ {
+  "id": 101,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1351,
+  "y": 174,
+  "text": "min no of clusters running and no activity",
+  "child": []
+ },
+ {
+  "id": 102,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1267,
+  "y": 252,
+  "text": "multicluster",
+  "child": [
+   103
+  ]
+ },
+ {
+  "id": 103,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1354,
+  "y": 252,
+  "text": "entire warehouse suspended/no running cluster",
+  "child": []
+ }
 ]

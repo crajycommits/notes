@@ -1,0 +1,4002 @@
+[
+ {
+  "id": 2,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 226,
+  "y": 91,
+  "title": "Spark folders\n\n",
+  "text": "bin🗑️:\npyspark [s=20] 👜 [/s], spark-shell [s=20] 🐚 [/s] , sparkR [s=20] R [/s], spark-sql[s=20] 🪢 [/s], spark-submit [s=20] 🙇‍♀️ [/s]\n\nsbin🗑️: admin scripts\n\nkubernetes: docker images\n\ndata📂:.txt input files for MLlib 🤖Spark structured streaming  🔀\nGraphX 📈",
+  "height": 28,
+  "width": 112
+ },
+ {
+  "id": 9,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 323,
+  "y": 1033,
+  "title": "2.0\n\n",
+  "text": "spark 2.0 unification\n\nUnified the \n[s=24]dataframe[/s] and \n[s=24]dataset[/s] API\n\nUnified all below entry points to [s=24]SparkSession[/s]\nSparkContext, StreamingContext\nSQLContext, HiveContext, SparkConf, StreamingContext",
+  "height": 19,
+  "width": 164
+ },
+ {
+  "id": 11,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 420,
+  "y": 95,
+  "title": "Spark Ecosystem\n\n",
+  "text": "SPARK    SPARK      SPARK     GRAPHX\nSQL     STREAMING   MLLIB\n\n        DATAFRAME API\n[c=#ffb86c]java python scala R SQL[/c]\n             |\n             V\n          RDD API\n[c=#ffb86c]java python scala R SQL[/c]\n             |\n             V\n         [c=#f1fa8c]SPARK    CORE(fault tolerant)[/c]\n ",
+  "height": 32,
+  "width": 121
+ },
+ {
+  "id": 12,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 529,
+  "y": 1029,
+  "title": "ErrorMatrix\n\n",
+  "text": "                   | SQL library |   DataFrame   |  DataSets \nSyntax error       | run time    | compile time  | compile time\nanalysis error     | run time    |    run time   | compile time\n[s=32]📐[/s]",
+  "height": 24,
+  "width": 91
+ },
+ {
+  "id": 0,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 7,
+  "y": 5,
+  "title": "root\n\n",
+  "text": "root",
+  "height": 44,
+  "width": 34
+ },
+ {
+  "id": 14,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 341,
+  "y": 1175,
+  "title": "readText\n\n",
+  "text": "pyspark\n# [c=#bd93f9]read file[/c]\nstrings = spark.read.text(\"../README.md\")\n# [c=#bd93f9]read show top 10[/c]\nstrings.show(10, truncate=False)\n# [c=#bd93f9]count total words[/c]\nstrings.count()",
+  "height": 30,
+  "width": 92
+ },
+ {
+  "id": 15,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 13,
+  "y": 176,
+  "title": ".",
+  "text": "pyspark",
+  "gotoid": "14"
+ },
+ {
+  "id": 16,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 508,
+  "y": 1174,
+  "title": "simpleExample\n\n",
+  "text": "[c=#f1fa8c]Simple example[/c]\n[c=#7CFC00]\n# get session\n# read file from paramter\n# read file into data frame\n# group by print\n# group by filter print\n[/c]\n\nimport sys\nfrom pyspark.sql import SparkSession\nfrom pyspark.sql.functions import count\nif __name__ == \"__main__\":\nif len(sys.argv) != 2:\n    print(\"Usage: mnmcount <file>\", file=sys.stderr)\n    sys.exit(-1)\n\n    # Build a SparkSession using the SparkSession APIs.\n    # If one does not exist, then create an instance. There\n    # [c=#FFD700]can only be one SparkSession per JVM.[/c]\n    spark = (SparkSession.builder.appName(\"PythonMnMCount\").getOrCreate())\n\n    # Get the M&M data set\n    mnm_file = sys.argv[1]\n    \n    mnm_df = (spark.read.format(\"csv\").option(\"header\", \"true\").option(\"inferSchema\", \"true\").load(mnm_file))\n    count_mnm_df = (mnm_df\n    .select(\"State\", \"Color\", \"Count\")\n    .groupBy(\"State\", \"Color\")\n    .agg(count(\"Count\").alias(\"Total\"))\n    .orderBy(\"Total\", ascending=False))\n    # Show the resulting aggregations for all the states and colors;\n    # a total [c=#FFD700]count of each color per state[/c].\n    # Note [c=#FFD700]show() is an action[/c], which will trigger the above\n    # query to be executed.\n    count_mnm_df.show(n=60, truncate=False)\n    print(\"Total Rows = %d\" % (count_mnm_df.count()))\n    \n    \n    ca_count_mnm_df = (mnm_df\n    .select(\"State\", \"Color\", \"Count\")\n    .where(mnm_df.State == \"CA\")\n    .groupBy(\"State\", \"Color\")\n    .agg(count(\"Count\").alias(\"Total\"))\n    .orderBy(\"Total\", ascending=False))\n    # Show the resulting aggregation for California.\n    # As above, show() is an action that will trigger the execution of the\n    # entire computation.\n    ca_count_mnm_df.show(n=10, truncate=False)\n    # Stop the SparkSession\n    spark.stop()",
+  "height": 28,
+  "width": 124
+ },
+ {
+  "id": 17,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 12,
+  "y": 361,
+  "title": ".",
+  "text": "simpleExample",
+  "gotoid": "16"
+ },
+ {
+  "id": 19,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 629,
+  "y": 93,
+  "title": "qaBasics\n\n",
+  "text": [
+   {
+    "q": "Spark top level folders",
+    "options": [
+     "bin",
+     "sbin",
+     "core",
+     "conf"
+    ],
+    "a": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "q": "Choose the main Apache Spark libraries",
+    "options": [
+     "Spark Structured Streaming",
+     "MLlib",
+     "Hadoop FS",
+     "GraphX",
+     "Spark SQL"
+    ],
+    "a": [
+     0,
+     1,
+     3,
+     4
+    ]
+   },
+   {
+    "q": "What is the difference between Spark Streaming and Spark Structured Streaming?",
+    "options": [
+     "Spark Streaming uses RDD-based API",
+     "Structured Streaming is easier to use",
+     "spark Structured Streaming has Built-in fault tolerance with exactly-once guarantees",
+     "Structured Streaming is Legacy, not actively improved"
+    ],
+    "a": [
+     0,
+     1,
+     2
+    ]
+   },
+   {
+    "q": "The two engines in spark are spark ____ engine and spark ____ engine",
+    "a": [
+     "core",
+     "sql"
+    ]
+   },
+   {
+    "q": "within each Spark application, multiple jobs (Spark actions) may be running concurrently if they were submitted by  ____ (2) ",
+    "a": [
+     "multiple threads"
+    ]
+   },
+   {
+    "q": "What triggers the creation of a job💼 in Apache Spark?",
+    "options": [
+     "Triggering an action on an RDD or DataFrame",
+     "Creating a new RDD",
+     "Performing a transformation on an RDD",
+     "Saving data to disk"
+    ],
+    "a": [
+     0
+    ],
+    "h": "A job is created whenever you trigger an action on an RDD or DataFrame to execute the necessary computations."
+   },
+   {
+    "q": "Spark job divided into ____ based on ____ (2) ",
+    "a": [
+     "stages",
+     "shuffle boundaries"
+    ]
+   },
+   {
+    "q": "shuffle boundary is a point in a job where data needs to be ____ or ____ across the cluster",
+    "a": [
+     "repartitioned",
+     "redistributed"
+    ],
+    "h": "Shuffle boundaries mark where data movement happens between stages."
+   },
+   {
+    "q": "____ is the smallest unit of work that Spark sends to an executor to run?",
+    "a": [
+     "task"
+    ],
+    "h": "Each task runs on one partition of the data and is the smallest unit of work in Spark."
+   },
+   {
+    "q": "Fill in the blank: In Apache Spark, each application gets its own set of ____ processes and runs ____ in multiple threads.",
+    "a": [
+     "executor",
+     "task"
+    ],
+    "h": "This has the benefit of isolating applications from each other"
+   },
+   {
+    "q": "True or False: Tasks from different Spark applications run in the same JVM for efficiency.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "Which of the following statement is true about DSL and Spark Structured API",
+    "options": [
+     "It helps Spark optimize queries",
+     "It is verbose",
+     "It can read and understand the lambda functions passed to RDD",
+     "It provides abstraction over spark core api"
+    ],
+    "a": [
+     0,
+     3
+    ]
+   },
+   {
+    "q": "What is the correct relationship between Spark applications, drivers, and SparkContexts?",
+    "options": [
+     "1 : 1 : 1",
+     "1 : 2 : 1",
+     "1 : 1 : 2",
+     "2 : 1 : 1"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Why can't Spark applications share data in memory?",
+    "options": [
+     "Because Spark does not support data sharing at all",
+     "Because applications run in separate JVMs",
+     "Because Spark only supports shared memory on YARN",
+     "Because the driver is always remote"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "Which component of Spark schedules tasks for its application?",
+    "options": [
+     "The cluster manager",
+     "The driver",
+     "The executor",
+     "The worker"
+    ],
+    "a": [
+     1
+    ]
+   },
+   {
+    "q": "What condition must be met for the driver program to maintain communication with its executors?",
+    "options": [
+     "It must be inside the same JVM as the executor",
+     "It must be running in local mode",
+     "It must be network addressable from worker nodes",
+     "It must be deployed in Kubernetes"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "Why is it recommended to run the Spark driver close to the worker nodes?",
+    "options": [
+     "To avoid garbage collection delays",
+     "To reduce data serialization",
+     "To improve scheduling latency and reduce network overhead",
+     "To keep the cluster manager idle"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "True or False: Spark can only run on one type of cluster manager, such as YARN or Kubernetes.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Spark is agnostic to the cluster manager and can run on various backends like YARN, Kubernetes, or standalone mode."
+   },
+   {
+    "q": "What is the recommended way to send requests to a remote Spark cluster?",
+    "options": [
+     "Run the driver remotely on a different machine",
+     "Write scripts to SSH into worker nodes",
+     "Send RPCs to the driver and submit jobs from nearby",
+     "Install SparkContext on all workers"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "What is the 'Driver program' in Apache Spark?",
+    "options": [
+     "The process running the main() function of the application and creating the SparkContext",
+     "A JVM process that runs tasks in multiple threads",
+     "The cluster manager that allocates resources",
+     "A worker node that executes tasks"
+    ],
+    "a": [
+     0
+    ],
+    "h": "The driver program is the process that runs the main() function and creates the SparkContext."
+   },
+   {
+    "q": "____ are operations that create a new RDD from an existing one and they are ____. \n ____ trigger the execution of all the transformations to return a result or write data",
+    "a": [
+     "Transformations",
+     "lazy",
+     "Actions"
+    ],
+    "h": "Transformations create new RDD. Actions trigger transformation "
+   },
+   {
+    "q": "Which of the following is NOT transformation",
+    "options": [
+     "map",
+     "filter",
+     "reduce",
+     "flatMap",
+     "union"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "A ____ transformation is one where each output partition depends on only ____ input partition",
+    "a": [
+     "narrow",
+     "one"
+    ],
+    "h": "map(), filter(), union() (without shuffle), mapPartitions()"
+   },
+   {
+    "q": "A ____ transformation is one where output partitions depend on ____ input partitions",
+    "a": [
+     "wide",
+     "multiple"
+    ],
+    "h": "reduceByKey(), groupByKey(), join(), distinct()"
+   },
+   {
+    "q": "Which of the following is NOT action",
+    "options": [
+     "collect",
+     "count",
+     "reduce",
+     "union",
+     "take"
+    ],
+    "a": [
+     3
+    ]
+   }
+  ],
+  "height": 25,
+  "width": 88,
+  "tag": [
+   "begin"
+  ]
+ },
+ {
+  "id": 20,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 10,
+  "y": 234,
+  "title": ".",
+  "text": "basicsQuiz",
+  "gotoid": "19"
+ },
+ {
+  "id": 21,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 305,
+  "y": 260,
+  "title": "Transformations\n\n",
+  "text": "Narrow vs Wide\n\n+-------------------+-------------------------------+------------------------------+\n| Aspect            | Narrow Transformation          | Wide Transformation          |\n+-------------------+-------------------------------+------------------------------+\n| Data Movement     | No shuffle (local)             | Shuffle across nodes         |\n| Dependency        | 1-to-1 partition dependency    | Many-to-many partition dependency |\n| Examples          | map(), filter()                | reduceByKey(), join()        |\n| Performance Impact| Fast🏃🏃🏻‍♀️ and efficient        | Slow🐌🐢⏳ and costly💰 due to shuffle|\n+-------------------+-------------------------------+------------------------------+\n",
+  "height": 48,
+  "width": 121
+ },
+ {
+  "id": 22,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 323,
+  "y": 516,
+  "title": "RDD\n\n",
+  "text": "RDD is the fundamental data structure in Spark representing an immutable, distributed collection of objects that can be processed in parallel.\n\nvital characteristics of an RDD:\nDependencies\nPartitions (with some locality information)\nCompute function: Partition => Iterator[T]\n\nKey Properties:\n\nNote: NO schema so even if it is passed RDD inherently dont have a schema\n\nImmutable: Once created✍️, cannot be changed.\n\nDistributed 🚚🚚🚚: Data is split into partitions🧱🧱 across cluster nodes.\n\nFault-tolerant: Recovers lost data using lineage (the history of transformations).\n\nLazy🥱evaluation: Transformations are computed only when an action🎬 is called.\n\nIn-memory🧠 computation: Supports caching/persisting for faster access.\n\n[g=30]tupleToRdd[/g] and [g=31]rddAgg[/g] \nshows lambda functions, is cryptic and hard to read. Its completely opaque to Spark",
+  "height": 34,
+  "width": 190
+ },
+ {
+  "id": 23,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 531,
+  "y": 193,
+  "title": "DriverCommunication\n\n",
+  "text": "spark driver -> cluster manager -> | ->   WORKER              \n     ^  ^                          |    ( executor -jvm )\n     |  |   GET RESOURCE           |    usually 1 jvm/worker \n     |  |--------------------------|           ^\n     |                                         |\n     | job2dag -> dag2stage -> stage2task    EXECUTE TASK                          \n     |-----------------------------------------|",
+  "height": 32,
+  "width": 165
+ },
+ {
+  "id": 24,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 462,
+  "y": 250,
+  "title": "LifeCycle\n\n",
+  "text": "A [c=#f1fa8c]job[/c]💼 in Apache Spark is a high-level unit of work that Spark creates whenever you trigger an action on an RDD or DataFrame🖼️ .\nWhen you [c=#ffb86c]perform an action[/c]🎬 like Spark creates a job to execute the necessary computations.\nThe job represents the entire computation that Spark will carry out to produce the result of that action.\n\n[c=#f1fa8c]Stage[/c]🎤\nA job is divided into smaller stages based on [c=#ffb86c]shuffle boundaries[/c].\nA shuffle boundary is a point in a Spark job where data needs to be repartitioned or redistributed across the cluster.\n\n[c=#f1fa8c]Task[/c]\nEach stage is further split into multiple tasks that operate on partitions of the data.\nThese tasks are distributed and run in parallel across executors in the cluster.\nA Task is the smallest(⚛️) unit of work that Spark sends to an executor to run.Each task [c=#ffb86c]runs on one partition[/c] of the data.\nIf your RDD has 10 partitions and you call an action, Spark will create 10 tasks—one task for each partition",
+  "height": 32,
+  "width": 86
+ },
+ {
+  "id": 25,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 627,
+  "y": 148,
+  "title": "Architecture\n\n",
+  "text": "[c=#FFD700]architecture[/c]\nEach application gets its [c=#00FF7F]own executor processes[/c]\nIt stay up😴🚫 for the duration of the whole application\nIt run tasks in multiple threads.🧵🧵🧵 \n\nThis isolates applications from each other\n1. on the scheduling side ([c=#00FF7F]each driver schedules its own tasks[/c])\n2. executor side ([c=#00FF7F]tasks from different applications run in different JVMs[/c]). \n\n[c=#00FF7F]Data cannot be shared🙊🚫 across different Spark applications[/c] (instances of SparkContext) \nwrite to external storage system for sharing.\n \nSpark is [c=#00FF7F]agnostic😑🤷‍♂️ to the underlying cluster manager[/c]. \nAs long as it can acquire executor processes it does not care\n\n \nThe driver🚗👨‍✈️ program must listen for and accept incoming connections from its executors throughout its lifetime (e.g., see spark.driver.port in the network config section). \nAs such, the driver program must be network addressable from the worker nodes. \n\nBecause the driver schedules tasks on the cluster, [c=#00FF7F]driver should be run close to the worker nodes[/c], preferably on the same local area network. \n\nIf youd like to send requests to the cluster remotely, its better to open an RPC to the driver and have it submit operations from nearby than to run a driver far away from the worker nodes.",
+  "height": 37,
+  "width": 126
+ },
+ {
+  "id": 26,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 567,
+  "y": 507,
+  "title": "RDDCache\n\n",
+  "text": "[g=27]quiz[/g]\n[c=#FFD700]RDD CACHE[/c]\n\nRDD can be persisted using the [c=#FF5733]persist() or cache()[/c] methods on it. The first time it is computed in an action, it will be kept in memory on the nodes\n\n[c=#00FF7F]cache()[/c] is a shorthand for StorageLevel.MEMORY_ONLY\n\n[c=#00FF7F]default[/c] is StorageLevel.MEMORY_ONLY\n\nLevel                Space used  CPU time  In memory  On disk  Serialized\n-------------------------------------------------------------------------\nMEMORY_ONLY          High        Low       Y          N        N\nMEMORY_ONLY_SER      Low         High      Y          N        Y\nMEMORY_AND_DISK      High        Medium    Some       Some     Some\nMEMORY_AND_DISK_SER  Low         High      Some       Some     Y\nDISK_ONLY            Low         High      N          Y        Y\n\nIn Python, stored objects will [c=#00FF7F]always be serialized with the Pickle library[/c]. So options with _SER dont apply to python\n\nold cache data partitions in a least-recently-used (LRU) fashion. \nuse the [c=#FF4500]RDD.unpersist()[/c] for manual removal.specify [c=#FF4500]blocking=true[/c] for synchronous unpersist\n\n⚠️Dont spill to disk unless the functions that computed your datasets are expensive\n",
+  "height": 28,
+  "width": 100
+ },
+ {
+  "id": 27,
+  "type": "quiz",
+  "style": {
+   "default": "quiz",
+   "fontFamily": "Comic Sans MS"
+  },
+  "x": 874,
+  "y": 508,
+  "title": "qaCache\n\n",
+  "text": [
+   {
+    "q": "Which methods can be used to mark an RDD for persistence in Apache Spark?",
+    "options": [
+     "store()",
+     "persist()",
+     "cache()",
+     "save()"
+    ],
+    "a": [
+     1,
+     2
+    ],
+    "h": "You can use either persist() or cache() to mark an RDD to be stored for reuse in Spark."
+   },
+   {
+    "q": "When is an RDD actually persisted in Spark after calling persist() or cache()?",
+    "options": [
+     "Immediately after calling persist() or cache()",
+     "Only after a transformation is applied",
+     "The first time it is computed in an action",
+     "When the job is submitted to the cluster"
+    ],
+    "a": [
+     2
+    ],
+    "h": "RDDs are lazily evaluated and only get persisted the first time they are computed during an action like count(), collect(), etc."
+   },
+   {
+    "q": "The ____ method is a shorthand for StorageLevel.____.",
+    "a": [
+     "cache",
+     "MEMORY_ONLY"
+    ]
+   },
+   {
+    "q": "What is the default storage level in Spark?",
+    "options": [
+     "MEMORY_AND_DISK",
+     "MEMORY_ONLY",
+     "DISK_ONLY",
+     "OFF_HEAP"
+    ],
+    "a": [
+     1
+    ],
+    "h": "The cache() method uses the MEMORY_ONLY storage level by default, storing deserialized objects in memory."
+   },
+   {
+    "q": "Which storage levels in Spark are specific to Java and Scala?",
+    "options": [
+     "MEMORY_AND_DISK",
+     "MEMORY_ONLY_SER",
+     "MEMORY_ONLY_2",
+     "MEMORY_AND_DISK_SER"
+    ],
+    "a": [
+     1,
+     3
+    ],
+    "h": "n Python, stored objects will always be serialized with the Pickle library, so serialization option does not apply \n R not mentioned chat gpt says its the same"
+   },
+   {
+    "q": "Spark automatically persists some intermediate data in shuffle operations (e.g., reduceByKey), even without users calling persist. True or False?",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Spark automatically persists intermediate shuffle data to disk to ensure fault tolerance during operations like reduceByKey."
+   },
+   {
+    "q": "Which storage level is the most CPU-efficient option for RDDs in Spark?",
+    "options": [
+     "MEMORY_ONLY",
+     "MEMORY_ONLY_SER",
+     "MEMORY_AND_DISK",
+     "DISK_ONLY"
+    ],
+    "a": [
+     0
+    ],
+    "h": "MEMORY_ONLY is the most CPU-efficient option because it stores deserialized objects in memory, allowing fast access."
+   },
+   {
+    "q": "Which storage level is more space-efficient but uses more CPU time, recommended for Java and Scala?",
+    "options": [
+     "MEMORY_ONLY",
+     "MEMORY_ONLY_SER",
+     "DISK_ONLY",
+     "OFF_HEAP"
+    ],
+    "a": [
+     1
+    ],
+    "h": "MEMORY_ONLY_SER stores serialized objects, making it more space-efficient but requiring more CPU to read."
+   },
+   {
+    "q": "When is it recommended to allow RDDs to spill to disk in Spark?",
+    "options": [
+     "Always, to avoid recomputation",
+     "Only when functions are expensive or data is heavily filtered",
+     "Never, because disk access is too slow",
+     "Whenever memory is available"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Spilling to disk is recommended only if recomputing the data would be more expensive than reading it from disk."
+   },
+   {
+    "q": "What does the '_2' suffix indicate in Spark storage levels like MEMORY_ONLY_2 or MEMORY_AND_DISK_2?",
+    "options": [
+     "The data is compressed twice",
+     "Two copies of each partition are stored on different nodes",
+     "The data is stored on two disks"
+    ],
+    "a": [
+     1
+    ],
+    "h": "partition is replicated on two different cluster nodes for fault tolerance.\n 2 is hardcoded 3,4,etc not available"
+   },
+   {
+    "q": "When should you use replicated storage levels like MEMORY_ONLY_2 in Spark?",
+    "options": [
+     "When disk space is limited",
+     "To reduce memory usage",
+     "For fast fault recovery without waiting to recompute lost data",
+     "When you don't care about fault tolerance"
+    ],
+    "a": [
+     2
+    ],
+    "h": "All the storage levels provide full fault tolerance by recomputing lost data, but the replicated ones avoids recompute time."
+   },
+   {
+    "q": "How does Spark decide which cached data partitions to remove when memory is full?",
+    "options": [
+     "FIFO (First-In-First-Out)",
+     "MRU (Most Recently Used)",
+     "LRU (Least Recently Used)",
+     "Random Eviction"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "To manually remove an RDD from cache instead of waiting for it to be evicted, use the RDD.____() method.",
+    "a": [
+     "unpersist"
+    ],
+    "h": "This does not block by default. To block until resources are freed, specify blocking=true when calling this method."
+   }
+  ],
+  "links": [
+   "https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence"
+  ],
+  "height": 32,
+  "width": 153
+ },
+ {
+  "id": 28,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 365,
+  "y": 1242,
+  "title": "GlobalTempView\n\n",
+  "text": "[c=#FFD700]Global Temporary View[/c]\n\n[c=#00FF7F]Temporary views in Spark SQL are session-scoped[/c] and will disappear if the session that creates it terminates.\n\nglobal temporary view is [c=#00FF7F]shared among all sessions and kept alive[/c] until the Spark application terminates\n\nGlobal temporary view is tied to a system preserved database [c=#FF5733]global_temp[/c]\n\nSpark's catalog (which includes databases like global_temp) is managed by the driver.\nNote: Even if configured with hive catalog this is not same as that\n\nWhen you create a global temp view, it is registered in the driver's catalog\n\nAlways use fully qualified name to refer it, e.g. SELECT * FROM global_temp.view1.",
+  "height": 25,
+  "width": 196
+ },
+ {
+  "id": 29,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 320,
+  "y": 971,
+  "title": "DataSets\n\n",
+  "text": "[c=#FFD700]Datasets[/c]\n\nDatasets are similar to RDDs, however, instead of using [c=#FF5733]Java serialization or Kryo[/c] they use a specialized [c=#FF5733]Encoder[/c] to serialize the objects for processing or transmitting over the network. \n\nWhile both encoders and standard serialization are responsible for turning an object into bytes, encoders are code generated dynamically and use a format that allows Spark to perform many operations like [c=#00FF7F]filtering, sorting and hashing without deserializing the bytes back into an object[/c].",
+  "height": 33,
+  "width": 177
+ },
+ {
+  "id": 30,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 1000033,
+  "y": 868,
+  "title": "TupleToRdd\n\n",
+  "text": "# Create an RDD of tuples (name, age)\n\ndataRDD = sc.parallelize([(\"Brooke\", 20), (\"Denny\", 31), (\"Jules\", 30),\n(\"TD\", 35), (\"Brooke\", 25)])",
+  "height": 20,
+  "width": 95,
+  "tag": [
+   "create",
+   "rdd",
+   "tuple"
+  ]
+ },
+ {
+  "id": 31,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 1000024,
+  "y": 924,
+  "title": "rddAggregation\n\n",
+  "text": "agesRDD = (\n    dataRDD\n    .map(lambda x: (x[0], (x[1], 1)))\n    .reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))\n    .map(lambda x: (x[0], x[1][0] / x[1][1]))\n)\n\nmap [(\"A\", (30, 1)),(\"B\", (20, 1)),(\"A\", (34, 1))]\n\nreduce\n[(\"A\", (64, 2)),(\"B\", (20, 1))]\n\nmap\n[(\"A\", 32),(\"B\", 20)]\n",
+  "height": 28,
+  "width": 106,
+  "tag": [
+   "rdd",
+   "agg"
+  ]
+ },
+ {
+  "id": 32,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": -1065,
+  "y": 190,
+  "title": "Codequiz\n\n",
+  "text": [
+   {
+    "q": "Get spark session: spark = (____.____.appName(\"AuthorsAges\").getOrCreate())",
+    "a": [
+     "SparkSession",
+     "builder"
+    ]
+   },
+   {
+    "q": "data_df = spark.____([(\"Brooke\", 20), [\"name\", \"age\"])",
+    "a": [
+     "createDataFrame"
+    ]
+   },
+   {
+    "q": "Which of the following statements about Spark DataFrame df.show() are true?",
+    "options": [
+     "By default, df.show() displays 10 rows.",
+     "df.show(50, false) displays 50 rows without truncating column values.",
+     "df.show() displays the full content of all columns regardless of their length.",
+     "df.show(false) displays all rows in the DataFrame.",
+     "Column values are truncated to 20 characters by default in df.show().",
+     "df.show(Int.MaxValue) attempts to display all rows."
+    ],
+    "a": [
+     1,
+     2,
+     4
+    ],
+    "h": "default is 20 rows. \n Int.MaxValue - not recommended for large datasets"
+   },
+   {
+    "q": "df.____() returns the total number of rows in a DataFrame.",
+    "a": [
+     "count"
+    ]
+   },
+   {
+    "q": "group by name and average: \n avg_df = data_df.____(\"name\").____(____(\"age\"))",
+    "a": [
+     "groupBy",
+     "agg",
+     "avg"
+    ]
+   },
+   {
+    "q": "Running program from console : ____  Example-3_6.py",
+    "a": [
+     "spark-submit"
+    ]
+   },
+   {
+    "q": "Which of the following expressions are equivalent ways to select the 'Hits' column from a DataFrame in PySpark?",
+    "options": [
+     "blogsDF.select(expr(\"Hits\"))",
+     "blogsDF.select(col(\"Hits\"))",
+     "blogsDF.select(\"Hits\")",
+     "blogsDF.get(\"Hits\")",
+     "blogsDF.column(\"Hits\")"
+    ],
+    "a": [
+     0,
+     1,
+     2
+    ],
+    "h": "expr() is part of the pyspark.sql.functions (Python) and org.apache.spark.sql.functions (Scala) packages \n blogsDF.select(expr(\"Hits * 2\")).show(2)"
+   },
+   {
+    "q": "blogs_df.sort(col(\"Id\").desc) and blogsDF.sort(____\"Id\".desc) are identical",
+    "a": [
+     "$"
+    ],
+    "h": "They both sort the DataFrame column named Id in descending order"
+   },
+   {
+    "q": "In which of the following cases are backticks required when defining a schema in Spark using DDL format?",
+    "options": [
+     "Spaces in column names",
+     "Special characters in column names",
+     "Simple one-word column names like 'id' or 'name'",
+     "Reserved keywords (like SELECT, TABLE, etc.)"
+    ],
+    "a": [
+     0,
+     1,
+     3
+    ],
+    "h": "[g=37]link[/g]"
+   },
+   {
+    "q": "What does the withColumn() function do in Apache Spark?",
+    "options": [
+     "It adds a new column to a DataFrame.",
+     "It renames an existing column.",
+     "It modifies an existing column if the name already exists.",
+     "It displays the DataFrame in tabular format."
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "[g=36]link[/g]"
+   }
+  ],
+  "height": 26,
+  "width": 70
+ },
+ {
+  "id": 33,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 331,
+  "y": 736,
+  "title": "DataFrame.\n\n",
+  "text": "[c=#FF5733]Spark DataFrames[/c] are like distributed in-memory tables with [c=#FF5733]named columns and\nschemas[/c], where each column has a specific data type: integer, string, array, map, real,\ndate, timestamp, etc. To a humans eye, a Spark DataFrame is like a table",
+  "height": 32,
+  "width": 152
+ },
+ {
+  "id": 34,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 681,
+  "y": 739,
+  "title": "Schema\n\n",
+  "text": "A schema in Spark defines the column names and associated data types\n\nDefining a schema up front as opposed to taking a schema-on-read approach offers three benefits:\n\n1. Relieve Spark from the onus of inferring data types.\n2. Prevent Spark from creating a separate job just to read a large portion of\nyour file to ascertain the schema, which for a large data file can be expensive and\ntime-consuming.\n3. Detect errors early if data doesnt match the schema.\n\n[c=#00FF7F]Always define your schema up front whenever you want to read a large file from a data source.[/c]\n\nWhen inferring schema([c=#FF5733]reflection[/c]) use samplingRatio to control it\n\nCode: [g=40]codeSample[/g]",
+  "height": 29,
+  "width": 100
+ },
+ {
+  "id": 35,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 12,
+  "y": 294,
+  "title": ".",
+  "text": "codeSnippet",
+  "gotoid": "30"
+ },
+ {
+  "id": 36,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 1000025,
+  "y": 990,
+  "title": "Concat.\n\n",
+  "text": "blogsDF\n.withColumn(\"AuthorsId\", (concat(expr(\"First\"), expr(\"Last\"), expr(\"Id\"))))\n.select(col(\"AuthorsId\"))\n.show(4)",
+  "height": 33,
+  "width": 76
+ },
+ {
+  "id": 37,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 1000024,
+  "y": 1063,
+  "title": "DefineSchema\n\n",
+  "text": "#Programmatically In Python\nfrom pyspark.sql.types import *\nschema = StructType([StructField(\"author\", StringType(), False),\nStructField(\"title\", StringType(), False),\nStructField(\"pages\", IntegerType(), False)])\n\n# DDL\nschema = \"author STRING, title STRING, pages INT\"\nYou can choose whichever way you like to define a schema.\n\n# In Python\nfrom pyspark.sql import SparkSession\n# Define schema for our data using DDL\nschema = \"`Id` INT, `First` STRING, `Last` STRING, `Url` STRING,\n`Published` STRING, `Hits` INT, `Campaigns` ARRAY<STRING>\"\n\n[c=#00FF7F]Backtick protects Spaces, Special characters, Reserved keywords (like SELECT, TABLE, etc.)[/c]",
+  "height": 28,
+  "width": 124
+ },
+ {
+  "id": 38,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 513,
+  "y": 736,
+  "title": "ColsAndRows\n\n",
+  "text": "[c=#FFD700]columns[/c] are objects with public methods represented by the Column type\nScala, Java, and Python all have public methods associated with columns\nColumn is the object name, [c=#FF5733]col()[/c] is a built-in function that returns a Column\n\nColumns can be part of sql expressions [c=#FF5733]expr[/c]\nexpr(\"columnName * 5\")\nexpr() is part of the pyspark.sql.functions (Python) and org.apache.spark.sql.functions (Scala) packages\nexpr is basically a SQL expression\n\n[c=#FF5733]$[/c]\ndf.sort(col(\"Id\").desc) and df.sort($\"Id\".desc) are identical.\n$ is a function in Spark that converts column named Id to a Column\nColumn objects in a DataFrame [c=#00FF7F]cant exist in isolation[/c]; each column is part of a row\n\n[c=#FFD700]Row[/c]\nA row in Spark is a [c=#FF5733]generic Row object[/c], containing one or more columns.\nBecause Row is an ordered collection of fields, you can [c=#00FF7F]access its fields by an index starting at 0[/c]\nRow objects can be [c=#00FF7F]used to create DataFrames[/c]\nrows = [Row(\"Matei Zaharia\", \"CA\"), Row(\"Reynold Xin\", \"CA\")]\nauthors_df = spark.createDataFrame(rows, [\"Authors\", \"State\"])\n\n\n\n",
+  "height": 34,
+  "width": 128
+ },
+ {
+  "id": 39,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 16,
+  "y": 434,
+  "title": ".",
+  "text": "codeQuiz",
+  "gotoid": "32"
+ },
+ {
+  "id": 40,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 1000023,
+  "y": 1127,
+  "title": "create Dataframe with schema/schema sampling\n\n",
+  "text": "# In Python\nfrom pyspark.sql.types import *\nschema = StructType([StructField(\"author\", StringType(), False),\nStructField(\"title\", StringType(), False),\nStructField(\"pages\", IntegerType(), False)])\n\n# Create a DataFrame using the schema defined above\nblogs_df = spark.createDataFrame(data, schema)\n\nFor example, you can use the\nsamplingRatio option:\n// In Scala\nval sampleDF = spark.read.option(\"samplingRatio\", 0.001).option(\"header\",true).csv(\"/databricks-datasets/learning-spark-v2/sf-fire/sf-fire-calls.csv\")",
+  "height": 36,
+  "width": 318
+ },
+ {
+  "id": 41,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": 544,
+  "y": 964,
+  "title": "qaDSandSerialization\n\n",
+  "text": [
+   {
+    "q": "There are several ways to interact with Spark SQL engine including. They are ",
+    "options": [
+     "SQL",
+     "DataFrame API",
+     "Dataset API",
+     "RDD API"
+    ],
+    "a": [
+     0,
+     1,
+     2
+    ],
+    "h": "Spark SQL is a Spark module for structured data processing."
+   },
+   {
+    "q": " ____ is a new interface added in Spark 1.6 which has api in ",
+    "a": "dataset"
+   },
+   {
+    "q": "Dataset has api in ? languages",
+    "options": [
+     "java",
+     "python",
+     "scala",
+     "R"
+    ],
+    "a": [
+     0,
+     2
+    ]
+   },
+   {
+    "q": "spark 2.0 unified ____ and ____ api ",
+    "a": [
+     "dataframe",
+     "dataset"
+    ],
+    "h": "in Spark 2.0, DataFrames are just Dataset of Rows in Scala and Java API. It means dataframe and dataset api compiles down to same logical plan generated by SQL engine"
+   },
+   {
+    "q": "____ unifies SQLContext, HiveContext, etc in spark 2.0",
+    "a": [
+     "SparkSession"
+    ],
+    "h": "You need a SparkSession to access Spark functionality in your program. \n When you start the Spark Shell,Scala Shell (spark-shell) or PySpark Shell (pyspark) \n a default SparkSession is already available `spark` variable and spark context in `sc` variable"
+   },
+   {
+    "q": "In Spark Dataset API, syntax error and analysis error are caught at:",
+    "options": [
+     "both at compile time",
+     "both at run time",
+     "syntax error at compile time and type error at run time",
+     "type error at compile time and syntax error at run time"
+    ],
+    "a": [
+     0
+    ],
+    "h": "In the Dataset API, type safety is enforced using encoders and case classes, so errors can be caught at compile time."
+   },
+   {
+    "q": "Spark Dataset uses primitive ____ for non-nullable integer columns and boxed ____ for nullable integer columns like Option[Int].",
+    "a": "Int, java.lang.Integer"
+   },
+   {
+    "q": "What is an Encoder in Apache Spark?",
+    "options": [
+     "A tool to encrypt data during processing",
+     "A Spark feature to optimize shuffle operations",
+     "A component that converts JVM objects to and from Spark’s internal binary format",
+     "A mechanism to serialize RDDs only"
+    ],
+    "a": [
+     2
+    ],
+    "h": "An Encoder in Spark is responsible for converting JVM objects into Spark’s internal binary format (and back), enabling efficient serialization and deserialization during Dataset operations."
+   },
+   {
+    "q": "Which encoder does Spark use for DataFrames and Datasets respectively?",
+    "options": [
+     "DataFrame uses case class encoder",
+     "DataFrame uses row encoder",
+     "Dataset uses row encoder",
+     "Dataset uses case class encoder"
+    ],
+    "a": [
+     1,
+     3
+    ],
+    "h": "Spark uses a row encoder for DataFrames (which are Dataset[Row]) and a case class encoder for typed Datasets, enabling optimized serialization and type safety."
+   },
+   {
+    "q": "How do Encoders improve the performance of Spark Datasets compared to RDDs?",
+    "options": [
+     "By allowing Spark to perform operations like filtering and sorting directly on serialized data without full deserialization",
+     "Partial deserialization reduces memory usage and speeds up query execution",
+     "Encoders force all Dataset data to be fully deserialized before any operation",
+     "By forcing all data to be processed as raw bytes without schema information",
+     "Spark can operate directly on serialized data without converting it back to JVM objects"
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "Encoders enable Spark to run many operations on the serialized binary data directly, \n which avoids the overhead of converting data back and forth to JVM objects, making Dataset operations faster than RDDs."
+   },
+   {
+    "q": "Does Spark Dataset provide compile-time type safety that prevents accessing fields which do not exist in the underlying data type (such as a case class)?",
+    "options": [
+     "No, Dataset only checks field names at runtime",
+     "Yes, because Dataset uses the schema of the underlying case class for type checking",
+     "Yes, but only for DataFrames, not Datasets",
+     "No, Spark allows accessing any field regardless of case class definition"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Datasets in Spark use the schema of the underlying case class for compile-time type checking, preventing access to non-existent fields."
+   },
+   {
+    "q": "which of the following is true about spark serialization of RDD",
+    "options": [
+     "Java serialization is easy to use (just implement Serializable), but its relatively slow and produces large serialized data.",
+     "Kryo serialization is faster and produces more compact byte arrays",
+     "By default, Spark RDDs use Kryo serialization to serialize objects during shuffle and network transfer.",
+     "RDDs use specialized encoder to serialize objects"
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "Default is Java serialization. \n To set Kryo \n spark.conf.set(\"spark.serializer\", \"org.apache.spark.serializer.KryoSerializer\")"
+   },
+   {
+    "q": "Why is serialization needed in Spark?",
+    "options": [
+     "To transfer data efficiently between nodes over the network",
+     "To convert JVM objects into a format that can be stored in memory or on disk",
+     "Because Spark runs tasks within a single JVM",
+     "To completely avoid using JVM objects during processing"
+    ],
+    "a": [
+     0,
+     1
+    ],
+    "h": "Serialization is necessary to send data between nodes and to store data efficiently. Spark executors run in separate JVMs, so objects must be serialized to be transferred across the network or stored in memory/disk."
+   },
+   {
+    "q": "In Spark, how are SQL expressions handled with respect to validation?",
+    "options": [
+     "They are parsed and analyzed at compile time with full type safety.",
+     "They are parsed and validated at runtime, as they are treated as strings.",
+     "They are always validated during code compilation.",
+     "They raise syntax errors during DataFrame creation."
+    ],
+    "a": [
+     1
+    ],
+    "h": "SQL expressions in Spark are written as strings and are only parsed and validated at runtime. This means syntax or analysis errors will only appear during execution, not at compile time."
+   }
+  ],
+  "height": 29,
+  "width": 163
+ },
+ {
+  "id": 42,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 326,
+  "y": 434,
+  "title": ".",
+  "text": "qaRDDDfDs",
+  "gotoid": "41"
+ },
+ {
+  "id": 43,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 327,
+  "y": 798,
+  "title": "Spark data types\n\n",
+  "text": "Spark data types are a [c=#00FF7F]logical abstraction which are mapped[/c] to java data type\n\nDataFrame\nIntegerType ->Int or java.lang.Integer\nwhy not just int? int wont allow null storage\n\nDataSet\nIntegerType ->Int ( not nullable )\nOption[Int]->java.lang.Integer (nullable)\n\nwrapping primitive int as Integer is called boxing.\nBoxed integers take up more space\nSince Scala can use primitives ds is better than df or ds[Row]\n\nDataFrame uses [c=#FF5733]row encoder[/c]\nDataSet uses [c=#FF5733]case class encoder[/c]\n\nEven if we provide schema for df, [c=#00FF7F]only during runtime string is converted to column[/c]\ncol(\"a\") \"a\" is string during compile time\nThe error only appears when the query is analyzed, i.e., at runtime\n\nIn Dataset\ncase class Record(a: Int)\nds.map(_.b * 2) -> ERROR No \"b\" found",
+  "height": 32,
+  "width": 137
+ },
+ {
+  "id": 44,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": 459,
+  "y": 439,
+  "title": "qaRdd\n\n",
+  "text": [
+   {
+    "q": "____ offer the lowest level of control compared to DataFrames and Datasets ",
+    "a": [
+     "RDD"
+    ],
+    "h": "RDDs provide a low-level API that allows for fine-grained control over data transformations"
+   },
+   {
+    "q": "An RDD (____) is the lowest-level data structure in Spark",
+    "a": [
+     "Resilient Distributed Dataset"
+    ],
+    "h": "Its called resilient because it can recover from failures using lineage information."
+   },
+   {
+    "q": "Which of the following are vital characteristics associated with an RDD?",
+    "options": [
+     "Dependencies",
+     "Compute function: Partition => Iterator[T]",
+     "Caching strategy",
+     "RDD name identifier",
+     "Partitions (with some locality information)"
+    ],
+    "a": [
+     0,
+     1,
+     4
+    ],
+    "h": "Note: NO schema so even if it is passed RDD inherently dont have a schema"
+   },
+   {
+    "q": "Which of the following is NOT a property of RDD",
+    "options": [
+     "Immutability",
+     "Replication",
+     "Lineage",
+     "Laziness"
+    ],
+    "a": [
+     1
+    ],
+    "h": "RDD's are distributed not replicated since they have the lineage information to recover from failure \n When persisting RDDs can be replicated but generally not"
+   },
+   {
+    "q": "RDD's are split into ____",
+    "a": [
+     "partition"
+    ],
+    "h": "It’s called resilient because it can recover from failures using lineage information."
+   },
+   {
+    "q": "The Spark RDD API is available in what languages",
+    "options": [
+     "Python",
+     "SQL",
+     "Java",
+     "R",
+     "Scala"
+    ],
+    "a": [
+     0,
+     2,
+     3,
+     4
+    ],
+    "h": "RDDs provide a low-level API that allows for fine-grained control over data transformations"
+   },
+   {
+    "q": "If RDDs are typed in JVM (e.g., RDD[Person]), why are they still considered not schema-aware in Spark?",
+    "options": [
+     "Because JVM typing provides compile-time safety, but Spark cannot access internal fields of RDD objects at runtime for optimization",
+     "Because RDDs contain only untyped binary data",
+     "Because Spark does not use Catalyst optimization on RDDs",
+     "Because JVM types are dynamic and change at runtime"
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "RDDs are compile-time typed (e.g., RDD[Int]), but they are not schema-aware at runtime. Spark treats them as opaque objects, so it cannot perform optimizations like column pruning or predicate pushdown. DataFrames and Datasets, on the other hand, expose schema information to Spark's Catalyst engine."
+   },
+   {
+    "q": "If an RDD has 10 partitions and an action is called, how many tasks does Spark create in general?",
+    "options": [
+     "10 * no of nodes",
+     "10",
+     "less than 10"
+    ],
+    "a": [
+     "1"
+    ],
+    "h": "Spark creates one task per partition; therefore, for 10 partitions, it creates 10 tasks."
+   },
+   {
+    "q": "What is a key disadvantage of using RDD",
+    "options": [
+     "RDDs are automatically optimized by Catalyst, making them harder to debug",
+     "RDD transformations written using lambda functions are opaque to Spark's optimizer",
+     "RDDs do not support distributed processing"
+    ],
+    "a": [
+     "1"
+    ],
+    "h": "RDD transformations often use lambda functions, which Spark cannot analyze or optimize. Unlike DataFrames or Datasets, RDDs are not optimized by Catalyst and lack built-in optimization capabilities."
+   }
+  ],
+  "height": 33,
+  "width": 88
+ },
+ {
+  "id": 45,
+  "type": "quiz",
+  "style": {
+   "default": "quiz"
+  },
+  "x": 507,
+  "y": 797,
+  "title": "qaDF\n\n",
+  "text": [
+   {
+    "q": "A ____ combined a Resilient Distributed Dataset (RDD) with a defined schema",
+    "a": [
+     "SchemaRDD"
+    ]
+   },
+   {
+    "q": "Introduced in Spark 1.1, SchemaRDD was later deprecated in Spark 1.3 in favor of the more powerful and user-friendly ____ API",
+    "a": [
+     "DataFrame"
+    ]
+   },
+   {
+    "q": "____ was introduced to help spark optimize transformations and get more insights",
+    "a": "DSL"
+   },
+   {
+    "q": "Expand DSL ____ ____ ____ ",
+    "a": [
+     "domain",
+     "specific",
+     "language"
+    ],
+    "h": "DSL are abstractions built as part of dataframe and dataset api such as groupBy, avg"
+   },
+   {
+    "q": "The DataFrame API is available in",
+    "options": [
+     "java",
+     "python",
+     "scala",
+     "R"
+    ],
+    "a": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "h": "In Scala API, DataFrame is simply a type alias of Dataset[Row]. \n In Java API, users need to use Dataset<Row> to represent a DataFrame."
+   },
+   {
+    "q": "In Spark DataFrame API syntax error and analysis error is caught at ",
+    "options": [
+     "both at compile time",
+     "both at run time",
+     "syntax error at compile time and analysis error at run time",
+     "analysis error at compile time and syntax error at run time"
+    ],
+    "a": [
+     2
+    ]
+   },
+   {
+    "q": "What is a Spark DataFrame fundamentally composed of?",
+    "options": [
+     "A distributed collection of generic Row objects with a schema",
+     "A Dataset of strongly-typed case classes",
+     "A list of local Python dictionaries",
+     "A collection of key-value pairs",
+     "A static table in memory"
+    ],
+    "a": [
+     0
+    ]
+   },
+   {
+    "q": "Which of the following statements about Spark's Row object is true?",
+    "options": [
+     "Row is a generic, untyped container for a record in Spark SQL.",
+     "Row is a sequence of column objects.",
+     "Row maintains the schema information.",
+     "Row is a high-level API object; Catalyst converts it to InternalRow.",
+     "Row is mutable."
+    ],
+    "a": [
+     "0",
+     "3"
+    ],
+    "h": "A Row holds raw values, not column objects. \n Incorrect. The schema is maintained by the DataFrame, not by the Row itself. \n  Incorrect. Row objects are immutable for consistency and safety."
+   },
+   {
+    "q": "What is a Spark Column object used for?",
+    "options": [
+     "It stores the actual data values in a DataFrame row.",
+     "It represents a logical expression or reference to a column used for DataFrame transformations.",
+     "It holds the schema information for a DataFrame.",
+     "It is used to serialize data for network communication."
+    ],
+    "a": [
+     "1"
+    ],
+    "h": "A Spark Column object represents a logical expression or a reference to a column in a DataFrame.\n // Create a Column object representing the age column \n val ageColumn = df.col(\"age\") \n // Use the Column object in a filter transformation \n val adults = df.filter(ageColumn >= 30)"
+   },
+   {
+    "q": "In DataFrame, Column objects in a DataFrame cannot exist without a row.",
+    "options": [
+     "true",
+     "false"
+    ],
+    "a": [
+     1
+    ],
+    "h": "A column is meaningless without a row but does not mean they are directly linked with each other"
+   },
+   {
+    "q": "How can you access a column value from a Spark Row object?",
+    "options": [
+     "Using column index only.",
+     "Only by column name, because Row objects maintain schema internally.",
+     "By column name if the Row is part of a DataFrame with schema.",
+     "You cannot access columns in a Row object."
+    ],
+    "a": [
+     "0",
+     "2"
+    ],
+    "h": " A row object has no index associated with it so can be accessed only by position. \n If row is part of a df it uses the schema name of df to get the position"
+   },
+   {
+    "q": "Spark data types are a ____ (2) which are mapped to jvm data type",
+    "a": "logical abstraction"
+   },
+   {
+    "q": "Can a schema be associated with a Spark DataFrame?",
+    "options": [
+     "No, DataFrames never have schemas",
+     "Only Datasets have schemas, DataFrames do not",
+     "Yes, a DataFrame has a schema that may be inferred or explicitly provided, defining its columns and data types",
+     "DataFrames only have schemas if explicitly provided by the user"
+    ],
+    "a": [
+     2
+    ],
+    "h": "A Spark DataFrame always has a schema, which may be explicitly provided or inferred at runtime from the data source, defining the columns and their data types."
+   },
+   {
+    "q": "When creating a DataFrame without providing a schema, Spark uses ____ to infer the structure of the data.",
+    "a": "reflection"
+   },
+   {
+    "q": "How does Spark associate a schema with a DataFrame when the user does not explicitly provide one?",
+    "options": [
+     "Spark guesses the schema randomly",
+     "Spark cannot associate any schema unless it is explicitly defined",
+     "Spark uses schema inference by reading and analyzing a sample of the data",
+     "Spark uses default schemas hardcoded for each file format"
+    ],
+    "a": [
+     2
+    ],
+    "h": "When reading structured formats like JSON or Parquet, Spark automatically infers the schema by sampling the data \n and determining column names, data types, and nullability. \n The resulting DataFrame is a Dataset[Row], where each Row conforms to the inferred schema."
+   },
+   {
+    "q": "What is Spark's internal schema and why is it important in data processing and optimization?",
+    "options": [
+     "It is a JVM-based schema used to store Scala/Java objects directly in memory",
+     "It stores data structure metadata like nullability and data types",
+     "It is a schema used only for serializing data to disk in Parquet format",
+     "It is a high-level schema written by users for UI purposes only",
+     "It helps optimize query planning and execution"
+    ],
+    "a": [
+     "1",
+     "4"
+    ],
+    "h": "Sparks internal schema describes data using metadata like data types, field names, and nullability.\n This schema is used to convert data into an optimized `InternalRow` format, enabling the Catalyst optimizer to efficiently plan and execute queries.\n It differs from JVM object schemas (used in Datasets) and is central to Spark’s performance and flexibility."
+   },
+   {
+    "q": "Why does a Spark DataFrame represent integer columns as java.lang.Integer objects rather than primitive int types?",
+    "options": [
+     "Because JVM does not support primitive int types",
+     "Because DataFrame columns must support null values and primitives cannot represent null",
+     "Because java.lang.Integer is faster than primitive int",
+     "Because Spark does not handle primitive data types internally"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Spark DataFrame columns use boxed types like java.lang.Integer instead of primitives because DataFrames must support nullable columns. Primitive types like int cannot represent null values, so Spark uses their boxed counterparts to allow nullability."
+   },
+   {
+    "q": "What is boxing in the context of Spark, and how does it affect performance?",
+    "options": [
+     "Boxing is converting a primitive type into an object, which increases memory usage and slows down processing",
+     "Boxing is converting an object into a primitive type to speed up processing",
+     "Boxing increases garbage collection overhead due to more object allocation",
+     "Boxing reduces memory usage by compressing data",
+     "Boxing is a Spark feature that optimizes query execution"
+    ],
+    "a": [
+     0,
+     2
+    ],
+    "h": "Boxing wraps primitive types (like int) into objects (like java.lang.Integer), causing higher memory usage and slower processing due to additional object allocation and increased garbage collection overhead."
+   },
+   {
+    "q": "In Spark, even if a schema is provided for a DataFrame, expressions like col(\"a\") are resolved at runtime because \"a\" is just a string at compile time.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "a": [
+     0
+    ],
+    "h": "Column expressions such as col(\"a\") are based on strings and are resolved during runtime, regardless of whether a schema is provided at compile time."
+   },
+   {
+    "q": "If a Spark DataFrame is just a sequence of Row objects, why does Spark bother inferring the schema?",
+    "options": [
+     "To enable column-based access and SQL queries",
+     "To display pretty output in the console",
+     "To optimize execution using Catalyst",
+     "To validate queries before running",
+     "To allow type-safe access at compile time"
+    ],
+    "a": [
+     0,
+     2,
+     3
+    ],
+    "h": [
+     "Schema is needed for column-based access when Row is part of a dataframe.",
+     "Catalyst uses schema for query optimization.",
+     "Spark uses schema to validate query logic"
+    ]
+   }
+  ],
+  "height": 32,
+  "width": 187
+ },
+ {
+  "id": 46,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3976,
+  "y": 411,
+  "title": "g_sparkBasics\n\n",
+  "text": "[g=51]go[/g]",
+  "height": 56,
+  "width": 139,
+  "last_visited": "2025-09-07"
+ },
+ {
+  "id": 48,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3240,
+  "y": 57,
+  "title": "Study order\n\n\n",
+  "text": "i am new bubble",
+  "height": 46,
+  "width": 66
+ },
+ {
+  "id": 49,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 3456,
+  "y": 197,
+  "title": "Study Order",
+  "text": "[s=24]🚀💪[/s]",
+  "height": 53,
+  "width": 84
+ },
+ {
+  "id": 50,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 15,
+  "y": 116,
+  "title": ".",
+  "text": "studyOrder📖",
+  "gotoid": "49"
+ },
+ {
+  "id": 51,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
+  },
+  "x": 310,
+  "y": 18,
+  "title": "g_sparkBasics📌",
+  "text": "\n\n.",
+  "height": 28,
+  "width": 128
+ },
+ {
+  "id": 52,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 989,
+  "y": 301,
+  "text": "spark",
+  "root": true,
+  "child": [
+   67,
+   53,
+   71,
+   100,
+   110
+  ]
+ },
+ {
+  "id": 53,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 502,
+  "text": "folders",
+  "child": [
+   54,
+   55,
+   58,
+   56
+  ]
+ },
+ {
+  "id": 54,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 1371,
+  "text": "bin",
+  "child": [
+   59
+  ]
+ },
+ {
+  "id": 55,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 1293,
+  "text": "sbin",
+  "child": [
+   66
+  ]
+ },
+ {
+  "id": 56,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 1241,
+  "text": "kubernetes",
+  "child": [
+   57
+  ]
+ },
+ {
+  "id": 57,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1167,
+  "y": 1241,
+  "text": "p",
+  "child": [
+   68
+  ]
+ },
+ {
+  "id": 58,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 1267,
+  "text": "data",
+  "child": [
+   69
+  ]
+ },
+ {
+  "id": 59,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1118,
+  "y": 1371,
+  "text": "p",
+  "child": [
+   60,
+   61,
+   62,
+   63,
+   64
+  ]
+ },
+ {
+  "id": 60,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 1423,
+  "text": "pyspark",
+  "child": []
+ },
+ {
+  "id": 61,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 1397,
+  "text": "spark-shell",
+  "child": []
+ },
+ {
+  "id": 62,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 1371,
+  "text": "sparkR",
+  "child": []
+ },
+ {
+  "id": 63,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 1345,
+  "text": "spark-sql",
+  "child": []
+ },
+ {
+  "id": 64,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 1319,
+  "text": "spark-submit",
+  "child": []
+ },
+ {
+  "id": 65,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1141,
+  "y": 1293,
+  "text": "admin scripts",
+  "child": []
+ },
+ {
+  "id": 66,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1124,
+  "y": 1293,
+  "text": "p",
+  "child": [
+   65
+  ]
+ },
+ {
+  "id": 67,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 528,
+  "text": "delete",
+  "child": []
+ },
+ {
+  "id": 68,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1184,
+  "y": 1241,
+  "text": "docker images",
+  "child": []
+ },
+ {
+  "id": 69,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1124,
+  "y": 1267,
+  "text": "p",
+  "child": [
+   70
+  ]
+ },
+ {
+  "id": 70,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1141,
+  "y": 1267,
+  "text": "txt ip - MLlib, GraphX, SparkStructuredStreaming",
+  "child": []
+ },
+ {
+  "id": 71,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 302,
+  "text": "p",
+  "child": [
+   72,
+   80,
+   81,
+   82,
+   83
+  ]
+ },
+ {
+  "id": 72,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1052,
+  "y": 476,
+  "text": "spark core engine",
+  "child": [
+   73
+  ]
+ },
+ {
+  "id": 73,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1173,
+  "y": 1212,
+  "text": "📍",
+  "child": []
+ },
+ {
+  "id": 74,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 435,
+  "text": "api",
+  "child": [
+   75
+  ]
+ },
+ {
+  "id": 75,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1133,
+  "y": 435,
+  "text": "Languages",
+  "child": [
+   76,
+   77,
+   78,
+   79
+  ]
+ },
+ {
+  "id": 76,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1211,
+  "y": 474,
+  "text": "python",
+  "child": []
+ },
+ {
+  "id": 77,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1211,
+  "y": 448,
+  "text": "scala",
+  "child": []
+ },
+ {
+  "id": 78,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1211,
+  "y": 422,
+  "text": "Java",
+  "child": []
+ },
+ {
+  "id": 79,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1211,
+  "y": 396,
+  "text": "R",
+  "child": []
+ },
+ {
+  "id": 80,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1052,
+  "y": 328,
+  "text": "spark SQL",
+  "child": [
+   84
+  ]
+ },
+ {
+  "id": 81,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1052,
+  "y": 182,
+  "text": "spark Streaming",
+  "child": []
+ },
+ {
+  "id": 82,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1052,
+  "y": 156,
+  "text": "MLLib",
+  "child": []
+ },
+ {
+  "id": 83,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1052,
+  "y": 130,
+  "text": "GraphX",
+  "child": []
+ },
+ {
+  "id": 84,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1131,
+  "y": 328,
+  "text": "p",
+  "child": [
+   85,
+   86,
+   200
+  ]
+ },
+ {
+  "id": 85,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1149,
+  "y": 450,
+  "text": "engine",
+  "child": []
+ },
+ {
+  "id": 86,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1149,
+  "y": 424,
+  "text": "catalyst",
+  "child": [
+   87
+  ]
+ },
+ {
+  "id": 87,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1206,
+  "y": 424,
+  "text": "k",
+  "child": [
+   88
+  ]
+ },
+ {
+  "id": 88,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1226,
+  "y": 342,
+  "text": "parser",
+  "child": [
+   89
+  ]
+ },
+ {
+  "id": 89,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 341,
+  "text": "👟",
+  "child": [
+   90,
+   91,
+   92,
+   220,
+   221,
+   222
+  ]
+ },
+ {
+  "id": 90,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 407,
+  "text": "1. parsing",
+  "child": [
+   223
+  ]
+ },
+ {
+  "id": 91,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 365,
+  "text": "2. Resolve table/column name to produce logical plan",
+  "child": []
+ },
+ {
+  "id": 92,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 339,
+  "text": "3. Logical Optimization – constant folding, predicate pushdown, projection pruning",
+  "child": []
+ },
+ {
+  "id": 93,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1454,
+  "y": 910,
+  "text": "v",
+  "child": [
+   94,
+   95,
+   96,
+   97
+  ]
+ },
+ {
+  "id": 94,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 949,
+  "text": "python",
+  "child": []
+ },
+ {
+  "id": 95,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 923,
+  "text": "scala",
+  "child": []
+ },
+ {
+  "id": 96,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 897,
+  "text": "Java",
+  "child": [
+   98
+  ]
+ },
+ {
+  "id": 97,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 871,
+  "text": "R",
+  "child": []
+ },
+ {
+  "id": 98,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1508,
+  "y": 897,
+  "text": "!",
+  "child": [
+   99
+  ]
+ },
+ {
+  "id": 99,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1522,
+  "y": 897,
+  "text": "external Package interface with df/ds api",
+  "child": []
+ },
+ {
+  "id": 100,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 104,
+  "text": "ds",
+  "child": [
+   101
+  ]
+ },
+ {
+  "id": 101,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1058,
+  "y": 104,
+  "text": "k",
+  "child": [
+   102
+  ]
+ },
+ {
+  "id": 102,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1075,
+  "y": 104,
+  "text": "rdd",
+  "child": [
+   103,
+   105,
+   74,
+   150,
+   173
+  ]
+ },
+ {
+  "id": 103,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 604,
+  "text": "*",
+  "child": [
+   104
+  ]
+ },
+ {
+  "id": 104,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1122,
+  "y": 604,
+  "text": "resilient distributed dataset",
+  "child": []
+ },
+ {
+  "id": 105,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 538,
+  "text": "🏠",
+  "child": [
+   106,
+   107,
+   108,
+   109
+  ]
+ },
+ {
+  "id": 106,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 578,
+  "text": "distributed",
+  "child": []
+ },
+ {
+  "id": 107,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 552,
+  "text": "lineage",
+  "child": []
+ },
+ {
+  "id": 108,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 526,
+  "text": "partitioned",
+  "child": []
+ },
+ {
+  "id": 109,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 500,
+  "text": "immutable",
+  "child": []
+ },
+ {
+  "id": 110,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 75,
+  "text": "🏃",
+  "child": [
+   111
+  ]
+ },
+ {
+  "id": 111,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1066,
+  "y": -634,
+  "text": "p",
+  "child": [
+   112,
+   113,
+   114,
+   127
+  ]
+ },
+ {
+  "id": 112,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1083,
+  "y": -549,
+  "text": "driver",
+  "child": [
+   123,
+   129,
+   134
+  ]
+ },
+ {
+  "id": 113,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1083,
+  "y": -731,
+  "text": "executors",
+  "child": [
+   115,
+   117,
+   121
+  ]
+ },
+ {
+  "id": 114,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1083,
+  "y": -803,
+  "text": "cluster manager",
+  "child": [
+   119
+  ]
+ },
+ {
+  "id": 115,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1153,
+  "y": -703,
+  "text": "?",
+  "child": [
+   116
+  ]
+ },
+ {
+  "id": 116,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1169,
+  "y": -703,
+  "text": "A process launched for an application on a worker node",
+  "child": []
+ },
+ {
+  "id": 117,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1153,
+  "y": -729,
+  "text": "!",
+  "child": [
+   118
+  ]
+ },
+ {
+  "id": 118,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1167,
+  "y": -729,
+  "text": "executor process/data not shared between app",
+  "child": []
+ },
+ {
+  "id": 119,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1193,
+  "y": -803,
+  "text": "v",
+  "child": [
+   120
+  ]
+ },
+ {
+  "id": 120,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1210,
+  "y": -821,
+  "text": "stand alone\nYarn\nKubernetes",
+  "child": []
+ },
+ {
+  "id": 121,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1153,
+  "y": -758,
+  "text": "🏃",
+  "child": [
+   122
+  ]
+ },
+ {
+  "id": 122,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1184,
+  "y": -758,
+  "text": "task",
+  "child": []
+ },
+ {
+  "id": 123,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": -421,
+  "text": "?",
+  "child": [
+   124
+  ]
+ },
+ {
+  "id": 124,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1146,
+  "y": -421,
+  "text": "process running main() function of app and creating SparkContext",
+  "child": []
+ },
+ {
+  "id": 125,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1484,
+  "y": -633,
+  "text": "?",
+  "child": [
+   126
+  ]
+ },
+ {
+  "id": 126,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1500,
+  "y": -633,
+  "text": "unit of work/executor/partition",
+  "child": []
+ },
+ {
+  "id": 127,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1083,
+  "y": -847,
+  "text": "sparkcontext",
+  "child": []
+ },
+ {
+  "id": 128,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1147,
+  "y": -540,
+  "text": "spark context",
+  "child": [
+   130,
+   132
+  ]
+ },
+ {
+  "id": 129,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": -540,
+  "text": "p",
+  "child": [
+   128
+  ]
+ },
+ {
+  "id": 130,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1241,
+  "y": -447,
+  "text": "?",
+  "child": [
+   131
+  ]
+ },
+ {
+  "id": 131,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1257,
+  "y": -447,
+  "text": "object in main/driver program",
+  "child": []
+ },
+ {
+  "id": 132,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1241,
+  "y": -553,
+  "text": "u",
+  "child": [
+   136,
+   137
+  ]
+ },
+ {
+  "id": 133,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1397,
+  "y": -529,
+  "text": "negotiate resource from cluster manager\nacquire executor process in worker\nsend app code jar/python to executor\nsend task to executor",
+  "child": []
+ },
+ {
+  "id": 134,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": -668,
+  "text": "!",
+  "child": [
+   135
+  ]
+ },
+ {
+  "id": 135,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1144,
+  "y": -677,
+  "text": "Must be close to worker. \nOpen RPC for remote cluster than run driver far away",
+  "child": []
+ },
+ {
+  "id": 136,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1258,
+  "y": -501,
+  "text": "worker coordination",
+  "child": [
+   133
+  ]
+ },
+ {
+  "id": 137,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1258,
+  "y": -594,
+  "text": "dag",
+  "child": [
+   138,
+   149,
+   139
+  ]
+ },
+ {
+  "id": 138,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1290,
+  "y": -555,
+  "text": "1. Submit job",
+  "child": []
+ },
+ {
+  "id": 139,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1290,
+  "y": -620,
+  "text": "3. build dag",
+  "child": [
+   140
+  ]
+ },
+ {
+  "id": 140,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1375,
+  "y": -620,
+  "text": "p",
+  "child": [
+   141
+  ]
+ },
+ {
+  "id": 141,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1392,
+  "y": -620,
+  "text": "stage",
+  "child": [
+   142,
+   147
+  ]
+ },
+ {
+  "id": 142,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1433,
+  "y": -607,
+  "text": "?",
+  "child": [
+   143
+  ]
+ },
+ {
+  "id": 143,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1449,
+  "y": -607,
+  "text": "group transformation based on suffle boudary",
+  "child": [
+   144
+  ]
+ },
+ {
+  "id": 144,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1750,
+  "y": -607,
+  "text": "shuffle boundary",
+  "child": [
+   145
+  ]
+ },
+ {
+  "id": 145,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1867,
+  "y": -607,
+  "text": "?",
+  "child": [
+   146
+  ]
+ },
+ {
+  "id": 146,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1883,
+  "y": -607,
+  "text": "transformation performed without data movement",
+  "child": []
+ },
+ {
+  "id": 147,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1433,
+  "y": -633,
+  "text": "p",
+  "child": [
+   148
+  ]
+ },
+ {
+  "id": 148,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1450,
+  "y": -633,
+  "text": "task",
+  "child": [
+   125
+  ]
+ },
+ {
+  "id": 149,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1290,
+  "y": -581,
+  "text": "2. Action triggered",
+  "child": []
+ },
+ {
+  "id": 150,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 150,
+  "text": "k",
+  "child": [
+   151,
+   158
+  ]
+ },
+ {
+  "id": 151,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1122,
+  "y": 213,
+  "text": "transformation",
+  "child": [
+   152,
+   154,
+   162
+  ]
+ },
+ {
+  "id": 152,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": 370,
+  "text": "?",
+  "child": [
+   153
+  ]
+ },
+ {
+  "id": 153,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1241,
+  "y": 370,
+  "text": "creates new RDD from existing RDD",
+  "child": []
+ },
+ {
+  "id": 154,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": 344,
+  "text": "f",
+  "child": [
+   155
+  ]
+ },
+ {
+  "id": 155,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": 344,
+  "text": "lazy",
+  "child": [
+   156
+  ]
+ },
+ {
+  "id": 156,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 344,
+  "text": "?",
+  "child": [
+   157
+  ]
+ },
+ {
+  "id": 157,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1290,
+  "y": 344,
+  "text": "wont trigger till action",
+  "child": []
+ },
+ {
+  "id": 158,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1122,
+  "y": -20,
+  "text": "action",
+  "child": [
+   159,
+   160
+  ]
+ },
+ {
+  "id": 159,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1170,
+  "y": 30,
+  "text": "operations triggering DAG execution",
+  "child": []
+ },
+ {
+  "id": 160,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1170,
+  "y": -33,
+  "text": "eg",
+  "child": [
+   161
+  ]
+ },
+ {
+  "id": 161,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1194,
+  "y": -69,
+  "text": "collect()\ncount()\nfirst()\ntake(n)\nreduce()",
+  "child": []
+ },
+ {
+  "id": 162,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": 187,
+  "text": "v",
+  "child": [
+   163,
+   164
+  ]
+ },
+ {
+  "id": 163,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 268,
+  "text": "narrow",
+  "child": [
+   165,
+   169
+  ]
+ },
+ {
+  "id": 164,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 124,
+  "text": "wide",
+  "child": [
+   167,
+   171
+  ]
+ },
+ {
+  "id": 165,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1296,
+  "y": 318,
+  "text": "?",
+  "child": [
+   166
+  ]
+ },
+ {
+  "id": 166,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1312,
+  "y": 318,
+  "text": "1:1 out to in partition",
+  "child": []
+ },
+ {
+  "id": 167,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1282,
+  "y": 183,
+  "text": "?",
+  "child": [
+   168
+  ]
+ },
+ {
+  "id": 168,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1298,
+  "y": 174,
+  "text": "many:many output to input partition\nmay cause shuffle ( costly)",
+  "child": []
+ },
+ {
+  "id": 169,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1296,
+  "y": 255,
+  "text": "eg",
+  "child": [
+   170
+  ]
+ },
+ {
+  "id": 170,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1320,
+  "y": 219,
+  "text": "map()\nfilter()\nflatMap()\nunion() (if no repartitioning)\nmapPartitions()",
+  "child": []
+ },
+ {
+  "id": 171,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1282,
+  "y": 102,
+  "text": "eg",
+  "child": [
+   172
+  ]
+ },
+ {
+  "id": 172,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1306,
+  "y": 56,
+  "text": "groupByKey()\nreduceByKey()\njoin()\ndistinct()\nrepartition()\ncogroup()",
+  "child": []
+ },
+ {
+  "id": 173,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": -245,
+  "text": "f",
+  "child": [
+   174
+  ]
+ },
+ {
+  "id": 174,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1119,
+  "y": -245,
+  "text": "cache",
+  "child": [
+   175,
+   188,
+   191
+  ]
+ },
+ {
+  "id": 175,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1164,
+  "y": -108,
+  "text": "v",
+  "child": [
+   176,
+   177
+  ]
+ },
+ {
+  "id": 176,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1181,
+  "y": -95,
+  "text": "persist",
+  "child": []
+ },
+ {
+  "id": 177,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1181,
+  "y": -121,
+  "text": "cache",
+  "child": [
+   189
+  ]
+ },
+ {
+  "id": 178,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1208,
+  "y": -236,
+  "text": "v",
+  "child": [
+   179,
+   180,
+   181,
+   182,
+   183,
+   185
+  ]
+ },
+ {
+  "id": 179,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -147,
+  "text": "MEMORY_ONLY",
+  "child": [
+   184
+  ]
+ },
+ {
+  "id": 180,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -173,
+  "text": "MEMORY_ONLY_SER",
+  "child": []
+ },
+ {
+  "id": 181,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -199,
+  "text": "MEMORY_AND_DISK",
+  "child": []
+ },
+ {
+  "id": 182,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -225,
+  "text": "MEMORY_AND_DISK_SER",
+  "child": []
+ },
+ {
+  "id": 183,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -251,
+  "text": "DISK_ONLY",
+  "child": []
+ },
+ {
+  "id": 184,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1356,
+  "y": -147,
+  "text": "default",
+  "child": []
+ },
+ {
+  "id": 185,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1225,
+  "y": -301,
+  "text": "!",
+  "child": [
+   186,
+   187
+  ]
+ },
+ {
+  "id": 186,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": -277,
+  "text": "default StorageLevel.MEMORY_ONLY",
+  "child": []
+ },
+ {
+  "id": 187,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": -325,
+  "text": "_SER❌python\npython uses pickle",
+  "child": []
+ },
+ {
+  "id": 188,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1164,
+  "y": -236,
+  "text": "mode",
+  "child": [
+   178
+  ]
+ },
+ {
+  "id": 189,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1226,
+  "y": -121,
+  "text": "!",
+  "child": [
+   190
+  ]
+ },
+ {
+  "id": 190,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1240,
+  "y": -121,
+  "text": "cache() is shorthand for StorageLevel.MEMORY_ONLY",
+  "child": []
+ },
+ {
+  "id": 191,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1164,
+  "y": -373,
+  "text": "lc",
+  "child": [
+   192
+  ]
+ },
+ {
+  "id": 192,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1184,
+  "y": -373,
+  "text": "clear",
+  "child": [
+   193,
+   194
+  ]
+ },
+ {
+  "id": 193,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1224,
+  "y": -360,
+  "text": "manual",
+  "child": [
+   196
+  ]
+ },
+ {
+  "id": 194,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1224,
+  "y": -395,
+  "text": "default",
+  "child": [
+   195
+  ]
+ },
+ {
+  "id": 195,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1277,
+  "y": -395,
+  "text": "LRU Least recently used",
+  "child": []
+ },
+ {
+  "id": 196,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1280,
+  "y": -360,
+  "text": "RDD.unpersist()",
+  "child": [
+   197
+  ]
+ },
+ {
+  "id": 197,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1395,
+  "y": -360,
+  "text": "!",
+  "child": [
+   198
+  ]
+ },
+ {
+  "id": 198,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1409,
+  "y": -369,
+  "text": "default operation is asynchronous\nblocking=true for synchronous unpersist",
+  "child": []
+ },
+ {
+  "id": 199,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 260,
+  "text": "row",
+  "child": [
+   232,
+   234,
+   236,
+   238,
+   241
+  ]
+ },
+ {
+  "id": 200,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1149,
+  "y": 302,
+  "text": "TableFormatAbstraction",
+  "child": [
+   201
+  ]
+ },
+ {
+  "id": 201,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1315,
+  "y": 302,
+  "text": "v",
+  "child": [
+   202,
+   203,
+   217
+  ]
+ },
+ {
+  "id": 202,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1333,
+  "y": 384,
+  "text": "dataset",
+  "child": [
+   210,
+   214
+  ]
+ },
+ {
+  "id": 203,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1333,
+  "y": 288,
+  "text": "dataframe",
+  "child": [
+   209,
+   211,
+   207,
+   230
+  ]
+ },
+ {
+  "id": 204,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1480,
+  "y": 343,
+  "text": "v",
+  "child": [
+   205,
+   206
+  ]
+ },
+ {
+  "id": 205,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1491,
+  "y": 815,
+  "text": "python",
+  "child": []
+ },
+ {
+  "id": 206,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1491,
+  "y": 789,
+  "text": "R",
+  "child": []
+ },
+ {
+  "id": 207,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 286,
+  "text": "?",
+  "child": [
+   208
+  ]
+ },
+ {
+  "id": 208,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 286,
+  "text": "alias for Dataset[Row object]",
+  "child": []
+ },
+ {
+  "id": 209,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 343,
+  "text": "languages",
+  "child": [
+   204
+  ]
+ },
+ {
+  "id": 210,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1386,
+  "y": 398,
+  "text": "languages",
+  "child": [
+   93
+  ]
+ },
+ {
+  "id": 211,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 314,
+  "text": "⏱️",
+  "child": [
+   212
+  ]
+ },
+ {
+  "id": 212,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1432,
+  "y": 760,
+  "text": "v1",
+  "child": [
+   213
+  ]
+ },
+ {
+  "id": 213,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1457,
+  "y": 760,
+  "text": "Spark 1.3 (2015)",
+  "child": []
+ },
+ {
+  "id": 214,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1386,
+  "y": 369,
+  "text": "⏱️",
+  "child": [
+   215
+  ]
+ },
+ {
+  "id": 215,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1412,
+  "y": 841,
+  "text": "v1",
+  "child": [
+   216
+  ]
+ },
+ {
+  "id": 216,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1437,
+  "y": 841,
+  "text": "Spark 1.6 (2016)",
+  "child": []
+ },
+ {
+  "id": 217,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1333,
+  "y": 208,
+  "text": "sql",
+  "child": [
+   218
+  ]
+ },
+ {
+  "id": 218,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 708,
+  "text": "?",
+  "child": [
+   219
+  ]
+ },
+ {
+  "id": 219,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1371,
+  "y": 708,
+  "text": "String representation of SQL",
+  "child": []
+ },
+ {
+  "id": 220,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 313,
+  "text": "4. Physical Planning – Generate one or more physical plans (actual execution strategies).",
+  "child": []
+ },
+ {
+  "id": 221,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 287,
+  "text": "5. Cost Model Evaluation – Use the Catalyst cost model to choose the best physical plan.",
+  "child": []
+ },
+ {
+  "id": 222,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 261,
+  "text": "6. Code Generation – Generate optimized Java bytecode (via Tungsten engine) for execution.",
+  "child": []
+ },
+ {
+  "id": 223,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1377,
+  "y": 407,
+  "text": "v",
+  "child": [
+   224,
+   225
+  ]
+ },
+ {
+  "id": 224,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1394,
+  "y": 422,
+  "text": "sql",
+  "child": [
+   229
+  ]
+ },
+ {
+  "id": 225,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1394,
+  "y": 393,
+  "text": "dsl",
+  "child": [
+   227
+  ]
+ },
+ {
+  "id": 226,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 420,
+  "text": "sql string to query at run time",
+  "child": []
+ },
+ {
+  "id": 227,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1421,
+  "y": 391,
+  "text": "⏱️wn",
+  "child": [
+   228
+  ]
+ },
+ {
+  "id": 228,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1471,
+  "y": 391,
+  "text": "compile time",
+  "child": []
+ },
+ {
+  "id": 229,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1421,
+  "y": 420,
+  "text": "⏱️wn",
+  "child": [
+   226
+  ]
+ },
+ {
+  "id": 230,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 247,
+  "text": "k",
+  "child": [
+   199,
+   231
+  ]
+ },
+ {
+  "id": 231,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 234,
+  "text": "column",
+  "child": []
+ },
+ {
+  "id": 232,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1460,
+  "y": 325,
+  "text": "📍",
+  "child": [
+   233
+  ]
+ },
+ {
+  "id": 233,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1491,
+  "y": 325,
+  "text": "https://github.com/apache/spark/blob/master/sql/api/src/main/scala/org/apache/spark/sql/Row.scala",
+  "child": []
+ },
+ {
+  "id": 234,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1460,
+  "y": 299,
+  "text": "?",
+  "child": [
+   235
+  ]
+ },
+ {
+  "id": 235,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1476,
+  "y": 299,
+  "text": "untyped generic object like python list",
+  "child": []
+ },
+ {
+  "id": 236,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1460,
+  "y": 263,
+  "text": "!",
+  "child": [
+   237
+  ]
+ },
+ {
+  "id": 237,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1474,
+  "y": 254,
+  "text": "Row is not directly tied to column\nOnly in DF a row and column comes together",
+  "child": []
+ },
+ {
+  "id": 238,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1460,
+  "y": 225,
+  "text": "🔍",
+  "child": [
+   239
+  ]
+ },
+ {
+  "id": 239,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1491,
+  "y": 225,
+  "text": "by index",
+  "child": []
+ },
+ {
+  "id": 240,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1505,
+  "y": 196,
+  "text": "No runtime safety",
+  "child": [
+   243
+  ]
+ },
+ {
+  "id": 241,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1460,
+  "y": 197,
+  "text": "f",
+  "child": [
+   242
+  ]
+ },
+ {
+  "id": 242,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1474,
+  "y": 196,
+  "text": "❌",
+  "child": [
+   240
+  ]
+ },
+ {
+  "id": 243,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1629,
+  "y": 196,
+  "text": "?",
+  "child": [
+   244
+  ]
+ },
+ {
+  "id": 244,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1645,
+  "y": 196,
+  "text": "Type Erasure at runtime",
+  "child": []
+ }
+]

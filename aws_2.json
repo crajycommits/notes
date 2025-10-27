@@ -47,7 +47,7 @@
    "default": "bubble"
   },
   "x": 643,
-  "y": 1187,
+  "y": 969,
   "title": ".",
   "text": "Uploading⬆️\n\n🚩 uploading an object with a \nkey name that already exists🟰\nin a versioning-enabled bucket\nS3 creates another version✨\nwont replace the existing object.",
   "height": 107,
@@ -62,8 +62,8 @@
   "style": {
    "default": "bubble"
   },
-  "x": 487,
-  "y": 1228,
+  "x": 419,
+  "y": 969,
   "title": "S3 encryption\n\n",
   "text": "[c=#f1fa8c]SSE server💻 side encryption🔐[/c]\n\n🟩Amazon S3 managed keys (SSE-S3) is the default🙋‍♂️ encryption configuration\n\nAmazon S3 managed keys [c=#f1fa8c](SSE-S3)[/c]\nAWS KMS [c=#f1fa8c](SSE-KMS)[/c]\nAWS KMS keys [c=#f1fa8c](DSSE-KMS)[/c] : dual-layer server-side encryption\n\n[c=#f1fa8c](SSE-C)[/c] : customer-provided keys",
   "height": 26,
@@ -123,8 +123,8 @@
   "y": 709,
   "title": "S3 metadata\n",
   "text": "[a=https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingMetadata.html]lnk[/a]\n\nmetadata🔢\n\n1. System-defined metadata includes metadata such as the object's creation date, size, and storage class. \nit further has two types explained below\n   > There are two categories of system metadata:\n     1. System controlled – Metadata such as the object-creation date is system controlled, which means that only Amazon S3 can modify the date value.\n     2. User controlled – Other system metadata, such as the storage class configured for the object whose values you control. \n2. User-defined metadata is name-value pairs set at the time of uploading an object. \n   > When you upload objects using the REST API, the optional user-defined metadata names must begin with x-amz-meta- to distinguish them from other HTTP headers.\n3. Custom metadata, such as tags🏷️\n4. Event metadata, such as when an object is updated or deleted, and the AWS account that made the request\n\n⚠️After you upload the object, you cant❌ modify this user-defined metadata. The only way to modify this metadata is to make a copy of the object and set the metadata.\n\nAmazon S3 Metadata accelerates data discovery by automatically capturing metadata for objects in your general purpose buckets and storing it in read-only, fully managed Apache Iceberg tables that you can query. These read-only tables are called metadata tables.\n[a=https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html]link[/a]\n\nThe HeadObject action retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object. ",
-  "height": 355,
-  "width": 383
+  "height": 35,
+  "width": 104
  },
  {
   "id": 21,
@@ -407,7 +407,7 @@
   "gotoid": "40"
  },
  {
-  "id": 9999,
+  "id": 52,
   "type": "quiz",
   "style": {
    "default": "quiz",
@@ -772,8 +772,8 @@
    "default": "quiz",
    "fontFamily": "Comic Sans MS"
   },
-  "x": 844,
-  "y": 1183,
+  "x": 860,
+  "y": 982,
   "title": "qa s3 delete\n\n",
   "text": [
    {
@@ -1061,8 +1061,8 @@
   "links": [
    "https://docs.aws.amazon.com/AmazonS3/latest/userguide//DeletingObjects.html"
   ],
-  "height": 31,
-  "width": 119
+  "height": 36,
+  "width": 123
  },
  {
   "id": 58,
@@ -2681,7 +2681,8 @@
    101,
    103,
    105,
-   141
+   141,
+   213
   ],
   "root": true
  },
@@ -2691,8 +2692,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1089.4375,
-  "y": 556.6000003814697,
+  "x": 1089,
+  "y": 570,
   "text": "?",
   "child": [
    102
@@ -2704,8 +2705,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1103.5500001907349,
-  "y": 634.6000003814697,
+  "x": 1105,
+  "y": 569,
   "text": "aws☁️storage",
   "child": []
  },
@@ -2715,8 +2716,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1089.4375,
-  "y": 530.6000003814697,
+  "x": 1089,
+  "y": 544,
   "text": "*",
   "child": [
    104
@@ -2728,8 +2729,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1104.4375,
-  "y": 608.6000003814697,
+  "x": 1106,
+  "y": 543,
   "text": "simple storage service",
   "child": []
  },
@@ -2739,8 +2740,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1089.4375,
-  "y": 503,
+  "x": 1089,
+  "y": 518,
   "text": "k",
   "child": [
    106
@@ -2752,8 +2753,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1106.0375003814697,
-  "y": 503.80000019073486,
+  "x": 1106,
+  "y": 517,
   "text": "bucket",
   "child": [
    107,
@@ -2770,8 +2771,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 839.2000026702881,
+  "x": 1160,
+  "y": 625,
   "text": "?",
   "child": [
    108
@@ -2783,8 +2784,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1171.4000005722046,
-  "y": 582.6000003814697,
+  "x": 1176,
+  "y": 625,
   "text": "container for object",
   "child": [
    167
@@ -2796,8 +2797,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 813.2000026702881,
+  "x": 1160,
+  "y": 560,
   "text": "v",
   "child": [
    111,
@@ -2812,8 +2813,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1173.8875007629395,
-  "y": 641.0000019073486,
+  "x": 1177,
+  "y": 599,
   "text": "General purpose",
   "child": []
  },
@@ -2823,8 +2824,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1173.8875007629395,
-  "y": 615.0000019073486,
+  "x": 1177,
+  "y": 573,
   "text": "Directory",
   "child": []
  },
@@ -2834,8 +2835,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1173.8875007629395,
-  "y": 589.0000019073486,
+  "x": 1177,
+  "y": 547,
   "text": "Table",
   "child": []
  },
@@ -2845,8 +2846,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1173.8875007629395,
-  "y": 563.0000019073486,
+  "x": 1177,
+  "y": 521,
   "text": "Vector",
   "child": []
  },
@@ -2856,8 +2857,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 543.6000003814697,
+  "x": 1160,
+  "y": 495,
   "text": "p",
   "child": [
    116
@@ -2869,8 +2870,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1178.6875019073486,
-  "y": 543.6000003814697,
+  "x": 1177,
+  "y": 495,
   "text": "object",
   "child": [
    139,
@@ -2885,8 +2886,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1227.9875011444092,
-  "y": 597.2000007629395,
+  "x": 1227,
+  "y": 537,
   "text": "p",
   "child": [
    117,
@@ -2900,8 +2901,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1246.1875009536743,
-  "y": 784.0000019073486,
+  "x": 1244,
+  "y": 565,
   "text": "key 🔑",
   "child": []
  },
@@ -2911,8 +2912,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1248.1375017166138,
-  "y": 501.3999996185303,
+  "x": 1247,
+  "y": 421,
   "text": "version 📌",
   "child": []
  },
@@ -2922,8 +2923,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1246.1875009536743,
-  "y": 754.8000011444092,
+  "x": 1244,
+  "y": 536,
   "text": "value/content 📝",
   "child": []
  },
@@ -2933,8 +2934,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 247.99999809265137,
+  "x": 1160,
+  "y": 466,
   "text": "🏠",
   "child": [
    122,
@@ -2948,8 +2949,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1191.062502861023,
-  "y": 275.5999984741211,
+  "x": 1192,
+  "y": 492,
   "text": "name",
   "child": [
    123,
@@ -2962,8 +2963,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1229.5125007629395,
-  "y": 525.7999992370605,
+  "x": 1235,
+  "y": 503,
   "text": "✏️",
   "child": [
    126
@@ -2975,8 +2976,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 197.5999984741211,
+  "x": 1160,
+  "y": 438,
   "text": "lc",
   "child": [
    125,
@@ -2989,8 +2990,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1175.8375005722046,
-  "y": 475.3999996185303,
+  "x": 1180,
+  "y": 451,
   "text": "create",
   "child": []
  },
@@ -3011,8 +3012,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1229.5125007629395,
-  "y": 499.79999923706055,
+  "x": 1235,
+  "y": 477,
   "text": "!",
   "child": [
    128
@@ -3035,8 +3036,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1191.062502861023,
-  "y": 249.5999984741211,
+  "x": 1192,
+  "y": 451,
   "text": "access",
   "child": [
    130
@@ -3098,8 +3099,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1175.8375005722046,
-  "y": 449.3999996185303,
+  "x": 1180,
+  "y": 425,
   "text": "grow",
   "child": []
  },
@@ -3122,10 +3123,12 @@
   "style": {
    "default": "card"
   },
-  "x": 1089.4375,
-  "y": 477,
+  "x": 1089,
+  "y": 492,
   "text": "delete",
-  "child": []
+  "child": [
+   252
+  ]
  },
  {
   "id": 142,
@@ -3133,8 +3136,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1191.062502861023,
-  "y": 223.5999984741211,
+  "x": 1192,
+  "y": 425,
   "text": "version",
   "child": [
    143
@@ -3183,8 +3186,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1227.9875011444092,
-  "y": 382.79999923706055,
+  "x": 1227,
+  "y": 481,
   "text": "l",
   "child": [
    164
@@ -3196,8 +3199,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1233.037501335144,
-  "y": 540.3999996185303,
+  "x": 1313.8625020980835,
+  "y": 532.2000007629395,
   "text": "5TB",
   "child": []
  },
@@ -3207,8 +3210,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1227.9875011444092,
-  "y": 340.5999984741211,
+  "x": 1227,
+  "y": 450,
   "text": "✏️",
   "child": [
    149,
@@ -3221,8 +3224,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1258.5625019073486,
-  "y": 356.79999923706055,
+  "x": 1258,
+  "y": 464,
   "text": "update",
   "child": [
    150,
@@ -3235,8 +3238,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1301.8125019073486,
-  "y": 511.1999988555908,
+  "x": 1313.0125045776367,
+  "y": 533.8000011444092,
   "text": "💣",
   "child": [
    151
@@ -3248,8 +3251,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1332.387502670288,
-  "y": 511.1999988555908,
+  "x": 1343.5875053405762,
+  "y": 533.8000011444092,
   "text": "?",
   "child": [
    152
@@ -3261,8 +3264,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1348.1000032424927,
-  "y": 511.1999988555908,
+  "x": 1359.3000059127808,
+  "y": 533.8000011444092,
   "text": "last update wins",
   "child": []
  },
@@ -3272,8 +3275,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1258.5625019073486,
-  "y": 327.5999984741211,
+  "x": 1258,
+  "y": 435,
   "text": "📖",
   "child": [
    154
@@ -3285,8 +3288,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1281.137502670288,
-  "y": 452.7999973297119,
+  "x": 1290.7375030517578,
+  "y": 473.79999923706055,
   "text": "return",
   "child": [
    155
@@ -3298,8 +3301,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1327.950002670288,
-  "y": 452.7999973297119,
+  "x": 1337.5500030517578,
+  "y": 473.79999923706055,
   "text": "old or new never corrupt",
   "child": []
  },
@@ -3309,8 +3312,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1301.8125019073486,
-  "y": 481.99999809265137,
+  "x": 1313.0125045776367,
+  "y": 503,
   "text": "🧵🔒",
   "child": [
    157
@@ -3322,8 +3325,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1354.350004196167,
-  "y": 481.99999809265137,
+  "x": 1367.1500053405762,
+  "y": 503,
   "text": "?",
   "child": [
    158
@@ -3335,8 +3338,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1370.0625047683716,
-  "y": 481.99999809265137,
+  "x": 1382.8625059127808,
+  "y": 503,
   "text": "No",
   "child": []
  },
@@ -3346,8 +3349,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1160.4875020980835,
-  "y": 168.39999771118164,
+  "x": 1160,
+  "y": 409,
   "text": "✏️",
   "child": [
    160
@@ -3359,8 +3362,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1186.2625007629395,
-  "y": 421.79999923706055,
+  "x": 1191,
+  "y": 409,
   "text": "config",
   "child": [
    161
@@ -3372,8 +3375,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1235.7375030517578,
-  "y": 420.1999988555908,
+  "x": 1243.7375040054321,
+  "y": 395.79999923706055,
   "text": "⏳",
   "child": [
    162
@@ -3387,8 +3390,8 @@
   },
   "text": "eventual consistency",
   "child": [],
-  "x": 20,
-  "y": 20
+  "x": 1274.3125047683716,
+  "y": 395.79999923706055
  },
  {
   "id": 163,
@@ -3396,10 +3399,15 @@
   "style": {
    "default": "card"
   },
-  "x": 942,
-  "y": 654,
-  "text": "s31",
-  "child": [],
+  "x": 1057,
+  "y": 658,
+  "text": "route53",
+  "child": [
+   266,
+   249,
+   251,
+   279
+  ],
   "root": true
  },
  {
@@ -3408,8 +3416,8 @@
   "style": {
    "default": "card"
   },
-  "x": 915,
-  "y": 282,
+  "x": 1240,
+  "y": 477,
   "text": "size",
   "child": [
    165
@@ -3421,8 +3429,8 @@
   "style": {
    "default": "card"
   },
-  "x": 915,
-  "y": 282,
+  "x": 1277.7125024795532,
+  "y": 532.2000007629395,
   "text": "max",
   "child": [
    147
@@ -3434,8 +3442,8 @@
   "style": {
    "default": "goto"
   },
-  "x": 907,
-  "y": 342,
+  "x": 1310.075002670288,
+  "y": 610.8000011444092,
   "title": ".",
   "text": "object",
   "gotoid": "116",
@@ -3447,8 +3455,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1227.9875011444092,
-  "y": 301.5999984741211,
+  "x": 1227,
+  "y": 422,
   "text": "lc",
   "child": [
    118
@@ -3460,8 +3468,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1336.0999994277954,
-  "y": 623.2000007629395,
+  "x": 1335,
+  "y": 536,
   "text": "v",
   "child": [
    171,
@@ -3476,8 +3484,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1352.6999998092651,
-  "y": 702.8000011444092,
+  "x": 1353,
+  "y": 575,
   "text": "systemDefined",
   "child": [
    185
@@ -3489,8 +3497,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1352.6999998092651,
-  "y": 610.2000007629395,
+  "x": 1353,
+  "y": 549,
   "text": "userDefined",
   "child": [
    178,
@@ -3505,8 +3513,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1352.6999998092651,
-  "y": 543.6000003814697,
+  "x": 1353,
+  "y": 521,
   "text": "custom",
   "child": [
    176
@@ -3518,8 +3526,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1352.6999998092651,
-  "y": 517.6000003814697,
+  "x": 1353,
+  "y": 495,
   "text": "Event",
   "child": []
  },
@@ -3529,8 +3537,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1246.1875009536743,
-  "y": 566.3999996185303,
+  "x": 1244,
+  "y": 507,
   "text": "metadata🔢",
   "child": [
    169,
@@ -3544,8 +3552,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1407.5250005722046,
-  "y": 543.6000003814697,
+  "x": 1409,
+  "y": 521,
   "text": "eg",
   "child": [
    177
@@ -3557,8 +3565,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1431.2375001907349,
-  "y": 543.6000003814697,
+  "x": 1434,
+  "y": 521,
   "text": "tag",
   "child": []
  },
@@ -3568,8 +3576,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1439.4874982833862,
-  "y": 650.8000011444092,
+  "x": 1441,
+  "y": 589,
   "text": "?",
   "child": [
    179
@@ -3581,8 +3589,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1455.1999988555908,
-  "y": 650.8000011444092,
+  "x": 1457,
+  "y": 589,
   "text": "nameValuePairs",
   "child": []
  },
@@ -3592,8 +3600,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1439.4874982833862,
-  "y": 624.8000011444092,
+  "x": 1441,
+  "y": 563,
   "text": "lc",
   "child": [
    181
@@ -3605,8 +3613,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1459.6374988555908,
-  "y": 624.8000011444092,
+  "x": 1461,
+  "y": 563,
   "text": "create",
   "child": [
    182
@@ -3618,8 +3626,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1506.4250011444092,
-  "y": 624.8000011444092,
+  "x": 1508,
+  "y": 563,
   "text": "time of upload",
   "child": []
  },
@@ -3629,8 +3637,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1577.5875062942505,
-  "y": 676.8000011444092,
+  "x": 1582,
+  "y": 547,
   "text": "eg",
   "child": [
    184
@@ -3642,8 +3650,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1601.3000059127808,
-  "y": 676.8000011444092,
+  "x": 1606,
+  "y": 547,
   "text": "storage class",
   "child": []
  },
@@ -3653,8 +3661,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1457.287501335144,
-  "y": 702.8000011444092,
+  "x": 1459,
+  "y": 573,
   "text": "v",
   "child": [
    186,
@@ -3667,8 +3675,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1473.8875017166138,
-  "y": 715.8000011444092,
+  "x": 1477,
+  "y": 588,
   "text": "systemControlled",
   "child": [
    188,
@@ -3681,8 +3689,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1473.8875017166138,
-  "y": 676.8000011444092,
+  "x": 1477,
+  "y": 547,
   "text": "userControlled",
   "child": [
    183
@@ -3694,8 +3702,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1595.3750047683716,
-  "y": 728.8000011444092,
+  "x": 1598,
+  "y": 601,
   "text": "?",
   "child": [
    189
@@ -3707,8 +3715,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1611.0875053405762,
-  "y": 728.8000011444092,
+  "x": 1614,
+  "y": 601,
   "text": "Only s3 can edit",
   "child": []
  },
@@ -3718,8 +3726,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1595.3750047683716,
-  "y": 702.8000011444092,
+  "x": 1598,
+  "y": 575,
   "text": "eg",
   "child": [
    191
@@ -3731,8 +3739,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1619.0875043869019,
-  "y": 702.8000011444092,
+  "x": 1622,
+  "y": 575,
   "text": "creation date",
   "child": []
  },
@@ -3742,8 +3750,8 @@
   "style": {
    "default": "baloon"
   },
-  "x": 1453.4249982833862,
-  "y": 598.8000011444092,
+  "x": 1455,
+  "y": 537,
   "text": "When you upload objects using the REST API, the optional user-defined metadata names must begin with x-amz-meta- to distinguish them from other HTTP headers",
   "title": "RestAPIUpload",
   "child": []
@@ -3754,8 +3762,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1439.4874982833862,
-  "y": 598.8000011444092,
+  "x": 1441,
+  "y": 537,
   "text": "!",
   "child": [
    193
@@ -3767,8 +3775,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1439.4874982833862,
-  "y": 569.6000003814697,
+  "x": 1441,
+  "y": 506,
   "text": "✏️",
   "child": [
    196
@@ -3780,8 +3788,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1470.0624990463257,
-  "y": 569.6000003814697,
+  "x": 1473,
+  "y": 506,
   "text": "update",
   "child": [
    199
@@ -3793,8 +3801,8 @@
   "style": {
    "default": "baloon"
   },
-  "x": 1521.3124990463257,
-  "y": 569.6000003814697,
+  "x": 1526,
+  "y": 506,
   "text": "The only way to modify this metadata is to make a copy of the object and set the metadata.",
   "title": "No*",
   "child": []
@@ -3805,8 +3813,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1336.0999994277954,
-  "y": 475.3999996185303,
+  "x": 1335,
+  "y": 507,
   "text": "✏️",
   "child": [
    201
@@ -3818,8 +3826,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1366.6750001907349,
-  "y": 477,
+  "x": 1367,
+  "y": 507,
   "text": "select",
   "child": [
    202,
@@ -3832,8 +3840,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1411.7000017166138,
-  "y": 488.3999996185303,
+  "x": 1414,
+  "y": 520,
   "text": "🔑",
   "child": [
    203
@@ -3845,8 +3853,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1442.2750024795532,
-  "y": 488.3999996185303,
+  "x": 1445,
+  "y": 520,
   "text": "read",
   "child": []
  },
@@ -3856,8 +3864,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1411.7000017166138,
-  "y": 462.3999996185303,
+  "x": 1414,
+  "y": 492,
   "text": "HeadObject action",
   "child": [
    205
@@ -3869,8 +3877,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1539.8000001907349,
-  "y": 462.3999996185303,
+  "x": 1544,
+  "y": 492,
   "text": "returns",
   "child": [
    206
@@ -3882,8 +3890,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1592.8375024795532,
-  "y": 462.3999996185303,
+  "x": 1599,
+  "y": 492,
   "text": "only Metadata NOT entire object",
   "child": []
  },
@@ -3893,8 +3901,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1336.0999994277954,
-  "y": 420.1999988555908,
+  "x": 1335,
+  "y": 476,
   "text": "🔧",
   "child": [
    208
@@ -3906,8 +3914,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1368.2750005722046,
-  "y": 421.79999923706055,
+  "x": 1367,
+  "y": 477,
   "text": "Amazon S3 Metadata",
   "child": [
    209,
@@ -3920,8 +3928,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1517.0999975204468,
-  "y": 436.3999996185303,
+  "x": 1516,
+  "y": 490,
   "text": "?",
   "child": [
    210
@@ -3933,8 +3941,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1532.8124980926514,
-  "y": 436.3999996185303,
+  "x": 1532,
+  "y": 491,
   "text": "iceberg metadata storage",
   "child": []
  },
@@ -3944,8 +3952,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1517.0999975204468,
-  "y": 408.79999923706055,
+  "x": 1516,
+  "y": 464,
   "text": "y",
   "child": [
    212
@@ -3957,9 +3965,4029 @@
   "style": {
    "default": "card"
   },
-  "x": 1535.299997329712,
-  "y": 408.79999923706055,
+  "x": 1533,
+  "y": 464,
   "text": "accelerated MD discovery",
+  "child": []
+ },
+ {
+  "id": 213,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 463,
+  "text": "⚙",
+  "child": [
+   214
+  ]
+ },
+ {
+  "id": 214,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1111,
+  "y": 463,
+  "text": "static website hosting",
+  "child": [
+   215
+  ]
+ },
+ {
+  "id": 215,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1257,
+  "y": 463,
+  "text": "v",
+  "child": [
+   216,
+   217,
+   218
+  ]
+ },
+ {
+  "id": 216,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 543,
+  "text": "aws amplify hosting",
+  "child": [
+   219,
+   221
+  ]
+ },
+ {
+  "id": 217,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 463,
+  "text": "s3 website",
+  "child": [
+   224,
+   226,
+   228
+  ]
+ },
+ {
+  "id": 218,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 383,
+  "text": "s3+cloudfront",
+  "child": []
+ },
+ {
+  "id": 219,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1419,
+  "y": 514,
+  "text": "?",
+  "child": [
+   220
+  ]
+ },
+ {
+  "id": 220,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1436,
+  "y": 514,
+  "text": "content delivery network (CDN)",
+  "child": []
+ },
+ {
+  "id": 221,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1419,
+  "y": 475,
+  "text": "f",
+  "child": [
+   222,
+   223
+  ]
+ },
+ {
+  "id": 222,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1433,
+  "y": 488,
+  "text": "public HTTPS URL",
+  "child": []
+ },
+ {
+  "id": 223,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1433,
+  "y": 462,
+  "text": "select object location in bucket",
+  "child": []
+ },
+ {
+  "id": 224,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 513,
+  "text": "f❌",
+  "child": [
+   225
+  ]
+ },
+ {
+  "id": 225,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1394,
+  "y": 487,
+  "text": "\n[a=https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html]lnk[/a]\n\nIf your Amazon S3 bucket is configured as a website endpoint, you can't configure CloudFront to use HTTPS to communicate with your origin because Amazon S3 doesn't support HTTPS connections in that configuration.",
+  "title": "No",
+  "child": []
+ },
+ {
+  "id": 226,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 487,
+  "text": "!",
+  "child": [
+   227
+  ]
+ },
+ {
+  "id": 227,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1370,
+  "y": 461,
+  "text": "bucket level content access",
+  "child": []
+ },
+ {
+  "id": 228,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 435,
+  "text": "hw",
+  "child": [
+   241,
+   242
+  ]
+ },
+ {
+  "id": 229,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 446,
+  "text": "1.🪣pr-✔️static website hosting",
+  "child": [
+   238
+  ]
+ },
+ {
+  "id": 230,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1670,
+  "y": 448,
+  "text": "2.setup index.html",
+  "child": [
+   239,
+   240
+  ]
+ },
+ {
+  "id": 231,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1787,
+  "y": 450,
+  "text": "url",
+  "child": [
+   232
+  ]
+ },
+ {
+  "id": 232,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1782,
+  "y": 466,
+  "text": "http://bucket-name.s3-website[-.]Region.amazonaws.com",
+  "child": []
+ },
+ {
+  "id": 233,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1818,
+  "y": 432,
+  "text": "3.🔑",
+  "child": [
+   234
+  ]
+ },
+ {
+  "id": 234,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1861,
+  "y": 434,
+  "text": "* *",
+  "child": [
+   235
+  ]
+ },
+ {
+  "id": 235,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1890,
+  "y": 434,
+  "text": "public",
+  "child": [
+   236,
+   237
+  ]
+ },
+ {
+  "id": 236,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1939,
+  "y": 443,
+  "text": "1.disable block public access settings🪣",
+  "child": []
+ },
+ {
+  "id": 237,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1939,
+  "y": 421,
+  "text": "{\n    \"Version\": \"2012-10-17\",\t\t \t \t \n    \"Statement\": [\n        {\n            \"Sid\": \"PublicReadGetObject\",\n            \"Effect\": \"Allow\",\n            \"Principal\": \"*\",\n            \"Action\": [\n                \"s3:GetObject\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::Bucket-Name/*\"\n            ]\n        }\n    ]\n}\n",
+  "title": "2.public bucket policy",
+  "child": []
+ },
+ {
+  "id": 238,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1651,
+  "y": 448,
+  "text": ">",
+  "child": [
+   230
+  ]
+ },
+ {
+  "id": 239,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1799,
+  "y": 461,
+  "text": "📍",
+  "child": [
+   231
+  ]
+ },
+ {
+  "id": 240,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1799,
+  "y": 433,
+  "text": ">",
+  "child": [
+   233
+  ]
+ },
+ {
+  "id": 241,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1378,
+  "y": 461,
+  "text": "basic",
+  "child": [
+   229
+  ]
+ },
+ {
+  "id": 242,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1378,
+  "y": 422,
+  "text": "addOn",
+  "child": [
+   243
+  ]
+ },
+ {
+  "id": 243,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 422,
+  "text": "customDomain",
+  "child": [
+   244,
+   248
+  ]
+ },
+ {
+  "id": 244,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1535,
+  "y": 435,
+  "text": "hw",
+  "child": [
+   245
+  ]
+ },
+ {
+  "id": 245,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1563,
+  "y": 435,
+  "text": "1.Register custom domain",
+  "child": [
+   246
+  ]
+ },
+ {
+  "id": 246,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1739,
+  "y": 435,
+  "text": ">",
+  "child": [
+   247
+  ]
+ },
+ {
+  "id": 247,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1757,
+  "y": 435,
+  "text": "2. Route53 A record to S3 website endpoint",
+  "child": []
+ },
+ {
+  "id": 248,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1535,
+  "y": 409,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/website-hosting-custom-domain-walkthrough.html#website-hosting-custom-domain-walkthrough-domain-registry",
+  "text": "lnk",
+  "child": []
+ },
+ {
+  "id": 249,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 498,
+  "text": "?",
+  "child": [
+   250
+  ]
+ },
+ {
+  "id": 250,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 660,
+  "text": "Domain Name System (DNS) web service",
+  "child": [
+   271
+  ]
+ },
+ {
+  "id": 251,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 471,
+  "text": "u",
+  "child": [
+   253,
+   254,
+   255
+  ]
+ },
+ {
+  "id": 252,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 449,
+  "text": "Register domain names",
+  "child": []
+ },
+ {
+  "id": 253,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 765,
+  "text": "Register domain names",
+  "child": [
+   256
+  ]
+ },
+ {
+  "id": 254,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 739,
+  "text": "Route web traffic to domain resources",
+  "child": []
+ },
+ {
+  "id": 255,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1136,
+  "y": 713,
+  "text": "Check resource health",
+  "child": []
+ },
+ {
+  "id": 256,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1297,
+  "y": 633,
+  "text": "domain",
+  "child": [
+   257,
+   273,
+   274
+  ]
+ },
+ {
+  "id": 257,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 661,
+  "text": "pr",
+  "child": [
+   258
+  ]
+ },
+ {
+  "id": 258,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1377,
+  "y": 661,
+  "text": "name",
+  "child": [
+   267,
+   259,
+   269
+  ]
+ },
+ {
+  "id": 259,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 659,
+  "text": "p",
+  "child": [
+   260,
+   263,
+   276
+  ]
+ },
+ {
+  "id": 260,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 687,
+  "text": "TLD",
+  "child": [
+   261
+  ]
+ },
+ {
+  "id": 261,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1482,
+  "y": 687,
+  "text": "eg",
+  "child": [
+   262
+  ]
+ },
+ {
+  "id": 262,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1506,
+  "y": 687,
+  "text": "com",
+  "child": []
+ },
+ {
+  "id": 263,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 661,
+  "text": "SLD second level domain",
+  "child": [
+   264
+  ]
+ },
+ {
+  "id": 264,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1616,
+  "y": 661,
+  "text": "eg",
+  "child": [
+   265
+  ]
+ },
+ {
+  "id": 265,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1640,
+  "y": 661,
+  "text": "example",
+  "child": []
+ },
+ {
+  "id": 266,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 526,
+  "text": "delete",
+  "child": [
+   308
+  ]
+ },
+ {
+  "id": 267,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 713,
+  "text": "eg",
+  "child": [
+   268
+  ]
+ },
+ {
+  "id": 268,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1448,
+  "y": 713,
+  "text": "example.com",
+  "child": []
+ },
+ {
+  "id": 269,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1424,
+  "y": 607,
+  "text": "!",
+  "child": [
+   270
+  ]
+ },
+ {
+  "id": 270,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1431,
+  "y": 607,
+  "text": "example.com not same as example.org.\nBuy both",
+  "title": "unique TLD",
+  "child": []
+ },
+ {
+  "id": 271,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1415,
+  "y": 660,
+  "text": "?",
+  "child": [
+   272
+  ]
+ },
+ {
+  "id": 272,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1431,
+  "y": 634,
+  "text": "worldwide name2ip servers",
+  "child": []
+ },
+ {
+  "id": 273,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 633,
+  "text": "?",
+  "child": [
+   275
+  ]
+ },
+ {
+  "id": 274,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 607,
+  "text": "?",
+  "child": []
+ },
+ {
+  "id": 275,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1372,
+  "y": 633,
+  "text": "ip address name",
+  "child": []
+ },
+ {
+  "id": 276,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 633,
+  "text": "subdomain",
+  "child": [
+   277
+  ]
+ },
+ {
+  "id": 277,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1522,
+  "y": 633,
+  "text": "eg",
+  "child": [
+   278
+  ]
+ },
+ {
+  "id": 278,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1546,
+  "y": 633,
+  "text": "www.SL.TLD, m.en.SLD.TLD",
+  "child": []
+ },
+ {
+  "id": 279,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1407,
+  "y": 443,
+  "text": "k",
+  "child": [
+   280
+  ]
+ },
+ {
+  "id": 280,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1137,
+  "y": 555,
+  "text": "hostedZone",
+  "child": [
+   281,
+   286
+  ]
+ },
+ {
+  "id": 281,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1222,
+  "y": 583,
+  "text": "?",
+  "child": [
+   282
+  ]
+ },
+ {
+  "id": 282,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1238,
+  "y": 583,
+  "text": "container for records",
+  "child": [
+   283
+  ]
+ },
+ {
+  "id": 283,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1380,
+  "y": 583,
+  "text": "record",
+  "child": [
+   284,
+   293,
+   295,
+   297
+  ]
+ },
+ {
+  "id": 284,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 687,
+  "text": "?",
+  "child": [
+   285
+  ]
+ },
+ {
+  "id": 285,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1445,
+  "y": 687,
+  "text": "traffic route",
+  "child": []
+ },
+ {
+  "id": 286,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1222,
+  "y": 438,
+  "text": "v",
+  "child": [
+   287,
+   288
+  ]
+ },
+ {
+  "id": 287,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1240,
+  "y": 451,
+  "text": "public",
+  "child": [
+   289
+  ]
+ },
+ {
+  "id": 288,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1240,
+  "y": 425,
+  "text": "private",
+  "child": [
+   291
+  ]
+ },
+ {
+  "id": 289,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1290,
+  "y": 451,
+  "text": "?",
+  "child": [
+   290
+  ]
+ },
+ {
+  "id": 290,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1307,
+  "y": 451,
+  "text": "route traffic on the internet",
+  "child": []
+ },
+ {
+  "id": 291,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1293,
+  "y": 425,
+  "text": "?",
+  "child": [
+   292
+  ]
+ },
+ {
+  "id": 292,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1309,
+  "y": 425,
+  "text": "route traffic in an Amazon VPC",
+  "child": []
+ },
+ {
+  "id": 293,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 661,
+  "text": "!",
+  "child": [
+   294
+  ]
+ },
+ {
+  "id": 294,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1443,
+  "y": 661,
+  "text": "No charge for records",
+  "child": []
+ },
+ {
+  "id": 295,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 635,
+  "text": "l",
+  "child": [
+   296
+  ]
+ },
+ {
+  "id": 296,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1442,
+  "y": 635,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-records",
+  "text": "quota",
+  "child": []
+ },
+ {
+  "id": 297,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1429,
+  "y": 544,
+  "text": "v",
+  "child": [
+   301,
+   298,
+   302,
+   310
+  ]
+ },
+ {
+  "id": 298,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1446,
+  "y": 583,
+  "text": "A",
+  "child": [
+   299
+  ]
+ },
+ {
+  "id": 299,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1466,
+  "y": 583,
+  "text": "?",
+  "child": [
+   300
+  ]
+ },
+ {
+  "id": 300,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1482,
+  "y": 583,
+  "text": "Domain to resource ( IPv4 )",
+  "child": []
+ },
+ {
+  "id": 301,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1446,
+  "y": 609,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html#CNAMEFormat",
+  "text": "lnk",
+  "child": []
+ },
+ {
+  "id": 302,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1446,
+  "y": 557,
+  "text": "CNAME",
+  "child": [
+   307,
+   318
+  ]
+ },
+ {
+  "id": 303,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1535,
+  "y": 503,
+  "text": "Domain to [Sub]Domain",
+  "child": [
+   304
+  ]
+ },
+ {
+  "id": 304,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1703,
+  "y": 503,
+  "text": "eg",
+  "child": [
+   305,
+   306
+  ]
+ },
+ {
+  "id": 305,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1727,
+  "y": 516,
+  "text": "www.example.com -> example.com",
+  "child": []
+ },
+ {
+  "id": 306,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1727,
+  "y": 490,
+  "text": "shop.myntra.com -> buy.flipkart.com",
+  "child": []
+ },
+ {
+  "id": 307,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1519,
+  "y": 542,
+  "text": "!",
+  "child": [
+   309
+  ]
+ },
+ {
+  "id": 308,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1535,
+  "y": 529,
+  "text": "zone apex",
+  "child": []
+ },
+ {
+  "id": 309,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1535,
+  "y": 542,
+  "text": "f you register the DNS name example.com, the zone apex is example.com. You can't create a CNAME record for example.com",
+  "title": "zone apex",
+  "child": []
+ },
+ {
+  "id": 310,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1446,
+  "y": 505,
+  "text": "Alias",
+  "child": [
+   311
+  ]
+ },
+ {
+  "id": 311,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1488,
+  "y": 505,
+  "text": "?",
+  "child": [
+   312
+  ]
+ },
+ {
+  "id": 312,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1504,
+  "y": 505,
+  "text": "aws developed R53 extension",
+  "child": [
+   313,
+   316
+  ]
+ },
+ {
+  "id": 313,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1703,
+  "y": 518,
+  "text": "u",
+  "child": [
+   314,
+   315
+  ]
+ },
+ {
+  "id": 314,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1720,
+  "y": 531,
+  "text": "route traffic to selected AWS resource",
+  "child": []
+ },
+ {
+  "id": 315,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1720,
+  "y": 505,
+  "text": "route traffic from one record in a hosted zone to another record.",
+  "child": []
+ },
+ {
+  "id": 316,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1703,
+  "y": 479,
+  "text": "!",
+  "child": [
+   317
+  ]
+ },
+ {
+  "id": 317,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1717,
+  "y": 479,
+  "text": "Unlike CNAME create apex DNS node",
+  "child": []
+ },
+ {
+  "id": 318,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1519,
+  "y": 503,
+  "text": "?",
+  "child": [
+   303
+  ]
+ },
+ {
+  "id": 319,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1044,
+  "y": 845,
+  "text": "lambda^",
+  "child": [
+   364,
+   320,
+   322,
+   346,
+   366
+  ],
+  "root": true
+ },
+ {
+  "id": 320,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 1082,
+  "text": "?",
+  "child": [
+   321
+  ]
+ },
+ {
+  "id": 321,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1125,
+  "y": 1082,
+  "text": "serverless, event-driven compute service",
+  "child": []
+ },
+ {
+  "id": 322,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 847,
+  "text": "k",
+  "child": [
+   323,
+   354,
+   412,
+   457,
+   511
+  ]
+ },
+ {
+  "id": 323,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1127,
+  "y": 1004,
+  "text": "functions",
+  "child": [
+   324,
+   469
+  ]
+ },
+ {
+  "id": 324,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1195,
+  "y": 1056,
+  "text": "?",
+  "child": [
+   325
+  ]
+ },
+ {
+  "id": 325,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1211,
+  "y": 1056,
+  "text": "piece of code that runs in response to events",
+  "child": []
+ },
+ {
+  "id": 326,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1212,
+  "y": 991,
+  "text": "entry method",
+  "child": [
+   327,
+   328,
+   334,
+   342
+  ]
+ },
+ {
+  "id": 327,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 1030,
+  "text": "?",
+  "child": [
+   330
+  ]
+ },
+ {
+  "id": 328,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 1004,
+  "text": "naming",
+  "child": [
+   331,
+   329
+  ]
+ },
+ {
+  "id": 329,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1393,
+  "y": 656,
+  "text": "5*",
+  "child": [
+   333
+  ]
+ },
+ {
+  "id": 330,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1321,
+  "y": 1030,
+  "text": "method invoked at start",
+  "child": []
+ },
+ {
+  "id": 331,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1367,
+  "y": 987,
+  "text": "default",
+  "child": [
+   332
+  ]
+ },
+ {
+  "id": 332,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1420,
+  "y": 987,
+  "text": "lambda_function.lambda_handler",
+  "child": []
+ },
+ {
+  "id": 333,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1419,
+  "y": 656,
+  "text": "file_name.func_name",
+  "child": []
+ },
+ {
+  "id": 334,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 978,
+  "text": "sig",
+  "child": [
+   335
+  ]
+ },
+ {
+  "id": 335,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1339,
+  "y": 959,
+  "text": "lambda_handler(event, context)",
+  "child": [
+   336,
+   339
+  ]
+ },
+ {
+  "id": 336,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1551,
+  "y": 972,
+  "text": "context object",
+  "child": [
+   337
+  ]
+ },
+ {
+  "id": 337,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1643,
+  "y": 1704,
+  "text": "?",
+  "child": [
+   338
+  ]
+ },
+ {
+  "id": 338,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1659,
+  "y": 1704,
+  "text": "invocation and execution environment",
+  "child": []
+ },
+ {
+  "id": 339,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1551,
+  "y": 946,
+  "text": "event object",
+  "child": [
+   340
+  ]
+ },
+ {
+  "id": 340,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1630,
+  "y": 1678,
+  "text": "?",
+  "child": [
+   341
+  ]
+ },
+ {
+  "id": 341,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1646,
+  "y": 1678,
+  "text": "JSON from invoking service",
+  "child": []
+ },
+ {
+  "id": 342,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1305,
+  "y": 952,
+  "text": "return",
+  "child": [
+   343,
+   345
+  ]
+ },
+ {
+  "id": 343,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1358,
+  "y": 934,
+  "text": "!",
+  "child": [
+   344
+  ]
+ },
+ {
+  "id": 344,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1372,
+  "y": 934,
+  "text": "must be JSON serializable",
+  "child": []
+ },
+ {
+  "id": 345,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1358,
+  "y": 905,
+  "text": "optional🔢",
+  "child": []
+ },
+ {
+  "id": 346,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 610,
+  "text": "🏃",
+  "child": [
+   347
+  ]
+ },
+ {
+  "id": 347,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1140,
+  "y": 610,
+  "text": "execution env",
+  "child": [
+   348,
+   350
+  ]
+ },
+ {
+  "id": 348,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": 40,
+  "text": "?",
+  "child": [
+   349
+  ]
+ },
+ {
+  "id": 349,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1255,
+  "y": 40,
+  "text": "secure and isolated runtime",
+  "child": []
+ },
+ {
+  "id": 350,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": -53,
+  "text": "f",
+  "child": [
+   351,
+   352
+  ]
+ },
+ {
+  "id": 351,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1253,
+  "y": 14,
+  "text": "resource management",
+  "child": []
+ },
+ {
+  "id": 352,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1253,
+  "y": -66,
+  "text": "lifecycle management",
+  "child": [
+   353,
+   369
+  ]
+ },
+ {
+  "id": 353,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1402,
+  "y": -26,
+  "text": "who",
+  "child": [
+   355,
+   411
+  ]
+ },
+ {
+  "id": 354,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1127,
+  "y": 926,
+  "text": "function runtime",
+  "child": [
+   356,
+   358,
+   365,
+   374,
+   380
+  ]
+ },
+ {
+  "id": 355,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1438,
+  "y": -12,
+  "text": "external extension",
+  "child": []
+ },
+ {
+  "id": 356,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 1014,
+  "text": "?",
+  "child": [
+   357
+  ]
+ },
+ {
+  "id": 357,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1258,
+  "y": 1014,
+  "text": "language-specific environment",
+  "child": []
+ },
+ {
+  "id": 358,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 988,
+  "text": "u",
+  "child": [
+   359
+  ]
+ },
+ {
+  "id": 359,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1259,
+  "y": 988,
+  "text": "relay between Lambda and function",
+  "child": [
+   360
+  ]
+ },
+ {
+  "id": 360,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1499,
+  "y": 1570,
+  "text": "eg",
+  "child": [
+   361
+  ]
+ },
+ {
+  "id": 361,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1523,
+  "y": 1570,
+  "text": "invocation events, context info, responses",
+  "child": []
+ },
+ {
+  "id": 364,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 1108,
+  "text": "delete",
+  "child": [
+   407
+  ]
+ },
+ {
+  "id": 365,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1242,
+  "y": 961,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html",
+  "text": "lnk",
+  "child": []
+ },
+ {
+  "id": 366,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1109,
+  "y": 584,
+  "text": "pr",
+  "child": [
+   367,
+   368
+  ]
+ },
+ {
+  "id": 367,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1131,
+  "y": 754,
+  "text": "Memory",
+  "child": [
+   508
+  ]
+ },
+ {
+  "id": 368,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1131,
+  "y": 725,
+  "text": "TimeOut",
+  "child": [
+   506
+  ]
+ },
+ {
+  "id": 369,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1402,
+  "y": -92,
+  "text": "phases",
+  "child": [
+   370
+  ]
+ },
+ {
+  "id": 370,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1453,
+  "y": -92,
+  "text": "?",
+  "child": [
+   371,
+   372,
+   373
+  ]
+ },
+ {
+  "id": 371,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1469,
+  "y": -65,
+  "text": "1.^ sends event to runtime and all registered extensions",
+  "child": []
+ },
+ {
+  "id": 372,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1469,
+  "y": -91,
+  "text": "2.runtime and ext indicate completion by sending a Next API request",
+  "child": []
+ },
+ {
+  "id": 373,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1469,
+  "y": -120,
+  "text": "3.^🥶execution env when runtime and ext completes and no pending events.",
+  "child": []
+ },
+ {
+  "id": 374,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 874,
+  "text": "lc",
+  "child": [
+   426
+  ]
+ },
+ {
+  "id": 375,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1339,
+  "y": 1154,
+  "text": "create",
+  "child": [
+   394
+  ]
+ },
+ {
+  "id": 376,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1213,
+  "y": 835,
+  "text": "v",
+  "child": [
+   379,
+   377
+  ]
+ },
+ {
+  "id": 377,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1228,
+  "y": 897,
+  "text": ".zip",
+  "child": [
+   415,
+   437,
+   438,
+   445,
+   447,
+   451,
+   454
+  ]
+ },
+ {
+  "id": 379,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1228,
+  "y": 1141,
+  "text": "container image",
+  "child": [
+   375,
+   395
+  ]
+ },
+ {
+  "id": 380,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1242,
+  "y": 735,
+  "text": "v",
+  "child": [
+   381,
+   386
+  ]
+ },
+ {
+  "id": 381,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1259,
+  "y": 787,
+  "text": "managed",
+  "child": [
+   382,
+   419
+  ]
+ },
+ {
+  "id": 382,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1326,
+  "y": 1362,
+  "text": "eg",
+  "child": [
+   383,
+   384,
+   385
+  ]
+ },
+ {
+  "id": 383,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 1388,
+  "text": "python",
+  "child": []
+ },
+ {
+  "id": 384,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 1362,
+  "text": "Java",
+  "child": []
+ },
+ {
+  "id": 385,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1350,
+  "y": 1336,
+  "text": "Node.js",
+  "child": []
+ },
+ {
+  "id": 386,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1259,
+  "y": 722,
+  "text": "non-managed",
+  "child": [
+   387,
+   389,
+   391
+  ]
+ },
+ {
+  "id": 387,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 761,
+  "text": "?",
+  "child": [
+   388
+  ]
+ },
+ {
+  "id": 388,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1371,
+  "y": 761,
+  "text": "unavailable programming languages",
+  "child": []
+ },
+ {
+  "id": 389,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 735,
+  "text": "eg",
+  "child": [
+   390
+  ]
+ },
+ {
+  "id": 390,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1379,
+  "y": 735,
+  "text": "Go,Rust",
+  "child": []
+ },
+ {
+  "id": 391,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1355,
+  "y": 694,
+  "text": "🤔",
+  "child": [
+   392,
+   510
+  ]
+ },
+ {
+  "id": 392,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1386,
+  "y": 709,
+  "text": "use OS-only runtime image",
+  "child": []
+ },
+ {
+  "id": 394,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1386,
+  "y": 1154,
+  "text": "image creation",
+  "child": []
+ },
+ {
+  "id": 395,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1339,
+  "y": 1128,
+  "text": "update",
+  "child": [
+   396
+  ]
+ },
+ {
+  "id": 396,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1390,
+  "y": 1128,
+  "text": "rebuild image",
+  "child": []
+ },
+ {
+  "id": 397,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1484,
+  "y": 861,
+  "text": "update",
+  "child": [
+   399
+  ]
+ },
+ {
+  "id": 398,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1584,
+  "y": 813,
+  "text": "name",
+  "child": [
+   401
+  ]
+ },
+ {
+  "id": 399,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1535,
+  "y": 861,
+  "text": "config",
+  "child": [
+   400,
+   398
+  ]
+ },
+ {
+  "id": 400,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1584,
+  "y": 874,
+  "text": "value",
+  "child": [
+   402,
+   403,
+   404
+  ]
+ },
+ {
+  "id": 401,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1627,
+  "y": 813,
+  "text": "update-runtime-on",
+  "child": []
+ },
+ {
+  "id": 402,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1627,
+  "y": 909,
+  "text": "auto",
+  "child": []
+ },
+ {
+  "id": 403,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1627,
+  "y": 883,
+  "text": "functionUpdate",
+  "child": []
+ },
+ {
+  "id": 404,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1627,
+  "y": 848,
+  "text": "manual",
+  "child": [
+   405
+  ]
+ },
+ {
+  "id": 405,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1683,
+  "y": 848,
+  "text": "!",
+  "child": [
+   406
+  ]
+ },
+ {
+  "id": 406,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1697,
+  "y": 839,
+  "text": "User responsibility\nPrevent deprecated package usage",
+  "child": []
+ },
+ {
+  "id": 407,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1244,
+  "y": 781,
+  "text": "pr",
+  "child": [
+   408,
+   409
+  ]
+ },
+ {
+  "id": 408,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1268,
+  "y": 795,
+  "text": "version",
+  "child": []
+ },
+ {
+  "id": 409,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1268,
+  "y": 767,
+  "text": "arn",
+  "child": []
+ },
+ {
+  "id": 411,
+  "type": "goto",
+  "style": {
+   "default": "goto"
+  },
+  "x": 1438,
+  "y": -39,
+  "title": ".",
+  "text": "function runtime",
+  "gotoid": "354",
+  "child": []
+ },
+ {
+  "id": 412,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1127,
+  "y": 900,
+  "text": "deployment",
+  "child": [
+   376,
+   413
+  ]
+ },
+ {
+  "id": 413,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1213,
+  "y": 807,
+  "text": "?",
+  "child": [
+   414
+  ]
+ },
+ {
+  "id": 414,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1230,
+  "y": 807,
+  "text": "handler+libraries",
+  "child": []
+ },
+ {
+  "id": 415,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 1061,
+  "text": "p",
+  "child": [
+   416,
+   417,
+   418
+  ]
+ },
+ {
+  "id": 416,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1277,
+  "y": 1102,
+  "text": "dependent pkg/module",
+  "child": [
+   423
+  ]
+ },
+ {
+  "id": 417,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1277,
+  "y": 1063,
+  "text": "^ runtime",
+  "child": [
+   425
+  ]
+ },
+ {
+  "id": 418,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1277,
+  "y": 1022,
+  "text": "lambda handler module",
+  "child": [
+   421
+  ]
+ },
+ {
+  "id": 419,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1326,
+  "y": 1310,
+  "text": "p",
+  "child": [
+   420
+  ]
+ },
+ {
+  "id": 420,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1343,
+  "y": 1310,
+  "text": "aws sdk+its dependencies",
+  "child": []
+ },
+ {
+  "id": 421,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1437,
+  "y": 1021,
+  "text": "📍",
+  "child": [
+   422
+  ]
+ },
+ {
+  "id": 422,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1468,
+  "y": 1021,
+  "text": "root of zip",
+  "child": []
+ },
+ {
+  "id": 423,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1432,
+  "y": 1102,
+  "text": "!",
+  "child": [
+   424
+  ]
+ },
+ {
+  "id": 424,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1446,
+  "y": 1102,
+  "text": "can be added as lambda layers also",
+  "child": []
+ },
+ {
+  "id": 425,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1347,
+  "y": 1061,
+  "text": "optional but recommended🤯",
+  "child": [
+   430
+  ]
+ },
+ {
+  "id": 426,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1262,
+  "y": 874,
+  "text": "grow",
+  "child": [
+   427
+  ]
+ },
+ {
+  "id": 427,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1303,
+  "y": 874,
+  "text": "automatic periodic updates",
+  "child": [
+   428,
+   397
+  ]
+ },
+ {
+  "id": 428,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1484,
+  "y": 935,
+  "text": "!",
+  "child": [
+   429
+  ]
+ },
+ {
+  "id": 429,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1499,
+  "y": 1518,
+  "text": "version conflict with dependent package",
+  "child": []
+ },
+ {
+  "id": 430,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1549,
+  "y": 1063,
+  "text": "y",
+  "child": [
+   431
+  ]
+ },
+ {
+  "id": 431,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1566,
+  "y": 1054,
+  "text": "version conflict of common pkg \nbtw runtime and code dependency",
+  "child": [
+   432
+  ]
+ },
+ {
+  "id": 432,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1794,
+  "y": 1063,
+  "text": "solution",
+  "child": [
+   433,
+   434
+  ]
+ },
+ {
+  "id": 433,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1854,
+  "y": 1076,
+  "text": "1. add ^ sdk to zip package",
+  "child": [
+   435
+  ]
+ },
+ {
+  "id": 434,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1854,
+  "y": 1050,
+  "text": "2. find common version btw code and runtime",
+  "child": []
+ },
+ {
+  "id": 435,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 2036,
+  "y": 1076,
+  "text": "!",
+  "child": [
+   436
+  ]
+ },
+ {
+  "id": 436,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 2050,
+  "y": 1076,
+  "text": "runtime still exists but wont take precedence",
+  "child": []
+ },
+ {
+  "id": 437,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1260,
+  "y": 994,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/lambda/latest/dg/python-package.html",
+  "text": "lnk",
+  "child": []
+ },
+ {
+  "id": 438,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 946,
+  "text": "lc",
+  "child": [
+   439
+  ]
+ },
+ {
+  "id": 439,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1280,
+  "y": 946,
+  "text": "create",
+  "child": [
+   441,
+   443,
+   444
+  ]
+ },
+ {
+  "id": 441,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1327,
+  "y": 972,
+  "text": "cd my_function\nmkdir package\npip install --target ./package boto3\ncd package\nzip -r ../my_deployment_package.zip .\ncd ..\nzip my_deployment_package.zip lambda_function.py",
+  "title": "click2see",
+  "child": []
+ },
+ {
+  "id": 443,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1327,
+  "y": 946,
+  "text": "tetst",
+  "child": []
+ },
+ {
+  "id": 444,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1327,
+  "y": 924,
+  "text": "my_deployment_package.zip\n|- bin\n|  |-jp.py\n|- boto3\n|  |-compat.py\n|  |-data\n|  |-docs\n...\n|- lambda_function.py",
+  "title": "structure",
+  "child": []
+ },
+ {
+  "id": 445,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 895,
+  "text": "📍",
+  "child": [
+   446
+  ]
+ },
+ {
+  "id": 446,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1291,
+  "y": 895,
+  "text": "decompressed and mounted (/var/task)",
+  "child": []
+ },
+ {
+  "id": 447,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 825,
+  "text": "search precedence",
+  "child": [
+   448,
+   449,
+   450
+  ]
+ },
+ {
+  "id": 448,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1385,
+  "y": 869,
+  "text": "1. root",
+  "child": []
+ },
+ {
+  "id": 449,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1385,
+  "y": 825,
+  "text": "2. layer\n/opt/python/lib/python3.x/site-packages  or /opt/python",
+  "child": []
+ },
+ {
+  "id": 450,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1385,
+  "y": 780,
+  "text": "3. runtime and pip installed\n/var/runtime and /var/lang/lib/python3.x/site-packages",
+  "child": []
+ },
+ {
+  "id": 451,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 754,
+  "text": "l",
+  "child": [
+   452
+  ]
+ },
+ {
+  "id": 452,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1273,
+  "y": 754,
+  "text": "size",
+  "child": [
+   453
+  ]
+ },
+ {
+  "id": 453,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1306,
+  "y": 754,
+  "text": "250 MB (unzipped).combined size of uploaded, including ^ layers.",
+  "child": []
+ },
+ {
+  "id": 454,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1260,
+  "y": 710,
+  "text": "!",
+  "child": [
+   455
+  ]
+ },
+ {
+  "id": 455,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1274,
+  "y": 710,
+  "text": "permissions",
+  "child": [
+   456
+  ]
+ },
+ {
+  "id": 456,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1359,
+  "y": 692,
+  "text": "Lambda needs \n644 permissions for non-executable files (rw-r--r--) \n755 permissions (rwxr-xr-x) for directories and executable files.",
+  "child": []
+ },
+ {
+  "id": 457,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1127,
+  "y": 874,
+  "text": "layer",
+  "child": [
+   458,
+   463,
+   465,
+   470,
+   472,
+   476,
+   487,
+   489
+  ]
+ },
+ {
+  "id": 458,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 905,
+  "text": "?",
+  "child": [
+   459
+  ]
+ },
+ {
+  "id": 459,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1184,
+  "y": 905,
+  "text": ".zip supplementary code",
+  "child": [
+   460
+  ]
+ },
+ {
+  "id": 460,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1349,
+  "y": 627,
+  "text": "eg",
+  "child": [
+   461,
+   462
+  ]
+ },
+ {
+  "id": 461,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1373,
+  "y": 640,
+  "text": "custom runtime",
+  "child": []
+ },
+ {
+  "id": 462,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1373,
+  "y": 614,
+  "text": "dependencies",
+  "child": []
+ },
+ {
+  "id": 463,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 879,
+  "text": "u",
+  "child": [
+   464
+  ]
+ },
+ {
+  "id": 464,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1186,
+  "y": 855,
+  "text": "reduce deployment package size\nseparate core logic from dependencies\nshare dependencies across multiple functions\nTo lock an embedded SDK version",
+  "child": []
+ },
+ {
+  "id": 465,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 853,
+  "text": "!",
+  "child": [
+   466,
+   475,
+   481
+  ]
+ },
+ {
+  "id": 466,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1185,
+  "y": 764,
+  "text": "Not recommended for Rust Go",
+  "child": [
+   467
+  ]
+ },
+ {
+  "id": 467,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1389,
+  "y": 506,
+  "text": "y",
+  "child": [
+   468
+  ]
+ },
+ {
+  "id": 468,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1406,
+  "y": 506,
+  "text": "load assemblies at init delays cold start",
+  "child": []
+ },
+ {
+  "id": 469,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1195,
+  "y": 991,
+  "text": "p",
+  "child": [
+   326
+  ]
+ },
+ {
+  "id": 470,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 824,
+  "text": "📍",
+  "child": [
+   471
+  ]
+ },
+ {
+  "id": 471,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1199,
+  "y": 407,
+  "text": "extracts the layer contents into the /opt",
+  "child": []
+ },
+ {
+  "id": 472,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 795,
+  "text": "🚧",
+  "child": [
+   473
+  ]
+ },
+ {
+  "id": 473,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1199,
+  "y": 795,
+  "text": "max",
+  "child": [
+   474
+  ]
+ },
+ {
+  "id": 474,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1217,
+  "y": 381,
+  "text": "5 layer per function",
+  "child": []
+ },
+ {
+  "id": 475,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1185,
+  "y": 738,
+  "text": "layers work .zip file deployment Not container images.",
+  "child": []
+ },
+ {
+  "id": 476,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 754,
+  "text": "🔄",
+  "child": [
+   477,
+   482
+  ]
+ },
+ {
+  "id": 477,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1199,
+  "y": 769,
+  "text": "grow",
+  "child": [
+   478,
+   491
+  ]
+ },
+ {
+  "id": 478,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1244,
+  "y": 867,
+  "text": "updateLayer",
+  "child": [
+   479,
+   480
+  ]
+ },
+ {
+  "id": 479,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1318,
+  "y": 355,
+  "text": "increment version",
+  "child": []
+ },
+ {
+  "id": 480,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1318,
+  "y": 329,
+  "text": "create new layer",
+  "child": []
+ },
+ {
+  "id": 481,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1185,
+  "y": 693,
+  "text": "When adding layer to function specify exact layer version\neg: arn:aws:lambda:us-east-1:123456789012:layer:my-layer:1",
+  "child": []
+ },
+ {
+  "id": 482,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1199,
+  "y": 743,
+  "text": "create",
+  "child": []
+ },
+ {
+  "id": 483,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1200,
+  "y": 781,
+  "text": "version",
+  "child": [
+   484
+  ]
+ },
+ {
+  "id": 484,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1255,
+  "y": 277,
+  "text": "pr",
+  "child": [
+   485
+  ]
+ },
+ {
+  "id": 485,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1277,
+  "y": 277,
+  "text": "number",
+  "child": [
+   486
+  ]
+ },
+ {
+  "id": 486,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1334,
+  "y": 277,
+  "text": "initValue",
+  "child": [
+   488
+  ]
+ },
+ {
+  "id": 487,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 713,
+  "text": "🏠",
+  "child": [
+   483,
+   503
+  ]
+ },
+ {
+  "id": 488,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1400,
+  "y": 277,
+  "text": "1",
+  "child": []
+ },
+ {
+  "id": 489,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1168,
+  "y": 684,
+  "text": "⚙️",
+  "child": [
+   490
+  ]
+ },
+ {
+  "id": 490,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1200,
+  "y": 701,
+  "text": "FunctionDependency",
+  "child": []
+ },
+ {
+  "id": 491,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1244,
+  "y": 771,
+  "text": "AddLayer",
+  "child": [
+   492,
+   501
+  ]
+ },
+ {
+  "id": 492,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1319,
+  "y": 801,
+  "text": "👟",
+  "child": [
+   493,
+   495,
+   496
+  ]
+ },
+ {
+  "id": 493,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1351,
+  "y": 841,
+  "text": "1. get layer ARN",
+  "child": []
+ },
+ {
+  "id": 495,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1351,
+  "y": 818,
+  "text": "{\n  \"Effect\": \"Allow\",\n  \"Action\": [\n    \"lambda:GetLayerVersion\",\n    \"lambda:UpdateFunctionConfiguration\",\n    \"lambda:GetFunctionConfiguration\"\n  ],\n  \"Resource\": \"lambda arn\"\n}",
+  "title": "2. policy",
+  "child": []
+ },
+ {
+  "id": 496,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1351,
+  "y": 779,
+  "text": "3. update lambda layer configuration",
+  "child": [
+   497,
+   504
+  ]
+ },
+ {
+  "id": 497,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1596,
+  "y": 792,
+  "text": "cli",
+  "child": [
+   498,
+   499
+  ]
+ },
+ {
+  "id": 498,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1728,
+  "y": 177,
+  "text": "!",
+  "child": [
+   500
+  ]
+ },
+ {
+  "id": 499,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1728,
+  "y": 155,
+  "text": "aws lambda update-function-configuration \\\n  --function-name YourFunctionName \\\n  --layers \\\n    arn:aws:lambda:us-east-1:123456789012:layer:ExistingLayer:1 \\\n    arn:aws:lambda:us-east-1:123456789012:layer:MyLayer:3",
+  "title": "cmd",
+  "child": []
+ },
+ {
+  "id": 500,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1742,
+  "y": 177,
+  "text": "Must specify new and existing layer",
+  "child": []
+ },
+ {
+  "id": 501,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1319,
+  "y": 721,
+  "text": "!",
+  "child": [
+   502
+  ]
+ },
+ {
+  "id": 502,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1333,
+  "y": 703,
+  "text": "^ merges layers based on order\nFor conflicting files or paths \nlast will overwrite earlier ones",
+  "child": []
+ },
+ {
+  "id": 503,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1200,
+  "y": 755,
+  "text": "immutable",
+  "child": []
+ },
+ {
+  "id": 504,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1596,
+  "y": 766,
+  "text": "cfn",
+  "child": [
+   505
+  ]
+ },
+ {
+  "id": 505,
+  "type": "link",
+  "style": {
+   "default": "link"
+  },
+  "x": 1732,
+  "y": 128,
+  "title": ".",
+  "href": "https://docs.aws.amazon.com/lambda/latest/dg/layers-cfn.html",
+  "text": "lnk",
+  "child": []
+ },
+ {
+  "id": 506,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1197,
+  "y": 723,
+  "text": "🚧\n",
+  "child": [
+   507
+  ]
+ },
+ {
+  "id": 507,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1228,
+  "y": 723,
+  "text": "15 minutes per invocation",
+  "child": []
+ },
+ {
+  "id": 508,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1195,
+  "y": 752,
+  "text": "🚧\n",
+  "child": [
+   509
+  ]
+ },
+ {
+  "id": 509,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1226,
+  "y": 752,
+  "text": "10,240 MB per function",
+  "child": []
+ },
+ {
+  "id": 510,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1386,
+  "y": 683,
+  "text": "Add customer runtime interface using HTTP API",
+  "child": []
+ },
+ {
+  "id": 511,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1127,
+  "y": 743,
+  "text": "invocation",
+  "child": [
+   512
+  ]
+ },
+ {
+  "id": 512,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1205,
+  "y": 743,
+  "text": "v",
+  "child": [
+   513,
+   514
+  ]
+ },
+ {
+  "id": 513,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1223,
+  "y": 848,
+  "text": "synchronous",
+  "child": [
+   515,
+   526
+  ]
+ },
+ {
+  "id": 514,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1223,
+  "y": 730,
+  "text": "asynchronous",
+  "child": [
+   517,
+   519,
+   528
+  ]
+ },
+ {
+  "id": 515,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1312,
+  "y": 811,
+  "text": "?",
+  "child": [
+   516
+  ]
+ },
+ {
+  "id": 516,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1328,
+  "y": 811,
+  "text": "wait for response",
+  "child": []
+ },
+ {
+  "id": 517,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1321,
+  "y": 819,
+  "text": "⚙️",
+  "child": [
+   518
+  ]
+ },
+ {
+  "id": 518,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1352,
+  "y": 819,
+  "text": "aws lambda invoke --invocation-type Event",
+  "child": []
+ },
+ {
+  "id": 519,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1321,
+  "y": 743,
+  "text": "k",
+  "child": [
+   520
+  ]
+ },
+ {
+  "id": 520,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1339,
+  "y": 743,
+  "text": "event queue",
+  "child": [
+   521,
+   523
+  ]
+ },
+ {
+  "id": 521,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1426,
+  "y": 793,
+  "text": "?",
+  "child": [
+   522
+  ]
+ },
+ {
+  "id": 522,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 793,
+  "text": "SQS Q",
+  "child": []
+ },
+ {
+  "id": 523,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1426,
+  "y": 730,
+  "text": "!",
+  "child": [
+   524,
+   525
+  ]
+ },
+ {
+  "id": 524,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 741,
+  "text": "Age out",
+  "child": [
+   534
+  ]
+ },
+ {
+  "id": 525,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1442,
+  "y": 694,
+  "text": "def lambda_handler(event, context):\n    for record in event['Records']:\n        message_id = record['messageId']\n        body = record['body']\n\n        if has_been_processed(message_id):\n            print(f\"Skipping duplicate message: {message_id}\")\n            continue\n\n        process_message(body)\n        mark_as_processed(message_id)\n",
+  "title": "Possible duplicate event",
+  "child": []
+ },
+ {
+  "id": 526,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1312,
+  "y": 782,
+  "text": "⛔",
+  "child": [
+   527
+  ]
+ },
+ {
+  "id": 527,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1343,
+  "y": 782,
+  "text": "retry - 0",
+  "child": []
+ },
+ {
+  "id": 528,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1321,
+  "y": 652,
+  "text": "⛔",
+  "child": [
+   530
+  ]
+ },
+ {
+  "id": 529,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1391,
+  "y": 668,
+  "text": "d",
+  "child": [
+   531
+  ]
+ },
+ {
+  "id": 530,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1352,
+  "y": 654,
+  "text": "retry",
+  "child": [
+   529,
+   532
+  ]
+ },
+ {
+  "id": 531,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1408,
+  "y": 668,
+  "text": "initial + 2 retry",
+  "child": []
+ },
+ {
+  "id": 532,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1391,
+  "y": 639,
+  "text": "⚙️",
+  "child": [
+   533
+  ]
+ },
+ {
+  "id": 533,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1425,
+  "y": 637,
+  "text": "MaximumRetryAttempts\nType: Integer\nValid Range: 0 to 2",
+  "child": []
+ },
+ {
+  "id": 534,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1503,
+  "y": 741,
+  "text": "?",
+  "child": [
+   535,
+   536
+  ]
+ },
+ {
+  "id": 535,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1520,
+  "y": 747,
+  "text": "For long queue new events might age out before  ^ sends to function\nTo capture discarded events, configure a dead-letter queue",
+  "child": []
+ },
+ {
+  "id": 536,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1520,
+  "y": 716,
+  "text": "⚙️",
+  "child": [
+   537
+  ]
+ },
+ {
+  "id": 537,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1551,
+  "y": 690,
+  "text": "MaximumEventAgeInSeconds\nType: seconds\nvalue: Valid Range: 60 to 21600\nMax time of event in asynchronous event queue before discard.",
   "child": []
  }
 ]

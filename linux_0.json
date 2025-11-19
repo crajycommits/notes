@@ -1,245 +1,923 @@
 [
-  {
-    "id": 0,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 284,
-    "y": 128,
-    "title": ".",
-    "text": "[s=24]kernel[/s]\nA central software that manages [s=24]👨🏻‍💼[/s] \nand allocates computer resources \n(i.e., the CPU, RAM, and devices).",
-
-
-    "height": 140,
-    "width": 274
+ {
+  "id": 0,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 1,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 697,
-    "y": 137,
-    "title": ".",
-    "text": "accompanying standard software tools,\nsuch as \nbrowsers 🌍\ncommand-line interpreters 📟\ngraphical user interfaces 📱\nfile utilities📄\neditors",
-
-
-    "height": 200,
-    "width": 200
+  "x": 284,
+  "y": 128,
+  "title": "Kernel\n\n",
+  "text": "A central software that manages [s=24]👨🏻‍💼[/s] \nand allocates computer resources \n(i.e., the CPU, RAM, and devices).\nThe Linux kernel executable typically resides at the pathname \n🪑/boot/vmlinuz",
+  "height": 23,
+  "width": 61
+ },
+ {
+  "id": 1,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 2,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "34px"
-    },
-    "x": 603,
-    "y": 206,
-    "title": ".",
-    "text": "+",
-
-
-    "height": 64,
-    "width": 28
+  "x": 382,
+  "y": 129,
+  "title": "OS",
+  "text": "\nkernel + accompanying standard software = os\neg: browsers 🌍, cli 📟,gui 📱\nfile utilities📄,editors",
+  "height": 23,
+  "width": 36
+ },
+ {
+  "id": 6,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 3,
-    "type": "bubble",
-    "style": {
-      "default": "bubble",
-      "font-size": "32px"
-    },
-    "x": 957,
-    "y": 199,
-    "title": ".",
-    "text": "=",
-
-
-    "height": 200,
-    "width": 200
+  "x": 281,
+  "y": 287,
+  "title": "CPU MODES 🖥️\n\n",
+  "text": "Kernel mode and user mode\n\nKernel mode or supervisor mode\n[s=24]💪[/s]\n\nUser mode\n[s=24]🚫[/s]\nCan access what is allowed",
+  "height": 20,
+  "width": 141
+ },
+ {
+  "id": 7,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 4,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 1013,
-    "y": 209,
-    "title": ".",
-    "text": "Operating System",
-
-
-    "height": 52,
-    "width": 143
+  "x": 469,
+  "y": 286,
+  "title": "process\n\n",
+  "text": "What is the use of being a process 😩\n\nWhen will i get scheduled\nWhere am i in RAM\nHow can i talk to my friends\nWhen will i get the signals\nWhen will i get the CPU time\nI cannot even talk to devices directly\nI cannot even create my own child process\n\nOnly KERNEL knows",
+  "height": 32,
+  "width": 81
+ },
+ {
+  "id": 9,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 5,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 101,
-    "y": 262,
-    "title": ".",
-    "text": "The Linux kernel executable typically resides at the pathname \n\n   [s=24]🪑/boot/vmlinuz[/s]",
-
-
-    "height": 132,
-    "width": 258
+  "x": 281,
+  "y": 213,
+  "title": "🐚SHELL🌊\n\n",
+  "text": "login shell denotes a process created to run a shell when the user first logs in .\n\nBourne shell (sh) 👶 - Oldest and widely used\n\nC shell (csh) - Not so portable. no backward compatible\n\nKorn shell (ksh) 🌽 - backward compatible\n\nBourne again shell (bash) 👶 🔁-reimplementation of the Bourne shell. Most widely used shell in linux",
+  "height": 31,
+  "width": 137,
+  "show": true
+ },
+ {
+  "id": 11,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 6,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 166,
-    "y": 420,
-    "title": ".",
-    "text": "CPU MODES - [s=24]🖥️[/s]\n\nKernel mode and user mode\n\nKernel mode or supervisor mode\n[s=24]💪[/s]\n\nUser mode\n[s=24]🚫[/s]\nCan access what is allowed",
-
-
-    "height": 266,
-    "width": 242
+  "x": 283,
+  "y": 471,
+  "title": "/etc/passwd\n\n",
+  "text": "Every user [s=24]🙍🏻‍♂️[/s] has a unique user name and UID \nit is in [s=24]/etc/passwd[/s]\n\nThis file also has\nGroup ID 👨‍👨‍👦‍👦: the numeric group ID of the [s=24]first[/s] of the groups of which the user is a\nmember.\n\nHome [s=24]🏠[/s] directory: the initial directory into which the user is placed after logging in.\n\nLogin [s=24]🔐[/s] shell: the name of the program to be executed to interpret user commands",
+  "height": 26,
+  "width": 94
+ },
+ {
+  "id": 13,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 7,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 558,
-    "y": 396,
-    "title": ".",
-    "text": "What is the use of being a [s=24]process 😩[/s]\n\nWhen will i get scheduled\nWhere am i in RAM\nHow can i talk to my friends\nWhen will i get the signals\nWhen will i get the CPU time\nI cannot even talk to devices directly\nI cannot even create my own child process\n\nOnly [s=32]KERNEL[/s] knows",
-
-
-    "height": 292,
-    "width": 340
+  "x": 281,
+  "y": 406,
+  "title": "superuser 💪\n\n\n\n",
+  "text": "user ID 0\ntypical login name root. [s=24]🪵[/s]\n\nsuperuser can access any file in the system\nsend signals to any user process in the system\nso on and so forth",
+  "height": 30,
+  "width": 97
+ },
+ {
+  "id": 15,
+  "type": "bubble",
+  "style": {
+   "default": "bubble"
   },
-  {
-    "id": 8,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 434,
-    "y": 461,
-    "title": ".",
-    "text": "    ...\n[s=48]➡️[/s]\n    ...\n",
-
-
-    "height": 116,
-    "width": 73
+  "x": 283,
+  "y": 529,
+  "title": "groups 👨‍👨‍👦‍👦\n\n",
+  "text": "Each group is identified by a single line in the system group file, [s=32]/etc/group[/s]\n\nGroup name: unique name of the group.\n\nGroup ID (GID): the numeric ID\n\nUser list: comma separated line of users. Primary group listed in [s=24]/etc/passwd[/s]",
+  "height": 33,
+  "width": 80
+ },
+ {
+  "id": 16,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 9,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 1201,
-    "y": 337,
-    "title": ".",
-    "text": "[s=32]🐚SHELL🌊[/s]\n\nlogin shell denotes a process created to run a shell when the user first logs in .\n\nBourne shell (sh) 👶 - Oldest and widely used\n\nC shell (csh) - Not so portable. no backward compatible\n\nKorn shell (ksh) 🌽 - backward compatible\n\nBourne again shell (bash) 👶 🔁-reimplementation of the Bourne shell. Most widely used shell in linux",
-
-
-    "height": 279,
-    "width": 686,
-    "show": true
+  "x": 757,
+  "y": 266,
+  "text": "history",
+  "root": true,
+  "child": [
+   17,
+   20
+  ]
+ },
+ {
+  "id": 17,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 10,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 992,
-    "y": 447,
-    "title": ".",
-    "text": "    ...\n[s=48]➡️[/s]\n    ...\n",
-
-
-    "height": 141,
-    "width": 102
+  "x": 812,
+  "y": 263,
+  "text": "unix\nBell Labs (AT&T), USA\nKen Thompson, Dennis Ritchie, and others",
+  "child": [
+   22
+  ]
+ },
+ {
+  "id": 18,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 11,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 1180,
-    "y": 762,
-    "title": ".",
-    "text": "Every user [s=24]🙍🏻‍♂️[/s] has a unique user name and UID \nit is in [s=24]/etc/passwd[/s]\n\nThis file also has\nGroup ID 👨‍👨‍👦‍👦: the numeric group ID of the [s=24]first[/s] of the groups of which the user is a\nmember.\n\nHome [s=24]🏠[/s] directory: the initial directory into which the user is placed after logging in.\n\nLogin [s=24]🔐[/s] shell: the name of the program to be executed to interpret user commands",
-
-
-    "height": 304,
-    "width": 628
+  "x": 911,
+  "y": 209,
+  "text": "Red Hat Family",
+  "child": [
+   30,
+   31
+  ]
+ },
+ {
+  "id": 19,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 12,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 1285,
-    "y": 615,
-    "title": ".",
-    "text": "...\n[s=48]⬇️[/s]\n...",
-
-
-    "height": 130,
-    "width": 84
+  "x": 911,
+  "y": 181,
+  "text": "Arch Family",
+  "child": [
+   32,
+   33
+  ]
+ },
+ {
+  "id": 20,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 13,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 778,
-    "y": 740,
-    "title": ".",
-    "text": "[s=24]superuser 💪[/s]\n\nuser ID 0\ntypical login name root. [s=24]🪵[/s]\n\nsuperuser can access any file in the system\nsend signals to any user process in the system\nso on and so forth",
-
-
-    "height": 220,
-    "width": 347
+  "x": 812,
+  "y": 235,
+  "text": "linux families",
+  "child": [
+   21,
+   18,
+   19,
+   27
+  ]
+ },
+ {
+  "id": 21,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 14,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 626,
-    "y": 815,
-    "title": ".",
-    "text": "...\n[s=48]⬅️[/s]\n...",
-
-
-    "height": 132,
-    "width": 97
+  "x": 911,
+  "y": 235,
+  "text": "Debian Family",
+  "child": [
+   28,
+   29
+  ]
+ },
+ {
+  "id": 22,
+  "type": "card",
+  "style": {
+   "default": "card"
   },
-  {
-    "id": 15,
-    "type": "bubble",
-    "style": {
-      "default": "bubble"
-    },
-    "x": 1829,
-    "y": 785,
-    "title": ".",
-    "text": "[s=24]groups 👨‍👨‍👦‍👦[/s]\n\nEach group is identified by a single line in the system group file, [s=32]/etc/group[/s]\n\nGroup name: unique name of the group.\n\nGroup ID (GID): the numeric ID\n\nUser list: comma separated line of users. Primary group listed in [s=24]/etc/passwd[/s]",
-
-
-    "height": 271,
-    "width": 596
-  }
+  "x": 1097,
+  "y": 279,
+  "text": "❌",
+  "child": [
+   23
+  ]
+ },
+ {
+  "id": 23,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1128,
+  "y": 281,
+  "text": "proprietary",
+  "child": [
+   24
+  ]
+ },
+ {
+  "id": 24,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1208,
+  "y": 279,
+  "text": "✅",
+  "child": [
+   25,
+   26
+  ]
+ },
+ {
+  "id": 25,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": 266,
+  "text": "GNU Project (1983)\nRichard Stallman (MIT)\nKey tools like GNU Compiler Collection (GCC), GNU Bash, coreutils, Emacs, etc.\n\nMissing piece: The kernel",
+  "child": []
+ },
+ {
+  "id": 26,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1239,
+  "y": 222,
+  "text": "Linux Kernel (1991)\nWho: Linus Torvalds, a Finnish computer science student",
+  "child": []
+ },
+ {
+  "id": 27,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 911,
+  "y": 155,
+  "text": "SUSE Family",
+  "child": [
+   34,
+   35
+  ]
+ },
+ {
+  "id": 28,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1302,
+  "y": 309,
+  "text": "Debian\n ├─ Ubuntu (2004)\n │   ├─ Linux Mint\n │   ├─ Pop!_OS\n │   ├─ Zorin OS\n │   ├─ elementary OS\n │   ├─ Kubuntu / Xubuntu / Lubuntu\n │   └─ Kali Linux\n ├─ MX Linux\n └─ Raspbian (for Raspberry Pi)",
+  "child": []
+ },
+ {
+  "id": 29,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1302,
+  "y": 283,
+  "text": "APT package manager",
+  "child": []
+ },
+ {
+  "id": 30,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1023,
+  "y": 197,
+  "text": "Red Hat Linux\n ├─ RHEL (Red Hat Enterprise Linux)\n │   ├─ CentOS → (now CentOS Stream)\n │   ├─ AlmaLinux\n │   └─ Rocky Linux\n └─ Fedora (community edition)\n     ├─ Fedora Workstation\n     └─ Fedora Server\n",
+  "child": []
+ },
+ {
+  "id": 31,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1023,
+  "y": 171,
+  "text": "RPM packages (.rpm), DNF/YUM package manager, enterprise-grade stability, corporate focus.",
+  "child": []
+ },
+ {
+  "id": 32,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1003,
+  "y": 158,
+  "text": "Arch Linux\n ├─ Manjaro (user-friendly installer, GUI tools)\n ├─ EndeavourOS (near-vanilla Arch + easy install)\n ├─ Garuda Linux (performance/gaming focus)\n └─ ArcoLinux (educational, customizable)\n",
+  "child": []
+ },
+ {
+  "id": 33,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1003,
+  "y": 130,
+  "text": "Pacman package manager(.pkg.tar.zst), rolling updates, DIY setup, high customization.",
+  "child": []
+ },
+ {
+  "id": 34,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1008,
+  "y": 140,
+  "text": "SUSE Linux\r\n ├─ openSUSE Leap (stable, enterprise base)\r\n ├─ openSUSE Tumbleweed (rolling release)\r\n └─ SLE (SUSE Linux Enterprise)",
+  "child": []
+ },
+ {
+  "id": 35,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1008,
+  "y": 114,
+  "text": "Uses RPM + YaST configuration tool, enterprise and desktop options, strong in Europe.",
+  "child": []
+ },
+ {
+  "id": 36,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 770,
+  "y": 449,
+  "text": "c1",
+  "root": true,
+  "child": [
+   59,
+   60,
+   67
+  ]
+ },
+ {
+  "id": 37,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 819,
+  "y": 636,
+  "text": "p",
+  "child": [
+   38,
+   39
+  ]
+ },
+ {
+  "id": 38,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 837,
+  "y": 649,
+  "text": "kernel",
+  "child": [
+   41,
+   43,
+   47
+  ]
+ },
+ {
+  "id": 39,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 837,
+  "y": 531,
+  "text": "additional software",
+  "child": [
+   40
+  ]
+ },
+ {
+  "id": 40,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 969,
+  "y": 531,
+  "text": "eg text editor ( emacs ), cli",
+  "child": []
+ },
+ {
+  "id": 41,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 887,
+  "y": 743,
+  "text": "?",
+  "child": [
+   42
+  ]
+ },
+ {
+  "id": 42,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 879,
+  "y": 454,
+  "text": "central software that manages and allocates\ncomputer resources (i.e., the CPU, RAM, and devices).",
+  "child": []
+ },
+ {
+  "id": 43,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 887,
+  "y": 714,
+  "text": "📍 ",
+  "child": [
+   44
+  ]
+ },
+ {
+  "id": 44,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 898,
+  "y": 461,
+  "text": "/boot/vmlinuz",
+  "child": [
+   45
+  ]
+ },
+ {
+  "id": 45,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 996,
+  "y": 462,
+  "text": "?",
+  "child": [
+   46
+  ]
+ },
+ {
+  "id": 46,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1012,
+  "y": 434,
+  "text": "Early UNIX kernel was called unix. \nAfter virtual memory vmunix \n\nlinuz z - compressed executable\n",
+  "child": []
+ },
+ {
+  "id": 47,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 887,
+  "y": 622,
+  "text": "task",
+  "child": [
+   48,
+   50,
+   52,
+   55,
+   57,
+   58
+  ]
+ },
+ {
+  "id": 48,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 688,
+  "text": "preemptive multitasking",
+  "child": [
+   49
+  ]
+ },
+ {
+  "id": 49,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1088,
+  "y": 632,
+  "text": "Multitasking - \nmultiple processes (instances of running programs) simultaneously reside in memory\nreceive CPU use\n\nPreemptive\nrules governing which processes receive  CPU and how long determined by kernel process scheduler \n(not by processes themselves).",
+  "child": []
+ },
+ {
+  "id": 50,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 662,
+  "text": "virtual memory management",
+  "child": [
+   51
+  ]
+ },
+ {
+  "id": 51,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1116,
+  "y": 588,
+  "text": "Processes isolated from one another\nand from the kernel\nOnly part of process kept in memory",
+  "child": []
+ },
+ {
+  "id": 52,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 636,
+  "text": "system call API",
+  "child": [
+   53
+  ]
+ },
+ {
+  "id": 53,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1034,
+  "y": 580,
+  "text": "Processes request kernel to perform tasks using kernel entry points known as system calls",
+  "child": [
+   54
+  ]
+ },
+ {
+  "id": 54,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1593,
+  "y": 362,
+  "text": "eg shorthand for “a process can request\nthe kernel\"\na process can create another process\na process can create a pipe\na process can write data to a file\na processcan terminate by calling exit().",
+  "child": []
+ },
+ {
+  "id": 55,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 609,
+  "text": "process management",
+  "child": [
+   56
+  ]
+ },
+ {
+  "id": 56,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1065,
+  "y": 507,
+  "text": "For a process, many things happen asynchronously. \nAn executing process \ndont know when it will be scheduled.\ndelivery of signals and IPC events are mediated by the kernel, and can occur at any time\ndont know where it is located in RAM or swap area\ndont know where on the disk drive the files it accesses are being held\ncannot directly communicate with another process. \ncannot itself create a new process\ncannot  end its own existence. \nprocess cant communicate directly with IO devices\n\nThe kernel facilitates the running of all processes on the system",
+  "child": []
+ },
+ {
+  "id": 57,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 583,
+  "text": "networking",
+  "child": []
+ },
+ {
+  "id": 58,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 923,
+  "y": 557,
+  "text": "access to devices",
+  "child": []
+ },
+ {
+  "id": 59,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 795,
+  "y": 636,
+  "text": "os",
+  "child": [
+   37
+  ]
+ },
+ {
+  "id": 60,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 795,
+  "y": 505,
+  "text": "cpu",
+  "child": [
+   61
+  ]
+ },
+ {
+  "id": 61,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 827,
+  "y": 505,
+  "text": "modes",
+  "child": [
+   62,
+   63
+  ]
+ },
+ {
+  "id": 62,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 880,
+  "y": 449,
+  "text": "kernel/supervisor",
+  "child": [
+   65,
+   66
+  ]
+ },
+ {
+  "id": 63,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 880,
+  "y": 423,
+  "text": "user",
+  "child": [
+   64
+  ]
+ },
+ {
+  "id": 64,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 915,
+  "y": 423,
+  "text": "CPU can access only memory marked as user space",
+  "child": []
+ },
+ {
+  "id": 65,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1001,
+  "y": 449,
+  "text": "CPU can access both user and kernel memory space.",
+  "child": []
+ },
+ {
+  "id": 66,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 652,
+  "y": 209,
+  "text": "certain operations as shut down performed in only kernel mode",
+  "child": []
+ },
+ {
+  "id": 67,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 795,
+  "y": 318,
+  "text": "shell/command interpreter",
+  "child": [
+   68,
+   70,
+   71,
+   72
+  ]
+ },
+ {
+  "id": 68,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 972,
+  "y": 479,
+  "text": "?",
+  "child": [
+   69
+  ]
+ },
+ {
+  "id": 69,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 988,
+  "y": 479,
+  "text": "read commands and execute appropriate programs in response",
+  "child": []
+ },
+ {
+  "id": 70,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 972,
+  "y": 416,
+  "text": "login shell\nthe process created to run a shell\nwhen the user first logs in.",
+  "child": []
+ },
+ {
+  "id": 71,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 972,
+  "y": 371,
+  "text": "in unix shell is a user process \nin some os shell part of kernel",
+  "child": []
+ },
+ {
+  "id": 72,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 972,
+  "y": 251,
+  "text": "v",
+  "child": [
+   73,
+   74,
+   75,
+   76
+  ]
+ },
+ {
+  "id": 73,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 989,
+  "y": 327,
+  "text": "bourne shell (sh)",
+  "child": [
+   79
+  ]
+ },
+ {
+  "id": 74,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 989,
+  "y": 273,
+  "text": "c shell (csh)",
+  "child": [
+   78
+  ]
+ },
+ {
+  "id": 75,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 989,
+  "y": 229,
+  "text": "korn shell ksh",
+  "child": [
+   80
+  ]
+ },
+ {
+  "id": 76,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 989,
+  "y": 175,
+  "text": "bourne again shell bash",
+  "child": [
+   77
+  ]
+ },
+ {
+  "id": 77,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1148,
+  "y": 157,
+  "text": "oldest of the widely used shells\nWritten by Steve Bourne.\nstandard shell for Seventh Edition UNIX",
+  "child": []
+ },
+ {
+  "id": 78,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1075,
+  "y": 264,
+  "text": "flow-control constructs resemble C programming language.\nNot backward compatible with Bourne shell",
+  "child": []
+ },
+ {
+  "id": 79,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 309,
+  "text": "GNU projects reimplementation of\nthe Bourne shell\nwidely used shell on Linux",
+  "child": []
+ },
+ {
+  "id": 80,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087,
+  "y": 220,
+  "text": "maintain backward compatibility with Bourne shell\nIncorporated features provided by C shell.",
+  "child": []
+ }
 ]

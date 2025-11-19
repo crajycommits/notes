@@ -811,7 +811,7 @@
    "default": "card"
   },
   "x": 922,
-  "y": 488,
+  "y": 561,
   "text": "?",
   "child": [
    37
@@ -823,8 +823,8 @@
   "style": {
    "default": "card"
   },
-  "x": 661,
-  "y": 405,
+  "x": 938,
+  "y": 457,
   "text": "saas",
   "child": [
    38
@@ -864,7 +864,9 @@
   "y": 304,
   "text": "k",
   "child": [
-   41
+   41,
+   104,
+   128
   ]
  },
  {
@@ -874,7 +876,7 @@
    "default": "card"
   },
   "x": 940,
-  "y": 304,
+  "y": 535,
   "text": "warehouse",
   "child": [
    78,
@@ -899,8 +901,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1019,
-  "y": 384,
+  "x": 1017,
+  "y": 422,
   "text": "v",
   "child": [
    44,
@@ -1153,10 +1155,11 @@
    "default": "card"
   },
   "x": 922,
-  "y": 514,
+  "y": 587,
   "text": "delete",
   "child": [
-   62
+   62,
+   175
   ]
  },
  {
@@ -1344,8 +1347,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1019,
-  "y": 462,
+  "x": 1017,
+  "y": 448,
   "text": "?",
   "child": [
    42
@@ -1444,8 +1447,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1019,
-  "y": 226,
+  "x": 1017,
+  "y": 396,
   "text": "f",
   "child": [
    94
@@ -1663,5 +1666,1163 @@
   "y": 252,
   "text": "entire warehouse suspended/no running cluster",
   "child": []
+ },
+ {
+  "id": 104,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 940,
+  "y": 509,
+  "text": "cache",
+  "child": [
+   105,
+   115,
+   121
+  ]
+ },
+ {
+  "id": 105,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 987,
+  "y": 291,
+  "text": "result cache",
+  "child": [
+   106,
+   109,
+   112,
+   126
+  ]
+ },
+ {
+  "id": 106,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1073,
+  "y": 367,
+  "text": "📍",
+  "child": [
+   107
+  ]
+ },
+ {
+  "id": 107,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1104,
+  "y": 367,
+  "text": "service layer",
+  "child": [
+   108
+  ]
+ },
+ {
+  "id": 108,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1194,
+  "y": 367,
+  "text": "top most layer",
+  "child": []
+ },
+ {
+  "id": 109,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1073,
+  "y": 328,
+  "text": "f",
+  "child": [
+   110,
+   111
+  ]
+ },
+ {
+  "id": 110,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087,
+  "y": 341,
+  "text": "persisted query results",
+  "child": []
+ },
+ {
+  "id": 111,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087,
+  "y": 315,
+  "text": "cross virtual warehouse access",
+  "child": []
+ },
+ {
+  "id": 112,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1073,
+  "y": 265,
+  "text": "🚧",
+  "child": [
+   113,
+   114
+  ]
+ },
+ {
+  "id": 113,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1104,
+  "y": 289,
+  "text": "cache expires after 24 hours if not accessed",
+  "child": []
+ },
+ {
+  "id": 114,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1104,
+  "y": 245,
+  "text": "24-hour reset upto 31 days from the date and time that the query was first executed.\nhe next time the query is submitted, a new result is generated",
+  "child": []
+ },
+ {
+  "id": 115,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 987,
+  "y": 188,
+  "text": "local disk cache",
+  "child": [
+   116,
+   118,
+   124
+  ]
+ },
+ {
+  "id": 116,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 294,
+  "text": "📍",
+  "child": [
+   117
+  ]
+ },
+ {
+  "id": 117,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": 294,
+  "text": "compute WH SSD",
+  "child": []
+ },
+ {
+  "id": 118,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 265,
+  "text": "🔄",
+  "child": [
+   119
+  ]
+ },
+ {
+  "id": 119,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": 265,
+  "text": "exit",
+  "child": [
+   120
+  ]
+ },
+ {
+  "id": 120,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1163,
+  "y": 265,
+  "text": "dropped when warehouse suspended",
+  "child": []
+ },
+ {
+  "id": 121,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 987,
+  "y": 162,
+  "text": "remote disk",
+  "child": [
+   122
+  ]
+ },
+ {
+  "id": 122,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1071,
+  "y": 162,
+  "text": "?",
+  "child": [
+   123
+  ]
+ },
+ {
+  "id": 123,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1087,
+  "y": 162,
+  "text": "persisted data storage ( Technically not cache )",
+  "child": []
+ },
+ {
+  "id": 124,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 234,
+  "text": "📺",
+  "child": [
+   125
+  ]
+ },
+ {
+  "id": 125,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1131,
+  "y": 234,
+  "text": "SELECT warehouse_name\n  ,COUNT(*) AS query_count\n  ,SUM(bytes_scanned) AS bytes_scanned\n  ,SUM(bytes_scanned*percentage_scanned_from_cache) AS bytes_scanned_from_cache\n  ,SUM(bytes_scanned*percentage_scanned_from_cache) / SUM(bytes_scanned) AS percent_scanned_from_cache\nFROM snowflake.account_usage.query_history\nWHERE start_time >= dateadd(month,-1,current_timestamp())\n  AND bytes_scanned > 0\nGROUP BY 1\nORDER BY 5;",
+  "title": "monitoring query\n(schema needs admin access)",
+  "child": []
+ },
+ {
+  "id": 126,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1073,
+  "y": 214,
+  "text": "🚦",
+  "child": [
+   127
+  ]
+ },
+ {
+  "id": 127,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 160,
+  "text": "New query matches the previously executed query exactly ( even case)\n\nMust not include non deterministic function\n\nHas necessary privileges\n\netc",
+  "child": []
+ },
+ {
+  "id": 128,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 940,
+  "y": 278,
+  "text": "streams",
+  "child": [
+   129,
+   131,
+   133,
+   141,
+   173
+  ]
+ },
+ {
+  "id": 129,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 999,
+  "y": 483,
+  "text": "?",
+  "child": [
+   130
+  ]
+ },
+ {
+  "id": 130,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1015,
+  "y": 483,
+  "text": "Tracks CDC between two point in time",
+  "child": []
+ },
+ {
+  "id": 131,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 999,
+  "y": 457,
+  "text": "!",
+  "child": [
+   132
+  ]
+ },
+ {
+  "id": 132,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1013,
+  "y": 457,
+  "text": "stream itself does not contain any table data",
+  "child": []
+ },
+ {
+  "id": 133,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 999,
+  "y": 276,
+  "text": "🏠",
+  "child": [
+   134,
+   163
+  ]
+ },
+ {
+  "id": 134,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1031,
+  "y": 431,
+  "text": "hidden columns",
+  "child": [
+   135
+  ]
+ },
+ {
+  "id": 135,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1140,
+  "y": 344,
+  "text": "v",
+  "child": [
+   136,
+   137,
+   140
+  ]
+ },
+ {
+  "id": 136,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1157,
+  "y": 379,
+  "text": "METADATA$ACTION\nDML operation INSERT, DELETE",
+  "child": []
+ },
+ {
+  "id": 137,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1157,
+  "y": 344,
+  "text": "METADATA$ISUPDATE",
+  "child": [
+   138
+  ]
+ },
+ {
+  "id": 138,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1335,
+  "y": 344,
+  "text": "?",
+  "child": [
+   139
+  ]
+ },
+ {
+  "id": 139,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1351,
+  "y": 335,
+  "text": "Updates are represented as DELETE/INSERT pairs\nMETADATA$ISUPDATE values set to TRUE.",
+  "child": []
+ },
+ {
+  "id": 140,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1157,
+  "y": 291,
+  "text": "METADATA$ROW_ID\nSpecifies a unique, immutable row ID",
+  "child": []
+ },
+ {
+  "id": 141,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 999,
+  "y": 100,
+  "text": "v",
+  "child": [
+   142,
+   143,
+   144
+  ]
+ },
+ {
+  "id": 142,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1017,
+  "y": 262,
+  "text": "Standard",
+  "child": [
+   149,
+   151
+  ]
+ },
+ {
+  "id": 143,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1017,
+  "y": 197,
+  "text": "Append-only",
+  "child": [
+   145
+  ]
+ },
+ {
+  "id": 144,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1017,
+  "y": 171,
+  "text": "Insert-only",
+  "child": [
+   147
+  ]
+ },
+ {
+  "id": 145,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1112,
+  "y": 237,
+  "text": "?",
+  "child": [
+   146
+  ]
+ },
+ {
+  "id": 146,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1129,
+  "y": 237,
+  "text": "An append-only stream exclusively tracks row inserts. \nUpdate, delete, and truncate operations are not captured by append-only streams.",
+  "child": []
+ },
+ {
+  "id": 147,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1096,
+  "y": 171,
+  "text": "!",
+  "child": [
+   148
+  ]
+ },
+ {
+  "id": 148,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1110,
+  "y": 171,
+  "text": "Supports externally managed Apache Iceberg or external tables only.",
+  "child": []
+ },
+ {
+  "id": 149,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1082,
+  "y": 301,
+  "text": "!",
+  "child": [
+   150
+  ]
+ },
+ {
+  "id": 150,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1095,
+  "y": 315,
+  "text": "Dont work for geospatial data.use append-only streams",
+  "child": []
+ },
+ {
+  "id": 151,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1082,
+  "y": 249,
+  "text": "behavior",
+  "child": [
+   152,
+   154,
+   164
+  ]
+ },
+ {
+  "id": 152,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1147,
+  "y": 275,
+  "text": "?",
+  "child": [
+   153
+  ]
+ },
+ {
+  "id": 153,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1163,
+  "y": 275,
+  "text": "Stream essentially compares offset snapshot with currentsnaphot and produce output",
+  "child": []
+ },
+ {
+  "id": 154,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1147,
+  "y": 249,
+  "text": "v",
+  "child": [
+   155,
+   157,
+   159,
+   161
+  ]
+ },
+ {
+  "id": 155,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1166,
+  "y": 289,
+  "text": "Insert and Delete",
+  "child": [
+   156
+  ]
+ },
+ {
+  "id": 156,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1201,
+  "y": 213,
+  "text": "No change in stream",
+  "child": []
+ },
+ {
+  "id": 157,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1166,
+  "y": 263,
+  "text": "Update",
+  "child": [
+   158
+  ]
+ },
+ {
+  "id": 158,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1138,
+  "y": 191,
+  "text": "1 DELETE 1 INSERT\nMETADATA$ISUPDATE = True",
+  "child": []
+ },
+ {
+  "id": 159,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1166,
+  "y": 237,
+  "text": "Insert",
+  "child": [
+   160
+  ]
+ },
+ {
+  "id": 160,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1130,
+  "y": 159,
+  "text": "1 Insert METADATA$ISUPDATE = False",
+  "child": []
+ },
+ {
+  "id": 161,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1166,
+  "y": 211,
+  "text": "delete",
+  "child": [
+   162
+  ]
+ },
+ {
+  "id": 162,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1131,
+  "y": 146,
+  "text": "1 DELETE ROW METADATA$ISUPDATE FALSE",
+  "child": []
+ },
+ {
+  "id": 163,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1031,
+  "y": 265,
+  "text": "offset",
+  "child": [
+   166,
+   168
+  ]
+ },
+ {
+  "id": 164,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1147,
+  "y": 223,
+  "text": "!",
+  "child": [
+   165
+  ]
+ },
+ {
+  "id": 165,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1161,
+  "y": 223,
+  "text": "All calculations start from an existing offset",
+  "child": []
+ },
+ {
+  "id": 166,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1077,
+  "y": 405,
+  "text": "?",
+  "child": [
+   167
+  ]
+ },
+ {
+  "id": 167,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1094,
+  "y": 317,
+  "text": "Stream is a point in time snapshot\nQuerying stream returns changes between offset and current time",
+  "child": []
+ },
+ {
+  "id": 168,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1077,
+  "y": 252,
+  "text": "lc",
+  "child": [
+   169,
+   171,
+   177
+  ]
+ },
+ {
+  "id": 169,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 379,
+  "text": "create",
+  "child": [
+   170
+  ]
+ },
+ {
+  "id": 170,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 719,
+  "y": 127,
+  "text": "upon stream creation",
+  "child": []
+ },
+ {
+  "id": 171,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 344,
+  "text": "update",
+  "child": [
+   172
+  ]
+ },
+ {
+  "id": 172,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1150,
+  "y": 334,
+  "text": "A stream advances offset when used in  DML transaction i.e CTAS, INSERT, MERGE\nSelecting/Viewing stream does not affect it",
+  "child": []
+ },
+ {
+  "id": 173,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 999,
+  "y": 74,
+  "text": "f",
+  "child": [
+   174
+  ]
+ },
+ {
+  "id": 174,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1013,
+  "y": 74,
+  "text": "multiple stream can be created for same table",
+  "child": []
+ },
+ {
+  "id": 175,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1077,
+  "y": 217,
+  "text": "!",
+  "child": [
+   176
+  ]
+ },
+ {
+  "id": 176,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1093,
+  "y": 208,
+  "text": "Truncate is DDL, It removes table snapshot thus rendering the offset and stream unusable\nNew stream needs to be created",
+  "child": []
+ },
+ {
+  "id": 177,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1099,
+  "y": 215,
+  "text": "💤",
+  "child": [
+   178
+  ]
+ },
+ {
+  "id": 178,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1131,
+  "y": 216,
+  "text": "stale",
+  "child": [
+   179,
+   181,
+   183
+  ]
+ },
+ {
+  "id": 179,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1171,
+  "y": 305,
+  "text": "✅",
+  "child": [
+   180
+  ]
+ },
+ {
+  "id": 180,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1202,
+  "y": 305,
+  "text": "Recreate stream using CREATE STREAM command.",
+  "child": []
+ },
+ {
+  "id": 181,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1171,
+  "y": 276,
+  "text": "🕒",
+  "child": [
+   182
+  ]
+ },
+ {
+  "id": 182,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1202,
+  "y": 276,
+  "text": "offset outside data retention period of source table",
+  "child": []
+ },
+ {
+  "id": 183,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1171,
+  "y": 186,
+  "text": "💉",
+  "child": [
+   184,
+   185
+  ]
+ },
+ {
+  "id": 184,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1203,
+  "y": 250,
+  "text": "consume stream records within a DML statement regularly",
+  "child": []
+ },
+ {
+  "id": 185,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1203,
+  "y": 174,
+  "text": "data retention period",
+  "child": [
+   187,
+   194,
+   195
+  ]
+ },
+ {
+  "id": 186,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1363,
+  "y": 178,
+  "text": "If stream not consumed SF temporarily extends DRP to prevent stream staleness\nOnce stream consumed, extended DRP reverts to table default (DATA_RETENTION_TIME_IN_DAYS).",
+  "child": []
+ },
+ {
+  "id": 187,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1346,
+  "y": 222,
+  "text": "!",
+  "child": [
+   188
+  ]
+ },
+ {
+  "id": 188,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1362,
+  "y": 222,
+  "text": "Streams on shared tables or views dont extend DRP for the table or underlying tables, respectively.",
+  "child": []
+ },
+ {
+  "id": 189,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1378,
+  "y": 139,
+  "text": "MAX_DATA_EXTENSION_TIME_IN_DAYS",
+  "child": [
+   190,
+   192
+  ]
+ },
+ {
+  "id": 190,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1693,
+  "y": 152,
+  "text": "default",
+  "child": [
+   191
+  ]
+ },
+ {
+  "id": 191,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1746,
+  "y": 152,
+  "text": "14 days",
+  "child": []
+ },
+ {
+  "id": 192,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1693,
+  "y": 126,
+  "text": "range",
+  "child": [
+   193
+  ]
+ },
+ {
+  "id": 193,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1737,
+  "y": 126,
+  "text": "0 to 90 days",
+  "child": []
+ },
+ {
+  "id": 194,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1346,
+  "y": 186,
+  "text": "?",
+  "child": [
+   186
+  ]
+ },
+ {
+  "id": 195,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1346,
+  "y": 137,
+  "text": "⚙️",
+  "child": [
+   189
+  ]
  }
 ]

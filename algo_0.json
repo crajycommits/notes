@@ -9,265 +9,8 @@
   "y": 0,
   "title": ".",
   "text": "root",
-
-
   "height": 42,
   "width": 36
- },
- {
-  "id": 1,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 294,
-  "y": 551,
-  "title": ".",
-  "text": "//[c=#50fa7b]a and p declared separately[/c]\nint a ;\nint *p ;\n\n//[c=#50fa7b]Nothing on left[/c]\na = 10;\np = &a ;\n\nint b = 20;\n*p = b;\n\nwhat is a and b",
-
-
-  "height": 261,
-  "width": 146
- },
- {
-  "id": 2,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 298,
-  "y": 838,
-  "title": ".",
-  "text": "a is 20\nb is 20",
-
-
-  "height": 68,
-  "width": 60,
-  "show": false
- },
- {
-  "id": 3,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 517,
-  "y": 551,
-  "title": ".",
-  "text": "Declare and initialize\n//[c=#50fa7b]a and p declared same place[/c]\n[s=24]👌[/s]\njjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjhhhhhhhhh\nint a = 10;\nint *p = &a;",
-
-
-  "height": 136,
-  "width": 94,
-  "tag": [
-   "test",
-   "test1"
-  ],
-  "_max": false
- },
- {
-  "id": 4,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 528,
-  "y": 723,
-  "title": ".",
-  "text": "😮\nint [s=24]*p[/s] is same as \n[s=24]int*[/s] p",
-
-
-  "height": 110,
-  "width": 184
- },
- {
-  "id": 5,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 397,
-  "y": 996,
-  "title": ".",
-  "text": "int *p = &a;\n\nwhat is p+1 if p is 1000\n\nprintf(\"%d\\n\", p+1) 1004\n\n\nget size of int by below function\n\n[s=24]sizeof(int)[/s]\n[s=24]🪁[/s]",
-
-
-  "height": 181,
-  "width": 184
- },
- {
-  "id": 8,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 657,
-  "y": 866,
-  "title": ".",
-  "text": "printf(\"%d\\n\", *(p + 97349879439) )\n\n[s=24] 🗑️ Garbage [/s]\n\n ",
-
-
-  "height": 106,
-  "width": 282
- },
- {
-  "id": 9,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 399,
-  "y": 1234,
-  "title": ".",
-  "text": "int a = 1025\n// 1025 binary is \n// 00000000 0000000 00000100 00000001\nint *p = &a\n\nprintf(\"%d, %d\", p, *p)\n\nchar *p0 ;\np0 = (char*)p;\n\n[c=#ffb86c] printing as integer[/c]\nprintf(\"%d, %d\", p0, *p0)\n\n",
-
-
-  "height": 146,
-  "width": 172
- },
- {
-  "id": 10,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 686,
-  "y": 1216,
-  "title": ".",
-  "text": "Output\n\n65436354, 1025\n65436354, 1\n\n[s=20]Same address.😮[/s]\nAddress goes from right to left ⬅️\n\nint reads all -> 1025\n00000000 0000000 00000100 00000001\n\nchar reads right most bit -> 1\nxxxxxxxx xxxxxxxx xxxxxxxx  00000001",
-
-
-  "height": 164,
-  "width": 185,
-  "show": false
- },
- {
-  "id": 11,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 707,
-  "y": 1456,
-  "title": ".",
-  "text": "What is \nprintf(\"%d, %d\", p+1, *(p+1))\nprintf(\"%d, %d\", p0+1, *(p0+1))\n\n",
-
-
-  "height": 70,
-  "width": 162
- },
- {
-  "id": 13,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 711,
-  "y": 1545,
-  "title": ".",
-  "text": "Output\n\n65436358, Garbage value\n65436355, 4\n",
-
-
-  "height": 90,
-  "width": 134,
-  "show": false
- },
- {
-  "id": 14,
-  "type": "bubble",
-  "style": {
-   "default": "bubble",
-   "font-size": "16px",
-   "color": "#ff9800"
-  },
-  "x": 734,
-  "y": 1038,
-  "title": ".",
-  "text": "*(p+1)\n\nincrement address by 1 and get value",
-
-
-  "height": 149,
-  "width": 88
- },
- {
-  "id": 15,
-  "type": "bubble",
-  "style": {
-   "default": "bubble",
-   "font-size": "8px"
-  },
-  "x": 415,
-  "y": 1466,
-  "title": ".",
-  "text": "//[c=#DCDCAA]Version 1: This wont Update original variable\npass dereferenced pointer[/c]\n\n//[c=#DCDCAA]x is a plain variable[/c]\nvoid update(int x){ x=42; }\n\nint main(){\nint value=10; int *ptr=&value;\nupdate(*ptr);\n}",
-
-
-  "height": 142,
-  "width": 252
- },
- {
-  "id": 16,
-  "type": "bubble",
-  "style": {
-   "default": "bubble",
-   "font-size": "8px"
-  },
-  "x": 433,
-  "y": 1682,
-  "title": ".",
-  "text": "Version 2:\n//[c=#DCDCAA]pass var address[/c]\n\nvoid update(int *p){*p = 42;}\nint main(){\nint value=10; update(&value)\n}",
-
-
-  "height": 122,
-  "width": 228
- },
- {
-  "id": 17,
-  "type": "bubble",
-  "style": {
-   "default": "bubble",
-   "font-size": "8px"
-  },
-  "x": 440,
-  "y": 1841,
-  "title": ".",
-  "text": "Version 3:\n\nvoid update(int **p){ **p = 42; }\nint main(){\nint value=10;\nint *ptr = &value;\nupdate(&ptr;)\n}",
-
-
-  "height": 113,
-  "width": 188
- },
- {
-  "id": 23,
-  "type": "bubble",
-  "style": {
-   "default": "bubble",
-   "font-size": "12px",
-   "color": "red"
-  },
-  "x": 187,
-  "y": 1720,
-  "title": ".",
-  "text": "int **p is declaration\np is a pointer to a pointer\n       *p           &ptr\n\np = address of pointer\n*p = address of value\n**p = value",
-
-
-  "height": 160,
-  "width": 172
- },
- {
-  "id": 25,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 208,
-  "y": 537,
-  "title": ".",
-  "text": ".[s=28]\n🌳\n🌲\n🌴\n🌵\n[/s]",
-
-
-  "height": 215,
-  "width": 65
  },
  {
   "id": 26,
@@ -279,8 +22,6 @@
   "y": 990,
   "title": ".",
   "text": "[s=28]🌳 🌲 🌴 🌵 🎄 🌾 🎋 🎍 🪵 🪨 🌿 ☘️ 🍀 🍃 🍂 🍁 🌱 🪴 🌸 🌺 🌻 🌼 🌷 🌹 🥀 🌳 🌲 🌴 🌵 🎄 🌾 🎋 🎍 🪵 🪨 🌿 ☘️ 🍀 🍃 🍂 🍁 🌱 🪴 🌸 🌺 🌻 🌼 🌷 🌹 🥀[/s]",
-
-
   "height": 200,
   "width": 200,
   "tag": [
@@ -297,8 +38,6 @@
   "y": 712,
   "title": ".",
   "text": "[s=28]🏠 🏡 🏘️ 🏢 🏬 🏭 🏗️ 🏛️ 🏦 🏫 🏥 🏨 🏙️ 🌆 🌇 🌃 🗼 🗽 🧱🚆 🚇 🚈 🚉 🚄 🚅 🚝 🚞 🚋 🚃 🚂🚗 🚙 🚕 🚓 🚑 🚒 🚌 🚎 🚐 🚚 🚛 🚜 🏍️ 🛵 🛺 🚲 🚨[/s]",
-
-
   "height": 292,
   "width": 435,
   "tag": [
@@ -315,8 +54,6 @@
   "y": 490,
   "title": ".",
   "text": "[s=28]🏠🏡🏘️🏚️🛖🛖🏢🏢🏬🏣🏤🏥🏨🏦🏫🏛️🏭🏭🏗️🧱[/s]",
-
-
   "height": 200,
   "width": 200,
   "tag": [
@@ -333,8 +70,6 @@
   "y": 1017,
   "title": ".",
   "text": "[s=28]🏔️ ⛰️ 🏞️ 🌄 🌅 🌊 🌊 🏝️ 🏖️ 🏞️ 🏕️ 🌊 🌅[/s]",
-
-
   "height": 200,
   "width": 200,
   "tag": [
@@ -351,25 +86,8 @@
   "y": 953,
   "title": ".",
   "text": "[s=100]🏔️\n🏔️\n🏔️[/s].",
-
-
   "height": 473,
   "width": 140
- },
- {
-  "id": 31,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 179,
-  "y": 2023,
-  "title": ".",
-  "text": "[s=100]🛣️[/s]",
-
-
-  "height": 171,
-  "width": 148
  },
  {
   "id": 32,
@@ -381,8 +99,6 @@
   "y": 1088,
   "title": ".",
   "text": "[s=100]🛝[/s]",
-
-
   "height": 176,
   "width": 153
  },
@@ -396,8 +112,6 @@
   "y": 1478,
   "title": ".",
   "text": "[s=100]🏕️[/s]",
-
-
   "height": 162,
   "width": 168
  },
@@ -412,113 +126,6 @@
   "title": ".",
   "text": "pointerBasic",
   "gotoid": "1"
-
-
- },
- {
-  "id": 35,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 455,
-  "y": 2040,
-  "title": ".",
-  "text": "T a;          int a;\nT* p;         int *p;\n\np                        a\n==              =>    ==========\n96785965765975          garbage\n\na=[1,2,3]\na[4] => garbage\n\na=malloc(10)\np=a\ndealloc(a)\nwhat about p?   dangling🦥pointer\n",
-
-
-  "height": 185,
-  "width": 195
- },
- {
-  "id": 36,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 722,
-  "y": 2279,
-  "title": ".",
-  "text": "pointer space is usually 1 machine word\n1 byte\n⚠️may vary based on 32bit 64bit\n\nint *p => only pointer space🧠 allocated\nint a=>only now variable got space🧠\np=&a\n\nint a - static declaration - stack\nmalloc(10) - heap\n\nf(){\nint a // i got memory😊\n}\n// i lost memory🥺\n\nf(int **ptr){\nint a = 10;\n*ptr = &a; //🦥dangling pointer\nreturn 0;\n}\n\n",
-
-
-  "height": 200,
-  "width": 200
- },
- {
-  "id": 37,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 293,
-  "y": 2272,
-  "title": ".",
-  "text": "int g(int **ptr){\nif ((*iptr=malloc(sizeof(int)))==NULL)\n  return -1;\nreturn 0;\n}\n\nGoes to [s=22]HEAP[/s] no dangling pointer\n\n❗DEALLOCATING HEAP is user responsibility❗ else memory leak",
-
-
-  "height": 138,
-  "width": 301
- },
- {
-  "id": 38,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 188,
-  "y": 2566,
-  "title": ".",
-  "text": "[s=32]🍇[/s]",
-
-
-  "height": 72,
-  "width": 65
- },
- {
-  "id": 39,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 661,
-  "y": 2551,
-  "title": ".",
-  "text": "[s=32]🍇[/s]",
-
-
-  "height": 75,
-  "width": 61
- },
- {
-  "id": 40,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 247,
-  "y": 2713,
-  "title": ".",
-  "text": "typedef struct ListElmt_ {\nvoid *data;\nstruct ListElmt_ *next;\n} ListElmt\n\nListElmt_   =>    forward declaration\n⚠️Only a pointer can point to its own not a struct⚠️\n\nListElmt    =>    Alias\n\n",
-
-
-  "height": 130,
-  "width": 271
- },
- {
-  "id": 41,
-  "type": "bubble",
-  "style": {
-   "default": "bubble"
-  },
-  "x": 343,
-  "y": 2547,
-  "title": ".",
-  "text": "actual data\n📝\n📝\n📝\n\nmultiple structure can point to same data\nstructures are just pointers\ndeleting 🍇usually involves deleting📝",
-
-
-  "height": 117,
-  "width": 272
  },
  {
   "id": 49,
@@ -530,8 +137,6 @@
   "y": 1194,
   "title": ".",
   "text": "go full length of array",
-
-
   "maximize": true,
   "height": 56,
   "width": 164
@@ -546,8 +151,6 @@
   "y": 1265,
   "title": ".",
   "text": "i = 0; i < n\ni = 0; i <= n-1\n\ni = 1; i <= n",
-
-
   "height": 100,
   "width": 100,
   "show": true
@@ -562,8 +165,6 @@
   "y": 1617,
   "title": ".",
   "text": "\n[] [] [] [] [] \nn = 5\nn//2 = 2\n0 to <2  |  2 to <5\n[0] [1]    [2] [3] [4] \nOdd moves to right",
-
-
   "height": 172,
   "width": 140
  },
@@ -577,8 +178,6 @@
   "y": 1621,
   "title": ".",
   "text": "[] [] [] []\nn = 4\nn//2 = 2\n0 to <2  |  2 to <4\n[0] [1]    [2] [3]\nequal split",
-
-
   "height": 140,
   "width": 153
  },
@@ -592,8 +191,6 @@
   "y": 1615,
   "title": ".",
   "text": "[]\nn = 1\nn//2 = 0\n0 to <0  |  0 to <1\ninvalid  |  [0]\nodd to right",
-
-
   "height": 143,
   "width": 150
  },
@@ -607,8 +204,6 @@
   "y": 1233,
   "title": ".",
   "text": "0 to < [s=24]n[/s]\nRuns [s=24]n[/s] times, all elements\n\n0 to < [s=24]n-1[/s]\nRuns [s=24]n-1[/s] times, except last\n\nbasically the value of < N",
-
-
   "height": 232,
   "width": 212
  },
@@ -622,8 +217,6 @@
   "y": 1196,
   "title": ".",
   "text": "[s=100]📏[/s]",
-
-
   "height": 163,
   "width": 142
  },
@@ -637,8 +230,6 @@
   "y": 1617,
   "title": ".",
   "text": "[s=50]🧹floor[/s]",
-
-
   "height": 112,
   "width": 238
  },
@@ -652,8 +243,6 @@
   "y": 811,
   "title": ".",
   "text": "full code\n\n#include <stdio.h>\n#include <stdbool.h>\n\n// Swap function\nvoid swap(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}\n\n// Bubble Sort with early exit\nvoid bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        bool swapped = false;\n\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                swap(&arr[j], &arr[j + 1]);\n                swapped = true;\n            }\n        }\n\n        // If no two elements were swapped, the array is already sorted\n        if (!swapped)\n            break;\n    }\n}\n\n// Print the array\nvoid printArray(int arr[], int n) {\n    for (int i = 0; i < n; i++)\n        printf(\"%d \", arr[i]);\n    printf(\"\\n\");\n}\n\n// Main function\nint main() {\n    int arr[] = {64, 25, 12, 22, 11};\n    int n = sizeof(arr) / sizeof(arr[0]);\n\n    printf(\"Original array: \");\n",
-
-
   "height": 470,
   "width": 351,
   "tag": [
@@ -670,8 +259,6 @@
   "y": 677,
   "title": ".",
   "text": "[s=50]🫧[/s]",
-
-
   "height": 111,
   "width": 104,
   "tag": [
@@ -689,8 +276,6 @@
   "title": ".",
   "text": "bubble",
   "gotoid": "58"
-
-
  },
  {
   "id": 61,
@@ -702,8 +287,6 @@
   "y": 662,
   "title": ".",
   "text": "[c=#ff79c6]file list.h[/c]\n\n#[g=62]ifndef[/g] LIST_H\n#define LIST_H\n#include <stdlib.h>\n...\n#endif",
-
-
   "height": 93,
   "width": 92
  },
@@ -717,8 +300,6 @@
   "y": 515,
   "title": ".",
   "text": "[c=#bd93f9]What does ifndef do ?[/c]\n\nIn a file\n\n#include \"list.h\"\n#include \"list.h\"\nThe compiler might see duplicate definitions, leading to compilation errors.",
-
-
   "height": 128,
   "width": 152
  },
@@ -732,8 +313,6 @@
   "y": 565,
   "title": ".",
   "text": "[s=33]Linked list[/s]",
-
-
   "height": 64,
   "width": 224
  },
@@ -747,8 +326,6 @@
   "y": 667,
   "title": ".",
   "text": "[c=#ff79c6]list element[/c]\ntypedef struct ListElmt_ {\nvoid *data;\nstruct ListElmt_ *next;\n} ListElmt;",
-
-
   "height": 81,
   "width": 119
  },
@@ -762,8 +339,6 @@
   "y": 662,
   "title": ".",
   "text": "[c=#ff79c6]list[/c]\ntypedef struct List_ {\nint size;\nint (*match)(const void *key1, const void *key2);\nvoid (*destroy)(void *data);\nListElmt *head;\nListElmt *tail;\n} List;",
-
-
   "height": 103,
   "width": 230
  },
@@ -777,8 +352,6 @@
   "y": 667,
   "title": ".",
   "text": "[c=#ff79c6]public interface[/c]\nIf you dont define it here. then when doing #include \"list.h\", it wont be visible\n\nvoid list_init(List *list, void (*destroy)(void *data));\nvoid list_destroy(List *list);\nint list_ins_next(List *list, ListElmt *element, const void *data);\nint list_rem_next(List *list, ListElmt *element, void **data);\n\n#define list_size(list) ((list)->size)\n#define list_head(list) ((list)->head)\n#define list_tail(list) ((list)->tail)\n#define list_is_head(list, element) ((element) == (list)->head ? 1 : 0)\n#define list_is_tail(element) ((element)->next == NULL ? 1 : 0)\n#define list_data(element) ((element)->data)\n#define list_next(element) ((element)->next)",
-
-
   "height": 182,
   "width": 386
  },
@@ -793,8 +366,6 @@
   "title": ".",
   "text": "linkedList",
   "gotoid": "63"
-
-
  },
  {
   "id": 68,
@@ -806,8 +377,6 @@
   "y": 1705,
   "title": ".",
   "text": "#include <iostream>     // std::cout, std::endl\n#include <string>       // std::string\n#include <memory>       // std::unique_ptr, std::make_unique\n\n// Data structure to hold user info\nstruct Data {\n    int id;                 // Unique ID\n    std::string name;       // Name string\n\n    Data(int id_, const std::string& name_) : id(id_), name(name_) {}\n};\n\nclass LinkedList {\nprivate:\n    // Internal Node structure with data and unique_ptr to next node\n    struct Node {\n        Data data;\n        std::unique_ptr<Node> next;\n\n        Node(const Data& d) : data(d), next(nullptr) {}\n    };\n\n    std::unique_ptr<Node> head; // Pointer to first node\n\npublic:\n    LinkedList() = default;      // Default constructor\n    ~LinkedList() = default;     // Default destructor (unique_ptr cleans up)\n\n    LinkedList(const LinkedList&) = delete;            // No copy constructor\n    LinkedList& operator=(const LinkedList&) = delete; // No copy assignment\n\n    LinkedList(LinkedList&&) = default;     // Move constructor\n    LinkedList& operator=(LinkedList&&) = default; // Move assignment\n\n    // Insert at head\n    void insertAtHead(const Data& d) {\n        auto newNode = std::make_unique<Node>(d);\n        newNode->next = std::move(head);\n        head = std::move(newNode);\n    }\n\n    // Insert at end\n    void insertAtEnd(const Data& d) {\n        auto newNode = std::make_unique<Node>(d);\n        if (!head) {              // Empty list, new node becomes head\n            head = std::move(newNode);\n            return;\n        }\n        Node* temp = head.get();  // Non-owning pointer to traverse\n        while (temp->next) {      // Traverse to last node\n            temp = temp->next.get();\n        }\n        temp->next = std::move(newNode); // Link last node to new node\n    }\n\n    // Insert at a specific position (0-based index)\n    void insertAtPosition(const Data& d, size_t pos) {\n        if (pos == 0) {\n            insertAtHead(d);\n            return;\n        }\n\n        Node* temp = head.get();\n        size_t index = 0;\n\n        // Traverse to node before insertion point\n        while (temp && index < pos - 1) {\n            temp = temp->next.get();\n            ++index;\n        }\n\n        if (!temp) {  // Position out of bounds; insert at end\n            insertAtEnd(d);\n            return;\n        }\n\n        // Create new node\n        auto newNode = std::make_unique<Node>(d);\n        // Link new node's next to temp's next\n        newNode->next = std::move(temp->next);\n        // Link temp's next to new node\n        temp->next = std::move(newNode);\n    }\n\n    // Delete from head\n    void deleteFromHead() {\n        if (!head) {\n            std::cout << \"List is empty, nothing to delete at head.\\n\";\n            return;\n        }\n        head = std::move(head->next); // unique_ptr automatically deletes old head\n    }\n\n    // Delete from end\n    void deleteFromEnd() {\n        if (!head) {\n            std::cout << \"List is empty, nothing to delete at end.\\n\";\n            return;\n        }\n\n        if (!head->next) {\n            head.reset();  // Only one node, delete head\n            return;\n        }\n\n        Node* temp = head.get();\n        // Traverse until node before last node\n        while (temp->next->next) {\n            temp = temp->next.get();\n        }\n        temp->next.reset();  // Delete last node\n    }\n\n    // Delete at a specific position (0-based index)\n    void deleteAtPosition(size_t pos) {\n        if (!head) {\n            std::cout << \"List is empty, nothing to delete.\\n\";\n            return;\n        }\n\n        if (pos == 0) {\n            deleteFromHead();\n            return;\n        }\n\n        Node* temp = head.get();\n        size_t index = 0;\n\n        // Traverse to node before deletion point\n        while (temp->next && index < pos - 1) {\n            temp = temp->next.get();\n            ++index;\n        }\n\n        if (!temp->next) {\n            std::cout << \"Position out of bounds, nothing to delete.\\n\";\n            return;\n        }\n\n        // Bypass and delete node at position\n        temp->next = std::move(temp->next->next);\n    }\n\n    // Display the list contents\n    void display() const {\n        const Node* temp = head.get();\n        if (!temp) {\n            std::cout << \"List is empty.\\n\";\n            return;\n        }\n\n        while (temp) {\n            std::cout << \"ID: \" << temp->data.id << \", Name: \" << temp->data.name << \"\\n\";\n            temp = temp->next.get();\n        }\n    }\n};\n\nint main() {\n    LinkedList list;\n\n    // Insert some nodes\n    list.insertAtHead(Data(1, \"Alice\"));\n    list.insertAtEnd(Data(2, \"Bob\"));\n    list.insertAtPosition(Data(3, \"Charlie\"), 1);  // Insert at middle position\n\n    std::cout << \"List after inserts:\\n\";\n    list.display();\n\n    // Delete head node\n    list.deleteFromHead();\n    std::cout << \"\\nAfter deleting from head:\\n\";\n    list.display();\n\n    // Delete last node\n    list.deleteFromEnd();\n    std::cout << \"\\nAfter deleting from end:\\n\";\n    list.display();\n\n    // Delete node at position 0 (only node left)\n    list.deleteAtPosition(0);\n    std::cout << \"\\nAfter deleting at position 0:\\n\";\n    list.display();\n\n    return 0;\n}\n",
-
-
   "height": 1878,
   "width": 612
  },
@@ -822,8 +391,6 @@
   "title": ".",
   "text": "linkedlistcpp",
   "gotoid": "68"
-
-
  },
  {
   "id": 70,
@@ -835,8 +402,6 @@
   "y": 1608,
   "title": ".",
   "text": "[c=#f1fa8c]c++ constructor[/c]\n\nData(int id_, const std::string& name_) : id(id_), name(name_) {}\n\nData() is a [c=#50fa7b]constructor[/c]\nid_, name_ are parameters to constructor\npost_ is a [c=#50fa7b]convention[/c] when names are same\n\nc++ has init and assignment\n\ninit:\nid(id_), name(name_) is initialization\n\nassignment:\nData(int id_, const std::string& name_) {\n    id = id_;\n    name = name_;\n}\n\n[c=#ff79c6]Note:[/c] \nThe name even though uses a reference & it is copied over to struct because struct likes to [c=#50fa7b]OWN[/c] things\n\ninit -> direct copy\nassignment -> create a local variable name inside {} -> set it to default '' -> assign to that \n\none extra step. Init better\nfor int it doesnt matter\n\nNote: The struct basically makes a separate copy of the string to itself",
-
-
   "height": 332,
   "width": 372
  },
@@ -851,8 +416,6 @@
   "title": ".",
   "text": "c++",
   "gotoid": "70"
-
-
  },
  {
   "id": 72,
@@ -865,8 +428,6 @@
   "title": ".",
   "text": "cpp",
   "gotoid": "70"
-
-
  },
  {
   "id": 73,
@@ -879,65 +440,647 @@
   "y": 818,
   "title": ".",
   "text": [
-  {
-  "q": "How many nested loops are present in the bubbleSort function?",
-  "options": [
-    "1",
-    "2",
-    "3",
-    "4"
+   {
+    "q": "How many nested loops are present in the bubbleSort function?",
+    "options": [
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "a": [
+     1
+    ],
+    "h": "The bubbleSort function has 2 nested loops. Its time complexity is O(n²) in the worst case due to these nested iterations."
+   },
+   {
+    "q": "What is the condition for the outer loop in the bubbleSort function?",
+    "options": [
+     "i < n",
+     "i < n - 1",
+     "i <= n",
+     "i <= n - 1"
+    ],
+    "a": [
+     1
+    ],
+    "h": "Ensures it skips last element because inside loop has j+1"
+   },
+   {
+    "q": "Fill in the blank: The inner loop in the bubbleSort function runs while ____ ",
+    "a": [
+     "j<n-i-1"
+    ]
+   },
+   {
+    "q": "The loop 'int i = 0; i < n - 1; i++' in bubbleSort runs only when there are at least how many elements in the array?",
+    "options": [
+     "0",
+     "1",
+     "2",
+     "n"
+    ],
+    "a": [
+     2
+    ],
+    "h": "The outer loop runs only if n - 1 > 0, meaning there must be at least 2 elements for the loop to execute."
+   },
+   {
+    "q": "What is the purpose of the 'swapped' variable in the bubbleSort function?",
+    "options": [
+     "To count how many swaps are made",
+     "To reverse the array after sorting",
+     "To check if any elements were swapped during a pass",
+     "To keep track of the loop index"
+    ],
+    "a": [
+     2
+    ],
+    "h": "bool swapped = false in outer loop \n swapped = true in inner loop \n if (!swapped) break in outer loop"
+   },
+   {
+    "q": "Does bool swapped recreate variable inside outer loop every time",
+    "options": [
+     "yes",
+     "no",
+     "maybe",
+     "probably no"
+    ],
+    "a": [
+     3
+    ],
+    "h": "Yes, a new bool swapped is created per iteration (by C rules) \n but most modern compilers reuses the same memory location for each iteration]n Declaring swapped inside the loop is a best practice in this case, for readability, safety, and scoping.😱"
+   }
   ],
-  "a": [1],
-  "h": "The bubbleSort function has 2 nested loops. Its time complexity is O(n²) in the worst case due to these nested iterations."
-},{
-  "q": "What is the condition for the outer loop in the bubbleSort function?",
-  "options": [
-    "i < n",
-    "i < n - 1",
-    "i <= n",
-    "i <= n - 1"
-  ],
-  "a": [1],
-  "h": "Ensures it skips last element because inside loop has j+1"
-},{
-  "q": "Fill in the blank: The inner loop in the bubbleSort function runs while ____ ",
-  "a": ["j<n-i-1"]
-},{
-  "q": "The loop 'int i = 0; i < n - 1; i++' in bubbleSort runs only when there are at least how many elements in the array?",
-  "options": [
-    "0",
-    "1",
-    "2",
-    "n"
-  ],
-  "a": [2],
-  "h": "The outer loop runs only if n - 1 > 0, meaning there must be at least 2 elements for the loop to execute."
-},{
-  "q": "What is the purpose of the 'swapped' variable in the bubbleSort function?",
-  "options": [
-    "To count how many swaps are made",
-    "To reverse the array after sorting",
-    "To check if any elements were swapped during a pass",
-    "To keep track of the loop index"
-  ],
-  "a": [2],
-  "h": "bool swapped = false in outer loop \n swapped = true in inner loop \n if (!swapped) break in outer loop"
-},{
-  "q": "Does bool swapped recreate variable inside outer loop every time",
-  "options": [
-    "yes",
-    "no",
-    "maybe",
-    "probably no"
-  ],
-  "a": [3],
-  "h": "Yes, a new bool swapped is created per iteration (by C rules) \n but most modern compilers reuses the same memory location for each iteration]n Declaring swapped inside the loop is a best practice in this case, for readability, safety, and scoping.😱"
-}
-
-  ],
-
-
   "height": 200,
   "width": 200
+ },
+ {
+  "id": 74,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 676,
+  "y": 559,
+  "text": "pointer",
+  "root": true,
+  "child": [
+   75,
+   77,
+   83,
+   95,
+   100,
+   103,
+   110,
+   112
+  ]
+ },
+ {
+  "id": 75,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 685,
+  "text": "?",
+  "child": [
+   76
+  ]
+ },
+ {
+  "id": 76,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 748,
+  "y": 601,
+  "text": "variable that stores address of piece of data",
+  "child": []
+ },
+ {
+  "id": 77,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 658,
+  "text": "lc",
+  "child": [
+   78
+  ]
+ },
+ {
+  "id": 78,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 752,
+  "y": 603,
+  "text": "declare",
+  "child": [
+   91,
+   80
+  ]
+ },
+ {
+  "id": 79,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 853,
+  "y": 557,
+  "text": "T *p\nT* p\nT - Datatype. Must match target type ( except void)",
+  "child": []
+ },
+ {
+  "id": 80,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 810,
+  "y": 547,
+  "text": "eg",
+  "child": [
+   81,
+   82
+  ]
+ },
+ {
+  "id": 81,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 834,
+  "y": 624,
+  "text": "int a = 2;\nint *p = &a;",
+  "child": []
+ },
+ {
+  "id": 82,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 834,
+  "y": 561,
+  "text": "int a=2;\nint *p;\np=&a;",
+  "child": []
+ },
+ {
+  "id": 83,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 627,
+  "text": "🔍",
+  "child": [
+   84,
+   92
+  ]
+ },
+ {
+  "id": 84,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 764,
+  "y": 634,
+  "text": "select",
+  "child": [
+   85,
+   86,
+   88
+  ]
+ },
+ {
+  "id": 85,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 815,
+  "y": 562,
+  "text": "basic",
+  "child": [
+   90
+  ]
+ },
+ {
+  "id": 86,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 815,
+  "y": 535,
+  "text": "jump",
+  "child": [
+   87
+  ]
+ },
+ {
+  "id": 87,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 857,
+  "y": 490,
+  "text": "int *p = &a;\np is 1000\nsizeof(int) 4\n\nprintf(\"%d\\n\", p+1) \n1004\n",
+  "child": []
+ },
+ {
+  "id": 88,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 815,
+  "y": 504,
+  "text": "🗑️ Garbage ",
+  "child": [
+   89
+  ]
+ },
+ {
+  "id": 89,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 908,
+  "y": 505,
+  "text": "printf(\"%d\\n\", *(p + 97349879439) )",
+  "child": []
+ },
+ {
+  "id": 90,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 858,
+  "y": 562,
+  "text": "printf(\"%d\\n\", *p )",
+  "child": []
+ },
+ {
+  "id": 91,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 810,
+  "y": 573,
+  "text": "basic",
+  "child": [
+   79
+  ]
+ },
+ {
+  "id": 92,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 764,
+  "y": 562,
+  "text": "update",
+  "child": [
+   93
+  ]
+ },
+ {
+  "id": 93,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 815,
+  "y": 562,
+  "text": "copy",
+  "child": [
+   94
+  ]
+ },
+ {
+  "id": 94,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 855,
+  "y": 516,
+  "text": "int a ;\nint *p ;\na = 10;\np = &a ;\nint b = 20;\n*p = b;",
+  "child": []
+ },
+ {
+  "id": 95,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 599,
+  "text": "typecast",
+  "child": [
+   97
+  ]
+ },
+ {
+  "id": 96,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 856,
+  "y": 368,
+  "text": "int a = 1025\n00000000 0000000 00000100 00000001\nAddress goes from right to left ⬅️\nint *p = &a\n\nprintf(\"%d, %d\", p, *p)\n65436354, 1025\n\nchar *p0 ;\np0 = (char*)p;\n\n! print as int\nprintf(\"%d, %d\", p0, *p0)\n65436354, 1",
+  "child": [
+   99
+  ]
+ },
+ {
+  "id": 97,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 795,
+  "y": 490,
+  "text": "int2char",
+  "child": [
+   96
+  ]
+ },
+ {
+  "id": 98,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1167,
+  "y": 368,
+  "text": "What is \nprintf(\"%d, %d\", p+1, *(p+1))\nprintf(\"%d, %d\", p0+1, *(p0+1))\n\n65436358, Garbage value\n65436355, 4",
+  "child": []
+ },
+ {
+  "id": 99,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1125,
+  "y": 414,
+  "text": "jump",
+  "child": [
+   98
+  ]
+ },
+ {
+  "id": 100,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 572,
+  "text": "p2p",
+  "child": [
+   101
+  ]
+ },
+ {
+  "id": 101,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 765,
+  "y": 465,
+  "text": "?",
+  "child": [
+   102
+  ]
+ },
+ {
+  "id": 102,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 781,
+  "y": 428,
+  "text": "int **p declaration\n\n**p  value\n*p address - point to something else\np address of pointer - usually not modified\n",
+  "child": []
+ },
+ {
+  "id": 103,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 541,
+  "text": "❌\n",
+  "child": [
+   104
+  ]
+ },
+ {
+  "id": 104,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 764,
+  "y": 541,
+  "text": "dangling🦥pointer",
+  "child": [
+   105,
+   106
+  ]
+ },
+ {
+  "id": 105,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 896,
+  "y": 543,
+  "text": "int f(int **iptr) {\nint a = 10;\n*iptr = &a;\nreturn 0;\n}\n\n//a is automatic variable in stack\nautomatically deallocated during function exit",
+  "child": []
+ },
+ {
+  "id": 106,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 896,
+  "y": 410,
+  "text": "✅",
+  "child": [
+   107,
+   108
+  ]
+ },
+ {
+  "id": 107,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 927,
+  "y": 370,
+  "text": "#include <stdlib.h>\nint g(int **iptr) {\nif ((*iptr = (int *)malloc(sizeof(int))) == NULL)\nreturn -1;\nreturn 0;\n}\n\n//heap allocation\nUser responsibility to free",
+  "child": []
+ },
+ {
+  "id": 108,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 927,
+  "y": 325,
+  "text": "!",
+  "child": [
+   109
+  ]
+ },
+ {
+  "id": 109,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 941,
+  "y": 307,
+  "text": "Memory leaks\nblocks of storage that are allocated but never freed by a program, even\nwhen no longer in use.",
+  "child": []
+ },
+ {
+  "id": 110,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 513,
+  "text": "!",
+  "child": [
+   111
+  ]
+ },
+ {
+  "id": 111,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 750,
+  "y": 418,
+  "text": "pointer space is usually 1 machine word\r\n1 byte\r\n⚠️may vary based on 32bit 64bit\r\n\r\nint *p => only pointer space🧠 allocated\r\nint a=>only now variable got space🧠\r\np=&a",
+  "child": []
+ },
+ {
+  "id": 112,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 732,
+  "y": 459,
+  "text": "as f param",
+  "child": [
+   113,
+   115,
+   117
+  ]
+ },
+ {
+  "id": 113,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 809,
+  "y": 487,
+  "text": "basic",
+  "child": [
+   114
+  ]
+ },
+ {
+  "id": 114,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 850,
+  "y": 467,
+  "text": "void update(int *p){*p = 42;}\nint main(){\nint value=10; update(&value)\n}",
+  "child": []
+ },
+ {
+  "id": 115,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 809,
+  "y": 461,
+  "text": "p2p",
+  "child": [
+   116
+  ]
+ },
+ {
+  "id": 116,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 842,
+  "y": 395,
+  "text": "void update(int **p){ **p = 42; }\r\nint main(){\r\nint value=10;\r\nint *ptr = &value;\r\nupdate(&ptr;)\r\n}",
+  "child": []
+ },
+ {
+  "id": 117,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 809,
+  "y": 432,
+  "text": "❌",
+  "child": [
+   118
+  ]
+ },
+ {
+  "id": 118,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 841,
+  "y": 283,
+  "text": "This wont Update original variable\npass dereferenced pointer\n\n//x is a plain variable\nvoid update(int x){ x=42; }\n\nint main(){\nint value=10; int *ptr=&value;\nupdate(*ptr);\n}",
+  "child": []
  }
 ]

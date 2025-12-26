@@ -73,6 +73,29 @@
             height: 100%;
             overflow: hidden;
         }
+        @media print {
+        @page {
+            margin: 0;
+            padding: 0;
+        }
+        .top, .sidebar {
+            display: none;
+            visibility: hidden; /* Hide everything */
+            margin: 0;
+            padding: 0;
+            
+        }
+        #anchor, #draw_area_pop *{
+            visibility: hidden; /* Hide everything */
+        }
+        #draw_area{
+            visibility: visible; /* Show only the target */
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        }
+        
         #anchor{
             width: 60px;
             height: 60px;
@@ -205,15 +228,17 @@
         background: #1F1F1F;
         color: #9CDCFE;
         }
-        .baloonpop {
+    .baloonpop {
         border: 1px solid #dddddd;
         border-radius: 8px;
         position: relative;
         white-space: pre-wrap;
-        padding: 0;
+        padding: 0.5em;             /* add some padding for readability */
         background: #1F1F1F;
         color: #9CDCFE;
-        }
+        overflow: auto;             /* enable scroll when content exceeds size */
+        max-height: 50%;          /* set a maximum height */
+    }
         .goto {
         display: inline-block;
         background-color: #007BFF; /* Default blue */
@@ -352,6 +377,11 @@
       background: #553300;
     }
 
+    .child-selected-leaf {
+      border: 1px solid blue;
+      background: #553300;
+    }
+
     .parent-selected {
       border: 1px solid orange;
       background: #555500;
@@ -371,7 +401,33 @@
 const zIndices = { bubble: 79, quiz: 79, link: 79, img: 77, goto: 79, card: 79, graphNode: 85,  topSpot: 90, baloon: 95 };
 
 data=[]
-g_file_name = null
+g_pdf_mode = false
+function pdf_mode(on=true){
+    if (on) {
+        g_pdf_mode = true
+        document.querySelectorAll('[item_sub_type="handle"]').forEach(el => {
+            if (el.innerHTML.trim() === ".") {
+                el.style.color = "#1f1f1f";
+            }
+        });
+        const resizers = document.querySelectorAll('[item_sub_type="resizer"]');
+            resizers.forEach(el => {
+                observer.unobserve(el);  // stop observing
+                el.style.resize = "none";
+        });
+    } else {
+        g_pdf_mode = false
+        document.querySelectorAll('[item_sub_type="handle"]').forEach(el => {
+        el.style.color = "";   // remove inline color
+        });
+        const resizers = document.querySelectorAll('[item_sub_type="resizer"]');
+            resizers.forEach(el => {
+                observer.observe(el);  // stop observing
+                el.style.resize = "";
+        });
+    }
+
+}
 function loadData(){
     data_input = document.getElementById('FileInput');
         const file = data_input.files[0];
@@ -1790,6 +1846,7 @@ function highlightChain(id, nodes){
     const SELF_SELECTED = "self-selected";
     const CHILD_SELECTED = "child-selected";
     const PARENT_SELECTED = "parent-selected"
+    CHILD_SELECTED_LEAF = "child-selected-leaf"
     // clear existing
     for (const node of nodes) {
         const el = document.getElementById(node.id);
@@ -1797,6 +1854,7 @@ function highlightChain(id, nodes){
                 el.classList.remove(SELF_SELECTED)
                 el.classList.remove(CHILD_SELECTED)
                 el.classList.remove(PARENT_SELECTED)
+                el.classList.remove(CHILD_SELECTED_LEAF)
             }
     }
     // highlight 
@@ -1809,7 +1867,11 @@ function highlightChain(id, nodes){
     // get children
     const all_child = nodes.filter(item => curr_data.child.includes(item.id));
     for (const child of all_child) {
-        document.getElementById(child.id)?.classList.add(CHILD_SELECTED);
+        child_data = nodes.find(d=>d.id==child.id)
+        if ( child_data.child.length == 0 )
+            { document.getElementById(child.id)?.classList.add(CHILD_SELECTED_LEAF); }
+        else 
+            { document.getElementById(child.id)?.classList.add(CHILD_SELECTED); }
     }
 }
 
@@ -2569,7 +2631,7 @@ function createOptionsQuestion(question) {
             } else {
                 node.style.zIndex=zIndices[item.type]
             }
-            if (item.type == "bubble" || item.type == "quiz"){
+            if ( item.type == "bubble" || item.type == "quiz") {
             resize_node  = document.createElement("div")
             resize_node.setAttribute("item_sub_type", "resizer");
             resize_node.setAttribute("parent_id", node.id);

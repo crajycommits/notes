@@ -811,7 +811,7 @@
    "default": "card"
   },
   "x": 922,
-  "y": 561,
+  "y": 371,
   "text": "?",
   "child": [
    37
@@ -866,7 +866,8 @@
   "child": [
    41,
    104,
-   128
+   128,
+   218
   ]
  },
  {
@@ -876,7 +877,7 @@
    "default": "card"
   },
   "x": 940,
-  "y": 535,
+  "y": 345,
   "text": "warehouse",
   "child": [
    78,
@@ -1155,7 +1156,7 @@
    "default": "card"
   },
   "x": 922,
-  "y": 587,
+  "y": 397,
   "text": "delete",
   "child": [
    62,
@@ -1674,7 +1675,7 @@
    "default": "card"
   },
   "x": 940,
-  "y": 509,
+  "y": 319,
   "text": "cache",
   "child": [
    105,
@@ -1976,7 +1977,7 @@
    "default": "card"
   },
   "x": 940,
-  "y": 278,
+  "y": 293,
   "text": "streams",
   "child": [
    129,
@@ -1992,8 +1993,8 @@
   "style": {
    "default": "card"
   },
-  "x": 999,
-  "y": 483,
+  "x": 997,
+  "y": 436,
   "text": "?",
   "child": [
    130
@@ -2005,8 +2006,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1015,
-  "y": 483,
+  "x": 1013,
+  "y": 436,
   "text": "Tracks CDC between two point in time",
   "child": []
  },
@@ -2016,8 +2017,8 @@
   "style": {
    "default": "card"
   },
-  "x": 999,
-  "y": 457,
+  "x": 997,
+  "y": 410,
   "text": "!",
   "child": [
    132
@@ -2029,8 +2030,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1013,
-  "y": 457,
+  "x": 1015,
+  "y": 434,
   "text": "stream itself does not contain any table data",
   "child": []
  },
@@ -2040,8 +2041,8 @@
   "style": {
    "default": "card"
   },
-  "x": 999,
-  "y": 276,
+  "x": 997,
+  "y": 291,
   "text": "🏠",
   "child": [
    134,
@@ -2054,8 +2055,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1031,
-  "y": 431,
+  "x": 1028,
+  "y": 384,
   "text": "hidden columns",
   "child": [
    135
@@ -2141,8 +2142,8 @@
   "style": {
    "default": "card"
   },
-  "x": 999,
-  "y": 100,
+  "x": 997,
+  "y": 174,
   "text": "v",
   "child": [
    142,
@@ -2157,7 +2158,7 @@
    "default": "card"
   },
   "x": 1017,
-  "y": 262,
+  "y": 286,
   "text": "Standard",
   "child": [
    149,
@@ -2171,7 +2172,7 @@
    "default": "card"
   },
   "x": 1017,
-  "y": 197,
+  "y": 164,
   "text": "Append-only",
   "child": [
    145
@@ -2184,7 +2185,7 @@
    "default": "card"
   },
   "x": 1017,
-  "y": 171,
+  "y": 128,
   "text": "Insert-only",
   "child": [
    147
@@ -2197,7 +2198,7 @@
    "default": "card"
   },
   "x": 1112,
-  "y": 237,
+  "y": 165,
   "text": "?",
   "child": [
    146
@@ -2209,8 +2210,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1129,
-  "y": 237,
+  "x": 1128,
+  "y": 156,
   "text": "An append-only stream exclusively tracks row inserts. \nUpdate, delete, and truncate operations are not captured by append-only streams.",
   "child": []
  },
@@ -2220,8 +2221,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1096,
-  "y": 171,
+  "x": 1097,
+  "y": 128,
   "text": "!",
   "child": [
    148
@@ -2233,8 +2234,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1110,
-  "y": 171,
+  "x": 1111,
+  "y": 128,
   "text": "Supports externally managed Apache Iceberg or external tables only.",
   "child": []
  },
@@ -2244,8 +2245,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1082,
-  "y": 301,
+  "x": 1084,
+  "y": 374,
   "text": "!",
   "child": [
    150
@@ -2257,8 +2258,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1095,
-  "y": 315,
+  "x": 1098,
+  "y": 374,
   "text": "Dont work for geospatial data.use append-only streams",
   "child": []
  },
@@ -2268,8 +2269,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1082,
-  "y": 249,
+  "x": 1084,
+  "y": 274,
   "text": "behavior",
   "child": [
    152,
@@ -2283,8 +2284,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1147,
-  "y": 275,
+  "x": 1149,
+  "y": 348,
   "text": "?",
   "child": [
    153
@@ -2296,8 +2297,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1163,
-  "y": 275,
+  "x": 1165,
+  "y": 348,
   "text": "Stream essentially compares offset snapshot with currentsnaphot and produce output",
   "child": []
  },
@@ -2307,8 +2308,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1147,
-  "y": 249,
+  "x": 1149,
+  "y": 274,
   "text": "v",
   "child": [
    155,
@@ -2324,7 +2325,7 @@
    "default": "card"
   },
   "x": 1166,
-  "y": 289,
+  "y": 322,
   "text": "Insert and Delete",
   "child": [
    156
@@ -2336,8 +2337,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1201,
-  "y": 213,
+  "x": 1284,
+  "y": 322,
   "text": "No change in stream",
   "child": []
  },
@@ -2348,7 +2349,7 @@
    "default": "card"
   },
   "x": 1166,
-  "y": 263,
+  "y": 287,
   "text": "Update",
   "child": [
    158
@@ -2360,8 +2361,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1138,
-  "y": 191,
+  "x": 1221,
+  "y": 278,
   "text": "1 DELETE 1 INSERT\nMETADATA$ISUPDATE = True",
   "child": []
  },
@@ -2372,7 +2373,7 @@
    "default": "card"
   },
   "x": 1166,
-  "y": 237,
+  "y": 252,
   "text": "Insert",
   "child": [
    160
@@ -2384,8 +2385,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1130,
-  "y": 159,
+  "x": 1211,
+  "y": 252,
   "text": "1 Insert METADATA$ISUPDATE = False",
   "child": []
  },
@@ -2396,7 +2397,7 @@
    "default": "card"
   },
   "x": 1166,
-  "y": 211,
+  "y": 226,
   "text": "delete",
   "child": [
    162
@@ -2408,8 +2409,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1131,
-  "y": 146,
+  "x": 1213,
+  "y": 226,
   "text": "1 DELETE ROW METADATA$ISUPDATE FALSE",
   "child": []
  },
@@ -2419,8 +2420,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1031,
-  "y": 265,
+  "x": 1028,
+  "y": 279,
   "text": "offset",
   "child": [
    166,
@@ -2433,8 +2434,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1147,
-  "y": 223,
+  "x": 1149,
+  "y": 200,
   "text": "!",
   "child": [
    165
@@ -2446,8 +2447,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1161,
-  "y": 223,
+  "x": 1163,
+  "y": 200,
   "text": "All calculations start from an existing offset",
   "child": []
  },
@@ -2457,8 +2458,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1077,
-  "y": 405,
+  "x": 1073,
+  "y": 349,
   "text": "?",
   "child": [
    167
@@ -2470,8 +2471,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1094,
-  "y": 317,
+  "x": 1089,
+  "y": 340,
   "text": "Stream is a point in time snapshot\nQuerying stream returns changes between offset and current time",
   "child": []
  },
@@ -2481,8 +2482,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1077,
-  "y": 252,
+  "x": 1073,
+  "y": 257,
   "text": "lc",
   "child": [
    169,
@@ -2496,8 +2497,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1099,
-  "y": 379,
+  "x": 1093,
+  "y": 314,
   "text": "create",
   "child": [
    170
@@ -2520,8 +2521,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1099,
-  "y": 344,
+  "x": 1093,
+  "y": 288,
   "text": "update",
   "child": [
    172
@@ -2544,8 +2545,8 @@
   "style": {
    "default": "card"
   },
-  "x": 999,
-  "y": 74,
+  "x": 997,
+  "y": 148,
   "text": "f",
   "child": [
    174
@@ -2557,8 +2558,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1013,
-  "y": 74,
+  "x": 1011,
+  "y": 148,
   "text": "multiple stream can be created for same table",
   "child": []
  },
@@ -2592,8 +2593,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1099,
-  "y": 215,
+  "x": 1093,
+  "y": 229,
   "text": "💤",
   "child": [
    178
@@ -2605,8 +2606,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1131,
-  "y": 216,
+  "x": 1124,
+  "y": 231,
   "text": "stale",
   "child": [
    179,
@@ -2620,8 +2621,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1171,
-  "y": 305,
+  "x": 1162,
+  "y": 259,
   "text": "✅",
   "child": [
    180
@@ -2633,8 +2634,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 305,
+  "x": 1193,
+  "y": 259,
   "text": "Recreate stream using CREATE STREAM command.",
   "child": []
  },
@@ -2644,9 +2645,9 @@
   "style": {
    "default": "card"
   },
-  "x": 1171,
-  "y": 276,
-  "text": "🕒",
+  "x": 1162,
+  "y": 229,
+  "text": "⌚",
   "child": [
    182
   ]
@@ -2658,7 +2659,7 @@
    "default": "card"
   },
   "x": 1202,
-  "y": 276,
+  "y": 231,
   "text": "offset outside data retention period of source table",
   "child": []
  },
@@ -2668,8 +2669,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1171,
-  "y": 186,
+  "x": 1162,
+  "y": 200,
   "text": "💉",
   "child": [
    184,
@@ -2683,7 +2684,7 @@
    "default": "card"
   },
   "x": 1203,
-  "y": 250,
+  "y": 259,
   "text": "consume stream records within a DML statement regularly",
   "child": []
  },
@@ -2694,12 +2695,13 @@
    "default": "card"
   },
   "x": 1203,
-  "y": 174,
-  "text": "data retention period",
+  "y": 189,
+  "text": "automatic temporary extension",
   "child": [
    187,
    194,
-   195
+   195,
+   205
   ]
  },
  {
@@ -2708,9 +2710,9 @@
   "style": {
    "default": "card"
   },
-  "x": 1363,
-  "y": 178,
-  "text": "If stream not consumed SF temporarily extends DRP to prevent stream staleness\nOnce stream consumed, extended DRP reverts to table default (DATA_RETENTION_TIME_IN_DAYS).",
+  "x": 1427,
+  "y": 188,
+  "text": "stream not consumed\nDRP for a table < 14 days\nSF temporarily extends this period",
   "child": []
  },
  {
@@ -2719,8 +2721,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1346,
-  "y": 222,
+  "x": 1411,
+  "y": 233,
   "text": "!",
   "child": [
    188
@@ -2732,8 +2734,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1362,
-  "y": 222,
+  "x": 1425,
+  "y": 233,
   "text": "Streams on shared tables or views dont extend DRP for the table or underlying tables, respectively.",
   "child": []
  },
@@ -2743,8 +2745,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1378,
-  "y": 139,
+  "x": 1442,
+  "y": 176,
   "text": "MAX_DATA_EXTENSION_TIME_IN_DAYS",
   "child": [
    190,
@@ -2757,8 +2759,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1693,
-  "y": 152,
+  "x": 1757,
+  "y": 174,
   "text": "default",
   "child": [
    191
@@ -2770,8 +2772,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1746,
-  "y": 152,
+  "x": 1810,
+  "y": 174,
   "text": "14 days",
   "child": []
  },
@@ -2781,8 +2783,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1693,
-  "y": 126,
+  "x": 1757,
+  "y": 148,
   "text": "range",
   "child": [
    193
@@ -2794,8 +2796,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1737,
-  "y": 126,
+  "x": 1801,
+  "y": 148,
   "text": "0 to 90 days",
   "child": []
  },
@@ -2805,8 +2807,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1346,
-  "y": 186,
+  "x": 1411,
+  "y": 207,
   "text": "?",
   "child": [
    186
@@ -2818,11 +2820,388 @@
   "style": {
    "default": "card"
   },
-  "x": 1346,
-  "y": 137,
+  "x": 1411,
+  "y": 178,
   "text": "⚙️",
   "child": [
    189
   ]
+ },
+ {
+  "id": 196,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1067,
+  "y": 311,
+  "text": "tt",
+  "child": [
+   197,
+   207,
+   219
+  ]
+ },
+ {
+  "id": 197,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1085,
+  "y": 335,
+  "text": "⚙️",
+  "child": [
+   198
+  ]
+ },
+ {
+  "id": 198,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1116,
+  "y": 335,
+  "text": "DATA_RETENTION_TIME_IN_DAYS",
+  "child": [
+   199,
+   201,
+   202
+  ]
+ },
+ {
+  "id": 199,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1318,
+  "y": 292,
+  "text": "level",
+  "child": [
+   200
+  ]
+ },
+ {
+  "id": 200,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1358,
+  "y": 292,
+  "text": "Can be set for Account » Database » Schema » Table",
+  "child": []
+ },
+ {
+  "id": 201,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1318,
+  "y": 266,
+  "text": "d",
+  "child": [
+   203
+  ]
+ },
+ {
+  "id": 202,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1318,
+  "y": 240,
+  "text": "range",
+  "child": [
+   204
+  ]
+ },
+ {
+  "id": 203,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1335,
+  "y": 266,
+  "text": "1",
+  "child": []
+ },
+ {
+  "id": 204,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1362,
+  "y": 240,
+  "text": "0 to 90",
+  "child": []
+ },
+ {
+  "id": 205,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1411,
+  "y": 147,
+  "text": "❓",
+  "child": [
+   206
+  ]
+ },
+ {
+  "id": 206,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1442,
+  "y": 147,
+  "text": "transient table max TT is 1 then how can it go 14 days?",
+  "child": []
+ },
+ {
+  "id": 207,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1085,
+  "y": 309,
+  "text": "syntax",
+  "child": [
+   208
+  ]
+ },
+ {
+  "id": 208,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1067,
+  "y": 250,
+  "text": "AT|BEFORE",
+  "child": [
+   209,
+   210
+  ]
+ },
+ {
+  "id": 209,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1161,
+  "y": 263,
+  "text": "AT",
+  "child": [
+   211,
+   212,
+   216
+  ]
+ },
+ {
+  "id": 210,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1161,
+  "y": 211,
+  "text": "BEFORE",
+  "child": [
+   214
+  ]
+ },
+ {
+  "id": 211,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1191,
+  "y": 291,
+  "text": "SELECT * FROM my_table AT(TIMESTAMP => 'Wed, 26 Jun 2024 09:20:00 -0700'::TIMESTAMP_LTZ);",
+  "child": []
+ },
+ {
+  "id": 212,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1191,
+  "y": 265,
+  "text": "historical data  as of 5 minutes ago",
+  "child": [
+   213
+  ]
+ },
+ {
+  "id": 213,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1422,
+  "y": 265,
+  "text": "SELECT * FROM my_table AT(OFFSET => -60*5) AS T WHERE T.flag = 'valid';",
+  "child": []
+ },
+ {
+  "id": 214,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1231,
+  "y": 211,
+  "text": "eg",
+  "child": [
+   215
+  ]
+ },
+ {
+  "id": 215,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1255,
+  "y": 211,
+  "text": "SELECT * FROM my_table BEFORE(STATEMENT => '8e5d0ca9-005e-44e6-b858-a8f5b37c5726');",
+  "child": []
+ },
+ {
+  "id": 216,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1191,
+  "y": 237,
+  "text": "!",
+  "child": [
+   217
+  ]
+ },
+ {
+  "id": 217,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1207,
+  "y": 237,
+  "text": "inclusive of time",
+  "child": []
+ },
+ {
+  "id": 218,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 940,
+  "y": 265,
+  "text": "timetravel/failsafe",
+  "child": [
+   196,
+   221
+  ]
+ },
+ {
+  "id": 219,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1085,
+  "y": 283,
+  "text": "?",
+  "child": [
+   220
+  ]
+ },
+ {
+  "id": 220,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 846,
+  "y": 75,
+  "text": "view/restore db/schema/objects in past",
+  "child": []
+ },
+ {
+  "id": 221,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1067,
+  "y": 224,
+  "text": "fs",
+  "child": [
+   222,
+   224
+  ]
+ },
+ {
+  "id": 222,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 239,
+  "text": "?",
+  "child": [
+   223
+  ]
+ },
+ {
+  "id": 223,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 221,
+  "text": "not for accessing historical data\nInternal sf use\nhelp recover lost data due to extreme operational failures.",
+  "child": []
+ },
+ {
+  "id": 224,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1089,
+  "y": 193,
+  "text": "!",
+  "child": [
+   225
+  ]
+ },
+ {
+  "id": 225,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1105,
+  "y": 193,
+  "text": "Not guaranteed\nNot an alternate for TT",
+  "child": []
  }
 ]

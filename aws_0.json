@@ -9084,8 +9084,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1097,
-  "y": 875,
+  "x": 1118,
+  "y": 874,
   "text": "⚙",
   "child": [
    625,
@@ -9248,8 +9248,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1097,
-  "y": 847,
+  "x": 1118,
+  "y": 846,
   "text": "sqs",
   "child": []
  },
@@ -10084,7 +10084,7 @@
    "default": "card"
   },
   "x": 1117,
-  "y": 1187,
+  "y": 951,
   "text": "*",
   "child": [
    704
@@ -10108,10 +10108,11 @@
    "default": "card"
   },
   "x": 1117,
-  "y": 923,
+  "y": 925,
   "text": "k",
   "child": [
-   706
+   706,
+   794
   ]
  },
  {
@@ -10121,7 +10122,7 @@
    "default": "card"
   },
   "x": 1135,
-  "y": 923,
+  "y": 938,
   "text": "policy",
   "child": [
    707,
@@ -10135,8 +10136,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1185,
-  "y": 1158,
+  "x": 1184,
+  "y": 962,
   "text": "🏢",
   "child": [
    715
@@ -10149,7 +10150,7 @@
    "default": "card"
   },
   "x": 1117,
-  "y": 661,
+  "y": 897,
   "text": "v",
   "child": []
  },
@@ -10159,8 +10160,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1185,
-  "y": 1037,
+  "x": 1184,
+  "y": 936,
   "text": "v",
   "child": [
    710,
@@ -10177,8 +10178,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 1132,
+  "x": 1203,
+  "y": 1001,
   "text": "scp",
   "child": [
    727
@@ -10190,8 +10191,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 1106,
+  "x": 1203,
+  "y": 975,
   "text": "permission boundary",
   "child": []
  },
@@ -10201,8 +10202,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 1080,
+  "x": 1203,
+  "y": 949,
   "text": "resource based policy",
   "child": [
    736
@@ -10214,8 +10215,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 1054,
+  "x": 1203,
+  "y": 923,
   "text": "identity policy",
   "child": []
  },
@@ -10225,8 +10226,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 1028,
+  "x": 1203,
+  "y": 897,
   "text": "sts session/scope down",
   "child": [
    735
@@ -10288,8 +10289,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1185,
-  "y": 801,
+  "x": 1184,
+  "y": 910,
   "text": "policy evaluation",
   "child": [
    726,
@@ -10314,8 +10315,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1306,
-  "y": 888,
+  "x": 1303,
+  "y": 880,
   "text": "Allow/Deny",
   "child": [
    722,
@@ -10374,8 +10375,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1306,
-  "y": 914,
+  "x": 1303,
+  "y": 906,
   "text": "👟",
   "child": [
    720,
@@ -10489,8 +10490,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1358,
-  "y": 1028,
+  "x": 1357,
+  "y": 897,
   "text": "Assumed role (intersection) scope down policy",
   "child": []
  },
@@ -10500,8 +10501,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1349,
-  "y": 1080,
+  "x": 1350,
+  "y": 949,
   "text": "!",
   "child": [
    737
@@ -10611,8 +10612,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1306,
-  "y": 774,
+  "x": 1303,
+  "y": 854,
   "text": "example scenarios",
   "child": [
    746,
@@ -10703,13 +10704,15 @@
    "default": "card"
   },
   "x": 1117,
-  "y": 635,
+  "y": 871,
   "text": "delete",
   "child": [
    751,
    778,
    779,
-   781
+   781,
+   800,
+   809
   ]
  },
  {
@@ -10846,8 +10849,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1202,
-  "y": 972,
+  "x": 1203,
+  "y": 869,
   "text": "trust policy/relationship",
   "child": [
    764,
@@ -10860,8 +10863,8 @@
   "style": {
    "default": "card"
   },
-  "x": 1363,
-  "y": 983,
+  "x": 1362,
+  "y": 882,
   "text": "?",
   "child": [
    765
@@ -10884,8 +10887,8 @@
   "style": {
    "default": "baloon"
   },
-  "x": 1363,
-  "y": 943,
+  "x": 1362,
+  "y": 860,
   "text": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
   "title": "sample - only ec2 can assume this role",
   "child": []
@@ -11228,6 +11231,208 @@
   "x": 2378,
   "y": 643,
   "text": "aws iam attach-role-policy \\\r\n    --role-name unicornLambdaRole \\\r\n    --policy-arn arn:aws:iam::123456789012:policy/unicornS3ReadWritePolicy",
+  "child": []
+ },
+ {
+  "id": 794,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1135,
+  "y": 910,
+  "text": "role",
+  "child": [
+   795
+  ]
+ },
+ {
+  "id": 795,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1170,
+  "y": 910,
+  "text": "assumeRole",
+  "child": [
+   796,
+   808
+  ]
+ },
+ {
+  "id": 796,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1258,
+  "y": 922,
+  "text": "v",
+  "child": [
+   797,
+   798
+  ]
+ },
+ {
+  "id": 797,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1275,
+  "y": 935,
+  "text": "aws user",
+  "child": [
+   799
+  ]
+ },
+ {
+  "id": 798,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1275,
+  "y": 909,
+  "text": "federated user",
+  "child": [
+   807
+  ]
+ },
+ {
+  "id": 799,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1340,
+  "y": 820,
+  "text": "👟",
+  "child": [
+   801,
+   802
+  ]
+ },
+ {
+  "id": 800,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1374,
+  "y": 843,
+  "text": "Policy attached to user",
+  "child": []
+ },
+ {
+  "id": 801,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1371,
+  "y": 835,
+  "text": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Resource\": \"arn:aws:iam::<ACCOUNT_ID>:role/TargetRole\"\n    }\n  ]\n}\n",
+  "title": "Attach STS user policy",
+  "child": []
+ },
+ {
+  "id": 802,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1371,
+  "y": 813,
+  "text": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": { \"AWS\": \"arn:aws:iam::123456789012:user/MyUser\" },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+  "title": "Attach trust policy to role",
+  "child": []
+ },
+ {
+  "id": 803,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1408,
+  "y": 776,
+  "text": "IAM -> Identity Providers -> create\neg \nPingFederate of type saml\nOIDC of type OpenId connect\n",
+  "child": [
+   804
+  ]
+ },
+ {
+  "id": 804,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1647,
+  "y": 776,
+  "text": "!",
+  "child": [
+   805
+  ]
+ },
+ {
+  "id": 805,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1661,
+  "y": 776,
+  "text": "Dont see any attached policy",
+  "child": []
+ },
+ {
+  "id": 806,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1408,
+  "y": 752,
+  "text": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Federated\": \"arn:aws:iam::<ACCOUNT_ID>:saml-provider/<MySAMLProvider eg PingFederate>\"\n      },\n      \"Action\": \"sts:AssumeRoleWithSAML\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"SAML:aud\": \"https://signin.aws.amazon.com/saml\"\n        }\n      }\n    }\n  ]\n}\n",
+  "title": "Role Trust policy",
+  "child": []
+ },
+ {
+  "id": 807,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1376,
+  "y": 790,
+  "text": "👟",
+  "child": [
+   803,
+   806
+  ]
+ },
+ {
+  "id": 808,
+  "type": "baloon",
+  "style": {
+   "default": "baloon"
+  },
+  "x": 1258,
+  "y": 887,
+  "text": "CREDS=$(aws sts assume-role \\\n  --role-arn arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME> \\\n  --role-session-name MySession \\\n  --query \"Credentials.[AccessKeyId,SecretAccessKey,SessionToken]\" \\\n  --output text)\n\nexport AWS_ACCESS_KEY_ID=$(echo $CREDS | awk '{print $1}')\nexport AWS_SECRET_ACCESS_KEY=$(echo $CREDS | awk '{print $2}')\nexport AWS_SESSION_TOKEN=$(echo $CREDS | awk '{print $3}')\n",
+  "title": "cli",
+  "child": []
+ },
+ {
+  "id": 809,
+  "type": "card",
+  "style": {
+   "default": "card"
+  },
+  "x": 1258,
+  "y": 873,
+  "text": "cli",
   "child": []
  }
 ]
